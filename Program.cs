@@ -3,11 +3,12 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
+System.Media.SoundPlayer player = new System.Media.SoundPlayer();
 ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
-
 Graphics g = null;
+player.SoundLocation = "OMORI OST - 106 GOLDENVENGEANCE.wav"; 
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
@@ -27,6 +28,7 @@ form.Load += (o, e) =>
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
+    player.PlayLooping();
 };
 
 float x = 300, y = 300;
