@@ -5,7 +5,8 @@ public class SoundPlayer
     public SoundPlayer()
     {
         this.song = new System.Media.SoundPlayer();
-        song.SoundLocation = "../../../Media/songs/OMORI OST - 106 GOLDENVENGEANCE.wav"; 
+        // song.SoundLocation = "../../../Media/songs/OMORI OST - 106 GOLDENVENGEANCE.wav"; // DEBUG MODE
+        song.SoundLocation = "./Media/songs/OMORI OST - 106 GOLDENVENGEANCE.wav"; 
     }
 
     public void Play()
