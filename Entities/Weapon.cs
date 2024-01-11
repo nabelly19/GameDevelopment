@@ -2,14 +2,12 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 
-public abstract class Arma 
+public abstract class Weapon : Hittable
 {
-    public string Nome { get; set; }
-    public int Nivel { get; set; }
-    public int Dano { get; set; }
+    protected Weapon(string path) : base(path) { }
 
-    public virtual void Atirar() {}
-    public virtual void Recarregar() {}
-    public virtual void Melhorar() {}
+    public string Name      { get; set; }
+    public int AtkSpeed     { get; set; }
+    public bool WindBlade   { get; set; } = false;
 
 }

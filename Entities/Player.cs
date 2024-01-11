@@ -2,20 +2,17 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 
-public abstract class Player
+public abstract class Player : Hittable
 {
-    public int Vida         { get; private set; }
-    public int Dano         { get; private set; }
-    public State state    { get; set; }
-    public int X            { get; set; }
-    public int Y            { get; set; }
-    public float Largura    { get; private set; }
-    public float Altura     { get; private set; }
+    public int HP           { get; set; }
+    public Weapon weapon    { get; set; }
+    public float CritChance { get; set; }
+    public float BlockChance{ get; set; }
+    public int Velocity     { get; set; }
+    protected Player(string path) : base(path) { }
 
-    private Image img;
-    public Player(string path)
-        => this.img = Bitmap.FromFile(path); //TODO MUDAR IMAGEM AQ PO
-    
-    public abstract void Atacar ();
-    public abstract void ReceberDano();
+
+    public abstract void Attack ();
+    public virtual void ReceiveDamage()
+        => this.HP--;
 }
