@@ -7,8 +7,9 @@ ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
 Graphics g = null;
-Background bg = new Background();
-SoundPlayer sound = new SoundPlayer();
+Game.Current.Background = new Background();
+Game.Current.Sound = new SoundPlayer();
+Game.Current.BossList.Add( new Boss("./Midia/Sprites/Bosses/pxArt.png"));
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
@@ -28,7 +29,7 @@ form.Load += (o, e) =>
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
-    sound.Play();
+    Game.Current.Sound.Play();
 };
 
 float x = 300, y = 300;
@@ -38,7 +39,8 @@ float vx = 0, vy = 0;
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
-    bg.Draw(g, pb);
+    Game.Current.Background.Draw(g, pb);
+    Game.Current.BossList[0].Draw(g);
     g.FillRectangle(
         Brushes.Red,
         new RectangleF
