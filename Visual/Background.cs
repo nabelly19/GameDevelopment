@@ -7,19 +7,16 @@ public class Background
     public float Size;
     private Image img;
 
-    public Background ()
+    public Background()
         // => this.img = Bitmap.FromFile("../../../Midia./imgs./bggif.gif"); // DEBUG MODE
         => this.img = Bitmap.FromFile("./Midia./imgs./bggif.gif"); //TODO ImageAnimator.Image
 
-    public void Draw (Graphics g, PictureBox pb)
+    public void Draw(Graphics g, PictureBox pb)
     {
-        SpawnPoint.X = (pb.Width / 2) - img.Width/2;
-        SpawnPoint.Y = (pb.Height / 2) - img.Height/2;
+        SpawnPoint.X = (pb.Width / 2) - img.Width / 2;
+        SpawnPoint.Y = (pb.Height / 2) - img.Height / 2;
         Size = 626;
-        
-        g.DrawImage(img,
-            SpawnPoint);
 
+        g.DrawImage(img, SpawnPoint);
     }
-
 }

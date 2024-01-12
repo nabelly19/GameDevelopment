@@ -10,8 +10,8 @@ Graphics g = null;
 
 Game.Current.Background = new Background();
 Game.Current.Sound = new SoundPlayer();
-Game.Current.BossList.Add(new Boss("./Midia/Sprites/Bosses/pxArt.png"));
-Game.Current.Player = new Player("./Midia/Sprites/Player/download.png");
+Game.Current.BossList.Add(new Boss("./Midia/Sprites/Bosses/pxArt.png", 10, 10));
+Game.Current.Player = new Player("./Midia/Sprites/Player/download.png", 25, 25);
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 

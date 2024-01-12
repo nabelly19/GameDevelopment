@@ -17,8 +17,8 @@ public class Player : Hittable
     public float Velocity_X { get; set; }
     public float Velocity_Y { get; set; }
 
-    public Player(string path)
-        : base(path) { }
+    public Player(string path, int width, int height)
+        : base(path, width, height) { }
 
     public void Attack() { }
 
@@ -58,11 +58,14 @@ public class Player : Hittable
             Brushes.Red,
             new RectangleF
             {
-                X = this.X - 5,
-                Y = this.Y - 5,
-                Width = 10,
-                Height = 10
+                X = this.X - this.Width/2,
+                Y = this.Y - this.Height/2,
+                Width = this.Width,
+                Height = this.Height
             }
         );
+        CreateHitbox(this.X, this.Y, 
+            this.Width + 1, this.Height + 1);
+        g.DrawRectangle(Pens.White, this.Hitbox);
     }
 }
