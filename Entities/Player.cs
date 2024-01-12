@@ -2,6 +2,11 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 
+/// <summary>
+/// The Player class represents a player character in a game, with properties such as HP, weapon, crit
+/// chance, block chance, velocity, and angle, as well as methods for attacking, receiving damage, and
+/// movement.
+/// </summary>
 public class Player : Hittable
 {
     public int HP { get; set; }
@@ -27,10 +32,10 @@ public class Player : Hittable
     
     public void MoveY_axis ()
         => this.Velocity_Y = 5;
-    public void StopY_axis ()
-        => this.Velocity_Y = 0;
     public void MoveX_axis ()
         => this.Velocity_X = 5;
+    public void StopY_axis ()
+        => this.Velocity_Y = 0;
     public void StopX_axis ()
         => this.Velocity_X = 0;
 

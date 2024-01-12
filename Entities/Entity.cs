@@ -1,5 +1,6 @@
 using System.Drawing;
 
+/* The abstract class Entity represents an entity with an image that can be drawn on a graphics object. */
 public abstract class Entity
 {
     public Image Image  { get; private set; }

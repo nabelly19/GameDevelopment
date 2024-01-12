@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Drawing;
 
 
+/* The Boss class is a subclass of the Enemy class and represents a boss enemy with a spawn point and
+methods for attacking and handling collisions. */
 public class Boss : Enemy
 {
     public PointF SpawnPoint;
