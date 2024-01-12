@@ -10,7 +10,7 @@ Graphics g = null;
 
 Game.Current.Background = new Background();
 Game.Current.Sound = new SoundPlayer();
-Game.Current.BossList.Add( new Boss("./Midia/Sprites/Bosses/pxArt.png"));
+Game.Current.BossList.Add(new Boss("./Midia/Sprites/Bosses/pxArt.png"));
 Game.Current.Player = new Player("./Midia/Sprites/Player/download.png");
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
@@ -34,7 +34,6 @@ form.Load += (o, e) =>
     Game.Current.Sound.Play();
 };
 
-
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
@@ -55,25 +54,21 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.W:
-            Game.Current.Player.Angle = 3 * Math.PI / 2;
-            Game.Current.Player.MoveY_axis();
+            Game.Current.Player.MoveUp();
             break;
 
         case Keys.A:
-            Game.Current.Player.Angle = Math.PI;
-            Game.Current.Player.MoveX_axis();
+
+            Game.Current.Player.MoveLeft();
             break;
 
         case Keys.S:
-            Game.Current.Player.Angle = Math.PI / 2;
-            Game.Current.Player.MoveY_axis();
+            Game.Current.Player.MoveDown();
             break;
 
         case Keys.D:
-            Game.Current.Player.Angle = 0;
-            Game.Current.Player.MoveX_axis();
+            Game.Current.Player.MoveRight();
             break;
-
     }
 };
 
@@ -86,7 +81,7 @@ form.KeyUp += (o, e) =>
             break;
 
         case Keys.A:
-            Game.Current.Player.Velocity_X = 0;        
+            Game.Current.Player.Velocity_X = 0;
             break;
 
         case Keys.S:
