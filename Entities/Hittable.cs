@@ -19,7 +19,6 @@ public abstract class Hittable : Entity
     public bool HittableHitbox { get; private set; }
     public bool Colided { get; set; }
 
-    public abstract bool Colision(Hittable hittable);
     public virtual void CreateHitbox(
         float x, float y, 
         int width, int height)

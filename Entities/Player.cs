@@ -26,6 +26,9 @@ public class Player : Hittable
 
     public void Move()
     {
+        this.Old_X = this.X;
+        this.Old_Y = this.Y;
+        
         double magnitude = Math.Sqrt(Velocity_X * Velocity_X + Velocity_Y * Velocity_Y);
 
         if (magnitude == 0)
@@ -47,11 +50,6 @@ public class Player : Hittable
 
     public void StopX_axis() => this.Velocity_X = 0;
 
-    public override bool Colision(Hittable hittable)
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Draw(Graphics g)
     {
         g.FillRectangle(
@@ -66,6 +64,10 @@ public class Player : Hittable
         );
         CreateHitbox(this.X, this.Y, 
             this.Width + 1, this.Height + 1);
+        
+
+
         g.DrawRectangle(Pens.White, this.Hitbox);
+
     }
 }

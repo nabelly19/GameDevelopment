@@ -13,6 +13,9 @@ public class Boss : Enemy
         {
             this.Width = this.Image.Width;
             this.Height = this.Image.Height;
+
+            this.X = 500;
+            this.Y = 500;
         }
 
     // Strategy / State / Behaviour
@@ -21,15 +24,8 @@ public class Boss : Enemy
         throw new NotImplementedException();
     }
 
-    public override bool Colision(Hittable hittable)
-    {
-        throw new NotImplementedException();
-    }
-
     public override void Draw(Graphics g)
     {
-        this.X = 500;
-        this.Y = 500; 
 
         g.DrawImage(this.Image, this.X - this.Width / 2, this.Y - this.Height / 2);
         CreateHitbox(

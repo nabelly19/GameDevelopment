@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -41,6 +42,11 @@ timer.Tick += (o, e) =>
     Game.Current.BossList[0].Draw(g);
     Game.Current.Player.Draw(g);
     Game.Current.Player.Move();
+
+    Game.Current.TestColision(
+            Game.Current.BossList[0], 
+            Game.Current.Player
+        );
 
     pb.Refresh();
 };

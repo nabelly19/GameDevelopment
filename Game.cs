@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -22,6 +23,33 @@ public class Game
     public void StartSound() => Sound.Play();
 
     public void StartBackground(Graphics g, PictureBox pb) => Background.Draw(g, pb);
+    public void TestColision (Hittable hit1, Hittable hit2)
+    {
+        if (hit1.Hitbox.IntersectsWith(hit2.Hitbox))
+        {
+            var x = hit2.X - hit2.Old_X;
+            var y = hit2.Y - hit2.Old_Y;
+
+            if (x > 0)
+            {
+                hit2.X = hit2.Old_X - 10;
+            }
+            if (x < 0)
+            {
+                hit2.X = hit2.Old_X + 10;
+            }
+            
+            if (y > 0)
+            {
+                hit2.Y = hit2.Old_Y - 10;
+            }
+            if (y < 0)
+            {
+                hit2.Y = hit2.Old_Y + 10;
+            }
+        }
+
+    }
 
     public static void New() => crr = new Game();
 
