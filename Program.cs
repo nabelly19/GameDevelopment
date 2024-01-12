@@ -7,9 +7,11 @@ ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
 Graphics g = null;
+
 Game.Current.Background = new Background();
 Game.Current.Sound = new SoundPlayer();
 Game.Current.BossList.Add( new Boss("./Midia/Sprites/Bosses/pxArt.png"));
+Game.Current.Player = new Player("./Midia/Sprites/Player/download.png");
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
@@ -32,27 +34,14 @@ form.Load += (o, e) =>
     Game.Current.Sound.Play();
 };
 
-float x = 300, y = 300;
-float vx = 0, vy = 0;
-
 
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
     Game.Current.Background.Draw(g, pb);
     Game.Current.BossList[0].Draw(g);
-    g.FillRectangle(
-        Brushes.Red,
-        new RectangleF
-        {
-            X = x - 5,
-            Y = y - 5,
-            Width = 10,
-            Height = 10
-        }
-    );
-    x += vx;
-    y += vy;
+    Game.Current.Player.Draw(g);
+    Game.Current.Player.Move();
 
     pb.Refresh();
 };
@@ -66,20 +55,25 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.W:
-            vy = -5;
+            Game.Current.Player.Angle = 3 * Math.PI / 2;
+            Game.Current.Player.MoveY_axis();
             break;
 
         case Keys.A:
-            vx = -5;
+            Game.Current.Player.Angle = Math.PI;
+            Game.Current.Player.MoveX_axis();
             break;
 
         case Keys.S:
-            vy = 5;
+            Game.Current.Player.Angle = Math.PI / 2;
+            Game.Current.Player.MoveY_axis();
             break;
 
         case Keys.D:
-            vx = 5;
+            Game.Current.Player.Angle = 0;
+            Game.Current.Player.MoveX_axis();
             break;
+
     }
 };
 
@@ -88,19 +82,19 @@ form.KeyUp += (o, e) =>
     switch (e.KeyCode)
     {
         case Keys.W:
-            vy = 0;
+            Game.Current.Player.Velocity_Y = 0;
             break;
 
         case Keys.A:
-            vx = 0;
+            Game.Current.Player.Velocity_X = 0;        
             break;
 
         case Keys.S:
-            vy = 0;
+            Game.Current.Player.Velocity_Y = 0;
             break;
 
         case Keys.D:
-            vx = 0;
+            Game.Current.Player.Velocity_X = 0;
             break;
     }
 };

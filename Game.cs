@@ -12,6 +12,7 @@ public class Game
     // Propriedades do jogo (bg, player, sound)
     public Background Background    { get; set; }
     public SoundPlayer Sound        { get; set; }
+    public Player Player            { get; set; }
     public List<Boss> BossList      { get; set; } = new List<Boss>();
 
     //TODO Para carregamento do jogo
