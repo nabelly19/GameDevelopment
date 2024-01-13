@@ -22,6 +22,7 @@ var form = new Form
 {
     WindowState = FormWindowState.Maximized,
     FormBorderStyle = FormBorderStyle.None,
+    Text = "Rogue-Like",
     Controls = { pb }
 };
 

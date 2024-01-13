@@ -32,20 +32,26 @@ public class Game
 
             if (x > 0)
             {
-                hit2.X = hit2.Old_X - 10;
+                hit2.X = hit2.Old_X - 1;
+                hit1.X += 5;
             }
             if (x < 0)
             {
-                hit2.X = hit2.Old_X + 10;
+                hit2.X = hit2.Old_X + 1;
+                hit1.X -= 5;
+
             }
             
             if (y > 0)
             {
-                hit2.Y = hit2.Old_Y - 10;
+                hit2.Y = hit2.Old_Y - 1;
+                hit1.Y += 5;
+
             }
             if (y < 0)
             {
-                hit2.Y = hit2.Old_Y + 10;
+                hit2.Y = hit2.Old_Y + 1;
+                hit1.Y -= 5;
             }
         }
 
