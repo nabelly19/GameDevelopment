@@ -11,13 +11,13 @@ public abstract class Hittable : Entity
             this.Height = height;
          }
 
-    public float X { get; set; }
-    public float Y { get; set; }
-    public float Old_X { get; set; }
-    public float Old_Y { get; set; }
-    public RectangleF Hitbox { get; set; }
-    public bool HittableHitbox { get; private set; }
-    public bool Colided { get; set; }
+    public float X              { get; set; }
+    public float Y              { get; set; }
+    public float Old_X          { get; set; }
+    public float Old_Y          { get; set; }
+    public RectangleF Hitbox    { get; set; }
+    public bool HittableHitbox  { get; private set; }
+    public bool Colided         { get; set; }
 
     public virtual void CreateHitbox(
         float x, float y, 

@@ -12,50 +12,64 @@ public class Game
     private Game() { }
 
     // Propriedades do jogo (bg, player, sound)
-    public Background Background { get; set; }
-    public SoundPlayer Sound { get; set; }
-    public Player Player { get; set; }
-    public List<Boss> BossList { get; set; } = new List<Boss>();
+    public Background Background{ get; set; }
+    public SoundPlayer Sound    { get; set; }
+    public Player Player        { get; set; }
+    public List<Boss> BossList  { get; set; } = new List<Boss>();
+    public List<Map> Dungeons   { get; private set; } = new List<Map>();
+    public Map CurrentMap       { get; set; }
+    public Colision Colision = new Colision();
 
     //TODO Para carregamento do jogo
     // private Game(string text) => this.SomeProperty = text;
 
     public void StartSound() => Sound.Play();
-
     public void StartBackground(Graphics g, PictureBox pb) => Background.Draw(g, pb);
-    public void TestColision (Hittable hit1, Hittable hit2)
+    public void PlayerBossColision (Hittable boss, Hittable player)
     {
-        if (hit1.Hitbox.IntersectsWith(hit2.Hitbox))
-        {
-            var x = hit2.X - hit2.Old_X;
-            var y = hit2.Y - hit2.Old_Y;
+        Colision.BossPlayer(boss, player);
+        // if (boss.Hitbox.IntersectsWith(player.Hitbox))
+        // {
+        //     var x = player.X - player.Old_X;
+        //     var y = player.Y - player.Old_Y;
 
-            if (x > 0)
-            {
-                hit2.X = hit2.Old_X - 1;
-                hit1.X += 5;
-            }
-            if (x < 0)
-            {
-                hit2.X = hit2.Old_X + 1;
-                hit1.X -= 5;
+        //     if (x > 0)
+        //     {
+        //         player.X = player.Old_X - 1;
+        //         boss.X += 5;
+        //     }
+        //     if (x < 0)
+        //     {
+        //         player.X = player.Old_X + 1;
+        //         boss.X -= 5;
 
-            }
+        //     }
             
-            if (y > 0)
-            {
-                hit2.Y = hit2.Old_Y - 1;
-                hit1.Y += 5;
+        //     if (y > 0)
+        //     {
+        //         player.Y = player.Old_Y - 1;
+        //         boss.Y += 5;
 
-            }
-            if (y < 0)
-            {
-                hit2.Y = hit2.Old_Y + 1;
-                hit1.Y -= 5;
-            }
-        }
+        //     }
+        //     if (y < 0)
+        //     {
+        //         player.Y = player.Old_Y + 1;
+        //         boss.Y -= 5;
+        //     }
+        // }
 
     }
+
+    public void CreateDungeons (Graphics g)
+    {
+        var dg1 = new Dungeon_01("./Midia/Maps/widen_1220x0.png");
+        this.Dungeons.Add(dg1);
+        this.CurrentMap = dg1;
+    }
+
+    public void DrawMap (Graphics g, PictureBox pb)
+        => this.CurrentMap.Draw(g, pb);
+    
 
     public static void New() => crr = new Game();
 

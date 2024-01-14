@@ -12,6 +12,7 @@ Project Description
 - [ ] Dialog Boxes  
 - [ ] Boss Mecanics  
 - [ ] Maps + Hitboxes (Colision)  
+- [ ] Menu  
 - [ ] Cutscenes  
 
 ### In Progress

@@ -9,8 +9,8 @@ ApplicationConfiguration.Initialize();
 Bitmap bmp = null;
 Graphics g = null;
 
-Game.Current.Background = new Background();
 Game.Current.Sound = new SoundPlayer();
+Game.Current.CreateDungeons(g);
 Game.Current.BossList.Add(new Boss("./Midia/Sprites/Bosses/pxArt.png", 10, 10));
 Game.Current.Player = new Player("./Midia/Sprites/Player/download.png", 25, 25);
 
@@ -33,21 +33,21 @@ form.Load += (o, e) =>
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
+    Game.Current.CurrentMap.CreateWalls(pb);
     Game.Current.Sound.Play();
 };
 
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
-    Game.Current.Background.Draw(g, pb);
-    Game.Current.BossList[0].Draw(g);
-    Game.Current.Player.Draw(g);
-    Game.Current.Player.Move();
-
-    Game.Current.TestColision(
+    Game.Current.PlayerBossColision(
             Game.Current.BossList[0], 
             Game.Current.Player
         );
+    Game.Current.DrawMap(g, pb);
+    Game.Current.BossList[0].Draw(g);
+    Game.Current.Player.Draw(g);
+    Game.Current.Player.Move();
 
     pb.Refresh();
 };
@@ -75,6 +75,10 @@ form.KeyDown += (o, e) =>
 
         case Keys.D:
             Game.Current.Player.MoveRight();
+            break;
+
+        case Keys.Space:
+            Game.Current.CurrentMap.UpdateBackground("./Midia/Maps/dungeon_pre.png");
             break;
     }
 };
