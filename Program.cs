@@ -40,14 +40,14 @@ form.Load += (o, e) =>
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
+    Game.Current.DrawMap(g, pb);
+    Game.Current.Player.Move();
     Game.Current.PlayerBossColision(
             Game.Current.BossList[0], 
             Game.Current.Player
         );
-    Game.Current.DrawMap(g, pb);
     Game.Current.BossList[0].Draw(g);
     Game.Current.Player.Draw(g);
-    Game.Current.Player.Move();
 
     pb.Refresh();
 };

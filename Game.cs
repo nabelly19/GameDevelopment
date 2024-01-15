@@ -25,7 +25,7 @@ public class Game
 
     public void StartSound() => Sound.Play();
     public void StartBackground(Graphics g, PictureBox pb) => Background.Draw(g, pb);
-    public void PlayerBossColision (Hittable boss, Hittable player)
+    public void PlayerBossColision (Boss boss, Player player)
     {
         Colision.BossPlayer(boss, player);
         // if (boss.Hitbox.IntersectsWith(player.Hitbox))
