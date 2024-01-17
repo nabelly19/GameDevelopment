@@ -8,9 +8,10 @@ ApplicationConfiguration.Initialize();
 Bitmap bmp = null;
 Graphics g = null;
 
+CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Boss("Ele", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 engine.AddObject(new Player("Ele", 0, 0, "./assets/Sprites/Player/download.png"));
+engine.AddObject(new Boss("Ele", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
@@ -38,10 +39,12 @@ form.Load += (o, e) =>
 timer.Tick += (o, e) =>
 {
     g.Clear(Color.Black);
+    engine.Update();
     engine.Render(g, pb);
-
     pb.Refresh();
 };
+
+//295,4 467,93552
 
 form.KeyDown += (o, e) =>
 {
@@ -49,6 +52,10 @@ form.KeyDown += (o, e) =>
     {
         case Keys.Escape:
             Application.Exit();
+            break;
+        
+        case Keys.I:
+            engine.player.Info();
             break;
 
         case Keys.W:
@@ -79,19 +86,19 @@ form.KeyUp += (o, e) =>
     switch (e.KeyCode)
     {
         case Keys.W:
-            engine.player.Vy = 0;
+            engine.player.Ay = 0;
             break;
 
         case Keys.A:
-            engine.player.Vx = 0;
+            engine.player.Ax = 0;
             break;
 
         case Keys.S:
-            engine.player.Vy = 0;
+            engine.player.Ay = 0;
             break;
 
         case Keys.D:
-            engine.player.Vx = 0;
+            engine.player.Ax = 0;
             break;
     }
 };

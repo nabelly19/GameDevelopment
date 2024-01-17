@@ -6,7 +6,6 @@ using System.Windows.Forms;
 public class GameEngine
 {
     public Player player = null;
-    public CollisionManager collisionManager = new();
     public Background Background { get; set; } = new();
     public SoundPlayer Sound { get; set; } = new();
 
@@ -16,24 +15,24 @@ public class GameEngine
 
     public void Update()
     {
-        foreach (var gameObject in collisionManager.gameObjects)
+        foreach (var gameObject in CollisionManager.Current.gameObjects)
         {
             gameObject.Update();
         }
 
-        collisionManager.CheckCollisions();
+        CollisionManager.Current.CheckCollisions();
     }
 
     public void AddObject(GameObject gameObject)
     {
         if (gameObject is Player)
             this.player = gameObject as Player;
-        collisionManager.AddGameObject(gameObject);
+        CollisionManager.Current.AddGameObject(gameObject);
     }
 
     public void Render(Graphics g, PictureBox pb)
     {
-        foreach (var gameObject in collisionManager.gameObjects)
+        foreach (var gameObject in CollisionManager.Current.gameObjects)
         {
             gameObject.Render(g, pb);
         }
