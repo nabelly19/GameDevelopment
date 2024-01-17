@@ -8,8 +8,8 @@ public class Background
     private Image img;
 
     public Background()
-        // => this.img = Bitmap.FromFile("../../../Midia./imgs./bggif.gif"); // DEBUG MODE
-        => this.img = Bitmap.FromFile("./Midia./imgs./bggif.gif"); //TODO ImageAnimator.Image
+        // => this.img = Bitmap.FromFile("../../../assets./imgs./bggif.gif"); // DEBUG MODE
+        => this.img = Bitmap.FromFile("./assets./imgs./bggif.gif"); //TODO ImageAnimator.Image
 
     public void Draw(Graphics g, PictureBox pb)
     {
