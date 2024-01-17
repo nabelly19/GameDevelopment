@@ -6,21 +6,21 @@ Project Description
 
 ### Todo
 
-- [ ] Character Sprite Change (On mov)  
-- [ ] Colision Algorithm  
-- [ ] Boss Design  
 - [ ] Dialog Boxes  
-- [ ] Boss Mecanics  
-- [ ] Maps + Hitboxes (Colision)  
 - [ ] Menu  
 - [ ] Cutscenes  
 
 ### In Progress
 
-- [ ] Character Design  
+- [ ] Character Sprite Change (On mov)  
+- [ ] Boss Design  
+- [ ] Maps + Hitboxes (Colision)  
+- [ ] Boss Mecanics  
 
 ### Done ✓
 
+- [x] Colision Algorithm  
 - [x] PLayer Movement  
 - [x] Basic Colision Algo (For testing)  
+- [x] Character Design  
 
