@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
 public class CollisionManager
 {
-    public List<GameObject> gameObjects {get;private set;}
+    public List<GameObject> gameObjects { get; private set; }
 
     public CollisionManager()
     {
@@ -29,6 +30,19 @@ public class CollisionManager
                 {
                     HandleCollision(obj1, obj2);
                 }
+                else
+                {
+                    if (obj1 is IMoveable)
+                    {
+                        var obj = obj1 as IMoveable;
+                        obj.Move();
+                    }
+                    if (obj2 is IMoveable)
+                    {
+                        var obj = obj2 as IMoveable;
+                        obj.Move();
+                    }
+                }
             }
         }
     }
@@ -36,7 +50,7 @@ public class CollisionManager
     private bool CollisionDetected(GameObject obj1, GameObject obj2)
     {
         // Lógica para detectar colisões entre dois objetos
-        return Math.Abs(obj1.X - obj2.X) < 10 && Math.Abs(obj1.Y - obj2.Y) < 10;
+        return Math.Abs(obj1.New_X - obj2.New_X) < 10 && Math.Abs(obj1.New_Y - obj2.New_Y) < 10;
     }
 
     private void HandleCollision(GameObject obj1, GameObject obj2)
