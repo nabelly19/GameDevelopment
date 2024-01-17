@@ -12,8 +12,8 @@ public abstract class GameObject
     public float Y { get; set; }
     public float Width { get; set; }
     public float Height { get; set; }
-    public float Old_X { get; set; }
-    public float Old_Y { get; set; }
+    public float New_X { get; set; }
+    public float New_Y { get; set; }
     public Image Sprite { get; set; }
 
     public GameObject(string name, int x, int y, string sprite)

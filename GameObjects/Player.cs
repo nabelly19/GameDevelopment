@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 // namespace Entity;
 
-public class Player : GameObject
+public class Player : GameObject, IMoveable
 {
     public int Hp { get; set; }
     public float Base_Speed { get; set; } = 5;
@@ -36,16 +36,16 @@ public class Player : GameObject
 
     public void Move()
     {
-        Old_X = X;
-        Old_Y = Y;
+        X = New_X;
+        Y = New_Y;
 
         double magnitude = Math.Sqrt(Vx * Vx + Vy * Vy);
 
         if (magnitude == 0)
             return;
 
-        X += (float)(Vx / magnitude) * Base_Speed;
-        Y += (float)(Vy / magnitude) * Base_Speed;
+        New_X += (float)(Vx / magnitude) * Base_Speed;
+        New_Y += (float)(Vy / magnitude) * Base_Speed;
     }
 
     public void MoveUp() => this.Vy = -1;
