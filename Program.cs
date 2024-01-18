@@ -32,7 +32,7 @@ form.Load += (o, e) =>
 {
     bmp = new Bitmap(pb.Width, pb.Height);
     g = Graphics.FromImage(bmp);
-    g.Clear(Color.Wheat);
+    g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
     engine.StartSound();
@@ -46,7 +46,7 @@ timer.Tick += (o, e) =>
 {
     fps = (int)(1/(float)(DateTime.Now-lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
-    g.Clear(Color.Wheat);
+    g.Clear(Color.Black);
     engine.Update();
     engine.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
