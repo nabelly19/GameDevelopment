@@ -5,8 +5,8 @@ using System.Windows.Forms;
 
 public class Wall : GameObject
 {
-    public Wall(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite) { }
+    public Wall(string name, int x, int y, float width, float height)
+        : base(name, x, y, width, height) { }
 
     // test Render
     public override void Render(Graphics g, PictureBox pb)

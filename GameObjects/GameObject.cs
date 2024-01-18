@@ -26,6 +26,14 @@ public abstract class GameObject
         this.Width = this.Sprite.Width;
         this.Height = this.Sprite.Height;
     }
+    public GameObject(string name, int x, int y, float width, float height)
+    {
+        this.Name = name;
+        this.X = x;
+        this.Y = y;
+        this.Width = width;
+        this.Height = height;
+    }
 
     public virtual void Update() { }
 
