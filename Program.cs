@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+
 ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
@@ -14,10 +15,9 @@ GameEngine engine = new();
 engine.AddObject(new Player("Ele", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
 engine.AddObject(new Boss("Ele", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 
-
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
-var timer = new Timer { Interval = 20, };
+var timer = new Timer { Interval = 1000 / 60, };
 
 var form = new Form
 {
@@ -37,11 +37,18 @@ form.Load += (o, e) =>
     engine.StartSound();
 };
 
+DateTime lastchecked = DateTime.Now;
+float fps =0;
+
+
 timer.Tick += (o, e) =>
 {
+    fps = (int)(1/(float)(DateTime.Now-lastchecked).TotalSeconds);
+    lastchecked = DateTime.Now;
     g.Clear(Color.Black);
     engine.Update();
     engine.Render(g, pb);
+    g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
     pb.Refresh();
 };
 
@@ -54,7 +61,7 @@ form.KeyDown += (o, e) =>
         case Keys.Escape:
             Application.Exit();
             break;
-        
+
         case Keys.I:
             engine.player.Info();
             break;

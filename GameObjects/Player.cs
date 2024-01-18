@@ -20,19 +20,26 @@ public class Player : GameObject, IMoveable
     public float BlockChance { get; set; }
 
     public Player(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite) { }
+        : base(name, x, y, sprite)
+    {
+        this.Width /= 4;
+        this.Height /= 4;
+    }
 
-    public override void Update (){
+    public override void Update()
+    {
         Move();
     }
 
     public override void Render(Graphics g, PictureBox pb)
-    { 
+    {
         g.DrawImage(
-            this.Sprite, 
-            this.X - this.Width / 2, this.Y - this.Height / 2
+            this.Sprite,
+            new RectangleF(this.X - this.Width / 2, this.Y - this.Height / 2, Width, Height)
         );
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        // CreateHitbox(this.X, this.Y, 250, 300);
+
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -65,12 +72,12 @@ public class Player : GameObject, IMoveable
             vx = max;
         else if (vx < -max)
             vx = -max;
-        
+
         if (vy > max)
             vy = max;
         else if (vy < -max)
             vy = -max;
-        
+
         if (!CollisionManager.Current.CheckCollisions(this))
             return;
 
@@ -81,13 +88,29 @@ public class Player : GameObject, IMoveable
         Y = OldY;
     }
 
-    public void MoveUp() { this.Ay = -1; AnimatePLayer(13, 16); }
+    public void MoveUp()
+    {
+        this.Ay = -1;
+        AnimatePLayer(13, 16);
+    }
 
-    public void MoveDown() { this.Ay = 1; AnimatePLayer(1, 4); }
+    public void MoveDown()
+    {
+        this.Ay = 1;
+        AnimatePLayer(1, 4);
+    }
 
-    public void MoveRight() {this.Ax = 1; AnimatePLayer(9, 12);}
+    public void MoveRight()
+    {
+        this.Ax = 1;
+        AnimatePLayer(9, 12);
+    }
 
-    public void MoveLeft() { this.Ax = -1; AnimatePLayer(5, 8); }
+    public void MoveLeft()
+    {
+        this.Ax = -1;
+        AnimatePLayer(5, 8);
+    }
 
     public void StopY_axis() => this.Ay = 0;
 
@@ -111,8 +134,8 @@ public class Player : GameObject, IMoveable
         this.Sprite = Resources.Current.PlayerSprites[steps];
     }
 
-
-    public void Info(){
-        MessageBox.Show( $"X: {this.X}  Y:{this.Y}");
+    public void Info()
+    {
+        MessageBox.Show($"X: {this.X}  Y:{this.Y}");
     }
 }

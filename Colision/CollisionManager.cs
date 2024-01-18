@@ -19,13 +19,13 @@ public class CollisionManager
         gameObjects.Add(gameObject);
     }
 
-    public void CheckCollisions()
-    {
-        // Lógica para verificar colisões entre os objetos do jogo
-        for (int i = 0; i < gameObjects.Count; i++)
-        {
-        }
-    }
+    // public void CheckCollisions()
+    // {
+    //     // Lógica para verificar colisões entre os objetos do jogo
+    //     for (int i = 0; i < gameObjects.Count; i++)
+    //     {
+    //     }
+    // }
 
     public bool CheckCollisions(GameObject obj)
     {

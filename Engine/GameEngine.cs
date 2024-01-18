@@ -19,8 +19,6 @@ public class GameEngine
         {
             gameObject.Update();
         }
-
-        CollisionManager.Current.CheckCollisions();
     }
 
     public void AddObject(GameObject gameObject)
