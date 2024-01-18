@@ -13,7 +13,7 @@ public class Player : GameObject, IMoveable
     public int slowFrameRate { get; set; } = 0;
 
     public int Hp { get; set; } = 3;
-    public float BaseAcceleration { get; set; } = 1_500;
+    public float BaseAcceleration { get; set; } = 1_000;
     public float Ax { get; set; }
     public float Ay { get; set; }
     public float CritChance { get; set; }
@@ -22,6 +22,8 @@ public class Player : GameObject, IMoveable
     public Player(string name, int x, int y, string sprite)
         : base(name, x, y, sprite)
     {
+        this.Height = 340;
+        this.Width = 0.894118f * this.Height;
         this.Width /= 4;
         this.Height /= 4;
     }
@@ -35,9 +37,12 @@ public class Player : GameObject, IMoveable
     {
         g.DrawImage(
             this.Sprite,
-            new RectangleF(this.X - this.Width / 2, this.Y - this.Height / 2, Width, Height)
+            new RectangleF(
+                this.X - this.Width / 2, 
+                this.Y - this.Height / 2, 
+                this.Width, this.Height)
         );
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        CreateHitbox(this.X, this.Y+10, this.Width  * 0.75f, this.Height - 20);
         // CreateHitbox(this.X, this.Y, 250, 300);
 
         g.DrawRectangle(Pens.White, this.Hitbox);
@@ -64,6 +69,9 @@ public class Player : GameObject, IMoveable
         X += vx * secs;
         Y += vy * secs;
 
+        CreateHitbox(this.X, this.Y+10, this.Width  * 0.75f, this.Height - 20);
+
+
         vx *= MathF.Pow(0.001f, secs);
         vy *= MathF.Pow(0.001f, secs);
 
@@ -84,6 +92,7 @@ public class Player : GameObject, IMoveable
         const float energyLoss = 0.2f;
         vx = -vx * energyLoss;
         vy = -vy * energyLoss;
+
         X = OldX;
         Y = OldY;
     }
