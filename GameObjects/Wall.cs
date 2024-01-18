@@ -11,7 +11,7 @@ public class Wall : GameObject
     // test Render
     public override void Render(Graphics g, PictureBox pb)
     {
-        CreateHitbox(this.X, this.Y, 100, 100);
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 }

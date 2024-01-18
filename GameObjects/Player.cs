@@ -136,6 +136,6 @@ public class Player : GameObject, IMoveable
 
     public void Info()
     {
-        MessageBox.Show($"X: {this.X}  Y:{this.Y}");
+        MessageBox.Show($"X: {this.X}  Y:{this.Y}  Ax:{this.Ax}");
     }
 }

@@ -13,6 +13,8 @@ Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
 engine.AddObject(new Player("Him", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
+engine.AddObject(new Weapon("Him", 30, 30, 10, 10, engine.player));
+engine.AddObject(new Bullet("Him", 30, 30, 100, 100));
 engine.AddObject(new Wall("Wall", 100, 1000, 100, 100));
 engine.AddObject(new Boss("Frog", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 

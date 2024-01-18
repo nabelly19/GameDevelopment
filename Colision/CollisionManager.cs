@@ -19,14 +19,6 @@ public class CollisionManager
         gameObjects.Add(gameObject);
     }
 
-    // public void CheckCollisions()
-    // {
-    //     // Lógica para verificar colisões entre os objetos do jogo
-    //     for (int i = 0; i < gameObjects.Count; i++)
-    //     {
-    //     }
-    // }
-
     public bool CheckCollisions(GameObject obj)
     {
         for (int j = 0; j < gameObjects.Count; j++)
@@ -35,7 +27,7 @@ public class CollisionManager
             if (other == obj)
                 continue;
 
-            if (CollisionDetected(obj, other))
+            if (CollisionDetected(obj, other) && other.isHittable)
                 return true;
         }
         return false;
