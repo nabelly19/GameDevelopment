@@ -35,7 +35,13 @@ public class Weapon : GameObject, IMoveable
 
     public void Move()
     {
-        this.X = player.X + (player.Width / 2 + this.Width / 2) * player.Ax;
-        this.Y = player.Y + (player.Height / 2 + this.Height / 2) * player.Ay;
+        if (player.Ax != 0)
+        this.Ax = player.Ax;
+        if (player.Ay != 0)
+        this.Ay = player.Ay;
+        
+        this.X = player.Hitbox.X + player.Hitbox.Width / 2 + (player.Hitbox.Width / 2 + this.Width / 2) * this.Ax;
+        this.Y = player.Hitbox.Y + player.Hitbox.Height / 2 + (player.Hitbox.Height / 2+ this.Height / 2) * this.Ay;
+        
     }
 }
