@@ -9,6 +9,8 @@ public class Player : GameObject, IMoveable
     private float vx = 0f;
     private float vy = 0f;
     private DateTime last = DateTime.Now;
+    public int steps { get; set; } = 0;
+    public int slowFrameRate { get; set; } = 0;
 
     public int Hp { get; set; }
     public float BaseAcceleration { get; set; } = 1_500;
@@ -26,17 +28,11 @@ public class Player : GameObject, IMoveable
 
     public override void Render(Graphics g, PictureBox pb)
     { 
-        // g.FillRectangle(
-        //     Brushes.Red,
-        //     new RectangleF
-        //     {
-        //         X = this.X - this.Width / 2,
-        //         Y = this.Y - this.Height / 2,
-        //         Width = this.Width,
-        //         Height = this.Height
-        //     }
-        // );
-        CreateHitbox(this.X, this.Y, 100, 200);
+        g.DrawImage(
+            this.Sprite, 
+            this.X - this.Width / 2, this.Y - this.Height / 2
+        );
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -85,17 +81,36 @@ public class Player : GameObject, IMoveable
         Y = OldY;
     }
 
-    public void MoveUp() => this.Ay = -1;
+    public void MoveUp() { this.Ay = -1; AnimatePLayer(13, 16); }
 
-    public void MoveDown() => this.Ay = 1;
+    public void MoveDown() { this.Ay = 1; AnimatePLayer(1, 4); }
 
-    public void MoveRight() => this.Ax = 1;
+    public void MoveRight() {this.Ax = 1; AnimatePLayer(9, 12);}
 
-    public void MoveLeft() => this.Ax = -1;
+    public void MoveLeft() { this.Ax = -1; AnimatePLayer(5, 8); }
 
     public void StopY_axis() => this.Ay = 0;
 
     public void StopX_axis() => this.Ax = 0;
+
+    private void AnimatePLayer(int start, int end)
+    {
+        slowFrameRate += 1;
+
+        if (slowFrameRate > 3)
+        {
+            steps++;
+            slowFrameRate = 0;
+        }
+
+        if (steps > end || steps < start)
+        {
+            steps = start;
+        }
+
+        this.Sprite = Resources.Current.PlayerSprites[steps];
+    }
+
 
     public void Info(){
         MessageBox.Show( $"X: {this.X}  Y:{this.Y}");

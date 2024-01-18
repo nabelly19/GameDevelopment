@@ -8,9 +8,10 @@ ApplicationConfiguration.Initialize();
 Bitmap bmp = null;
 Graphics g = null;
 
+Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Player("Ele", 0, 0, "./assets/Sprites/Player/download.png"));
+engine.AddObject(new Player("Ele", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
 engine.AddObject(new Boss("Ele", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 
 
