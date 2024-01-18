@@ -12,7 +12,7 @@ public class Player : GameObject, IMoveable
     public int steps { get; set; } = 0;
     public int slowFrameRate { get; set; } = 0;
 
-    public int Hp { get; set; }
+    public int Hp { get; set; } = 3;
     public float BaseAcceleration { get; set; } = 1_000;
     public float Ax { get; set; }
     public float Ay { get; set; }

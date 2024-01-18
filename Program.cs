@@ -12,8 +12,9 @@ Graphics g = null;
 Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Player("Ele", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
-engine.AddObject(new Boss("Ele", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
+engine.AddObject(new Player("Him", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
+// engine.AddObject(new Wall("Wall", 100, 1000, 100, 100));
+engine.AddObject(new Boss("Frog", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
