@@ -44,22 +44,8 @@ public class CollisionManager
     private bool CollisionDetected(GameObject obj1, GameObject obj2)
     {
         // Lógica para detectar colisões entre dois objetos
-        return obj2.Hitbox.Contains(
-                obj1.X + obj1.Hitbox.Width / 2,
-                obj1.Y + obj1.Hitbox.Height / 2
-            )
-            || obj2.Hitbox.Contains(
-                obj1.X - obj1.Hitbox.Width / 2,
-                obj1.Y - obj1.Hitbox.Height / 2
-            )
-            || obj2.Hitbox.Contains(
-                obj1.X + obj1.Hitbox.Width / 2,
-                obj1.Y - obj1.Hitbox.Height / 2
-            )
-            || obj2.Hitbox.Contains(
-                obj1.X - obj1.Hitbox.Width / 2,
-                obj1.Y + obj1.Hitbox.Height / 2
-            );
+        return  obj2.Hitbox.IntersectsWith(obj1.Hitbox);
+
 
     }
     public static void New() => current = new CollisionManager();
