@@ -27,6 +27,15 @@ public class CollisionManager
             if (other == obj)
                 continue;
 
+            if (obj is Weapon && other is Boss)
+            {
+                MessageBox.Show("Show");
+                if (CollisionDetected(obj, other))
+                    HandleDamage(other as IAttackable);
+                    return true;
+            }
+
+
             if (CollisionDetected(obj, other) && other.isHittable)
                 return true;
         }
@@ -37,8 +46,12 @@ public class CollisionManager
     {
         // Lógica para detectar colisões entre dois objetos
         return  obj2.Hitbox.IntersectsWith(obj1.Hitbox);
-
-
     }
+
+    public void HandleDamage(IAttackable attackable)
+    {
+        attackable.ReceiveDamage();
+    }
+
     public static void New() => current = new CollisionManager();
 }

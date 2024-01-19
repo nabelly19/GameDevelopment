@@ -19,8 +19,12 @@ public class Weapon : GameObject, IMoveable
         this.player = player;
         DisableHitbox();
     }
-
-    public void Attack() { }
+    public Weapon(string name, int x, int y, string sprite, Player player)
+        : base(name, x, y, sprite)
+    {
+        this.player = player;
+        DisableHitbox();
+    }
 
     public override void Render(Graphics g, PictureBox pb)
     {
@@ -30,18 +34,30 @@ public class Weapon : GameObject, IMoveable
 
     public override void Update()
     {
-        Move();
+        // Move();
     }
 
     public void Move()
     {
+
         if (player.Ax != 0)
-        this.Ax = player.Ax;
-        if (player.Ay != 0)
-        this.Ay = player.Ay;
-        
-        this.X = player.Hitbox.X + player.Hitbox.Width / 2 + (player.Hitbox.Width / 2 + this.Width / 2) * this.Ax;
-        this.Y = player.Hitbox.Y + player.Hitbox.Height / 2 + (player.Hitbox.Height / 2+ this.Height / 2) * this.Ay;
-        
+        {
+            this.Ax = player.Ax;
+            this.Ay = 0;
+        }
+        else if (player.Ay != 0)
+        {
+            this.Ax = 0;
+            this.Ay = player.Ay;
+        }
+
+        this.X =
+            player.Hitbox.X
+            + player.Hitbox.Width / 2
+            + (player.Hitbox.Width / 2 + this.Width / 2) * this.Ax;
+        this.Y =
+            player.Hitbox.Y
+            + player.Hitbox.Height / 2
+            + (player.Hitbox.Height / 2 + this.Height / 2) * this.Ay;
     }
 }

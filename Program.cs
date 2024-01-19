@@ -13,8 +13,7 @@ Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
 engine.AddObject(new Player("Him", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
-engine.AddObject(new Weapon("Weapon", 0, 0, 10, 10, engine.player));
-engine.AddObject(new Wall("Wall", 100, 1000, 100, 100));
+// engine.AddObject(new Weapon("Weapon", 0, 0, 10, 10, engine.player));
 engine.AddObject(new Boss("Frog", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
@@ -85,9 +84,9 @@ form.KeyDown += (o, e) =>
             engine.player.MoveRight();
             break;
 
-        // case Keys.Space:
-        //     Game.Current.CurrentMap.UpdateBackground("./Midia/Maps/dungeon_pre.png");
-        //     break;
+        case Keys.Space:
+            engine.player.Attack();
+            break;
     }
 };
 
@@ -109,6 +108,9 @@ form.KeyUp += (o, e) =>
 
         case Keys.D:
             engine.player.Ax = 0;
+            break;
+        
+        case Keys.Space:
             break;
     }
 };

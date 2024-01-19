@@ -24,7 +24,13 @@ public class GameEngine
     public void AddObject(GameObject gameObject)
     {
         if (gameObject is Player)
-            this.player = gameObject as Player;
+        {
+            var newPlayer = gameObject as Player;
+            var weapon = new Weapon("Weapon", 0, 0, 50, 50, newPlayer);
+            newPlayer.Weapon = weapon;
+            this.player = newPlayer;
+            AddObject(weapon);
+        }
         CollisionManager.Current.AddGameObject(gameObject);
     }
 

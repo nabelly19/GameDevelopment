@@ -8,7 +8,7 @@ public abstract class GameObject
     public string Name { get; set; }
     public RectangleF Hitbox { get; set; }
     public bool isHittable { get; private set; } = true;
-    public bool isColliding { get; private set; } = false;
+    // public bool is
     public float X { get; set; }
     public float Y { get; set; }
     public float Width { get; set; }
@@ -52,8 +52,4 @@ public abstract class GameObject
     public virtual void EnableHitbox() => this.isHittable = true;
 
     public virtual void DisableHitbox() => this.isHittable = false;
-
-    public virtual void Colliding() => this.isColliding = true;
-
-    public virtual void notColliding() => this.isColliding = false;
 }
