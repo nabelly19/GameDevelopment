@@ -7,7 +7,7 @@ using System.Windows.Forms;
 public class Weapon : GameObject, IMoveable
 {
     private Player player { get; set; }
-    public int AtkSpeed { get; set; }
+    public int AtkSpeed { get; set; } = 800;
     public bool WindBlade { get; set; } = false;
     public float BaseAcceleration { get; set; }
     public float Ax { get; set; }
@@ -59,5 +59,8 @@ public class Weapon : GameObject, IMoveable
             player.Hitbox.Y
             + player.Hitbox.Height / 2
             + (player.Hitbox.Height / 2 + this.Height / 2) * this.Ay;
+
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+
     }
 }

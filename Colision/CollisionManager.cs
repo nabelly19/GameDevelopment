@@ -27,25 +27,29 @@ public class CollisionManager
             if (other == obj)
                 continue;
 
-            if (obj is Weapon && other is Boss)
-            {
-                MessageBox.Show("Show");
-                if (CollisionDetected(obj, other))
-                    HandleDamage(other as IAttackable);
-                    return true;
-            }
-
-
             if (CollisionDetected(obj, other) && other.isHittable)
                 return true;
         }
         return false;
     }
 
+    public IEnumerable<GameObject> GetCollisions(GameObject obj)
+    {
+        for (int j = 0; j < gameObjects.Count; j++)
+        {
+            GameObject other = gameObjects[j];
+            if (other == obj)
+                continue;
+
+            if (CollisionDetected(obj, other) && other.isHittable)
+                yield return other;
+        }
+    }
+
     private bool CollisionDetected(GameObject obj1, GameObject obj2)
     {
         // Lógica para detectar colisões entre dois objetos
-        return  obj2.Hitbox.IntersectsWith(obj1.Hitbox);
+        return obj2.Hitbox.IntersectsWith(obj1.Hitbox);
     }
 
     public void HandleDamage(IAttackable attackable)

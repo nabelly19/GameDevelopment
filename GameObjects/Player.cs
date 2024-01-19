@@ -9,6 +9,7 @@ public class Player : GameObject, IMoveable, IAttackable
     private float vx = 0f;
     private float vy = 0f;
     private DateTime last = DateTime.Now;
+    private DateTime lastAttack = DateTime.Now;
     public int steps { get; set; } = 0;
     public int slowFrameRate { get; set; } = 0;
 
@@ -173,12 +174,32 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
-        MessageBox.Show($"X: {this.X}  Y:{this.Y}  Ax:{this.Ax}  Vx:{this.vx}  Vy:{this.vy}");
+        MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
     }
 
     public void Attack() {
         
-        CollisionManager.Current.CheckCollisions(this.Weapon);
+        var now = DateTime.Now;
+        var dt = now - this.lastAttack ;
+        var secs = (float)dt.TotalMilliseconds;
+
+        if (secs < this.Weapon.AtkSpeed)
+            return;
+
+        var collisions = CollisionManager.Current.GetCollisions(this.Weapon);
+
+        foreach (var obj in collisions)
+        {
+            if (obj == this)
+                continue;
+
+            if (obj is IAttackable other)
+            {
+                this.lastAttack = now;
+                other.ReceiveDamage();
+                return;
+            }
+        }
 
     }
 }
