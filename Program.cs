@@ -15,7 +15,6 @@ CollisionManager.New();
 GameEngine engine = new();
 engine.StartUp(pb);
 
-
 var timer = new Timer { Interval = 1000 / 60, };
 
 var form = new Form
