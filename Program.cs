@@ -49,7 +49,9 @@ timer.Tick += (o, e) =>
     engine.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
     pb.Refresh();
+    
 };
+
 
 //295,4 467,93552
 
@@ -85,6 +87,13 @@ form.KeyDown += (o, e) =>
         case Keys.Space:
             engine.player.Attack();
             break;
+        case Keys.L:
+            CollisionManager.New();
+            CollisionManager.Current.AddGameObject(engine.player);
+            break;
+        case Keys.K:
+            break;
+
     }
 };
 

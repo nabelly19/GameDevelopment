@@ -83,4 +83,10 @@ public class GameEngine
         CurrentMap = Maps[index];
     }
 
+    public void Run(){
+
+    }
+    public void Stop(){
+        
+    }
 }
