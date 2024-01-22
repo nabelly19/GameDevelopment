@@ -8,15 +8,13 @@ ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
 Graphics g = null;
+var pb = new PictureBox { Dock = DockStyle.Fill, };
 
 Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Player("Him", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
-// engine.AddObject(new Weapon("Weapon", 0, 0, 10, 10, engine.player));
-engine.AddObject(new Boss("Frog", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
+engine.StartUp(pb);
 
-var pb = new PictureBox { Dock = DockStyle.Fill, };
 
 var timer = new Timer { Interval = 1000 / 60, };
 

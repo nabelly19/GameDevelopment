@@ -6,12 +6,24 @@ using System.Windows.Forms;
 public class GameEngine
 {
     public Player player = null;
-    public Background Background { get; set; } = new();
+    public List<Map> Maps = new();
+    public Map CurrentMap { get; set; } // => current map
     public SoundPlayer Sound { get; set; } = new();
+    private int index = 0;
 
     public void StartSound() => Sound.Play();
+    public void StartBackground(Graphics g, PictureBox pb) => CurrentMap.Render(g, pb);
 
-    public void StartBackground(Graphics g, PictureBox pb) => Background.Draw(g, pb);
+    public void StartUp(PictureBox pb)
+    {
+        AddMap(new Dungeon_01(pb));
+        CurrentMap = this.Maps[0];
+        AddObject(new Player("Him", 700, 700, "./assets/Sprites/Player/SPRITE/k_0.png"));
+        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.player));
+        AddObject(new Boss("Frog", 50, 900, "./assets/Sprites/Bosses/pxArt.png"));
+        
+        AddWalls();
+    }
 
     public void Update()
     {
@@ -21,6 +33,14 @@ public class GameEngine
         }
     }
 
+    public void Render(Graphics g, PictureBox pb)
+    {
+        CurrentMap.Render(g, pb);
+        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        {
+            gameObject.Render(g, pb);
+        }
+    }
     public void AddObject(GameObject gameObject)
     {
         if (gameObject is Player)
@@ -34,11 +54,33 @@ public class GameEngine
         CollisionManager.Current.AddGameObject(gameObject);
     }
 
-    public void Render(Graphics g, PictureBox pb)
+    public void AddWalls()
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        foreach (var item in Maps)
         {
-            gameObject.Render(g, pb);
+            if (item == CurrentMap)
+            {
+                foreach (var wall in item.Walls)
+                {
+                    CollisionManager.Current.AddGameObject(wall);
+                }
+            }
         }
     }
+
+    public void AddMap(Map map)
+        => Maps.Add(map);
+
+    public void nextMap()
+    {
+        index++;
+        CurrentMap = Maps[index];
+    }
+
+    public void prevMap()
+    {
+        index--;
+        CurrentMap = Maps[index];
+    }
+
 }
