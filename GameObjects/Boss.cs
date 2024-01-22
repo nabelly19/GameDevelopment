@@ -13,6 +13,16 @@ public class Boss : GameObject, IAttackable
     public Boss(string name, int x, int y, string sprite)
         : base(name, x, y, sprite) { }
 
+    public override void Update()
+    {
+        var collided = CollisionManager.Current.GetCollisions(this);
+        foreach (var other in collided)
+        {
+            if (other is IAttackable player)
+                player.ReceiveDamage();
+        }
+    }
+
     // Strategy / State / Behaviour
     public void Attack(Player player)
     {
@@ -25,5 +35,10 @@ public class Boss : GameObject, IAttackable
         g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawRectangle(Pens.White, this.Hitbox);
+    }
+
+    public void ReceiveDamage()
+    {
+        this.Hp--;
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 // namespace Entity;
@@ -33,11 +34,12 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
-        Move();
+        Move();        
     }
 
     public override void Render(Graphics g, PictureBox pb)
     {
+        // this.Sprite.
         g.DrawImage(
             this.Sprite,
             new RectangleF(
@@ -170,6 +172,8 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Sprite = Resources.Current.PlayerSprites[steps];
     }
 
+
+
     public void Info()
     {
         // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
@@ -199,5 +203,10 @@ public class Player : GameObject, IMoveable, IAttackable
                 return;
             }
         }
+    }
+
+    public void ReceiveDamage()
+    {
+        this.Hp--;
     }
 }

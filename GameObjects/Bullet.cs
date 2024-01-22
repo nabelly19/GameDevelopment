@@ -29,7 +29,7 @@ public class Bullet : GameObject
         X += 1;
         Y += 1;
         var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
-        if (collided is not null)
+        if (CollisionManager.Current.CheckCollisions(this))
         {
             if (collided is IAttackable other)
                 other.ReceiveDamage();

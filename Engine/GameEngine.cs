@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public class GameEngine
@@ -15,8 +16,7 @@ public class GameEngine
 
     public void Update()
     {
-        var l = new List<GameObject>(CollisionManager.Current.gameObjects);
-        foreach (var gameObject in l)
+        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
@@ -39,8 +39,7 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        var l = new List<GameObject>(CollisionManager.Current.gameObjects);
-        foreach (var gameObject in l)
+        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
