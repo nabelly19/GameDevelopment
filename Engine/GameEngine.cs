@@ -15,8 +15,11 @@ public class GameEngine
 
     public void Update()
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        var l = new List<GameObject>(CollisionManager.Current.gameObjects);
+        foreach (var gameObject in l)
         {
+            if (gameObject is null)
+                continue;
             gameObject.Update();
         }
     }
@@ -36,16 +39,16 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        var l = new List<GameObject>(CollisionManager.Current.gameObjects);
+        foreach (var gameObject in l)
         {
+            if (gameObject is null)
+                continue;
             gameObject.Render(g, pb);
         }
     }
 
-    public void Run(){
+    public void Run() { }
 
-    }
-    public void Stop(){
-        
-    }
+    public void Stop() { }
 }

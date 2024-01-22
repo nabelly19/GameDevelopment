@@ -47,9 +47,8 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
+        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
-        // CreateHitbox(this.X, this.Y, 250, 300);
-
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -62,7 +61,7 @@ public class Player : GameObject, IMoveable, IAttackable
         var time = now - last;
         var secs = (float)time.TotalSeconds;
         last = now;
-        
+
         this.Weapon.Move();
 
         if ((int)vx > 8)
@@ -177,10 +176,10 @@ public class Player : GameObject, IMoveable, IAttackable
         // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }
 
-    public void Attack() {
-        
+    public void Attack()
+    {
         var now = DateTime.Now;
-        var dt = now - this.lastAttack ;
+        var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;
 
         if (secs < this.Weapon.AtkSpeed)
@@ -200,6 +199,5 @@ public class Player : GameObject, IMoveable, IAttackable
                 return;
             }
         }
-
     }
 }

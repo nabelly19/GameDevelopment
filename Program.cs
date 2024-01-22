@@ -12,7 +12,7 @@ Graphics g = null;
 Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Player("Him", 50, 50, "./assets/Sprites/Player/SPRITE/k_0.png"));
+engine.AddObject(new Player("Him", 110, 110, "./assets/Sprites/Player/SPRITE/k_0.png"));
 engine.AddObject(new Boss("Frog", 960, 540, "./assets/Sprites/Bosses/pxArt.png"));
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
@@ -38,23 +38,18 @@ form.Load += (o, e) =>
 };
 
 DateTime lastchecked = DateTime.Now;
-float fps =0;
-
+float fps = 0;
 
 timer.Tick += (o, e) =>
 {
-    fps = (int)(1/(float)(DateTime.Now-lastchecked).TotalSeconds);
+    fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
     engine.Update();
     engine.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
     pb.Refresh();
-    
 };
-
-
-//295,4 467,93552
 
 form.KeyDown += (o, e) =>
 {
@@ -65,6 +60,7 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
+            MessageBox.Show($"Count:{CollisionManager.Current.gameObjects.Count}");
             engine.player.Info();
             break;
 
@@ -93,8 +89,8 @@ form.KeyDown += (o, e) =>
             CollisionManager.Current.AddGameObject(engine.player);
             break;
         case Keys.K:
+            engine.AddObject(new Bullet("Bullet", 50, 50, 50, 50));
             break;
-
     }
 };
 
@@ -117,7 +113,7 @@ form.KeyUp += (o, e) =>
         case Keys.D:
             engine.player.Ax = 0;
             break;
-        
+
         case Keys.Space:
             break;
     }

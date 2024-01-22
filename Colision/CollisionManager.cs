@@ -18,13 +18,19 @@ public class CollisionManager
     {
         gameObjects.Add(gameObject);
     }
+    public void RemoveGameObject(GameObject gameObject)
+    {
+        
+        gameObjects.Remove(gameObject);
+    }
 
     public bool CheckCollisions(GameObject obj)
     {
         for (int j = 0; j < gameObjects.Count; j++)
         {
             GameObject other = gameObjects[j];
-            if (other == obj)
+
+            if (other == obj || other is null)
                 continue;
 
             if (CollisionDetected(obj, other) && other.isHittable)
@@ -40,7 +46,6 @@ public class CollisionManager
             GameObject other = gameObjects[j];
             if (other == obj)
                 continue;
-
             if (CollisionDetected(obj, other) && other.isHittable)
                 yield return other;
         }
@@ -67,11 +72,5 @@ public class CollisionManager
 
         return false;
     }
-
-    public void HandleDamage(IAttackable attackable)
-    {
-        attackable.ReceiveDamage();
-    }
-
     public static void New() => current = new CollisionManager();
 }

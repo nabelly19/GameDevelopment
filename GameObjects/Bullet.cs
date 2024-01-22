@@ -1,14 +1,16 @@
 // namespace Entity;
 
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public class Bullet : GameObject
 {
     public Bullet(string name, int x, int y, float width, float height)
-        : base(name, x, y, width, height) {
-            DisableHitbox();
-         }
+        : base(name, x, y, width, height)
+    {
+        DisableHitbox();
+    }
 
     public override void Update()
     {
@@ -26,5 +28,12 @@ public class Bullet : GameObject
         // Lógica de movimento da bala
         X += 1;
         Y += 1;
+        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        if (collided is not null)
+        {
+            if (collided is IAttackable other)
+                other.ReceiveDamage();
+            CollisionManager.Current.RemoveGameObject(this);
+        }
     }
 }
