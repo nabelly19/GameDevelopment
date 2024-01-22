@@ -19,6 +19,7 @@ public class Weapon : GameObject, IMoveable
         this.player = player;
         DisableHitbox();
     }
+
     public Weapon(string name, int x, int y, string sprite, Player player)
         : base(name, x, y, sprite)
     {
@@ -32,14 +33,8 @@ public class Weapon : GameObject, IMoveable
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
-    public override void Update()
-    {
-        // Move();
-    }
-
     public void Move()
     {
-
         if (player.Ax != 0)
         {
             this.Ax = player.Ax;
@@ -59,8 +54,5 @@ public class Weapon : GameObject, IMoveable
             player.Hitbox.Y
             + player.Hitbox.Height / 2
             + (player.Hitbox.Height / 2 + this.Height / 2) * this.Ay;
-
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
-
     }
 }

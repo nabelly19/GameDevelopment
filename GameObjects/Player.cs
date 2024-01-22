@@ -62,8 +62,7 @@ public class Player : GameObject, IMoveable, IAttackable
         var time = now - last;
         var secs = (float)time.TotalSeconds;
         last = now;
-
-        this.Weapon.Update();
+        
         this.Weapon.Move();
 
         if ((int)vx > 8)
@@ -174,7 +173,8 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
-        MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
+        // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
+        // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }
 
     public void Attack() {

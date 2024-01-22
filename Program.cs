@@ -12,9 +12,8 @@ Graphics g = null;
 Resources.New();
 CollisionManager.New();
 GameEngine engine = new();
-engine.AddObject(new Player("Him", 0, 0, "./assets/Sprites/Player/SPRITE/k_0.png"));
-// engine.AddObject(new Weapon("Weapon", 0, 0, 10, 10, engine.player));
-engine.AddObject(new Boss("Frog", 500, 500, "./assets/Sprites/Bosses/pxArt.png"));
+engine.AddObject(new Player("Him", 50, 50, "./assets/Sprites/Player/SPRITE/k_0.png"));
+engine.AddObject(new Boss("Frog", 960, 540, "./assets/Sprites/Bosses/pxArt.png"));
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
@@ -51,7 +50,9 @@ timer.Tick += (o, e) =>
     engine.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
     pb.Refresh();
+    
 };
+
 
 //295,4 467,93552
 
@@ -87,6 +88,13 @@ form.KeyDown += (o, e) =>
         case Keys.Space:
             engine.player.Attack();
             break;
+        case Keys.L:
+            CollisionManager.New();
+            CollisionManager.Current.AddGameObject(engine.player);
+            break;
+        case Keys.K:
+            break;
+
     }
 };
 

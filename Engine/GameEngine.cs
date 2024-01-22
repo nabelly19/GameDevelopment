@@ -41,4 +41,11 @@ public class GameEngine
             gameObject.Render(g, pb);
         }
     }
+
+    public void Run(){
+
+    }
+    public void Stop(){
+        
+    }
 }
