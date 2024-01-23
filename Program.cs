@@ -8,19 +8,14 @@ ApplicationConfiguration.Initialize();
 
 Bitmap bmp = null;
 Graphics g = null;
+var pb = new PictureBox { Dock = DockStyle.Fill, };
 
 Resources.New();
 CollisionManager.New();
-GameEngine.New();
-Player p = new Player("Him", 110, 110, "./assets/Sprites/Player/SPRITE/k_0.png");
-Boss b = new FelixTheToad(960, 540, "./assets/Sprites/Bosses/pxArt.png");
-GameEngine.Current.Player = p;
-
-GameEngine.Current.AddObject(p);
-GameEngine.Current.AddObject(b);
-
 
 var pb = new PictureBox { Dock = DockStyle.Fill, };
+GameEngine.New();
+engine.StartUp(pb);
 
 var timer = new Timer { Interval = 1000 / 60, };
 

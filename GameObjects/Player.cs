@@ -28,8 +28,8 @@ public class Player : GameObject, IMoveable, IAttackable
     {
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
-        this.Width /= 4;
-        this.Height /= 4;
+        this.Width /= 4f;
+        this.Height /= 4f;
     }
 
     public override void Update()
