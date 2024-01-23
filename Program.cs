@@ -13,9 +13,8 @@ var pb = new PictureBox { Dock = DockStyle.Fill, };
 Resources.New();
 CollisionManager.New();
 
-var pb = new PictureBox { Dock = DockStyle.Fill, };
 GameEngine.New();
-engine.StartUp(pb);
+GameEngine.Current.StartUp(pb);
 
 var timer = new Timer { Interval = 1000 / 60, };
 

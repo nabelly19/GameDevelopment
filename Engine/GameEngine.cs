@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-// '
+
 public class GameEngine
 {
     private static GameEngine current;
@@ -18,20 +18,21 @@ public class GameEngine
     private GameEngine() { }
 
     public void StartSound() => Sound.Play();
+
     public void StartBackground(Graphics g, PictureBox pb) => CurrentMap.Render(g, pb);
 
     public void StartUp(PictureBox pb)
     {
         AddMap(new Dungeon_01(pb));
         CurrentMap = this.Maps[0];
-      
+
         Player p = new Player("Him", 700, 700, "./assets/Sprites/Player/SPRITE/k_0.png");
         Boss b = new FelixTheToad(960, 540, "./assets/Sprites/Bosses/pxArt.png");
-      
+
         AddObject(p);
-        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.player));
+        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
-        
+
         AddWalls();
     }
 
@@ -48,11 +49,14 @@ public class GameEngine
     public void Render(Graphics g, PictureBox pb)
     {
         CurrentMap.Render(g, pb);
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
         {
+            if (gameObject is null)
+                continue;
             gameObject.Render(g, pb);
         }
     }
+
     public void AddObject(GameObject gameObject)
     {
         if (gameObject is Player)
@@ -68,15 +72,6 @@ public class GameEngine
 
     public void AddWalls()
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
-        {
-            if (gameObject is null)
-                continue;
-            gameObject.Render(g, pb);
-        }
-    }
-
-    public void Run() { }
         foreach (var item in Maps)
         {
             if (item == CurrentMap)
@@ -89,8 +84,9 @@ public class GameEngine
         }
     }
 
-    public void AddMap(Map map)
-        => Maps.Add(map);
+    public void Run() { }
+
+    public void AddMap(Map map) => Maps.Add(map);
 
     public void nextMap()
     {
@@ -100,11 +96,9 @@ public class GameEngine
 
     public void prevMap()
     {
-        index--;
-        CurrentMap = Maps[index];
+        this.index--;
+        this.CurrentMap = Maps[index];
     }
-
-    public void Run(){
 
     public void Stop() { }
 
