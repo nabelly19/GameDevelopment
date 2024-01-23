@@ -6,9 +6,13 @@ using System.Windows.Forms;
 
 public class GameEngine
 {
-    public Player player = null;
+    private static GameEngine current;
+    public static GameEngine Current => current;
+    public Player Player { get; set; }
     public Background Background { get; set; } = new();
     public SoundPlayer Sound { get; set; } = new();
+
+    private GameEngine() { }
 
     public void StartSound() => Sound.Play();
 
@@ -31,7 +35,7 @@ public class GameEngine
             var newPlayer = gameObject as Player;
             var weapon = new Weapon("Weapon", 0, 0, 50, 50, newPlayer);
             newPlayer.Weapon = weapon;
-            this.player = newPlayer;
+            this.Player = newPlayer;
             AddObject(weapon);
         }
         CollisionManager.Current.AddGameObject(gameObject);
@@ -50,4 +54,6 @@ public class GameEngine
     public void Run() { }
 
     public void Stop() { }
+
+    public static void New() => current = new GameEngine();
 }

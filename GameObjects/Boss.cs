@@ -8,25 +8,20 @@ methods for attacking and handling collisions. */
 public class Boss : GameObject, IAttackable
 {
     public int Hp { get; set; } = 3;
-    public PointF SpawnPoint;
-
+    public StateManager Manager { get; private set; } = new();
     public Boss(string name, int x, int y, string sprite)
         : base(name, x, y, sprite) { }
 
     public override void Update()
     {
+        this.Manager.Act();
+
         var collided = CollisionManager.Current.GetCollisions(this);
         foreach (var other in collided)
         {
             if (other is IAttackable player)
                 player.ReceiveDamage();
         }
-    }
-
-    // Strategy / State / Behaviour
-    public void Attack(Player player)
-    {
-        throw new NotImplementedException();
     }
 
     public override void Render(Graphics g, PictureBox pb)

@@ -111,7 +111,7 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (vy < -max)
             vy = -max;
 
-        if (!CollisionManager.Current.CheckCollisions(this))
+        if (!(CollisionManager.Current.CheckCollisions(this) || CollisionManager.Current.ScreenColision(this)))
             return;
 
         const float energyLoss = 0.2f;
@@ -176,6 +176,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
+        MessageBox.Show(CollisionManager.Current.ScreenColision(this).ToString());
         // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
         // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }

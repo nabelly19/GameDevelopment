@@ -1,7 +1,9 @@
 // namespace Entity;
 
+using System;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 public class Bullet : GameObject
@@ -25,15 +27,42 @@ public class Bullet : GameObject
 
     public void Move()
     {
-        // Lógica de movimento da bala
-        X += 1;
-        Y += 1;
+        // var radius = 10;
+        // var center = new PointF(80,80);
+        // var point = new PointF(center.X + radius,center.Y);
+        // var incrementX = -0.1f;
+        // var incrementY = +0.1f;
+        // for (int i = 0; i < 100; i++)
+        // {
+        //     if(point.X > center.X + radius)
+        //         incrementX = -0.01f;
+        //     else if(point.X < center.X - radius)
+        //         incrementX = 0.1f;
+
+        //     if(point.Y > center.Y + radius)
+        //         incrementY = -0.1f;
+        //     else if(point.Y < center.Y - radius)
+        //         incrementY= 0.1f;
+
+        //     point.X += incrementX;
+        //     point.Y += incrementY;
+
+        //     this.X = point.X;
+        //     this.Y = point.Y;
+        // }
+
+        this.X+=5;
+        this.Y+=5;
+
         var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
-        if (CollisionManager.Current.CheckCollisions(this))
+        if (collided is not null)
         {
-            if (collided is IAttackable other)
+            if (collided is Player other)
                 other.ReceiveDamage();
             CollisionManager.Current.RemoveGameObject(this);
+            return;
         }
+        if (CollisionManager.Current.ScreenColision(this))
+            CollisionManager.Current.RemoveGameObject(this);
     }
 }

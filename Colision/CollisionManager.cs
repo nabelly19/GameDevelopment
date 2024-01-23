@@ -55,7 +55,7 @@ public class CollisionManager
     {
         // Lógica para detectar colisões entre dois objetos
 
-        return obj2.Hitbox.IntersectsWith(obj1.Hitbox) || ScreenColision(obj1);
+        return obj2.Hitbox.IntersectsWith(obj1.Hitbox);
     }
 
     public bool ScreenColision(GameObject obj)
