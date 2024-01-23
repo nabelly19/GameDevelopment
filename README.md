@@ -4,6 +4,10 @@ OBJ FOLDER IS FINALLY GONE HOLY CRAP, WHY IS THAT SO DAMN HARD BRO
 
 ### Development Update
 
-Reworked Code Structre to ease the build of the game
+Addded:
+    - Game Background
+    - Boss States
+    - Bullet Collision with walls and screen
+    - Player Animation when no volocity (Still Working on it)
 
 [Todo](TODO.md)
