@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 // namespace Entity;
@@ -33,11 +34,12 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
-        Move();
+        Move();        
     }
 
     public override void Render(Graphics g, PictureBox pb)
     {
+        // this.Sprite.
         g.DrawImage(
             this.Sprite,
             new RectangleF(
@@ -47,9 +49,8 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
+        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
-        // CreateHitbox(this.X, this.Y, 250, 300);
-
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -62,7 +63,7 @@ public class Player : GameObject, IMoveable, IAttackable
         var time = now - last;
         var secs = (float)time.TotalSeconds;
         last = now;
-        
+
         this.Weapon.Move();
 
         if ((int)vx > 8)
@@ -110,7 +111,7 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (vy < -max)
             vy = -max;
 
-        if (!CollisionManager.Current.CheckCollisions(this))
+        if (!(CollisionManager.Current.CheckCollisions(this) || CollisionManager.Current.ScreenColision(this)))
             return;
 
         const float energyLoss = 0.2f;
@@ -171,16 +172,19 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Sprite = Resources.Current.PlayerSprites[steps];
     }
 
+
+
     public void Info()
     {
+        MessageBox.Show(CollisionManager.Current.ScreenColision(this).ToString());
         // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
         // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }
 
-    public void Attack() {
-        
+    public void Attack()
+    {
         var now = DateTime.Now;
-        var dt = now - this.lastAttack ;
+        var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;
 
         if (secs < this.Weapon.AtkSpeed)
@@ -200,6 +204,10 @@ public class Player : GameObject, IMoveable, IAttackable
                 return;
             }
         }
+    }
 
+    public void ReceiveDamage()
+    {
+        this.Hp--;
     }
 }

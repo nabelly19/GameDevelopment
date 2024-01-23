@@ -8,6 +8,7 @@ public abstract class GameObject
     public string Name { get; set; }
     public RectangleF Hitbox { get; set; }
     public bool isHittable { get; private set; } = true;
+
     // public bool is
     public float X { get; set; }
     public float Y { get; set; }
@@ -27,6 +28,7 @@ public abstract class GameObject
         this.Height = this.Sprite.Height;
     }
     public GameObject(string name, float x, float y, float width, float height)
+
     {
         this.Name = name;
         this.X = x;
