@@ -8,8 +8,7 @@ public abstract class GameObject
     public string Name { get; set; }
     public RectangleF Hitbox { get; set; }
     public bool isHittable { get; private set; } = true;
-
-    // public bool is
+    public PointF Location { get; set; }
     public float X { get; set; }
     public float Y { get; set; }
     public float Width { get; set; }

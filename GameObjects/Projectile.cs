@@ -4,8 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-public class Projectile : GameObject
+public class Projectile : GameObject, IMoveable
 {
+    protected SizeF speed;
+    public float angle = 0;
+    public float BaseAcceleration { get; set; } = 5;
+    public float Ax { get; set; }
+    public float Ay { get; set; }
+
     public Projectile(string name, int x, int y, string sprite)
         : base(name, x, y, sprite)
     {
@@ -26,8 +32,10 @@ public class Projectile : GameObject
 
     public virtual void Move()
     {
-        this.X++;
-        this.Y++;
+        // this.X++;
+        // this.Y++;
+        GoTo(90);
+        Location += 5f * this.speed;
     }
 
     public override void Update()
@@ -43,5 +51,14 @@ public class Projectile : GameObject
         }
         if (CollisionManager.Current.ScreenColision(this))
             CollisionManager.Current.RemoveGameObject(this);
+    }
+
+    protected float ToRadians(float angleD) => MathF.PI / 180 * angleD;
+
+    public virtual void GoTo(float angle)
+    {
+        var radians = ToRadians(angle);
+        this.X += BaseAcceleration * MathF.Cos(radians);
+        this.Y += BaseAcceleration * MathF.Sin(radians);
     }
 }
