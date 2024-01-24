@@ -26,7 +26,7 @@ public class GameEngine
         AddMap(new Dungeon_01(pb));
         CurrentMap = this.Maps[0];
 
-        Player p = new Player("Him", 700, 700, "./assets/Sprites/Player/SPRITE/k_0.png");
+        Player p = new Player("Him", 100, 700, "./assets/Sprites/Player/SPRITE/k_0.png");
         Boss b = new FelixTheToad(960, 540, "./assets/Sprites/Bosses/pxArt.png");
 
         AddObject(p);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 public class StateBuilder
 {
     private Boss boss = null;
@@ -17,19 +18,17 @@ public class StateBuilder
     {
         // state.SetContext(this.boss);
 
-        
+
 
         if (last is not null)
             last.SetNextState(state);
-        
+
         if (initial == null)
             initial = state;
 
         last = state;
         return this;
     }
-
-    
 
     public State Build()
     {
