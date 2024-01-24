@@ -34,7 +34,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
-        Move();        
+        Move();
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -111,7 +111,12 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (vy < -max)
             vy = -max;
 
-        if (!(CollisionManager.Current.CheckCollisions(this) || CollisionManager.Current.ScreenColision(this)))
+        if (
+            !(
+                CollisionManager.Current.CheckCollisions(this)
+                || CollisionManager.Current.ScreenColision(this)
+            )
+        )
             return;
 
         const float energyLoss = 0.2f;
@@ -171,8 +176,6 @@ public class Player : GameObject, IMoveable, IAttackable
 
         this.Sprite = Resources.Current.PlayerSprites[steps];
     }
-
-
 
     public void Info()
     {

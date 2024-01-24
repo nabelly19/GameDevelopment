@@ -27,8 +27,8 @@ public abstract class GameObject
         this.Width = this.Sprite.Width;
         this.Height = this.Sprite.Height;
     }
-    public GameObject(string name, float x, float y, float width, float height)
 
+    public GameObject(string name, float x, float y, float width, float height)
     {
         this.Name = name;
         this.X = x;
