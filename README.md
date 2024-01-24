@@ -9,5 +9,7 @@ Addded:
     - Boss States
     - Bullet Collision with walls and screen
     - Player Animation when no volocity (Still Working on it)
+    - Projectiles
+    - Spiral Projectile
 
 [Todo](TODO.md)
