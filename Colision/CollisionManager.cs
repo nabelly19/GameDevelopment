@@ -18,9 +18,9 @@ public class CollisionManager
     {
         gameObjects.Add(gameObject);
     }
+
     public void RemoveGameObject(GameObject gameObject)
     {
-        
         gameObjects.Remove(gameObject);
     }
 
@@ -72,5 +72,6 @@ public class CollisionManager
 
         return false;
     }
+
     public static void New() => current = new CollisionManager();
 }

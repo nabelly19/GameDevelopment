@@ -12,6 +12,7 @@ public class BulletState : State
 {
     DateTime? dt = null;
     int count = 0;
+
     public override void Act()
     {
         if (count == 3)
@@ -21,28 +22,29 @@ public class BulletState : State
             GoToNext();
             return;
         }
-        
+
         dt ??= DateTime.Now;
 
         if (DateTime.Now < dt?.AddSeconds(2))
             return;
-        
+
         count++;
         dt = null;
-        GameEngine.Current.AddObject(new Bullet("Bullet", 50, 50, 50, 50));
+        GameEngine.Current.AddObject(new SpiralProjectile("Bullet", 50, 50, 50, 50));
     }
 }
 
 public class WaitState : State
 {
     DateTime? dt = null;
+
     public override void Act()
     {
         dt ??= DateTime.Now;
 
         if (DateTime.Now < dt?.AddSeconds(4))
             return;
-        
+
         dt = null;
         GoToNext();
     }

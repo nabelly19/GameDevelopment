@@ -9,6 +9,7 @@ public class Boss : GameObject, IAttackable
 {
     public int Hp { get; set; } = 3;
     public StateManager Manager { get; private set; } = new();
+
     public Boss(string name, int x, int y, string sprite)
         : base(name, x, y, sprite) { }
 

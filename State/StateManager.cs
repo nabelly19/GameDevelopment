@@ -11,30 +11,22 @@ public class StateManager
         this.initialStateList.Add(state);
         state.SetContext(this);
     }
-    
+
     public void Act()
     {
-        Current ??= initialStateList[
-            Random.Shared.Next(initialStateList.Count)
-        ];
-        
+        Current ??= initialStateList[Random.Shared.Next(initialStateList.Count)];
+
         Current.Act();
     }
 
-    public void Randomize()
-    {
+    public void Randomize() { }
 
-    }
-    public void Damage01_Boss01()
-    {
-
-    }
-
+    public void Damage01_Boss01() { }
 }
 
 // //TODO REVER POSICAO DESSE BLOCO AI KK
-        // if (last.nextState is null)
-        // {
-        //     Random rand = new Random();
-        //     rand.Next(stateList.Count);
-        // }
+// if (last.nextState is null)
+// {
+//     Random rand = new Random();
+//     rand.Next(stateList.Count);
+// }

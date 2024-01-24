@@ -88,7 +88,7 @@ form.KeyDown += (o, e) =>
             CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
-            GameEngine.Current.AddObject(new Bullet("Bullet", 50, 50, 50, 50));
+            GameEngine.Current.AddObject(new Projectile("Bullet", 50, 50, 50, 50));
             break;
     }
 };
