@@ -14,7 +14,13 @@ public class GameEngine
 
     public SoundPlayer Sound { get; set; } = new();
     private int index = 0;
-
+    public bool transitioning = false;
+    public Map PrevMap;
+    public Map newMap;
+    public int transitionClock;
+    public int timer;
+    public int transitionStep = 0;
+  
     private GameEngine() { }
 
     public void StartSound() => Sound.Play();
@@ -23,8 +29,14 @@ public class GameEngine
 
     public void StartUp(PictureBox pb)
     {
-        // AddMap(new Dungeon_01(pb));
-        // CurrentMap = this.Maps[0];
+        AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
+        AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
+        AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
+
+        CurrentMap = this.Maps[0];
 
         Player p = new Player("Him", 700, 700);
         Boss b = new FelixTheToad(960, 540);
@@ -33,7 +45,7 @@ public class GameEngine
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
 
-        // AddWalls();
+        AddWalls();
     }
 
     public void Update()
@@ -48,13 +60,17 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        // CurrentMap.Render(g, pb);
         foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
+
         {
             if (gameObject is null)
                 continue;
             gameObject.Render(g, pb);
         }
+        g.FillRectangle(
+          new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+          0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
+      );
     }
 
     public void AddObject(GameObject gameObject)
@@ -91,16 +107,81 @@ public class GameEngine
     public void nextMap()
     {
         index++;
-        CurrentMap = Maps[index];
+        PrevMap = CurrentMap;
+        newMap = Maps[index];
+        transitioning = true;
+
     }
 
     public void prevMap()
     {
-        this.index--;
-        this.CurrentMap = Maps[index];
+        index--;
+        PrevMap = CurrentMap;
+        newMap = Maps[index];
+        transitioning = true;
     }
+
+
+    public void TimerTick(Graphics g, PictureBox pb)
+    {
+        if (!transitioning)
+            CurrentMap.Render(g, pb);
+        else
+            DrawFadeMap(g, pb);
+        
+    }
+
+    public void DrawFadeMap(Graphics g, PictureBox pb)
+    {
+
+        transitionClock = 5;
+
+        CurrentMap.Render(g, pb);
+        if (CurrentMap == PrevMap)
+            timer += transitionClock;
+        else
+            timer -= transitionClock;
+
+        if (timer < 0)
+        {
+            timer = 0;
+            transitioning = false;
+            transitionStep = 0;
+        }
+
+    //     g.FillRectangle(
+    //       new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+    //       0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
+    //   );
+
+        if (timer == 255)
+        {
+            CurrentMap = newMap;
+            foreach (var item in CollisionManager.Current.gameObjects.ToList())
+            {
+                if (item is Wall)
+                    CollisionManager.Current.gameObjects.Remove(item);
+            }
+            AddWalls();
+            newMap = null;
+            
+            // MessageBox.Show("ELP");
+        }
+    }
+
+
+    public void Run()
+    {
+
+    }
+    public void Stop()
+    {
+
+    }
+
 
     public void Stop() { }
 
     public static void New() => current = new GameEngine();
+
 }

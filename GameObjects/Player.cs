@@ -1,8 +1,9 @@
 using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-
+using Microsoft.VisualBasic;
 // namespace Entity;
 
 public class Player : GameObject, IMoveable, IAttackable
@@ -26,6 +27,7 @@ public class Player : GameObject, IMoveable, IAttackable
         : base(name, x, y, "./assets/Sprites/Player/SPRITE/k_0.png")
         // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
     {
+        
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
         this.Width /= 3f;
@@ -72,8 +74,8 @@ public class Player : GameObject, IMoveable, IAttackable
             StopLeft();
         else if ((int)vy < -8)
             StopUp();
-        else if ((int)vy > 8)
-            StopDown();
+        // else if ((int)vy > 8)
+        //     StopDown();
 
         if ((int)vx > 20)
             AnimatePLayer(9, 12);
@@ -83,6 +85,8 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(13, 16);
         else if ((int)vy > 20)
             AnimatePLayer(1, 4);
+        else if((int)vy == 0)
+            AnimatePLayer(17,21);
 
         double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
 
@@ -158,6 +162,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public void StopLeft() => this.Sprite = Resources.Current.PlayerSprites[5];
 
     public void StopRight() => this.Sprite = Resources.Current.PlayerSprites[9];
+
 
     private void AnimatePLayer(int start, int end)
     {

@@ -44,9 +44,12 @@ timer.Tick += (o, e) =>
     fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
+
+    GameEngine.Current.TimerTick(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
+  
     pb.Refresh();
 };
 
@@ -84,6 +87,15 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.Attack();
             break;
         case Keys.L:
+            // CollisionManager.New();
+            // CollisionManager.Current.AddGameObject(engine.player);
+            break;
+        
+        case Keys.K:
+            GameEngine.Current.prevMap();
+            break;
+        case Keys.T:
+            GameEngine.Current.nextMap();
             CollisionManager.New();
             CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;

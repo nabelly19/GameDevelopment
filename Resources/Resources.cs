@@ -13,6 +13,7 @@ public class Resources
 
     private Resources()
     {
+
         this.PlayerSprites = Directory
             .GetFiles("./assets/Sprites/Player/NewSprite/", "*.png")
             // .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
@@ -20,7 +21,6 @@ public class Resources
             .ToList();
         this.Maps.Add(Bitmap.FromFile("./assets/Maps/PRIMEIROCENARIO.png"));
         // this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
-
     }
 
     public List<Bitmap> PlayerSprites = new();
