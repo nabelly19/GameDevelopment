@@ -100,7 +100,6 @@ public class GameEngine
         }
     }
 
-    public void Run() { }
 
     public void AddMap(Map map) => Maps.Add(map);
 
@@ -170,16 +169,7 @@ public class GameEngine
     }
 
 
-    public void Run()
-    {
-
-    }
-    public void Stop()
-    {
-
-    }
-
-
+    public void Run() { }
     public void Stop() { }
 
     public static void New() => current = new GameEngine();

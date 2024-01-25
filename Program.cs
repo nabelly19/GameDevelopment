@@ -91,13 +91,13 @@ form.KeyDown += (o, e) =>
             // CollisionManager.Current.AddGameObject(engine.player);
             break;
         
-        case Keys.K:
+        case Keys.Y:
             GameEngine.Current.prevMap();
             break;
         case Keys.T:
             GameEngine.Current.nextMap();
-            CollisionManager.New();
-            CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
+            // CollisionManager.New();
+            // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
             GameEngine.Current.AddObject(new RotateBeam("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));

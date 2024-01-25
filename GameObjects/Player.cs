@@ -68,25 +68,24 @@ public class Player : GameObject, IMoveable, IAttackable
 
         this.Weapon.Move();
 
-        if ((int)vx > 8)
+        if (vx > 8)
             StopRight();
-        else if ((int)vx < -8)
+        else if (vx < -8)
             StopLeft();
-        else if ((int)vy < -8)
+        else if (vy < -8)
             StopUp();
-        // else if ((int)vy > 8)
-        //     StopDown();
-
-        if ((int)vx > 20)
+        else if (vy > 8)
+            StopDown();
+            
+        if (vx > 20)
             AnimatePLayer(9, 12);
-        else if ((int)vx < -20)
+        else if (vx < -20)
             AnimatePLayer(5, 8);
-        else if ((int)vy < -20)
+        else if (vy < -20)
             AnimatePLayer(13, 16);
-        else if ((int)vy > 20)
+        else if (vy > 20)
             AnimatePLayer(1, 4);
-        else if((int)vy == 0)
-            AnimatePLayer(17,21);
+
 
         double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
 
