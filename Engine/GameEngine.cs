@@ -6,9 +6,12 @@ using System.Windows.Forms;
 
 public class GameEngine
 {
-    public Player player = null;
+    private static GameEngine current;
+    public static GameEngine Current => current;
+    public Player Player { get; set; }
     public List<Map> Maps = new();
     public Map CurrentMap { get; set; } // => current map
+
     public SoundPlayer Sound { get; set; } = new();
     private int index = 0;
     public bool transitioning = false;
@@ -17,7 +20,11 @@ public class GameEngine
     public int transitionClock;
     public int timer;
     public int transitionStep = 0;
+  
+    private GameEngine() { }
+
     public void StartSound() => Sound.Play();
+
     public void StartBackground(Graphics g, PictureBox pb) => CurrentMap.Render(g, pb);
 
     public void StartUp(PictureBox pb)
@@ -30,28 +37,34 @@ public class GameEngine
         AddMap(new Test_Dungeon(pb));
 
         CurrentMap = this.Maps[0];
-        AddObject(new Player("Him", 700, 700, "../../../assets/Sprites/Player/SPRITE/k_0.png"));
-        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.player));
-        AddObject(new Boss("Frog", 50, 900, "../../../assets/Sprites/Bosses/pxArt.png"));
+
+        Player p = new Player("Him", 700, 700);
+        Boss b = new FelixTheToad(960, 540);
+
+        AddObject(p);
+        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
+        AddObject(b);
 
         AddWalls();
     }
 
     public void Update()
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
+        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
         {
+            if (gameObject is null)
+                continue;
             gameObject.Update();
         }
     }
 
     public void Render(Graphics g, PictureBox pb)
     {
-        // CurrentMap.Render(g, pb);
-        // DrawFadeMap(g, pb);
+        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
 
-        foreach (var gameObject in CollisionManager.Current.gameObjects)
         {
+            if (gameObject is null)
+                continue;
             gameObject.Render(g, pb);
         }
         g.FillRectangle(
@@ -59,6 +72,7 @@ public class GameEngine
           0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
       );
     }
+
     public void AddObject(GameObject gameObject)
     {
         if (gameObject is Player)
@@ -66,7 +80,7 @@ public class GameEngine
             var newPlayer = gameObject as Player;
             var weapon = new Weapon("Weapon", 0, 0, 50, 50, newPlayer);
             newPlayer.Weapon = weapon;
-            this.player = newPlayer;
+            this.Player = newPlayer;
             AddObject(weapon);
         }
         CollisionManager.Current.AddGameObject(gameObject);
@@ -86,8 +100,9 @@ public class GameEngine
         }
     }
 
-    public void AddMap(Map map)
-        => Maps.Add(map);
+    public void Run() { }
+
+    public void AddMap(Map map) => Maps.Add(map);
 
     public void nextMap()
     {
@@ -163,4 +178,10 @@ public class GameEngine
     {
 
     }
+
+
+    public void Stop() { }
+
+    public static void New() => current = new GameEngine();
+
 }

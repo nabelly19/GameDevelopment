@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 // namespace Entity;
@@ -22,15 +23,15 @@ public class Player : GameObject, IMoveable, IAttackable
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
-
-    public Player(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite)
+    public Player(string name, int x, int y)
+        : base(name, x, y, "./assets/Sprites/Player/SPRITE/k_0.png")
+        // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
     {
         
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
-        this.Width /= 4f;
-        this.Height /= 4f;
+        this.Width /= 3f;
+        this.Height /= 3f;
     }
 
     public override void Update()
@@ -40,6 +41,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Render(Graphics g, PictureBox pb)
     {
+        // this.Sprite.
         g.DrawImage(
             this.Sprite,
             new RectangleF(
@@ -49,9 +51,8 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
+        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
-        // CreateHitbox(this.X, this.Y, 250, 300);
-
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -64,7 +65,7 @@ public class Player : GameObject, IMoveable, IAttackable
         var time = now - last;
         var secs = (float)time.TotalSeconds;
         last = now;
-        
+
         this.Weapon.Move();
 
         if ((int)vx > 8)
@@ -114,7 +115,12 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (vy < -max)
             vy = -max;
 
-        if (!CollisionManager.Current.CheckCollisions(this))
+        if (
+            !(
+                CollisionManager.Current.CheckCollisions(this)
+                || CollisionManager.Current.ScreenColision(this)
+            )
+        )
             return;
 
         const float energyLoss = 0.2f;
@@ -178,14 +184,16 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
+        MessageBox.Show(Weapon.Ax.ToString());
+        MessageBox.Show(Weapon.Ay.ToString());
         // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
         // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }
 
-    public void Attack() {
-        
+    public void Attack()
+    {
         var now = DateTime.Now;
-        var dt = now - this.lastAttack ;
+        var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;
 
         if (secs < this.Weapon.AtkSpeed)
@@ -206,5 +214,33 @@ public class Player : GameObject, IMoveable, IAttackable
             }
         }
 
+        if(this.Weapon.WindBlade){
+            var ax = Weapon.Ax;
+            var ay = Weapon.Ay;
+            switch (ax)
+            {
+                case -1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X-this.Width/2-25, this.Y, 50, 50, 180, this));
+                break;
+                case 1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X+this.Width/2+25, this.Y, 50, 50, 0, this));
+                break;
+
+            }
+            switch (ay)
+            {
+                case -1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y-this.Height/2-25, 50, 50, 270, this));
+                break;
+                case 1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y+this.Height/2+25, 50, 50, 90, this));
+                break;
+            }
+        }
+    }
+
+    public void ReceiveDamage()
+    {
+        this.Hp--;
     }
 }

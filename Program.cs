@@ -12,8 +12,9 @@ var pb = new PictureBox { Dock = DockStyle.Fill, };
 
 Resources.New();
 CollisionManager.New();
-GameEngine engine = new();
-engine.StartUp(pb);
+
+GameEngine.New();
+GameEngine.Current.StartUp(pb);
 
 var timer = new Timer { Interval = 1000 / 60, };
 
@@ -32,29 +33,25 @@ form.Load += (o, e) =>
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
-    engine.StartSound();
+    GameEngine.Current.StartSound();
 };
 
 DateTime lastchecked = DateTime.Now;
-float fps =0;
-
+float fps = 0;
 
 timer.Tick += (o, e) =>
 {
-    fps = (int)(1/(float)(DateTime.Now-lastchecked).TotalSeconds);
+    fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
-    engine.TimerTick(g, pb);
-    engine.Update();
-    engine.Render(g, pb);
+
+    GameEngine.Current.TimerTick(g, pb);
+    GameEngine.Current.Update();
+    GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
+  
     pb.Refresh();
-    // engine.TimerTick();
-    
 };
-
-
-//295,4 467,93552
 
 form.KeyDown += (o, e) =>
 {
@@ -65,43 +62,46 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
-            engine.player.Info();
+            GameEngine.Current.Player.Info();
+            GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
             break;
 
         case Keys.W:
-            engine.player.MoveUp();
+            GameEngine.Current.Player.MoveUp();
             break;
 
         case Keys.A:
 
-            engine.player.MoveLeft();
+            GameEngine.Current.Player.MoveLeft();
             break;
 
         case Keys.S:
-            engine.player.MoveDown();
+            GameEngine.Current.Player.MoveDown();
             break;
 
         case Keys.D:
-            engine.player.MoveRight();
+            GameEngine.Current.Player.MoveRight();
             break;
 
         case Keys.Space:
-            engine.player.Attack();
+            GameEngine.Current.Player.Attack();
             break;
         case Keys.L:
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(engine.player);
-
             break;
+        
         case Keys.K:
-        engine.prevMap();
+            GameEngine.Current.prevMap();
             break;
         case Keys.T:
-        engine.nextMap();
-            engine.transitioning = true;
-            // engine.TimerTick(g, pb);
+            GameEngine.Current.nextMap();
+            CollisionManager.New();
+            CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
-
+        case Keys.K:
+            GameEngine.Current.AddObject(new RotateBeam("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
+            break;
     }
 };
 
@@ -110,21 +110,21 @@ form.KeyUp += (o, e) =>
     switch (e.KeyCode)
     {
         case Keys.W:
-            engine.player.Ay = 0;
+            GameEngine.Current.Player.Ay = 0;
             break;
 
         case Keys.A:
-            engine.player.Ax = 0;
+            GameEngine.Current.Player.Ax = 0;
             break;
 
         case Keys.S:
-            engine.player.Ay = 0;
+            GameEngine.Current.Player.Ay = 0;
             break;
 
         case Keys.D:
-            engine.player.Ax = 0;
+            GameEngine.Current.Player.Ax = 0;
             break;
-        
+
         case Keys.Space:
             break;
     }

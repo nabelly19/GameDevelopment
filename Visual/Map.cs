@@ -21,15 +21,17 @@ public abstract class Map
 
     public int Y {get; set;}
     public List<Wall> Walls { get; set; } = new ();
+
     public Image image = null;
+
     // public Map(string path, PictureBox pb)
     //     {
     //         this.image = Bitmap.FromFile(path);
     //         CreateWalls(pb);
     //     }
-    
+
     // public Map(Image image, PictureBox pb)
-    //     { 
+    //     {
     //         this.image = image;
     //         CreateWalls(pb);
     //     }

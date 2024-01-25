@@ -19,11 +19,17 @@ public class CollisionManager
         gameObjects.Add(gameObject);
     }
 
+    public void RemoveGameObject(GameObject gameObject)
+    {
+        gameObjects.Remove(gameObject);
+    }
+
     public bool CheckCollisions(GameObject obj)
     {
         for (int j = 0; j < gameObjects.Count; j++)
         {
             GameObject other = gameObjects[j];
+
             if (other == obj)
                 continue;
 
@@ -40,18 +46,13 @@ public class CollisionManager
             GameObject other = gameObjects[j];
             if (other == obj)
                 continue;
-
             if (CollisionDetected(obj, other) && other.isHittable)
                 yield return other;
         }
     }
 
-    private bool CollisionDetected(GameObject obj1, GameObject obj2)
-    {
-        // Lógica para detectar colisões entre dois objetos
-
-        return obj2.Hitbox.IntersectsWith(obj1.Hitbox) || ScreenColision(obj1);
-    }
+    private bool CollisionDetected(GameObject obj1, GameObject obj2) =>
+        obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
     public bool ScreenColision(GameObject obj)
     {
@@ -66,11 +67,6 @@ public class CollisionManager
             return true;
 
         return false;
-    }
-
-    public void HandleDamage(IAttackable attackable)
-    {
-        attackable.ReceiveDamage();
     }
 
     public static void New() => current = new CollisionManager();
