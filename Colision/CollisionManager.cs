@@ -30,7 +30,7 @@ public class CollisionManager
         {
             GameObject other = gameObjects[j];
 
-            if (other == obj || other is null)
+            if (other == obj)
                 continue;
 
             if (CollisionDetected(obj, other) && other.isHittable)
@@ -51,12 +51,8 @@ public class CollisionManager
         }
     }
 
-    private bool CollisionDetected(GameObject obj1, GameObject obj2)
-    {
-        // Lógica para detectar colisões entre dois objetos
-
-        return obj2.Hitbox.IntersectsWith(obj1.Hitbox);
-    }
+    private bool CollisionDetected(GameObject obj1, GameObject obj2) =>
+        obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
     public bool ScreenColision(GameObject obj)
     {

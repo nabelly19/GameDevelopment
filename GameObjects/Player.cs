@@ -22,14 +22,14 @@ public class Player : GameObject, IMoveable, IAttackable
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
-
-    public Player(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite)
+    public Player(string name, int x, int y)
+        : base(name, x, y, "./assets/Sprites/Player/SPRITE/k_0.png")
+        // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
     {
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
-        this.Width /= 4f;
-        this.Height /= 4f;
+        this.Width /= 3f;
+        this.Height /= 3f;
     }
 
     public override void Update()
@@ -179,7 +179,8 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
-        MessageBox.Show(CollisionManager.Current.ScreenColision(this).ToString());
+        MessageBox.Show(Weapon.Ax.ToString());
+        MessageBox.Show(Weapon.Ay.ToString());
         // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
         // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
     }
@@ -205,6 +206,30 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.lastAttack = now;
                 other.ReceiveDamage();
                 return;
+            }
+        }
+
+        if(this.Weapon.WindBlade){
+            var ax = Weapon.Ax;
+            var ay = Weapon.Ay;
+            switch (ax)
+            {
+                case -1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X-this.Width/2-25, this.Y, 50, 50, 180, this));
+                break;
+                case 1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X+this.Width/2+25, this.Y, 50, 50, 0, this));
+                break;
+
+            }
+            switch (ay)
+            {
+                case -1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y-this.Height/2-25, 50, 50, 270, this));
+                break;
+                case 1:
+                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y+this.Height/2+25, 50, 50, 90, this));
+                break;
             }
         }
     }

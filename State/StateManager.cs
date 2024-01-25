@@ -5,6 +5,11 @@ public class StateManager
 {
     public State Current { get; set; }
     private List<State> initialStateList = new();
+    private Boss boss = null;
+
+    public StateManager(Boss boss){
+        this.boss = boss;
+    }
 
     public void AddList(State state)
     {
@@ -16,7 +21,7 @@ public class StateManager
     {
         Current ??= initialStateList[Random.Shared.Next(initialStateList.Count)];
 
-        Current.Act();
+        Current.Act(boss);
     }
 
     public void Randomize() { }

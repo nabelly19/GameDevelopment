@@ -2,18 +2,18 @@ using System;
 
 public class MovingState : State
 {
-    public override void Act()
+    public override void Act(Boss boss)
     {
         throw new System.NotImplementedException();
     }
 }
 
-public class BulletState : State
+public class SpiralProjectileState : State
 {
     DateTime? dt = null;
     int count = 0;
 
-    public override void Act()
+    public override void Act(Boss boss)
     {
         if (count == 3)
         {
@@ -30,7 +30,22 @@ public class BulletState : State
 
         count++;
         dt = null;
-        GameEngine.Current.AddObject(new SpiralProjectile("Bullet", 50, 50, 50, 50));
+
+        for (int i = 0; i < 8; i++)
+        {
+            GameEngine.Current.AddObject(
+                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(0, 89), boss)
+            );
+            GameEngine.Current.AddObject(
+                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(90, 179), boss)
+            );
+            GameEngine.Current.AddObject(
+                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(180, 269), boss)
+            );
+            GameEngine.Current.AddObject(
+                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(270, 359), boss)
+            );
+        }
     }
 }
 
@@ -38,7 +53,7 @@ public class WaitState : State
 {
     DateTime? dt = null;
 
-    public override void Act()
+    public override void Act(Boss boss)
     {
         dt ??= DateTime.Now;
 
@@ -52,7 +67,7 @@ public class WaitState : State
 
 public class RayState : State
 {
-    public override void Act()
+    public override void Act(Boss boss)
     {
         throw new System.NotImplementedException();
     }
@@ -60,7 +75,7 @@ public class RayState : State
 
 public class PlataformState : State
 {
-    public override void Act()
+    public override void Act(Boss boss)
     {
         throw new System.NotImplementedException();
     }
@@ -68,7 +83,7 @@ public class PlataformState : State
 
 public class VulnerabilityState : State
 {
-    public override void Act()
+    public override void Act(Boss boss)
     {
         throw new System.NotImplementedException();
     }

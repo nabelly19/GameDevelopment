@@ -13,5 +13,5 @@ public abstract class State
 
     public void GoToNext() => this.manager.Current = nextState;
 
-    public abstract void Act();
+    public abstract void Act(Boss boss);
 }

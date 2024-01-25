@@ -14,10 +14,12 @@ public class Resources
     private Resources()
     {
         this.PlayerSprites = Directory
-            .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
+            .GetFiles("./assets/Sprites/Player/NewSprite/", "*.png")
+            // .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
+        this.Maps.Add(Bitmap.FromFile("./assets/Maps/PRIMEIROCENARIO.png"));
+        // this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
 
     }
 

@@ -59,8 +59,8 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
-            MessageBox.Show($"Count:{CollisionManager.Current.gameObjects.Count}");
             GameEngine.Current.Player.Info();
+            GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
             break;
 
         case Keys.W:
@@ -88,7 +88,7 @@ form.KeyDown += (o, e) =>
             CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
-            GameEngine.Current.AddObject(new Projectile("Bullet", 50, 50, 50, 50));
+            GameEngine.Current.AddObject(new RotateBeam("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
             break;
     }
 };

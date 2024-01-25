@@ -23,17 +23,17 @@ public class GameEngine
 
     public void StartUp(PictureBox pb)
     {
-        AddMap(new Dungeon_01(pb));
-        CurrentMap = this.Maps[0];
+        // AddMap(new Dungeon_01(pb));
+        // CurrentMap = this.Maps[0];
 
-        Player p = new Player("Him", 700, 700, "../../../assets/Sprites/Player/SPRITE/k_0.png");
-        Boss b = new FelixTheToad(960, 540, "../../../assets/Sprites/Bosses/Felix/felix.png");
+        Player p = new Player("Him", 700, 700);
+        Boss b = new FelixTheToad(960, 540);
 
         AddObject(p);
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
 
-        AddWalls();
+        // AddWalls();
     }
 
     public void Update()
@@ -48,7 +48,7 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        CurrentMap.Render(g, pb);
+        // CurrentMap.Render(g, pb);
         foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
         {
             if (gameObject is null)

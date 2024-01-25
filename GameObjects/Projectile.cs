@@ -7,21 +7,27 @@ using System.Windows.Forms;
 public class Projectile : GameObject, IMoveable
 {
     protected SizeF speed;
-    public float angle = 0;
+    public float Angle = Random.Shared.Next(360);
+    public float Direction {get;set;}
     public float BaseAcceleration { get; set; } = 5;
     public float Ax { get; set; }
     public float Ay { get; set; }
+    public IAttackable Owner {get;set;} = null;
 
-    public Projectile(string name, int x, int y, string sprite)
+    public Projectile(string name, int x, int y, string sprite, float direction, IAttackable owner)
         : base(name, x, y, sprite)
     {
+        this.Direction = direction;
+        this.Owner = owner;
         DisableHitbox();
     }
 
-    public Projectile(string name, float x, float y, float width, float height)
+    public Projectile(string name, float x, float y, float width, float height, float direction, IAttackable owner)
         : base(name, x, y, width, height)
     {
         DisableHitbox();
+        this.Owner = owner;
+        this.Direction = direction;
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -32,9 +38,7 @@ public class Projectile : GameObject, IMoveable
 
     public virtual void Move()
     {
-        // this.X++;
-        // this.Y++;
-        GoTo(90);
+        GoTo(Direction);
         Location += 5f * this.speed;
     }
 
@@ -44,11 +48,12 @@ public class Projectile : GameObject, IMoveable
         var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
         if (collided is not null)
         {
-            if (collided is Player other)
-                other.ReceiveDamage();
-            if (collided is Boss)
+            if(collided == Owner)
                 return;
             CollisionManager.Current.RemoveGameObject(this);
+            if (collided is IAttackable other)
+                other.ReceiveDamage();
+
         }
         if (CollisionManager.Current.ScreenColision(this))
             CollisionManager.Current.RemoveGameObject(this);

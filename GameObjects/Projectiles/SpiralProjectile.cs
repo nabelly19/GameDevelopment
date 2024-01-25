@@ -7,11 +7,13 @@ public class SpiralProjectile : Projectile
     public PointF center = new(960, 540);
     public float radius = 35;
 
-    public SpiralProjectile(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite) { }
+    public SpiralProjectile(string name, int x, int y, string sprite, float direction, IAttackable owner) : base(name, x, y, sprite, direction, owner)
+    {
+    }
 
-    public SpiralProjectile(string name, float x, float y, float width, float height)
-        : base(name, x, y, width, height) { }
+    public SpiralProjectile(string name, float x, float y, float width, float height, float direction, IAttackable owner) : base(name, x, y, width, height, direction, owner)
+    {
+    }
 
     public override void Move()
     {
@@ -21,21 +23,20 @@ public class SpiralProjectile : Projectile
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawRectangle(Pens.White, this.Hitbox);
-        g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
+        // g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
         
     }
 
     public void RotatePoints()
     {
-        float radians = ToRadians(angle);
+        float radians = ToRadians(Angle);
         float cos = MathF.Cos(radians);
         float sin = MathF.Sin(radians);
 
         this.X = this.center.X + this.radius * cos;
         this.Y = this.center.Y + this.radius * sin;
-
-        GoTo(0);
-        this.angle += 10f;
+        GoTo(Direction);
+        this.Angle += 10f;
 
         return;
     }
