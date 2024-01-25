@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public class SpiralProjectile : Projectile
 {
-    public PointF center = new(100, 100);
+    public PointF center = new(960, 540);
     public float radius = 35;
 
     public SpiralProjectile(string name, int x, int y, string sprite)

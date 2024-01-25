@@ -46,8 +46,9 @@ public class Projectile : GameObject, IMoveable
         {
             if (collided is Player other)
                 other.ReceiveDamage();
+            if (collided is Boss)
+                return;
             CollisionManager.Current.RemoveGameObject(this);
-            return;
         }
         if (CollisionManager.Current.ScreenColision(this))
             CollisionManager.Current.RemoveGameObject(this);
