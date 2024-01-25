@@ -44,8 +44,8 @@ timer.Tick += (o, e) =>
     fps = (int)(1/(float)(DateTime.Now-lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
-    engine.Update();
     engine.TimerTick(g, pb);
+    engine.Update();
     engine.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
     pb.Refresh();
@@ -94,8 +94,10 @@ form.KeyDown += (o, e) =>
 
             break;
         case Keys.K:
+        engine.prevMap();
             break;
         case Keys.T:
+        engine.nextMap();
             engine.transitioning = true;
             // engine.TimerTick(g, pb);
             break;

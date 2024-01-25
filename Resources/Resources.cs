@@ -13,10 +13,10 @@ public class Resources
     public static Resources Current => crr;
     private Resources()
     {
-        this.PlayerSprites = Directory.GetFiles("./assets/Sprites/Player/NewSprite/", "*.png")
+        this.PlayerSprites = Directory.GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        this.Maps.Add(Bitmap.FromFile("./assets/Maps/PRIMEIROCENARIO.png"));
+        this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
     }
 
     public List<Bitmap> PlayerSprites = new();

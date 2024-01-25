@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public class GameEngine
@@ -11,7 +12,8 @@ public class GameEngine
     public SoundPlayer Sound { get; set; } = new();
     private int index = 0;
     public bool transitioning = false;
-    public  Map newMap;
+    public Map PrevMap;
+    public Map newMap;
     public int transitionClock;
     public int timer;
     public int transitionStep = 0;
@@ -21,16 +23,17 @@ public class GameEngine
     public void StartUp(PictureBox pb)
     {
         AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
         AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
         AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
+        AddMap(new Test_Dungeon(pb));
 
         CurrentMap = this.Maps[0];
-        AddObject(new Player("Him", 700, 700, "./assets/Sprites/Player/SPRITE/k_0.png"));
+        AddObject(new Player("Him", 700, 700, "../../../assets/Sprites/Player/SPRITE/k_0.png"));
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.player));
-        AddObject(new Boss("Frog", 50, 900, "./assets/Sprites/Bosses/pxArt.png"));
-        
+        AddObject(new Boss("Frog", 50, 900, "../../../assets/Sprites/Bosses/pxArt.png"));
+
         AddWalls();
     }
 
@@ -51,6 +54,10 @@ public class GameEngine
         {
             gameObject.Render(g, pb);
         }
+        g.FillRectangle(
+          new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+          0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
+      );
     }
     public void AddObject(GameObject gameObject)
     {
@@ -85,71 +92,75 @@ public class GameEngine
     public void nextMap()
     {
         index++;
-        CurrentMap = Maps[index];
-        
+        PrevMap = CurrentMap;
+        newMap = Maps[index];
+        transitioning = true;
+
     }
 
     public void prevMap()
     {
         index--;
-        CurrentMap = Maps[index];
+        PrevMap = CurrentMap;
+        newMap = Maps[index];
+        transitioning = true;
     }
 
-    
+
     public void TimerTick(Graphics g, PictureBox pb)
     {
-         if(transitioning)
-            StartTransitioning(CurrentMap, g);
+        if (!transitioning)
+            CurrentMap.Render(g, pb);
+        else
+            DrawFadeMap(g, pb);
+        
     }
 
-
-    public void StartTransitioning(Map map, Graphics g)
+    public void DrawFadeMap(Graphics g, PictureBox pb)
     {
-        index++;
-        newMap = Maps[index];
-
-        transitionStep = 0;
-        transitioning = true;
-
-        DrawFadeMap(g);
-    }
-    //aqui KKKKKKKKKKKK
-
-    public void DrawFadeMap(Graphics g)
-    {   
-
-        if(!transitioning)
-            return;
 
         transitionClock = 5;
 
-        g.DrawImage(CurrentMap.image, 500, 500);
-        if (CurrentMap == Maps[0])
+        CurrentMap.Render(g, pb);
+        if (CurrentMap == PrevMap)
             timer += transitionClock;
         else
-            timer -=  transitionClock;
-        if (timer < 0)
-            timer = 0;
+            timer -= transitionClock;
 
-          g.FillRectangle(
-            new SolidBrush(Color.FromArgb( timer % 256, 0, 0, 0)),
-            0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
-        );
+        if (timer < 0)
+        {
+            timer = 0;
+            transitioning = false;
+            transitionStep = 0;
+        }
+
+    //     g.FillRectangle(
+    //       new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+    //       0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
+    //   );
 
         if (timer == 255)
         {
             CurrentMap = newMap;
+            foreach (var item in CollisionManager.Current.gameObjects.ToList())
+            {
+                if (item is Wall)
+                    CollisionManager.Current.gameObjects.Remove(item);
+            }
+            AddWalls();
             newMap = null;
-            transitioning = false;
+            
             // MessageBox.Show("ELP");
         }
     }
-    
 
-    public void Run(){
+
+    public void Run()
+    {
 
     }
-    public void Stop(){
-        
+    public void Stop()
+    {
+
     }
 }
