@@ -50,6 +50,8 @@ public class Projectile : GameObject, IMoveable
         {
             if(collided == Owner)
                 return;
+            if (collided is Coin)
+                return;
             CollisionManager.Current.RemoveGameObject(this);
             if (collided is IAttackable other)
                 other.ReceiveDamage();

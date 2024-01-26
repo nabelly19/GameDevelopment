@@ -19,12 +19,21 @@ public class Resources
             // .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        this.Maps.Add(Bitmap.FromFile("./assets/Maps/PRIMEIROCENARIO.png"));
+        this.Maps = Directory
+            .GetFiles("./assets/Maps/", "*.png")
+            // .GetFiles("../../../assets/Maps/", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
+        this.Coins = Directory
+            .GetFiles("./assets/Sprites/Coin/", "*.png")
+            // .GetFiles("../../../assets/Sprites/Coin/", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
         // this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
     }
 
     public List<Bitmap> PlayerSprites = new();
     public List<Bitmap> Maps = new();
-
+    public List<Bitmap> Coins = new();
     public static void New() => crr = new Resources();
 }
