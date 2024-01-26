@@ -6,15 +6,15 @@ Project Description
 
 ### Todo
 
+- [ ] Boss Animation  
 - [ ] Dialog Boxes  
 - [ ] Menu  
 - [ ] Cutscenes  
 
 ### In Progress
 
-- [ ] Character Sprite Change (On mov)  
-- [ ] Boss Design  
 - [ ] Maps + Hitboxes (Colision)  
+- [ ] Chain Boss Behaviour  
 - [ ] Boss Mecanics  
 
 ### Done ✓
@@ -23,4 +23,6 @@ Project Description
 - [x] PLayer Movement  
 - [x] Basic Colision Algo (For testing)  
 - [x] Character Design  
+- [x] Boss Design  
+- [x] Character Sprite Change (On mov)  
 
