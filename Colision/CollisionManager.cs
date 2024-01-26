@@ -15,14 +15,10 @@ public class CollisionManager
     }
 
     public void AddGameObject(GameObject gameObject)
-    {
-        gameObjects.Add(gameObject);
-    }
+        => gameObjects.Add(gameObject);
 
     public void RemoveGameObject(GameObject gameObject)
-    {
-        gameObjects.Remove(gameObject);
-    }
+        => gameObjects.Remove(gameObject);
 
     public bool CheckCollisions(GameObject obj)
     {

@@ -10,9 +10,6 @@ Bitmap bmp = null;
 Graphics g = null;
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
-Resources.New();
-CollisionManager.New();
-
 GameEngine.New();
 GameEngine.Current.StartUp(pb);
 
@@ -44,9 +41,12 @@ timer.Tick += (o, e) =>
     fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
+
+    MapManager.Current.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
+  
     pb.Refresh();
 };
 
@@ -85,8 +85,17 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.Attack();
             break;
         case Keys.L:
-            CollisionManager.New();
-            CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
+            // CollisionManager.New();
+            // CollisionManager.Current.AddGameObject(engine.player);
+            break;
+        
+        case Keys.Y:
+            MapManager.Current.PrevMap();
+            break;
+        case Keys.T:
+            MapManager.Current.nextMap();
+            // CollisionManager.New();
+            // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
             GameEngine.Current.AddObject(new RotateBeam("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
