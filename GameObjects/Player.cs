@@ -25,8 +25,8 @@ public class Player : GameObject, IMoveable, IAttackable
     public float BlockChance { get; set; }
 
     public Player(string name, int x, int y)
-        : base(name, x, y, "./assets/Sprites/Player/SPRITE/k_0.png")
-    // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
+        // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
+    : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
     {
         
         this.Height = 340;

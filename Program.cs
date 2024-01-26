@@ -42,7 +42,7 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    MapManager.Current.RenderMapOrFade(g, pb);
+    // MapManager.Current.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
@@ -98,7 +98,7 @@ form.KeyDown += (o, e) =>
             // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
-            GameEngine.Current.AddObject(new RotateBeam("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
+            GameEngine.Current.AddObject(new SpiralProjectile("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
             break;
     }
 };

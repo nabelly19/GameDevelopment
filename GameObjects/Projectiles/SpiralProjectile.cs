@@ -2,32 +2,50 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-public class SpiralProjectile : Projectile
+public class SpiralProjectile : RotateProjectile
 {
-    public PointF center = new(960, 540);
-    public float radius = 35;
-
-    public SpiralProjectile(string name, int x, int y, string sprite, float direction, IAttackable owner) : base(name, x, y, sprite, direction, owner)
+    public SpiralProjectile(
+        string name,
+        int x,
+        int y,
+        string sprite,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner)
     {
+        this.center = new(960, 540);
+        this.radius = 35;
     }
 
-    public SpiralProjectile(string name, float x, float y, float width, float height, float direction, IAttackable owner) : base(name, x, y, width, height, direction, owner)
+    public SpiralProjectile(
+        string name,
+        float x,
+        float y,
+        float width,
+        float height,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, width, height, direction, owner)
     {
+        this.center = new(960, 540);
+        this.radius = 35;
     }
 
     public override void Move()
     {
         RotatePoints();
     }
+
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawRectangle(Pens.White, this.Hitbox);
         // g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
-        
     }
 
-    public void RotatePoints()
+    public override void RotatePoints()
     {
         float radians = ToRadians(Angle);
         float cos = MathF.Cos(radians);

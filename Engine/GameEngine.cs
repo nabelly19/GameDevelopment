@@ -33,15 +33,15 @@ public class GameEngine
         MapManager.New();
 
         MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Test_Dungeon(pb));
+        MapManager.Current.AddMap(new Dungeon_02(pb));
         MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Test_Dungeon(pb));
+        MapManager.Current.AddMap(new Dungeon_02(pb));
         MapManager.Current.AddMap(new Dungeon_01(pb));
         MapManager.Current.AddMap(new Test_Dungeon(pb));
 
         MapManager.Current.Map = MapManager.Current.Maps[0];
 
-        MapManager.Current.AddWalls();
+        // MapManager.Current.AddWalls();
 
         Player p = new Player("Him", 700, 700); // TODO: add image from resources
         Boss b = new FelixTheToad(960, 540);
@@ -49,6 +49,7 @@ public class GameEngine
         AddObject(p);
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
+        AddObject(new Coin("Moeda", 900, 700));
     }
 
     public void Update()
