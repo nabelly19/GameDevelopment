@@ -1,6 +1,6 @@
 public abstract class State
 {
-    private StateManager manager = null;
+    private StateManager manager;
     public State nextState { get; private set; }
 
     public void SetContext(StateManager manager) => this.manager = manager;

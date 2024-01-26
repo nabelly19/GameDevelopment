@@ -160,7 +160,7 @@ public class WaitState : State
     {
         dt ??= DateTime.Now;
 
-        if (DateTime.Now < dt?.AddSeconds(4))
+        if (DateTime.Now < dt?.AddSeconds(2))
             return;
 
         dt = null;
