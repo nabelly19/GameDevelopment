@@ -52,7 +52,7 @@ public class Player : GameObject, IMoveable, IAttackable
         CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
         // CreateHitbox(this.X, this.Y, 250, 300);
 
-        g.DrawRectangle(Pens.White, this.Hitbox);
+        //g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
     public void Move()

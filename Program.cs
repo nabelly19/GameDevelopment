@@ -65,7 +65,7 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
-            engine.player.Info();
+            MessageBox.Show(CollisionManager.Current.gameObjects.Count.ToString());
             break;
 
         case Keys.W:

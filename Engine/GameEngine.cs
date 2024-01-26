@@ -21,12 +21,9 @@ public class GameEngine
     public void StartUp(PictureBox pb)
     {
         AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Dungeon_01(pb));
+        AddMap(new Dungeon_02(pb));
 
-        CurrentMap = this.Maps[0];
+        CurrentMap = this.Maps[1];
         AddObject(new Player("Him", 700, 700, "./assets/Sprites/Player/SPRITE/k_0.png"));
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.player));
         AddObject(new Boss("Frog", 50, 900, "./assets/Sprites/Bosses/pxArt.png"));
@@ -44,7 +41,7 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        // CurrentMap.Render(g, pb);
+        CurrentMap.Render(g, pb);
         // DrawFadeMap(g, pb);
 
         foreach (var gameObject in CollisionManager.Current.gameObjects)
