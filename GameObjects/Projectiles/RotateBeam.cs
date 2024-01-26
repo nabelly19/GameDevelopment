@@ -5,7 +5,7 @@ using System.Windows.Forms;
 public class RotateBeam : Projectile
 {
     public PointF center = new(960, 540);
-    public float radius = 35;
+    public float radius = 0;
 
     public RotateBeam(string name, int x, int y, string sprite, float direction, IAttackable owner) : base(name, x, y, sprite, direction, owner)
     {
@@ -15,36 +15,31 @@ public class RotateBeam : Projectile
     {
     }
 
-    public override void Move()
+     public override void Move()
     {
-        Rotate();
+       
+    }
+    public override void Render(Graphics g, PictureBox pb)
+    {
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
+        
     }
 
-    public void Rotate()
+    public void RotatePoints()
     {
         float radians = ToRadians(Angle);
         float cos = MathF.Cos(radians);
         float sin = MathF.Sin(radians);
 
-        this.X = this.X + this.radius * cos;
-        this.Y = this.Y + this.radius * sin;
-        GoTo(Direction);
-        this.Angle += 10f;
-
         return;
-    }
-
-    public override void Render(Graphics g, PictureBox pb)
-    {
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        g.DrawRectangle(Pens.White, this.Hitbox);
-        // g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
     }
 
     public override void GoTo(float angle)
     {
         var radians = ToRadians(angle);
-        this.X += BaseAcceleration * MathF.Cos(radians);
-        this.Y += BaseAcceleration * MathF.Sin(radians);
+        this.center.X += BaseAcceleration * MathF.Cos(radians);
+        this.center.Y += BaseAcceleration * MathF.Sin(radians);
     }
 }

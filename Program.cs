@@ -59,8 +59,9 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
-            GameEngine.Current.Player.Info();
+            // GameEngine.Current.Player.Info();
             GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
+            
             break;
 
         case Keys.W:

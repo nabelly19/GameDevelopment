@@ -22,9 +22,10 @@ public class Player : GameObject, IMoveable, IAttackable
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
+
     public Player(string name, int x, int y)
         : base(name, x, y, "./assets/Sprites/Player/SPRITE/k_0.png")
-        // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
+    // : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
     {
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
@@ -209,28 +210,69 @@ public class Player : GameObject, IMoveable, IAttackable
             }
         }
 
-        if(this.Weapon.WindBlade){
+        if (this.Weapon.WindBlade)
+        {
             var ax = Weapon.Ax;
             var ay = Weapon.Ay;
             switch (ax)
             {
                 case -1:
-                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X-this.Width/2-25, this.Y, 50, 50, 180, this));
-                break;
+                    GameEngine.Current.AddObject(
+                        new WindBlade(
+                            "Bullet",
+                            this.X - this.Width / 2 - 25,
+                            this.Y,
+                            50,
+                            50,
+                            180,
+                            this
+                        )
+                    );
+                    break;
                 case 1:
-                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X+this.Width/2+25, this.Y, 50, 50, 0, this));
-                break;
-
+                    GameEngine.Current.AddObject(
+                        new WindBlade(
+                            "Bullet",
+                            this.X + this.Width / 2 + 25,
+                            this.Y,
+                            50,
+                            50,
+                            0,
+                            this
+                        )
+                    );
+                    break;
             }
             switch (ay)
             {
                 case -1:
-                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y-this.Height/2-25, 50, 50, 270, this));
-                break;
+                    GameEngine.Current.AddObject(
+                        new WindBlade(
+                            "Bullet",
+                            this.X,
+                            this.Y - this.Height / 2 - 25,
+                            50,
+                            50,
+                            270,
+                            this
+                        )
+                    );
+                    break;
                 case 1:
-                GameEngine.Current.AddObject(new WindBlade("Bullet", this.X, this.Y+this.Height/2+25, 50, 50, 90, this));
-                break;
+                    GameEngine.Current.AddObject(
+                        new WindBlade(
+                            "Bullet",
+                            this.X,
+                            this.Y + this.Height / 2 + 25,
+                            50,
+                            50,
+                            90,
+                            this
+                        )
+                    );
+                    break;
             }
+            this.lastAttack = now;
         }
     }
 
