@@ -19,7 +19,6 @@ public class GameEngine
     public Map newMap;
     public int transitionClock;
     public int timer;
-    public int transitionStep = 0;
   
     private GameEngine() { }
 
@@ -29,23 +28,27 @@ public class GameEngine
 
     public void StartUp(PictureBox pb)
     {
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Test_Dungeon(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Test_Dungeon(pb));
-        AddMap(new Dungeon_01(pb));
-        AddMap(new Test_Dungeon(pb));
+        Resources.New();
+        CollisionManager.New();
+        MapManager.New();
 
-        CurrentMap = this.Maps[0];
+        MapManager.Current.AddMap(new Dungeon_01(pb));
+        MapManager.Current.AddMap(new Test_Dungeon(pb));
+        MapManager.Current.AddMap(new Dungeon_01(pb));
+        MapManager.Current.AddMap(new Test_Dungeon(pb));
+        MapManager.Current.AddMap(new Dungeon_01(pb));
+        MapManager.Current.AddMap(new Test_Dungeon(pb));
 
-        Player p = new Player("Him", 700, 700);
+        MapManager.Current.Map = MapManager.Current.Maps[0];
+
+        MapManager.Current.AddWalls();
+
+        Player p = new Player("Him", 700, 700); // TODO: add image from resources
         Boss b = new FelixTheToad(960, 540);
 
         AddObject(p);
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
-
-        AddWalls();
     }
 
     public void Update()
@@ -67,10 +70,9 @@ public class GameEngine
                 continue;
             gameObject.Render(g, pb);
         }
-        g.FillRectangle(
-          new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
-          0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
-      );
+
+        // FadeEffect Rectangle
+        MapManager.DrawFadeRectangle(g);
     }
 
     public void AddObject(GameObject gameObject)
@@ -145,7 +147,6 @@ public class GameEngine
         {
             timer = 0;
             transitioning = false;
-            transitionStep = 0;
         }
 
     //     g.FillRectangle(

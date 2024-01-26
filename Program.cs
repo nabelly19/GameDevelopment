@@ -10,9 +10,6 @@ Bitmap bmp = null;
 Graphics g = null;
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
-Resources.New();
-CollisionManager.New();
-
 GameEngine.New();
 GameEngine.Current.StartUp(pb);
 
@@ -45,7 +42,7 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    GameEngine.Current.TimerTick(g, pb);
+    MapManager.Current.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
@@ -92,10 +89,10 @@ form.KeyDown += (o, e) =>
             break;
         
         case Keys.Y:
-            GameEngine.Current.prevMap();
+            MapManager.Current.PrevMap();
             break;
         case Keys.T:
-            GameEngine.Current.nextMap();
+            MapManager.Current.nextMap();
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
