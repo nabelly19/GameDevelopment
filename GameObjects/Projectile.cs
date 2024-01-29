@@ -73,7 +73,7 @@ public class Projectile : GameObject, IMoveable
     }
 
     protected float ToRadians(float angleD) => MathF.PI / 180 * angleD;
-
+    protected float ToDegree(float angleR) => 180 / MathF.PI * angleR;
     public virtual void GoTo(float angle)
     {
         var radians = ToRadians(angle);
