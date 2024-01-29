@@ -5,8 +5,8 @@ public abstract class RotateProjectile : Projectile
 {
     protected RotateProjectile(
         string name,
-        int x,
-        int y,
+        float x,
+        float y,
         string sprite,
         float direction,
         IAttackable owner

@@ -36,16 +36,16 @@ public class SpiralProjectileState : State
         for (int i = 0; i < 8; i++)
         {
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(0, 89), boss)
+                new SpiralProjectile("Bullet", boss.X, boss.Y, Random.Shared.Next(0, 89), boss)
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(90, 179), boss)
+                new SpiralProjectile("Bullet", boss.X, boss.Y, Random.Shared.Next(90, 179), boss)
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(180, 269), boss)
+                new SpiralProjectile("Bullet", boss.X, boss.Y, Random.Shared.Next(180, 269), boss)
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", 50, 50, 25, 25, Random.Shared.Next(270, 359), boss)
+                new SpiralProjectile("Bullet", boss.X, boss.Y, Random.Shared.Next(270, 359), boss)
             );
         }
     }

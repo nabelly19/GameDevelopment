@@ -14,7 +14,7 @@ public class Projectile : GameObject, IMoveable
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
 
-    public Projectile(string name, int x, int y, string sprite, float direction, IAttackable owner)
+    public Projectile(string name, float x, float y, string sprite, float direction, IAttackable owner)
         : base(name, x, y, sprite)
     {
         this.Direction = direction;

@@ -15,20 +15,20 @@ public class FelixTheToad : Boss
         var c2 = new SpiralWaveState();
         // var c3 = new CircularlWaveState();
 
-        w1.SetContext(Manager);
-        w2.SetContext(Manager);
-        c2.SetContext(Manager);
+        // w1.SetContext(Manager);
+        // w2.SetContext(Manager);
+        // c2.SetContext(Manager);
         // c3.SetContext(Manager);
-        c2.SetNextState(w1);
+        // c2.SetNextState(w1);
         // w1.SetNextState(c3);
         // c3.SetNextState(w2);
 
-        this.Manager.AddList(c2);
+        // this.Manager.AddList(c2);
 
         this.Manager.AddList(s1);
-        this.Manager.AddList(s2);
+        // this.Manager.AddList(s2);
         // this.Manager.AddList(s3);
-        this.Manager.AddList(s4);
-        this.Manager.AddList(s5);
+        // this.Manager.AddList(s4);
+        // this.Manager.AddList(s5);
     }
 }

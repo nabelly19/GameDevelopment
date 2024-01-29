@@ -17,7 +17,7 @@ public abstract class GameObject
     public float New_Y { get; set; }
     public Image Sprite { get; set; }
 
-    public GameObject(string name, int x, int y, string sprite)
+    public GameObject(string name, float x, float y, string sprite)
     {
         this.Name = name;
         this.X = x;

@@ -6,13 +6,12 @@ public class SpiralProjectile : RotateProjectile
 {
     public SpiralProjectile(
         string name,
-        int x,
-        int y,
-        string sprite,
+        float x,
+        float y,
         float direction,
         IAttackable owner
     )
-        : base(name, x, y, sprite, direction, owner)
+        : base(name, x, y, "../../../assets/Sprites/Projectiles/spiral.png", direction, owner)
     {
         this.center = new(960, 540);
         this.radius = 35;
@@ -41,7 +40,8 @@ public class SpiralProjectile : RotateProjectile
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
+        // g.DrawRectangle(Pens.White, this.Hitbox);
         // g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
     }
 
