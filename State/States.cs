@@ -78,7 +78,7 @@ public class SpiralWaveState : State
         // 4 = 360 mais espacado
         // > 1 = 360
         // 1 = 180
-        angle += 10;
+        angle += 5;
         count++;
     }
 }
@@ -160,7 +160,7 @@ public class WaitState : State
     {
         dt ??= DateTime.Now;
 
-        if (DateTime.Now < dt?.AddSeconds(4))
+        if (DateTime.Now < dt?.AddSeconds(2))
             return;
 
         dt = null;

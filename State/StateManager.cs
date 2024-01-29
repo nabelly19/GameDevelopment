@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class StateManager
 {
-    public State Current { get; set; }
+    public State Current { get; set; } = null;
     private List<State> initialStateList = new();
     private Boss boss = null;
 

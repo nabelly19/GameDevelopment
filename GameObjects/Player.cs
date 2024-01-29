@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+
 // namespace Entity;
 
 public class Player : GameObject, IMoveable, IAttackable
@@ -23,12 +24,13 @@ public class Player : GameObject, IMoveable, IAttackable
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
+    public bool isVulnerable { get; set; }
+    public DateTime lastDamage { get; set; }
 
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
         : base(name, x, y, "../../../assets/Sprites/Player/NewSprite/k_0.png")
     {
-        
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
         this.Width /= 2.8f;
@@ -37,6 +39,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
+        VerifyVulnerability();
         Move();
     }
 
@@ -167,7 +170,6 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void StopRight() => this.Sprite = Resources.Current.PlayerSprites[9];
 
-
     private void AnimatePLayer(int start, int end)
     {
         slowFrameRate += 1;
@@ -286,6 +288,21 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void ReceiveDamage()
     {
-        this.Hp--;
+        if (isVulnerable)
+        {
+            this.Hp--;
+            lastDamage = DateTime.Now;
+        }
+
+        isVulnerable = false;
+    }
+
+
+    public void VerifyVulnerability(){
+        var now = DateTime.Now;
+        var diff = now - lastDamage;
+        var seconds = diff.TotalSeconds;
+        if(seconds > 3)
+            isVulnerable = true; 
     }
 }

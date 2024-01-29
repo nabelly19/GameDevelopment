@@ -19,6 +19,6 @@ public class Wave : Projectile
         IAttackable owner
     )
         : base(name, x, y, width, height, direction, owner)
-    {;
+    {
     }
 }
