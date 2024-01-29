@@ -26,13 +26,13 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
-    : base(name, x, y, "../../../assets/Sprites/Player/SPRITE/k_0.png")
+        : base(name, x, y, "../../../assets/Sprites/Player/NewSprite/k_0.png")
     {
         
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
-        this.Width /= 3f;
-        this.Height /= 3f;
+        this.Width /= 2.8f;
+        this.Height /= 2.8f;
     }
 
     public override void Update()
@@ -75,9 +75,9 @@ public class Player : GameObject, IMoveable, IAttackable
             StopLeft();
         else if (vy < -8)
             StopUp();
-        else if (vy > 8)
-            StopDown();
-            
+        // else if (vy > 8)
+        //     StopDown();
+
         if (vx > 20)
             AnimatePLayer(9, 12);
         else if (vx < -20)
@@ -86,6 +86,10 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(13, 16);
         else if (vy > 20)
             AnimatePLayer(1, 4);
+        else if((int)vy == 0)
+            AnimatePLayer(17, 21);
+            
+        
 
 
         double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
@@ -157,7 +161,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void StopUp() => this.Sprite = Resources.Current.PlayerSprites[15];
 
-    public void StopDown() => this.Sprite = Resources.Current.PlayerSprites[0];
+    // public void StopDown() => this.Sprite = Resources.Current.PlayerSprites[0];
 
     public void StopLeft() => this.Sprite = Resources.Current.PlayerSprites[5];
 

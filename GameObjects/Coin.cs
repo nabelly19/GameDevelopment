@@ -7,20 +7,27 @@ using Microsoft.VisualBasic;
 
 public class Coin : GameObject, IMoveable
 {
-    private float vy = 0;
-    private float vx = 0;
-    public int StateManager {get; set;}
+    public int StateManager { get; set; }
+    public int steps { get; set; } = 0;
+    public int slowFrameRate { get; set; } = 0;
+
 
     public Coin(string name, int x, int y)
         : base(name, x, y, Resources.Current.Coins[0])
     {
-          DisableHitbox();
+        DisableHitbox();
+        this.Height = 110;
+        this.Width = 1.25555f * this.Height;
+        this.Width /= 4f;
+        this.Height /= 4f;
+    
     }
 
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        g.DrawImage(this.Sprite, this.X, this.Y);
+        g.DrawImage(this.Sprite, this.X, this.Y, this.Width, this.Height);
+        
     }
 
     public override void Update()
@@ -35,6 +42,26 @@ public class Coin : GameObject, IMoveable
         if (collided is Player)
             CollisionManager.Current.RemoveGameObject(this);
 
+        AnimateItem(1,5);
+
+    }
+
+     private void AnimateItem(int start, int end)
+    {
+        slowFrameRate += 1;
+
+        if (slowFrameRate > 5)
+        {
+            steps++;
+            slowFrameRate = 0;
+        }
+
+        if (steps > end || steps < start)
+        {
+            steps = start;
+        }
+
+        this.Sprite = Resources.Current.Coins[steps];
     }
 
 
