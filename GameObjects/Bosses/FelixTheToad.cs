@@ -31,4 +31,13 @@ public class FelixTheToad : Boss
         this.Manager.AddList(s4);
         // this.Manager.AddList(s5);
     }
+
+    public override void Update()
+    {
+        base.Update();
+        if (Manager.Current is WaitState || Manager.Current is VulnerabilityState || Manager.Current is PlatformState)
+            setImage("../../../assets/Sprites/Bosses/Felix/felix.png");
+        else
+            setImage("../../../assets/Sprites/Bosses/Felix/felix2.png");
+    }
 }

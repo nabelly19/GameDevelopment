@@ -19,7 +19,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public Weapon Weapon { get; set; }
 
     public int Hp { get; set; } = 3;
-    public float BaseAcceleration { get; set; } = 1_000;
+    public float BaseAcceleration { get; set; } = 1_300;
     public float Ax { get; set; }
     public float Ay { get; set; }
     public float CritChance { get; set; }

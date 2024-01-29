@@ -1,6 +1,7 @@
 using System;
 using System.CodeDom;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -27,6 +28,7 @@ form.Load += (o, e) =>
 {
     bmp = new Bitmap(pb.Width, pb.Height);
     g = Graphics.FromImage(bmp);
+    g.InterpolationMode = InterpolationMode.NearestNeighbor;
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
@@ -42,7 +44,7 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    // MapManager.Current.RenderMapOrFade(g, pb);
+    MapManager.Current.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);

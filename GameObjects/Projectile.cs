@@ -9,7 +9,7 @@ public class Projectile : GameObject, IMoveable
     protected SizeF speed;
     public float Angle = Random.Shared.Next(360);
     public float Direction { get; set; }
-    public float BaseAcceleration { get; set; } = 5;
+    public virtual float BaseAcceleration { get; set; } = 5;
     public float Ax { get; set; }
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;

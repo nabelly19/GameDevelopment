@@ -41,7 +41,7 @@ public class GameEngine
 
         MapManager.Current.Map = MapManager.Current.Maps[0];
 
-        // MapManager.Current.AddWalls();
+        MapManager.Current.AddWalls();
 
         Player p = new Player("Him", 700, 700); // TODO: add image from resources
         Boss b = new FelixTheToad(960, 540);

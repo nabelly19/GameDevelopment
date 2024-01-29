@@ -13,7 +13,7 @@ public class SpiralProjectile : RotateProjectile
     )
         : base(name, x, y, "../../../assets/Sprites/Projectiles/spiral.png", direction, owner)
     {
-        this.center = new(960, 540);
+        this.center = new(x, y);
         this.radius = 35;
     }
 
@@ -28,7 +28,7 @@ public class SpiralProjectile : RotateProjectile
     )
         : base(name, x, y, width, height, direction, owner)
     {
-        this.center = new(960, 540);
+        this.center = new(x, y);
         this.radius = 35;
     }
 
@@ -41,8 +41,7 @@ public class SpiralProjectile : RotateProjectile
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
-        // g.DrawRectangle(Pens.White, this.Hitbox);
-        // g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
+        g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
     }
 
     public override void RotatePoints()
