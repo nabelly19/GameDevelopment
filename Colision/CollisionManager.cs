@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 public class CollisionManager
@@ -49,6 +50,10 @@ public class CollisionManager
 
     private bool CollisionDetected(GameObject obj1, GameObject obj2) =>
         obj2.Hitbox.IntersectsWith(obj1.Hitbox);
+
+    public bool CheckCollisionbyPoint(RectangleF hitbox, PointF p){
+        return hitbox.Contains(p);
+    }
 
     public bool ScreenColision(GameObject obj)
     {

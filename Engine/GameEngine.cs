@@ -19,7 +19,7 @@ public class GameEngine
     public Map newMap;
     public int transitionClock;
     public int timer;
-  
+
     private GameEngine() { }
 
     public void StartSound() => Sound.Play();
@@ -47,7 +47,6 @@ public class GameEngine
         Boss b = new FelixTheToad(960, 540);
 
         AddObject(p);
-        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
         AddObject(new Coin("Moeda", 900, 700));
     }
@@ -65,7 +64,6 @@ public class GameEngine
     public void Render(Graphics g, PictureBox pb)
     {
         foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
-
         {
             if (gameObject is null)
                 continue;
@@ -103,7 +101,6 @@ public class GameEngine
         }
     }
 
-
     public void AddMap(Map map) => Maps.Add(map);
 
     public void nextMap()
@@ -112,7 +109,6 @@ public class GameEngine
         PrevMap = CurrentMap;
         newMap = Maps[index];
         transitioning = true;
-
     }
 
     public void prevMap()
@@ -123,19 +119,16 @@ public class GameEngine
         transitioning = true;
     }
 
-
     public void TimerTick(Graphics g, PictureBox pb)
     {
         if (!transitioning)
             CurrentMap.Render(g, pb);
         else
             DrawFadeMap(g, pb);
-        
     }
 
     public void DrawFadeMap(Graphics g, PictureBox pb)
     {
-
         transitionClock = 5;
 
         CurrentMap.Render(g, pb);
@@ -150,10 +143,10 @@ public class GameEngine
             transitioning = false;
         }
 
-    //     g.FillRectangle(
-    //       new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
-    //       0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
-    //   );
+        //     g.FillRectangle(
+        //       new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+        //       0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
+        //   );
 
         if (timer == 255)
         {
@@ -165,15 +158,12 @@ public class GameEngine
             }
             AddWalls();
             newMap = null;
-            
-            // MessageBox.Show("ELP");
         }
     }
 
-
     public void Run() { }
+
     public void Stop() { }
 
     public static void New() => current = new GameEngine();
-
 }

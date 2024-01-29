@@ -190,10 +190,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
-        MessageBox.Show(Weapon.Ax.ToString());
-        MessageBox.Show(Weapon.Ay.ToString());
-        // MessageBox.Show($"X: {this.X}  Y:{this.Y} Xw:{this.Weapon.X} Yw:{this.Weapon.Y} HitBoxX:{this.Weapon.Hitbox.X} HitboxY:{this.Weapon.Hitbox.Y}");
-        // MessageBox.Show($"Colision:{this.Y + this.Hitbox.Height / 2 > 1080} HitboxY:{this.Y + this.Hitbox.Height / 2}");
+        
     }
 
     public void Attack()

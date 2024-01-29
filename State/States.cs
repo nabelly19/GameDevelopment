@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 public class MovingState : State
 {
@@ -176,11 +178,51 @@ public class RayState : State
     }
 }
 
-public class PlataformState : State
+public class PlatformState : State
 {
+    float durationTime;
+    DateTime creationTime = DateTime.Now;
+    Platform platform;
+    bool isActivated = false;
+    PointF[] spawns =
+    {
+        new PointF(250, 250),
+        new PointF(Screen.PrimaryScreen.Bounds.Width - 250, 250),
+        new PointF(250, Screen.PrimaryScreen.Bounds.Height - 250),
+        new PointF(
+            Screen.PrimaryScreen.Bounds.Width - 250,
+            Screen.PrimaryScreen.Bounds.Height - 250
+        )
+    };
+
+    public PlatformState(float lifetime)
+    {
+        var random = Random.Shared.Next(0, 3);
+        platform = new("Platform", spawns[random].X, spawns[random].Y, 500, 500);
+        this.durationTime = lifetime + platform.damageInitiationDelay;
+    }
+
     public override void Act(Boss boss)
     {
-        throw new System.NotImplementedException();
+        if (!isActivated)
+        {
+            creationTime = DateTime.Now;
+            platform.creationTime = DateTime.Now;
+            GameEngine.Current.AddObject(platform);
+            isActivated = true;
+        }
+        var diff = DateTime.Now - creationTime;
+        var millis = (float)diff.TotalMilliseconds;
+
+        if (millis > durationTime)
+        {
+            isActivated = false;
+            CollisionManager.Current.RemoveGameObject(platform);
+            var random = Random.Shared.Next(0, 3);
+            platform = new("Platform", spawns[random].X, spawns[random].Y, 500, 500);
+            GoToNext();
+            return;
+        }
     }
 }
 
