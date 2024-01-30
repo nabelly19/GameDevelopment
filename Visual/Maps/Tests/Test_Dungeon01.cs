@@ -15,11 +15,11 @@ public class Test_Dungeon01 : Map
           (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
           Screen.PrimaryScreen.Bounds.Height / 2
           );
-        CreateWalls(pb);
+        InitializeMapObjects(pb);
     }
 
 
-    public override void CreateWalls(PictureBox pb)
+    public override void InitializeMapObjects(PictureBox pb)
     {
         float width = this.image.Width;
         float height = this.image.Height;

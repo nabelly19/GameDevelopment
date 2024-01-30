@@ -1,8 +1,6 @@
 using System;
-using System.CodeDom;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using System.Windows.Forms;
 
 ApplicationConfiguration.Initialize();
@@ -32,7 +30,6 @@ form.Load += (o, e) =>
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
-    GameEngine.Current.StartSound();
 };
 
 DateTime lastchecked = DateTime.Now;
@@ -44,11 +41,11 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    MapManager.RenderMapOrFade(g, pb);
+    
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
-  
+
     pb.Refresh();
 };
 
@@ -63,8 +60,6 @@ form.KeyDown += (o, e) =>
         case Keys.I:
             // GameEngine.Current.Player.Info();
             MessageBox.Show(CollisionManager.gameObjects.Count.ToString());
-            // GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
-            
             break;
 
         case Keys.W:
@@ -90,26 +85,12 @@ form.KeyDown += (o, e) =>
         case Keys.Space:
             GameEngine.Current.Player.Attack();
             break;
-        
-        // case Keys.LButton:
-        //     GameEngine.Current.Player.Attack();
-        //     break;
 
-        case Keys.L:
-            // CollisionManager.New();
-            // CollisionManager.Current.AddGameObject(engine.player);
-            break;
-        
         case Keys.Y:
-            MapManager.PrevMap();
+            MapManager.PreviousMap();
             break;
         case Keys.T:
             MapManager.NextMap();
-            // CollisionManager.New();
-            // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
-            break;
-        case Keys.K:
-            GameEngine.Current.AddObject(new TrackingProjectile("Bullet", 200, 200, 50, 50, GameEngine.Current.Player, 90, GameEngine.Current.Player));
             break;
     }
 };

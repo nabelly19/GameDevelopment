@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Dynamic;
+using System.Linq;
 using System.Windows.Forms;
 
 public static class CollisionManager
@@ -42,10 +43,7 @@ public static class CollisionManager
     private static bool CollisionDetected(GameObject obj1, GameObject obj2) =>
         obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
-    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p)
-    {
-        return hitbox.Contains(p);
-    }
+    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p) => hitbox.Contains(p);
 
     public static bool ScreenColision(GameObject obj)
     {
@@ -62,10 +60,11 @@ public static class CollisionManager
         return false;
     }
 
-    public static void SetGameobjects(List<GameObject> list){
+    public static void SetGameobjects(List<GameObject> list)
+    {
         GameEngine.Current.AddPlayer(list);
-        gameObjects = list;
+        gameObjects = list.ToList();
     }
 
-    public static void New() => gameObjects = new List<GameObject>();
+    public static void ResetList() => gameObjects = new List<GameObject>();
 }

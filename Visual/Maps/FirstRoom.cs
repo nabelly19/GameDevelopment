@@ -1,25 +1,23 @@
 using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using Microsoft.VisualBasic;
 
-public class Dungeon_01 : Map
+public class FirstRoom : Map
 {
     public override List<GameObject> GameObjects { get; set; }
-    public Dungeon_01(PictureBox pb)
+    public FirstRoom(PictureBox pb)
     {
+        GameObjects = new();
         this.image = Resources.Maps[0];
         this.PlayerSpawn = new PointF(
             (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
             Screen.PrimaryScreen.Bounds.Height / 2
             );
-        CreateWalls(pb);
+        InitializeMapObjects(pb);
     }
 
 
-    public override void CreateWalls(PictureBox pb)
+    public override void InitializeMapObjects(PictureBox pb)
     {
         float width = this.image.Width;
         float height = this.image.Height;

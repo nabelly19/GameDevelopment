@@ -14,7 +14,14 @@ public class Projectile : GameObject, IMoveable
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
 
-    public Projectile(string name, float x, float y, string sprite, float direction, IAttackable owner)
+    public Projectile(
+        string name,
+        float x,
+        float y,
+        string sprite,
+        float direction,
+        IAttackable owner
+    )
         : base(name, x, y, sprite)
     {
         this.Direction = direction;
@@ -60,11 +67,10 @@ public class Projectile : GameObject, IMoveable
                 return;
             if (collided is IAttackable other)
             {
-               if ( other.isVulnerable) 
-                    other.ReceiveDamage(); 
+                if (other.isVulnerable)
+                    other.ReceiveDamage();
                 else
                     return;
-            
             }
             CollisionManager.RemoveGameObject(this);
         }
@@ -73,7 +79,9 @@ public class Projectile : GameObject, IMoveable
     }
 
     protected float ToRadians(float angleD) => MathF.PI / 180 * angleD;
+
     protected float ToDegree(float angleR) => 180 / MathF.PI * angleR;
+
     public virtual void GoTo(float angle)
     {
         var radians = ToRadians(angle);

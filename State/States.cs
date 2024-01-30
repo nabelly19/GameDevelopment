@@ -35,7 +35,7 @@ public class SpiralProjectileState : State
 
         for (int i = 0; i < 3; i++)
         {
-            GameEngine.Current.AddObject(
+            GameEngine.Current.AddObjectToCollisionList(
                 new SpiralProjectile(
                     "Bullet",
                     boss.X - 14,
@@ -44,7 +44,7 @@ public class SpiralProjectileState : State
                     boss
                 )
             );
-            GameEngine.Current.AddObject(
+            GameEngine.Current.AddObjectToCollisionList(
                 new SpiralProjectile(
                     "Bullet",
                     boss.X - 14,
@@ -53,7 +53,7 @@ public class SpiralProjectileState : State
                     boss
                 )
             );
-            GameEngine.Current.AddObject(
+            GameEngine.Current.AddObjectToCollisionList(
                 new SpiralProjectile(
                     "Bullet",
                     boss.X - 14,
@@ -62,7 +62,7 @@ public class SpiralProjectileState : State
                     boss
                 )
             );
-            GameEngine.Current.AddObject(
+            GameEngine.Current.AddObjectToCollisionList(
                 new SpiralProjectile(
                     "Bullet",
                     boss.X - 14,
@@ -104,10 +104,9 @@ public class TrackingProjectileState : State
         count++;
         dt = null;
 
-        GameEngine.Current.AddObject(
+        GameEngine.Current.AddObjectToCollisionList(
             new TrackingProjectile("Bullet", boss.X, boss.Y, 25, 25, this.player, 30, boss)
         );
-
     }
 }
 
@@ -120,7 +119,7 @@ public class SpiralWaveState : State
     {
         if (angle >= 180)
         {
-            GameEngine.Current.AddObject(
+            GameEngine.Current.AddObjectToCollisionList(
                 new Wave("Bullet", boss.X - 14, boss.Y - 50, 25, 25, angle, boss)
             );
             angle = 0;
@@ -133,7 +132,7 @@ public class SpiralWaveState : State
         if (DateTime.Now < dt?.AddSeconds(2.5))
             return;
 
-        GameEngine.Current.AddObject(
+        GameEngine.Current.AddObjectToCollisionList(
             new Wave("Bullet", boss.X - 14, boss.Y - 50, 25, 25, angle, boss)
         );
 
@@ -168,49 +167,14 @@ public class CircularlWaveState : State
 
         for (int i = 0; i < 180; i++)
         {
-            GameEngine.Current.AddObject(new Wave("Bullet", boss.X, boss.Y, 25, 25, angle, boss));
-            // 4 = 360 mais espacado
-            // > 1 = 360
-            // 1 = 180
+            GameEngine.Current.AddObjectToCollisionList(
+                new Wave("Bullet", boss.X, boss.Y, 25, 25, angle, boss)
+            );
             angle += 2;
         }
         count++;
     }
 }
-
-// public class WaveState : State
-// {
-//     private float angle = 0;
-//     DateTime? dt = null;
-//     int count = 0;
-
-//     public override void Act(Boss boss)
-//     {
-//         if (count == 3)
-//         {
-//             dt = null;
-//             count = 0;
-//             GoToNext();
-//             return;
-//         }
-
-//         dt ??= DateTime.Now;
-
-//         if (DateTime.Now < dt?.AddSeconds(2))
-//             return;
-
-//         count++;
-//         dt = null;
-//         for (int i = 0; i < 200; i++)
-//         {
-//             GameEngine.Current.AddObject(
-//                 new Wave("Bullet", 50, 50, 25, 25, angle, boss)
-//             );
-//             angle++;
-//         }
-//         angle = 0;
-//     }
-// }
 
 public class EnchantState : State
 {
@@ -233,14 +197,6 @@ public class WaitState : State
 
         dt = null;
         GoToNext();
-    }
-}
-
-public class RayState : State
-{
-    public override void Act(Boss boss)
-    {
-        throw new System.NotImplementedException();
     }
 }
 
@@ -274,7 +230,7 @@ public class PlatformState : State
         {
             creationTime = DateTime.Now;
             platform.creationTime = DateTime.Now;
-            GameEngine.Current.AddObject(platform);
+            GameEngine.Current.AddObjectToCollisionList(platform);
             isActivated = true;
         }
         var diff = DateTime.Now - creationTime;

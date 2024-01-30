@@ -7,7 +7,8 @@ public class StateManager
     private List<State> initialStateList = new();
     private Boss boss = null;
 
-    public StateManager(Boss boss){
+    public StateManager(Boss boss)
+    {
         this.boss = boss;
     }
 
@@ -20,7 +21,6 @@ public class StateManager
     public void Act()
     {
         Current ??= initialStateList[Random.Shared.Next(initialStateList.Count)];
-
         Current.Act(boss);
     }
 
@@ -28,10 +28,3 @@ public class StateManager
 
     public void Damage01_Boss01() { }
 }
-
-// //TODO REVER POSICAO DESSE BLOCO AI KK
-// if (last.nextState is null)
-// {
-//     Random rand = new Random();
-//     rand.Next(stateList.Count);
-// }

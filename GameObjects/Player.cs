@@ -93,9 +93,6 @@ public class Player : GameObject, IMoveable, IAttackable
         else if ((int)vy == 0)
             AnimatePLayer(17, 21);
 
-
-
-
         double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
 
         if (magnitude != 0)
@@ -123,12 +120,7 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (vy < -max)
             vy = -max;
 
-        if (
-            !(
-                CollisionManager.CheckCollisions(this)
-                || CollisionManager.ScreenColision(this)
-            )
-        )
+        if (!(CollisionManager.CheckCollisions(this) || CollisionManager.ScreenColision(this)))
             return;
 
         const float energyLoss = 0.2f;
@@ -165,7 +157,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void StopUp() => this.Sprite = Resources.PlayerSprites[15];
 
-    // public void StopDown() => this.Sprite = Resources.Current.PlayerSprites[0];
+    public void StopDown() => this.Sprite = Resources.PlayerSprites[0];
 
     public void StopLeft() => this.Sprite = Resources.PlayerSprites[5];
 
@@ -182,17 +174,12 @@ public class Player : GameObject, IMoveable, IAttackable
         }
 
         if (steps > end || steps < start)
-        {
             steps = start;
-        }
 
         this.Sprite = Resources.PlayerSprites[steps];
     }
 
-    public void Info()
-    {
-
-    }
+    public void Info() { }
 
     public void Attack()
     {
@@ -225,7 +212,7 @@ public class Player : GameObject, IMoveable, IAttackable
             switch (ax)
             {
                 case -1:
-                    GameEngine.Current.AddObject(
+                    GameEngine.Current.AddObjectToCollisionList(
                         new WindBlade(
                             "Bullet",
                             this.X - this.Width / 2 - 25,
@@ -238,7 +225,7 @@ public class Player : GameObject, IMoveable, IAttackable
                     );
                     break;
                 case 1:
-                    GameEngine.Current.AddObject(
+                    GameEngine.Current.AddObjectToCollisionList(
                         new WindBlade(
                             "Bullet",
                             this.X + this.Width / 2 + 25,
@@ -254,7 +241,7 @@ public class Player : GameObject, IMoveable, IAttackable
             switch (ay)
             {
                 case -1:
-                    GameEngine.Current.AddObject(
+                    GameEngine.Current.AddObjectToCollisionList(
                         new WindBlade(
                             "Bullet",
                             this.X,
@@ -267,7 +254,7 @@ public class Player : GameObject, IMoveable, IAttackable
                     );
                     break;
                 case 1:
-                    GameEngine.Current.AddObject(
+                    GameEngine.Current.AddObjectToCollisionList(
                         new WindBlade(
                             "Bullet",
                             this.X,
