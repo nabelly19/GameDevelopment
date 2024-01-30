@@ -27,11 +27,10 @@ public class Weapon : GameObject, IMoveable
         DisableHitbox();
     }
 
-    public override void Render(Graphics g, PictureBox pb)
-    {
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    public override void Update() => CreateHitbox(this.X, this.Y, this.Width, this.Height);
+
+    public override void Render(Graphics g, PictureBox pb) =>
         g.DrawRectangle(Pens.White, this.Hitbox);
-    }
 
     public void Move()
     {

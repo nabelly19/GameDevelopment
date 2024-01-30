@@ -53,7 +53,6 @@ public class GameEngine
         if (list.Contains(this.Player))
             return;
         this.Player.Weapon ??= new Weapon("Weapon", 0, 0, 50, 50, this.Player);
-        list.Add(this.Player.Weapon);
         list.Add(this.Player);
     }
 

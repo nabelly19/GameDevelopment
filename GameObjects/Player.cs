@@ -41,12 +41,13 @@ public class Player : GameObject, IMoveable, IAttackable
     public override void Update()
     {
         VerifyVulnerability();
+        updateHitbox();
+        this.Weapon.Update();
         Move();
     }
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        // this.Sprite.
         g.DrawImage(
             this.Sprite,
             new RectangleF(
@@ -57,7 +58,6 @@ public class Player : GameObject, IMoveable, IAttackable
             )
         );
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
-        CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
@@ -104,7 +104,7 @@ public class Player : GameObject, IMoveable, IAttackable
         X += vx * secs;
         Y += vy * secs;
 
-        CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
+        updateHitbox();
 
         vx *= MathF.Pow(0.001f, secs);
         vy *= MathF.Pow(0.001f, secs);
@@ -297,4 +297,7 @@ public class Player : GameObject, IMoveable, IAttackable
         if (seconds > 3)
             isVulnerable = true;
     }
+
+    private void updateHitbox() =>
+        CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
 }
