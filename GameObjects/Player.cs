@@ -163,13 +163,13 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void StopX_axis() => this.Ax = 0;
 
-    public void StopUp() => this.Sprite = Resources.Current.PlayerSprites[15];
+    public void StopUp() => this.Sprite = Resources.PlayerSprites[15];
 
     // public void StopDown() => this.Sprite = Resources.Current.PlayerSprites[0];
 
-    public void StopLeft() => this.Sprite = Resources.Current.PlayerSprites[5];
+    public void StopLeft() => this.Sprite = Resources.PlayerSprites[5];
 
-    public void StopRight() => this.Sprite = Resources.Current.PlayerSprites[9];
+    public void StopRight() => this.Sprite = Resources.PlayerSprites[9];
 
     private void AnimatePLayer(int start, int end)
     {
@@ -186,7 +186,7 @@ public class Player : GameObject, IMoveable, IAttackable
             steps = start;
         }
 
-        this.Sprite = Resources.Current.PlayerSprites[steps];
+        this.Sprite = Resources.PlayerSprites[steps];
     }
 
     public void Info()

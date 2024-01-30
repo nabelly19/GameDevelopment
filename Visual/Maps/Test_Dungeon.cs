@@ -8,7 +8,7 @@ public class Test_Dungeon : Map
 {
     public Test_Dungeon (PictureBox pb)
         {
-          this.image = Resources.Current.Maps[0];
+          this.image = Resources.Maps[0];
           CreateWalls(pb);  
         } 
     

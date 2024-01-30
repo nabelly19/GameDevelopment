@@ -8,7 +8,7 @@ public class Dungeon_01 : Map
 {
     public Dungeon_01(PictureBox pb)
     {
-        this.image = Resources.Current.Maps[0];
+        this.image = Resources.Maps[0];
         this.PlayerSpawn = new PointF(
             (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
             Screen.PrimaryScreen.Bounds.Height / 2
