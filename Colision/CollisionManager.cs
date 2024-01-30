@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 public static class CollisionManager
 {
-    public static List<GameObject> gameObjects { get; private set; }
+    public static List<GameObject> gameObjects { get; set; }
 
     public static void AddGameObject(GameObject gameObject)
         => gameObjects.Add(gameObject);

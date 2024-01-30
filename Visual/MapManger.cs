@@ -20,16 +20,32 @@ public static class MapManager
         {
             if (item == Map)
             {
-                foreach (var wall in item.Walls)
+                foreach (var wall in item.GameObjects)
                     CollisionManager.AddGameObject(wall);
+
+                if (item.Boss is not null)
+                    CollisionManager.AddGameObject(item.Boss);
+            
+            }
+        }
+    }
+
+    public static void AddMapObjects()
+    {
+        foreach (var item in Maps)
+        {
+            if (item == Map)
+            {   
                 
+                GameEngine.Current.AddPlayer(item.GameObjects);
+                CollisionManager.gameObjects = item.GameObjects;
             }
         }
     }
 
     public static void AddMap(Map map) => Maps.Add(map);
 
-    public static void nextMap()
+    public static void NextMap()
     {
         index++;
         prevMap = Map;
@@ -72,12 +88,7 @@ public static class MapManager
         if (timer == 255)
         {
             Map = newMap;
-            foreach (var item in CollisionManager.gameObjects.ToList())
-            {
-                if (item is Wall)
-                    CollisionManager.gameObjects.Remove(item);
-            }
-            AddWalls();
+            AddMapObjects();
             GameEngine.Current.Player.X = Map.PlayerSpawn.X;
             GameEngine.Current.Player.Y = Map.PlayerSpawn.Y;
             newMap = null;

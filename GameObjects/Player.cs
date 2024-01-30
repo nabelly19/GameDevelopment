@@ -90,10 +90,10 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(13, 16);
         else if (vy > 20)
             AnimatePLayer(1, 4);
-        else if((int)vy == 0)
+        else if ((int)vy == 0)
             AnimatePLayer(17, 21);
-            
-        
+
+
 
 
         double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
@@ -191,7 +191,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Info()
     {
-        
+
     }
 
     public void Attack()
@@ -302,11 +302,12 @@ public class Player : GameObject, IMoveable, IAttackable
             this.Hp = 0;
     }
 
-    public void VerifyVulnerability(){
+    public void VerifyVulnerability()
+    {
         var now = DateTime.Now;
         var diff = now - lastDamage;
         var seconds = diff.TotalSeconds;
-        if(seconds > 3)
-            isVulnerable = true; 
+        if (seconds > 3)
+            isVulnerable = true;
     }
 }

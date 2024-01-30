@@ -8,7 +8,7 @@ public class GameEngine
 {
     private static GameEngine current;
     public static GameEngine Current => current;
-    public Player Player { get; set; }
+    public Player Player { get; set; } = new Player("Him", 0, 0);
     // public List<Map> Maps = new();
     public Map CurrentMap { get; set; } // => current map
 
@@ -26,28 +26,26 @@ public class GameEngine
         CollisionManager.New();
         MapManager.New();
 
-        MapManager.AddMap(new Dungeon_02(pb));
-        MapManager.AddMap(new Dungeon_01(pb));
-        MapManager.AddMap(new Dungeon_01(pb));
-        MapManager.AddMap(new Dungeon_02(pb));
-        MapManager.AddMap(new Dungeon_01(pb));
-        MapManager.AddMap(new Test_Dungeon(pb));
+        // AddObject(p);
+
+        MapManager.AddMap(new Test_Dungeon01(pb));
+        MapManager.AddMap(new Test_Dungeon_02(pb));
+        // MapManager.AddMap(new Dungeon_01(pb));
+        // MapManager.AddMap(new Dungeon_02(pb));
+        // MapManager.AddMap(new Dungeon_01(pb));
+        // MapManager.AddMap(new Dungeon_02(pb));
+        // MapManager.AddMap(new Dungeon_01(pb));
 
         MapManager.Map = MapManager.Maps[0];
 
-        MapManager.AddWalls();
+        // TODO: add image from resources
+        this.Player.X = MapManager.Map.PlayerSpawn.X;
+        this.Player.Y = MapManager.Map.PlayerSpawn.Y;
 
-        Player p = new Player("Him", 70, 700)
-        {
-            X = MapManager.Map.PlayerSpawn.X,
-            Y = MapManager.Map.PlayerSpawn.Y
-        }; // TODO: add image from resources
-        AddObject(p);
-        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
-        
-        Boss b = new FelixTheToad(960, 540);
-        AddObject(b);
+        // Boss b = new FelixTheToad(960, 540);
+        // AddObject(b);
         AddObject(new Coin("Moeda", 900, 700));
+        MapManager.AddMapObjects();
     }
 
     public void Update()
@@ -77,28 +75,40 @@ public class GameEngine
     {
         if (gameObject is Player)
         {
-            var newPlayer = gameObject as Player;
-            var weapon = new Weapon("Weapon", 0, 0, 50, 50, newPlayer);
-            newPlayer.Weapon = weapon;
-            this.Player = newPlayer;
-            AddObject(weapon);
+            // var newPlayer = gameObject as Player;
+            // var weapon = new Weapon("Weapon", 0, 0, 50, 50, newPlayer);
+            // newPlayer.Weapon = weapon;
+            // this.Player = newPlayer;
+            // AddObject(weapon);
         }
         CollisionManager.AddGameObject(gameObject);
     }
 
-    public void AddWalls()
+    public void AddPlayer(List<GameObject> list)
     {
-        foreach (var item in MapManager.Maps)
-        {
-            if (item == MapManager.Map)
-            {
-                foreach (var wall in item.Walls)
-                {
-                    CollisionManager.AddGameObject(wall);
-                }
-            }
-        }
+        if(list.Contains(this.Player))
+            return;
+        this.Player.Weapon ??= new Weapon("Weapon", 0, 0, 50, 50, this.Player);
+        list.Add(this.Player.Weapon);
+        list.Add(this.Player);
     }
+
+    // public void AddWalls()
+    // {
+    //     foreach (var item in MapManager.Maps)
+    //     {
+    //         if (item == MapManager.Map)
+    //         {
+    //             foreach (var wall in item.Walls)
+    //             {
+    //                 CollisionManager.AddGameObject(wall);
+    //             }
+
+    //             if (item.Boss is not null)
+    //                 CollisionManager.AddGameObject(item.Boss);
+    //         }
+    //     }
+    // }
 
     public void AddMap(Map map) => MapManager.Maps.Add(map);
 

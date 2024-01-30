@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Drawing;
 using System.Net.WebSockets;
 using System.Security.Cryptography.X509Certificates;
@@ -7,6 +8,10 @@ using Microsoft.VisualBasic;
 
 public class Dungeon_02 : Map
 {
+    public override Boss Boss { get; set; } = new FelixTheToad(
+        960, 540
+    );
+    public override List<GameObject> GameObjects { get; set; }
 
     public Dungeon_02(PictureBox pb)
     {
@@ -54,10 +59,13 @@ public class Dungeon_02 : Map
             (pb.Width / 2 ) - this.image.Width / 2, (pb.Height / 2) - this.image.Height / 2.65f
         );
 
-        foreach (var wall in Walls)
+        foreach (var wall in GameObjects)
         {
             g.DrawRectangle(Pens.White, wall.Hitbox);
 
         }
     }
+
+     public override Map New(PictureBox pb)
+    => new Dungeon_02(pb);
 }

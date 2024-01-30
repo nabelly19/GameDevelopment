@@ -62,7 +62,8 @@ form.KeyDown += (o, e) =>
 
         case Keys.I:
             // GameEngine.Current.Player.Info();
-            GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
+            MessageBox.Show(CollisionManager.gameObjects.Count.ToString());
+            // GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
             
             break;
 
@@ -103,7 +104,7 @@ form.KeyDown += (o, e) =>
             MapManager.PrevMap();
             break;
         case Keys.T:
-            MapManager.nextMap();
+            MapManager.NextMap();
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
