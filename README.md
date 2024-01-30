@@ -6,6 +6,7 @@ OBJ FOLDER IS FINALLY GONE HOLY CRAP, WHY IS THAT SO DAMN HARD BRO
 
 Addded:
    - Platform Boss State<br />
+   - Tracking Projectile Boss State<br />
    - Coin animation<br />
    - Sprites<br />
 
