@@ -124,8 +124,8 @@ public class Player : GameObject, IMoveable, IAttackable
 
         if (
             !(
-                CollisionManager.Current.CheckCollisions(this)
-                || CollisionManager.Current.ScreenColision(this)
+                CollisionManager.CheckCollisions(this)
+                || CollisionManager.ScreenColision(this)
             )
         )
             return;
@@ -202,7 +202,7 @@ public class Player : GameObject, IMoveable, IAttackable
         if (secs < this.Weapon.AtkSpeed)
             return;
 
-        var collisions = CollisionManager.Current.GetCollisions(this.Weapon);
+        var collisions = CollisionManager.GetCollisions(this.Weapon);
 
         foreach (var obj in collisions)
         {

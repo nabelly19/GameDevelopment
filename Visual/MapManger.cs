@@ -3,41 +3,33 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-public class MapManager
+public static class MapManager
 {
-    private static MapManager crr;
-    public static MapManager Current => crr;
-    public List<Map> Maps { get; private set; }
-    private int index = 0;
-    private Map prevMap;
-    public Map Map { get; set; }
-    private Map newMap;
+    public static List<Map> Maps { get; private set; }
+    private static int index = 0;
+    private static Map prevMap;
+    public static Map Map { get; set; }
+    private static Map newMap;
     private static int timer;
-    private bool transitioning = false;
-    private int transitionClock;
-    private MapManager()
-    {
-        Maps = new List<Map>();
-        crr = this;
-    }
+    private static bool transitioning = false;
+    private static int transitionClock;
 
-    public void AddWalls()
+    public static void AddWalls()
     {
         foreach (var item in Maps)
         {
             if (item == Map)
             {
                 foreach (var wall in item.Walls)
-                {
-                    CollisionManager.Current.AddGameObject(wall);
-                }
+                    CollisionManager.AddGameObject(wall);
+                
             }
         }
     }
 
-    public void AddMap(Map map) => Maps.Add(map);
+    public static void AddMap(Map map) => Maps.Add(map);
 
-    public void nextMap()
+    public static void nextMap()
     {
         index++;
         prevMap = Map;
@@ -45,7 +37,7 @@ public class MapManager
         transitioning = true;
     }
 
-    public void PrevMap()
+    public static void PrevMap()
     {
         index--;
         prevMap = Map;
@@ -53,7 +45,7 @@ public class MapManager
         transitioning = true;
     }
 
-    public void RenderMapOrFade(Graphics g, PictureBox pb)
+    public static void RenderMapOrFade(Graphics g, PictureBox pb)
     {
         if (!transitioning)
             Map.Render(g, pb);
@@ -61,7 +53,7 @@ public class MapManager
             DrawFadeMap(g, pb);
     }
 
-    public void DrawFadeMap(Graphics g, PictureBox pb)
+    public static void DrawFadeMap(Graphics g, PictureBox pb)
     {
         transitionClock = 5;
 
@@ -80,12 +72,14 @@ public class MapManager
         if (timer == 255)
         {
             Map = newMap;
-            foreach (var item in CollisionManager.Current.gameObjects.ToList())
+            foreach (var item in CollisionManager.gameObjects.ToList())
             {
                 if (item is Wall)
-                    CollisionManager.Current.gameObjects.Remove(item);
+                    CollisionManager.gameObjects.Remove(item);
             }
             AddWalls();
+            GameEngine.Current.Player.X = Map.PlayerSpawn.X;
+            GameEngine.Current.Player.Y = Map.PlayerSpawn.Y;
             newMap = null;
         }
     }
@@ -98,5 +92,7 @@ public class MapManager
           );
     }
 
-    public static void New() => crr = new MapManager();
+    public static void New() 
+        => Maps = new List<Map>();
+
 }

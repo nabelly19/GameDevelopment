@@ -54,7 +54,7 @@ public class TrackingProjectile : Projectile
     {
         VerifyLifespan();
         Move();
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
         if (collided is not null)
         {
             if (collided == Owner)
@@ -67,10 +67,10 @@ public class TrackingProjectile : Projectile
 
             }
 
-            CollisionManager.Current.RemoveGameObject(this);
+            CollisionManager.RemoveGameObject(this);
         }
-        if (CollisionManager.Current.ScreenColision(this))
-            CollisionManager.Current.RemoveGameObject(this);
+        if (CollisionManager.ScreenColision(this))
+            CollisionManager.RemoveGameObject(this);
     }
 
     private void VerifyLifespan()
@@ -79,7 +79,7 @@ public class TrackingProjectile : Projectile
 
         if (DateTime.Now > dt?.AddSeconds(8))
         {
-            CollisionManager.Current.RemoveGameObject(this);
+            CollisionManager.RemoveGameObject(this);
             dt = null;
         }
 

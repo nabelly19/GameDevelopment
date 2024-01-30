@@ -275,7 +275,7 @@ public class PlatformState : State
         if (millis > durationTime)
         {
             isActivated = false;
-            CollisionManager.Current.RemoveGameObject(platform);
+            CollisionManager.RemoveGameObject(platform);
             var random = Random.Shared.Next(0, 3);
             platform = new("Platform", spawns[random].X, spawns[random].Y, 500, 500);
             GoToNext();

@@ -37,10 +37,10 @@ public class Coin : GameObject, IMoveable
 
     public void Move()
     {
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
         
         if (collided is Player)
-            CollisionManager.Current.RemoveGameObject(this);
+            CollisionManager.RemoveGameObject(this);
 
         AnimateItem(1,5);
 

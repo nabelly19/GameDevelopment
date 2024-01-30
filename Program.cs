@@ -44,7 +44,7 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    MapManager.Current.RenderMapOrFade(g, pb);
+    MapManager.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
@@ -92,10 +92,10 @@ form.KeyDown += (o, e) =>
             break;
         
         case Keys.Y:
-            MapManager.Current.PrevMap();
+            MapManager.PrevMap();
             break;
         case Keys.T:
-            MapManager.Current.nextMap();
+            MapManager.nextMap();
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;

@@ -53,7 +53,7 @@ public class Projectile : GameObject, IMoveable
     public override void Update()
     {
         Move();
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
         if (collided is not null)
         {
             if (collided == Owner)
@@ -66,10 +66,10 @@ public class Projectile : GameObject, IMoveable
                     return;
             
             }
-            CollisionManager.Current.RemoveGameObject(this);
+            CollisionManager.RemoveGameObject(this);
         }
-        if (CollisionManager.Current.ScreenColision(this))
-            CollisionManager.Current.RemoveGameObject(this);
+        if (CollisionManager.ScreenColision(this))
+            CollisionManager.RemoveGameObject(this);
     }
 
     protected float ToRadians(float angleD) => MathF.PI / 180 * angleD;

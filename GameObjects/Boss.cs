@@ -21,7 +21,7 @@ public class Boss : GameObject, IAttackable
     {
         this.Manager.Act();
 
-        var collided = CollisionManager.Current.GetCollisions(this);
+        var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
             if (other is IAttackable player)

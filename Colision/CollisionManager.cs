@@ -3,25 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-public class CollisionManager
+public static class CollisionManager
 {
-    private static CollisionManager current;
-    public static CollisionManager Current => current;
-    public List<GameObject> gameObjects { get; private set; }
+    public static List<GameObject> gameObjects { get; private set; }
 
-    private CollisionManager()
-    {
-        gameObjects = new List<GameObject>();
-        current = this;
-    }
-
-    public void AddGameObject(GameObject gameObject)
+    public static void AddGameObject(GameObject gameObject)
         => gameObjects.Add(gameObject);
 
-    public void RemoveGameObject(GameObject gameObject)
+    public static void RemoveGameObject(GameObject gameObject)
         => gameObjects.Remove(gameObject);
 
-    public bool CheckCollisions(GameObject obj)
+    public static bool CheckCollisions(GameObject obj)
     {
         for (int j = 0; j < gameObjects.Count; j++)
         {
@@ -36,7 +28,7 @@ public class CollisionManager
         return false;
     }
 
-    public IEnumerable<GameObject> GetCollisions(GameObject obj)
+    public static IEnumerable<GameObject> GetCollisions(GameObject obj)
     {
         for (int j = 0; j < gameObjects.Count; j++)
         {
@@ -48,14 +40,14 @@ public class CollisionManager
         }
     }
 
-    private bool CollisionDetected(GameObject obj1, GameObject obj2) =>
+    private static bool CollisionDetected(GameObject obj1, GameObject obj2) =>
         obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
-    public bool CheckCollisionbyPoint(RectangleF hitbox, PointF p){
+    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p){
         return hitbox.Contains(p);
     }
 
-    public bool ScreenColision(GameObject obj)
+    public static bool ScreenColision(GameObject obj)
     {
         var Xmax = Screen.PrimaryScreen.Bounds.Width;
         var Ymax = Screen.PrimaryScreen.Bounds.Height;
@@ -70,5 +62,5 @@ public class CollisionManager
         return false;
     }
 
-    public static void New() => current = new CollisionManager();
+public static void New() => gameObjects = new List<GameObject>();
 }

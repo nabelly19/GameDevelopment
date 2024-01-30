@@ -11,6 +11,10 @@ public class Dungeon_02 : Map
     public Dungeon_02(PictureBox pb)
     {
         this.image = Resources.Current.Maps[1];
+        this.PlayerSpawn = new PointF(
+            Screen.PrimaryScreen.Bounds.Width / 2,
+            0.9f * Screen.PrimaryScreen.Bounds.Height
+            );
         CreateWalls(pb);  
     }
     public override void CreateWalls(PictureBox pb)
@@ -50,10 +54,10 @@ public class Dungeon_02 : Map
             (pb.Width / 2 ) - this.image.Width / 2, (pb.Height / 2) - this.image.Height / 2.65f
         );
 
-        // foreach (var wall in Walls)
-        // {
-        //     g.DrawRectangle(Pens.White, wall.CreateHitbox());
+        foreach (var wall in Walls)
+        {
+            g.DrawRectangle(Pens.White, wall.Hitbox);
 
-        // }
+        }
     }
 }

@@ -9,16 +9,10 @@ public class GameEngine
     private static GameEngine current;
     public static GameEngine Current => current;
     public Player Player { get; set; }
-    public List<Map> Maps = new();
+    // public List<Map> Maps = new();
     public Map CurrentMap { get; set; } // => current map
 
     public SoundPlayer Sound { get; set; } = new();
-    private int index = 0;
-    public bool transitioning = false;
-    public Map PrevMap;
-    public Map newMap;
-    public int transitionClock;
-    public int timer;
 
     private GameEngine() { }
 
@@ -32,18 +26,22 @@ public class GameEngine
         CollisionManager.New();
         MapManager.New();
 
-        MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Dungeon_02(pb));
-        MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Dungeon_02(pb));
-        MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Test_Dungeon(pb));
+        MapManager.AddMap(new Dungeon_01(pb));
+        MapManager.AddMap(new Dungeon_02(pb));
+        MapManager.AddMap(new Dungeon_01(pb));
+        MapManager.AddMap(new Dungeon_02(pb));
+        MapManager.AddMap(new Dungeon_01(pb));
+        MapManager.AddMap(new Test_Dungeon(pb));
 
-        MapManager.Current.Map = MapManager.Current.Maps[0];
+        MapManager.Map = MapManager.Maps[0];
 
-        MapManager.Current.AddWalls();
+        MapManager.AddWalls();
 
-        Player p = new Player("Him", 70, 700); // TODO: add image from resources
+        Player p = new Player("Him", 70, 700)
+        {
+            X = MapManager.Map.PlayerSpawn.X,
+            Y = MapManager.Map.PlayerSpawn.Y
+        }; // TODO: add image from resources
         AddObject(p);
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         
@@ -54,7 +52,7 @@ public class GameEngine
 
     public void Update()
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
+        foreach (var gameObject in CollisionManager.gameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
@@ -64,7 +62,7 @@ public class GameEngine
 
     public void Render(Graphics g, PictureBox pb)
     {
-        foreach (var gameObject in CollisionManager.Current.gameObjects.ToList())
+        foreach (var gameObject in CollisionManager.gameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
@@ -85,82 +83,24 @@ public class GameEngine
             this.Player = newPlayer;
             AddObject(weapon);
         }
-        CollisionManager.Current.AddGameObject(gameObject);
+        CollisionManager.AddGameObject(gameObject);
     }
 
     public void AddWalls()
     {
-        foreach (var item in Maps)
+        foreach (var item in MapManager.Maps)
         {
-            if (item == CurrentMap)
+            if (item == MapManager.Map)
             {
                 foreach (var wall in item.Walls)
                 {
-                    CollisionManager.Current.AddGameObject(wall);
+                    CollisionManager.AddGameObject(wall);
                 }
             }
         }
     }
 
-    public void AddMap(Map map) => Maps.Add(map);
-
-    public void nextMap()
-    {
-        index++;
-        PrevMap = CurrentMap;
-        newMap = Maps[index];
-        transitioning = true;
-    }
-
-    public void prevMap()
-    {
-        index--;
-        PrevMap = CurrentMap;
-        newMap = Maps[index];
-        transitioning = true;
-    }
-
-    public void TimerTick(Graphics g, PictureBox pb)
-    {
-        if (!transitioning)
-            CurrentMap.Render(g, pb);
-        else
-            DrawFadeMap(g, pb);
-    }
-
-    public void DrawFadeMap(Graphics g, PictureBox pb)
-    {
-        transitionClock = 5;
-
-        CurrentMap.Render(g, pb);
-        if (CurrentMap == PrevMap)
-            timer += transitionClock;
-        else
-            timer -= transitionClock;
-
-        if (timer < 0)
-        {
-            timer = 0;
-            transitioning = false;
-        }
-
-        //     g.FillRectangle(
-        //       new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
-        //       0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
-        //   );
-
-        if (timer == 255)
-        {
-            CurrentMap = newMap;
-            foreach (var item in CollisionManager.Current.gameObjects.ToList())
-            {
-                if (item is Wall)
-                    CollisionManager.Current.gameObjects.Remove(item);
-            }
-            AddWalls();
-            newMap = null;
-        }
-    }
+    public void AddMap(Map map) => MapManager.Maps.Add(map);
 
     public void Run() { }
 
