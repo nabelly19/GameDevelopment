@@ -212,6 +212,14 @@ public class CircularlWaveState : State
 //     }
 // }
 
+public class EnchantState : State
+{
+    public override void Act(Boss boss)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public class WaitState : State
 {
     DateTime? dt = null;
