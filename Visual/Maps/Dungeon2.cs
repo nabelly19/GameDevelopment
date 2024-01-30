@@ -40,32 +40,23 @@ public class Dungeon_02 : Map
         var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height/2, 110, 90);
 
 
-        this.Walls.Add(w1);
-        this.Walls.Add(w2);
-        this.Walls.Add(w3);
-        this.Walls.Add(w4);    
-        this.Walls.Add(w5);
-        this.Walls.Add(w6);
-        this.Walls.Add(w7);
-        this.Walls.Add(w8);
-        this.Walls.Add(w9);
+        this.GameObjects.Add(w1);
+        this.GameObjects.Add(w2);
+        this.GameObjects.Add(w3);
+        this.GameObjects.Add(w4);    
+        this.GameObjects.Add(w5);
+        this.GameObjects.Add(w6);
+        this.GameObjects.Add(w7);
+        this.GameObjects.Add(w8);
+        this.GameObjects.Add(w9);
 
         }
 
-    public override void Render(Graphics g, PictureBox pb)
+    public override void RenderBackground(Graphics g, PictureBox pb)
     {
         g.DrawImage(
             this.image,
             (pb.Width / 2 ) - this.image.Width / 2, (pb.Height / 2) - this.image.Height / 2.65f
         );
-
-        foreach (var wall in GameObjects)
-        {
-            g.DrawRectangle(Pens.White, wall.Hitbox);
-
-        }
     }
-
-     public override Map New(PictureBox pb)
-    => new Dungeon_02(pb);
 }

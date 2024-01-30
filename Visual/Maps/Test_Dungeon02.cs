@@ -52,7 +52,7 @@ public class Test_Dungeon_02 : Map
 
     }
 
-    public override void Render(Graphics g, PictureBox pb)
+    public override void RenderBackground(Graphics g, PictureBox pb)
     {
         g.DrawImage(
             this.image,
@@ -65,7 +65,4 @@ public class Test_Dungeon_02 : Map
 
         // }
     }
-
-    public override Map New(PictureBox pb)
-        => new Test_Dungeon_02(pb);
 }

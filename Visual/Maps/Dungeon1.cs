@@ -36,32 +36,23 @@ public class Dungeon_01 : Map
         var v2 = new Wall("BarriSS V1", x + 0.51f * width / 2, y - 0.45f * height / 2, 90, 90); // barriSS V1 ( de pra baixo tlgd )
         var v3 = new Wall("BarriSS V2", x + 0.75f * width / 2, y - 0.45f * height / 2, 70, 90); // barriSS
 
-        this.Walls.Add(w1);
-        this.Walls.Add(w2);
-        this.Walls.Add(w3);
-        this.Walls.Add(w4);
-        this.Walls.Add(w5);
-        this.Walls.Add(v1);
-        this.Walls.Add(w6);
-        this.Walls.Add(v2);
-        this.Walls.Add(v3);
+        this.GameObjects.Add(w1);
+        this.GameObjects.Add(w2);
+        this.GameObjects.Add(w3);
+        this.GameObjects.Add(w4);
+        this.GameObjects.Add(w5);
+        this.GameObjects.Add(v1);
+        this.GameObjects.Add(w6);
+        this.GameObjects.Add(v2);
+        this.GameObjects.Add(v3);
     }
 
-    public override void Render(Graphics g, PictureBox pb)
+    public override void RenderBackground(Graphics g, PictureBox pb)
     {
         g.DrawImage(
             this.image,
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2
         );
-
-        // foreach (var wall in Walls)
-        // {
-        //     g.DrawRectangle(Pens.White, wall.Hitbox);
-        // }
-
     }
-
-     public override Map New(PictureBox pb)
-    => new Dungeon_01(pb);
 }

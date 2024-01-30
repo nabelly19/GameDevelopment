@@ -40,25 +40,11 @@ public class Test_Dungeon01 : Map
 
     }
 
-    public override void Render(Graphics g, PictureBox pb)
+    public override void RenderBackground(Graphics g, PictureBox pb)
     {
         g.DrawImage(
             this.image,
             (pb.Width / 2) - this.image.Width / 2, (pb.Height / 2) - this.image.Height / 2
         );
-
-        // foreach (var wall in GameObjects)
-        // {
-        //     g.DrawRectangle(Pens.White, wall.Hitbox);
-
-        // }
-
-
     }
-
-
-    public override Map New(PictureBox pb)
-       => new Test_Dungeon01(pb);
-
-
 }

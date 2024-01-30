@@ -13,6 +13,7 @@ public class FelixTheToad : Boss
 
         var w1 = new WaitState();
         var w2 = new WaitState();
+
         var c2 = new SpiralWaveState();
         // var c3 = new CircularlWaveState();
 
@@ -20,12 +21,12 @@ public class FelixTheToad : Boss
         w2.SetContext(Manager);
         c2.SetContext(Manager);
         s5.SetContext(Manager);
+
         c2.SetNextState(w1);
         w1.SetNextState(s5);
         // c3.SetNextState(w2);
 
         // this.Manager.AddList(w1);
-
         // this.Manager.AddList(s1);
         // this.Manager.AddList(s2);
         // this.Manager.AddList(s3);
