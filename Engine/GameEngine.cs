@@ -43,10 +43,11 @@ public class GameEngine
 
         MapManager.Current.AddWalls();
 
-        Player p = new Player("Him", 700, 700); // TODO: add image from resources
-        Boss b = new FelixTheToad(960, 540);
-
+        Player p = new Player("Him", 70, 700); // TODO: add image from resources
         AddObject(p);
+        AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
+        
+        Boss b = new FelixTheToad(960, 540);
         AddObject(b);
         AddObject(new Coin("Moeda", 900, 700));
     }
