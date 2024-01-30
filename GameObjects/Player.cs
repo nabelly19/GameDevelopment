@@ -7,7 +7,7 @@ using Microsoft.VisualBasic;
 
 // namespace Entity;
 
-public class Player : GameObject, IMoveable, IAttackable
+public class Player : GameObject, IMoveable, IAttackable, IInteractable
 {
     private float vx = 0f;
     private float vy = 0f;
@@ -26,6 +26,8 @@ public class Player : GameObject, IMoveable, IAttackable
     public float BlockChance { get; set; }
     public bool isVulnerable { get; set; }
     public DateTime lastDamage { get; set; }
+    public int coinWallet { get; set; } = 0;
+    public bool isInteractable { get; set; }
 
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
@@ -58,6 +60,7 @@ public class Player : GameObject, IMoveable, IAttackable
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
         g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawString($"Player Wallet: {this.coinWallet}",  SystemFonts.DefaultFont, Brushes.White, 10, 40);
     }
 
     public void Move()
@@ -89,8 +92,10 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(13, 16);
         else if (vy > 20)
             AnimatePLayer(1, 4);
+
         else if((int)vy == 0)
             AnimatePLayer(17, 21);
+ 
             
         
 
@@ -162,13 +167,17 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void StopX_axis() => this.Ax = 0;
 
-    public void StopUp() => this.Sprite = Resources.Current.PlayerSprites[15];
+    // public void StopUp() => AnimatePLayer(22,23);
+    public void StopUp() => this.Sprite = Resources.Current.PlayerSprites[0];
 
     // public void StopDown() => this.Sprite = Resources.Current.PlayerSprites[0];
 
-    public void StopLeft() => this.Sprite = Resources.Current.PlayerSprites[5];
+    // public void StopLeft() => AnimatePLayer(24,27);
+    public void StopLeft() => this.Sprite = Resources.Current.PlayerSprites[0];
 
-    public void StopRight() => this.Sprite = Resources.Current.PlayerSprites[9];
+    // public void StopRight() => AnimatePLayer(28,31);
+    public void StopRight() => this.Sprite = Resources.Current.PlayerSprites[0];
+
 
     private void AnimatePLayer(int start, int end)
     {
@@ -304,5 +313,15 @@ public class Player : GameObject, IMoveable, IAttackable
         var seconds = diff.TotalSeconds;
         if(seconds > 3)
             isVulnerable = true; 
+    }
+
+    public void ColectItem()
+    {
+        if (isInteractable)
+        {
+            this.coinWallet++;
+        }
+
+        isInteractable = false;
     }
 }

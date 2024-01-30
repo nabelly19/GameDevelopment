@@ -21,6 +21,7 @@ public abstract class Map
 
     public int Y {get; set;}
     public List<Wall> Walls { get; set; } = new ();
+    public List<IInteractable> Interactables { get; set; } = new ();
 
     public Image image = null;
 

@@ -29,6 +29,8 @@ public class Dungeon_01 : Map
         var v2 = new Wall("BarriSS V1", x + 0.51f * width / 2, y - 0.45f * height / 2, 90, 90); // barriSS V1 ( de pra baixo tlgd )
         var v3 = new Wall("BarriSS V2", x + 0.75f * width / 2, y - 0.45f * height / 2, 70, 90); // barriSS
 
+        // var market = new Market("Maercadin kkk", 700, 700);
+
         this.Walls.Add(w1);
         this.Walls.Add(w2);
         this.Walls.Add(w3);
@@ -38,6 +40,9 @@ public class Dungeon_01 : Map
         this.Walls.Add(w6);
         this.Walls.Add(v2);
         this.Walls.Add(v3);
+
+        // this.Interactables.Add(market);
+
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -51,6 +56,11 @@ public class Dungeon_01 : Map
         foreach (var wall in Walls)
         {
             g.DrawRectangle(Pens.White, wall.Hitbox);
+        }
+
+        foreach (var item in Interactables)
+        {
+            // g.DrawRectangle(Pens.Gold, item.)
         }
 
     }

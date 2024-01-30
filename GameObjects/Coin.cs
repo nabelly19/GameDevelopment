@@ -5,12 +5,11 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-public class Coin : GameObject, IMoveable
+public class Coin : GameObject, IMoveable, IInteractable
 {
     public int StateManager { get; set; }
     public int steps { get; set; } = 0;
     public int slowFrameRate { get; set; } = 0;
-
 
     public Coin(string name, int x, int y)
         : base(name, x, y, Resources.Current.Coins[0])
@@ -20,7 +19,6 @@ public class Coin : GameObject, IMoveable
         this.Width = 1.25555f * this.Height;
         this.Width /= 4f;
         this.Height /= 4f;
-    
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -33,14 +31,20 @@ public class Coin : GameObject, IMoveable
     public override void Update()
     {
         Move();
+        
+        var collided = CollisionManager.Current.GetCollisions(this);
+        foreach (var other in collided)
+        {
+            if (other is IInteractable player)
+            {
+                player.ColectItem();
+                CollisionManager.Current.RemoveGameObject(this);
+            }
+        }
     }
 
     public void Move()
     {
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
-        
-        if (collided is Player)
-            CollisionManager.Current.RemoveGameObject(this);
 
         AnimateItem(1,5);
 
@@ -68,4 +72,5 @@ public class Coin : GameObject, IMoveable
     public float BaseAcceleration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float Ax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float Ay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool isInteractable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 }

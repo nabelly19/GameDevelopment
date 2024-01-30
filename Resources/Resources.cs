@@ -29,11 +29,16 @@ public class Resources
             .GetFiles("../../../assets/Sprites/Coin/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        // this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
+        this.Market = Directory 
+            .GetFiles("../../../assets/Sprites/Market/", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
+
     }
 
     public List<Bitmap> PlayerSprites = new();
     public List<Bitmap> Maps = new();
     public List<Bitmap> Coins = new();
+    public List<Bitmap> Market = new();
     public static void New() => crr = new Resources();
 }

@@ -34,10 +34,6 @@ public class GameEngine
 
         MapManager.Current.AddMap(new Dungeon_01(pb));
         MapManager.Current.AddMap(new Dungeon_02(pb));
-        MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Dungeon_02(pb));
-        MapManager.Current.AddMap(new Dungeon_01(pb));
-        MapManager.Current.AddMap(new Test_Dungeon(pb));
 
         MapManager.Current.Map = MapManager.Current.Maps[0];
 
@@ -50,6 +46,8 @@ public class GameEngine
         AddObject(new Weapon("Weapon", 0, 0, 10, 10, this.Player));
         AddObject(b);
         AddObject(new Coin("Moeda", 900, 700));
+        AddObject(new Market("mercadinhokkk", 600, 500, 500, 500));
+    
     }
 
     public void Update()
