@@ -7,7 +7,7 @@ using Microsoft.VisualBasic;
 
 // namespace Entity;
 
-public class Player : GameObject, IMoveable, IAttackable, IInteractable
+public class Player : GameObject, IMoveable, IAttackable
 {
     private float vx = 0f;
     private float vy = 0f;
@@ -314,6 +314,20 @@ public class Player : GameObject, IMoveable, IAttackable, IInteractable
             isVulnerable = true;
     }
 
+    public void Interact()
+    {
+        foreach (var item in CollisionManager.gameObjects)
+        {
+            if (item is Interactable iter)
+            {
+                if (iter.VerifyCollisions());
+                    iter.Interact();
+                return;
+            }
+        }
+
+    }
+
     public void ColectItem()
     {
         if (isInteractable)
@@ -321,6 +335,6 @@ public class Player : GameObject, IMoveable, IAttackable, IInteractable
             this.coinWallet++;
         }
 
-        isInteractable = false;
+        
     }
 }

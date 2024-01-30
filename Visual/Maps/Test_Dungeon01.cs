@@ -32,6 +32,12 @@ public class Test_Dungeon01 : Map
         var w4 = new Wall("Cima", x, y - 0.65f * height / 2, width, 100); // parede de cima
         var w5 = new Wall("Barril", x - 0.66f * width / 4, y - 0.49f * height / 2, 129, 90); // barril
 
+        var i1 = new NextMapInteractable("Indo Ali", 0, 0, 0, 0);
+
+        // var market = new Market("Maercadin kkk", 700, 700);
+
+        this.GameObjects.Add(i1);
+
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
         this.GameObjects.Add(w3);
@@ -46,5 +52,11 @@ public class Test_Dungeon01 : Map
             this.image,
             (pb.Width / 2) - this.image.Width / 2, (pb.Height / 2) - this.image.Height / 2
         );
+        foreach (var item in this.GameObjects)
+        {
+            if (item is Interactable pog)
+                g.FillRectangle(Brushes.Gold, item.Hitbox);
+
+        }
     }
 }

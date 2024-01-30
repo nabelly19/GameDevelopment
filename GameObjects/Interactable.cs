@@ -1,8 +1,39 @@
-public class Interactable : GameObject, IInteractable
+using System.Linq;
+
+public abstract class Interactable : GameObject
 {
-    public Interactable(string name, float x, float y, string sprite) : base(name, x, y, sprite)
+    public bool isInteractable { get; set; }
+
+    protected Interactable
+    (
+        string name,
+        float x,
+        float y,
+        string sprite
+    ) : base(name, x, y, sprite) { }
+
+    protected Interactable
+    (
+        string name, 
+        float x, 
+        float y, 
+        float width, 
+        float height
+    ) : base(name, x, y, width, height) { }
+
+    public abstract void Interact();
+
+    public bool VerifyCollisions()
     {
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
+        if (collided is not null)
+        {
+            if (collided is Player p)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public bool isInteractable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 }

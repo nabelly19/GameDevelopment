@@ -6,18 +6,19 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-public class Market : GameObject, IInteractable
+public class Market : Interactable
 {
     public List<Item> AllMarketItems = new();
-    public bool isInteractable { get; set; } = true;
-    public RectangleF rectangle;
+    public bool isInteractable { get; set; }
+    
     public Market(string name, float x, float y, float width, float height) : base(name, x, y, width, height)
     {
+        this.isInteractable = true;
         CreateHitbox(x, Y, width, height);
     }
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.DrawRectangle(Pens.PaleGoldenrod, rectangle);
+        g.DrawRectangle(Pens.PaleGoldenrod, Hitbox);
     }
     public override void Update()
     {
@@ -33,4 +34,8 @@ public class Market : GameObject, IInteractable
         
     }
 
+    public override void Interact()
+    {
+        throw new NotImplementedException();
+    }
 }

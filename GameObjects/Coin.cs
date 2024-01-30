@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-public class Coin : GameObject, IMoveable, IInteractable
+public class Coin : GameObject, IMoveable 
 {
     public int StateManager { get; set; }
     public int steps { get; set; } = 0;
@@ -35,7 +35,7 @@ public class Coin : GameObject, IMoveable, IInteractable
         var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
-            if (other is IInteractable player)
+            if (other is Player player)
             {
                 player.ColectItem();
                 CollisionManager.RemoveGameObject(this);
@@ -72,5 +72,5 @@ public class Coin : GameObject, IMoveable, IInteractable
     public float BaseAcceleration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float Ax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public float Ay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public bool isInteractable { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+   
 }
