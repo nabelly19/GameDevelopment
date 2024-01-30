@@ -38,40 +38,23 @@ public class Dungeon_01 : Map
 
         // var market = new Market("Maercadin kkk", 700, 700);
 
-        this.Walls.Add(w1);
-        this.Walls.Add(w2);
-        this.Walls.Add(w3);
-        this.Walls.Add(w4);
-        this.Walls.Add(w5);
-        this.Walls.Add(v1);
-        this.Walls.Add(w6);
-        this.Walls.Add(v2);
-        this.Walls.Add(v3);
-
-        // this.Interactables.Add(market);
-
+        this.GameObjects.Add(w1);
+        this.GameObjects.Add(w2);
+        this.GameObjects.Add(w3);
+        this.GameObjects.Add(w4);
+        this.GameObjects.Add(w5);
+        this.GameObjects.Add(v1);
+        this.GameObjects.Add(w6);
+        this.GameObjects.Add(v2);
+        this.GameObjects.Add(v3);
     }
 
-    public override void Render(Graphics g, PictureBox pb)
+    public override void RenderBackground(Graphics g, PictureBox pb)
     {
         g.DrawImage(
             this.image,
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2
         );
-
-        // foreach (var wall in Walls)
-        // {
-        //     g.DrawRectangle(Pens.White, wall.Hitbox);
-        // }
-
-        foreach (var item in Interactables)
-        {
-            // g.DrawRectangle(Pens.Gold, item.)
-        }
-
     }
-
-     public override Map New(PictureBox pb)
-    => new Dungeon_01(pb);
 }

@@ -14,32 +14,12 @@ public static class MapManager
     private static bool transitioning = false;
     private static int transitionClock;
 
-    public static void AddWalls()
-    {
-        foreach (var item in Maps)
-        {
-            if (item == Map)
-            {
-                foreach (var wall in item.GameObjects)
-                    CollisionManager.AddGameObject(wall);
-
-                if (item.Boss is not null)
-                    CollisionManager.AddGameObject(item.Boss);
-            
-            }
-        }
-    }
-
     public static void AddMapObjects()
     {
         foreach (var item in Maps)
         {
             if (item == Map)
-            {   
-                
-                GameEngine.Current.AddPlayer(item.GameObjects);
-                CollisionManager.gameObjects = item.GameObjects;
-            }
+                CollisionManager.SetGameobjects(item.GameObjects);
         }
     }
 
@@ -64,7 +44,7 @@ public static class MapManager
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
     {
         if (!transitioning)
-            Map.Render(g, pb);
+            Map.RenderBackground(g, pb);
         else
             DrawFadeMap(g, pb);
     }
@@ -73,7 +53,7 @@ public static class MapManager
     {
         transitionClock = 5;
 
-        Map.Render(g, pb);
+        Map.RenderBackground(g, pb);
         if (Map == prevMap)
             timer += transitionClock;
         else
@@ -97,13 +77,14 @@ public static class MapManager
 
     public static void DrawFadeRectangle(Graphics g)
     {
-            g.FillRectangle(
-              new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
-              0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height
-          );
+        g.FillRectangle(
+            new SolidBrush(Color.FromArgb(timer % 256, 0, 0, 0)),
+            0,
+            0,
+            Screen.PrimaryScreen.Bounds.Width,
+            Screen.PrimaryScreen.Bounds.Height
+        );
     }
 
-    public static void New() 
-        => Maps = new List<Map>();
-
+    public static void New() => Maps = new List<Map>();
 }

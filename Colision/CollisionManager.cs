@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Dynamic;
 using System.Windows.Forms;
 
 public static class CollisionManager
 {
     public static List<GameObject> gameObjects { get; set; }
 
-    public static void AddGameObject(GameObject gameObject)
-        => gameObjects.Add(gameObject);
+    public static void AddGameObject(GameObject gameObject) => gameObjects.Add(gameObject);
 
-    public static void RemoveGameObject(GameObject gameObject)
-        => gameObjects.Remove(gameObject);
+    public static void RemoveGameObject(GameObject gameObject) => gameObjects.Remove(gameObject);
 
     public static bool CheckCollisions(GameObject obj)
     {
@@ -43,7 +42,8 @@ public static class CollisionManager
     private static bool CollisionDetected(GameObject obj1, GameObject obj2) =>
         obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
-    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p){
+    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p)
+    {
         return hitbox.Contains(p);
     }
 
@@ -62,5 +62,10 @@ public static class CollisionManager
         return false;
     }
 
-public static void New() => gameObjects = new List<GameObject>();
+    public static void SetGameobjects(List<GameObject> list){
+        GameEngine.Current.AddPlayer(list);
+        gameObjects = list;
+    }
+
+    public static void New() => gameObjects = new List<GameObject>();
 }

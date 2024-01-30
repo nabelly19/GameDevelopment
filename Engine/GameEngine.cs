@@ -18,7 +18,7 @@ public class GameEngine
 
     public void StartSound() => Sound.Play();
 
-    public void StartBackground(Graphics g, PictureBox pb) => CurrentMap.Render(g, pb);
+    public void StartBackground(Graphics g, PictureBox pb) => CurrentMap.RenderBackground(g, pb);
 
     public void StartUp(PictureBox pb)
     {

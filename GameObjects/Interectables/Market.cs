@@ -21,10 +21,10 @@ public class Market : GameObject, IInteractable
     }
     public override void Update()
     {
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
             if (collided is Player)
             {
-                CollisionManager.Current.RemoveGameObject(this);
+                CollisionManager.RemoveGameObject(this);
             }
     }
 
