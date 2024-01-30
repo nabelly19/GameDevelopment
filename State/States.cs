@@ -36,16 +36,40 @@ public class SpiralProjectileState : State
         for (int i = 0; i < 3; i++)
         {
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", boss.X-14, boss.Y-50, Random.Shared.Next(0, 89), boss)
+                new SpiralProjectile(
+                    "Bullet",
+                    boss.X - 14,
+                    boss.Y - 50,
+                    Random.Shared.Next(0, 89),
+                    boss
+                )
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", boss.X-14, boss.Y-50, Random.Shared.Next(90, 179), boss)
+                new SpiralProjectile(
+                    "Bullet",
+                    boss.X - 14,
+                    boss.Y - 50,
+                    Random.Shared.Next(90, 179),
+                    boss
+                )
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", boss.X-14, boss.Y-50, Random.Shared.Next(180, 269), boss)
+                new SpiralProjectile(
+                    "Bullet",
+                    boss.X - 14,
+                    boss.Y - 50,
+                    Random.Shared.Next(180, 269),
+                    boss
+                )
             );
             GameEngine.Current.AddObject(
-                new SpiralProjectile("Bullet", boss.X-14, boss.Y-50, Random.Shared.Next(270, 359), boss)
+                new SpiralProjectile(
+                    "Bullet",
+                    boss.X - 14,
+                    boss.Y - 50,
+                    Random.Shared.Next(270, 359),
+                    boss
+                )
             );
         }
     }
@@ -60,7 +84,9 @@ public class SpiralWaveState : State
     {
         if (angle >= 180)
         {
-            GameEngine.Current.AddObject(new Wave("Bullet", boss.X-14, boss.Y-50, 25, 25, angle, boss));
+            GameEngine.Current.AddObject(
+                new Wave("Bullet", boss.X - 14, boss.Y - 50, 25, 25, angle, boss)
+            );
             angle = 0;
             GoToNext();
             return;
@@ -71,7 +97,9 @@ public class SpiralWaveState : State
         if (DateTime.Now < dt?.AddSeconds(2.5))
             return;
 
-        GameEngine.Current.AddObject(new Wave("Bullet", boss.X-14, boss.Y-50, 25, 25, angle, boss));
+        GameEngine.Current.AddObject(
+            new Wave("Bullet", boss.X - 14, boss.Y - 50, 25, 25, angle, boss)
+        );
 
         // 4 = 360 mais espacado
         // > 1 = 360
