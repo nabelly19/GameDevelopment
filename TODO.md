@@ -15,7 +15,7 @@ Project Description
 
 - [ ] Maps + Hitboxes (Colision)  
 - [ ] Chain Boss Behaviour  
-- [ ] Boss Mecanics  
+- [ ] First Boss Mecanics  
 
 ### Done ✓
 

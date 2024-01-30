@@ -9,12 +9,12 @@ public class Projectile : GameObject, IMoveable
     protected SizeF speed;
     public float Angle = Random.Shared.Next(360);
     public float Direction { get; set; }
-    public float BaseAcceleration { get; set; } = 5;
+    public virtual float BaseAcceleration { get; set; } = 5;
     public float Ax { get; set; }
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
 
-    public Projectile(string name, int x, int y, string sprite, float direction, IAttackable owner)
+    public Projectile(string name, float x, float y, string sprite, float direction, IAttackable owner)
         : base(name, x, y, sprite)
     {
         this.Direction = direction;
@@ -53,7 +53,7 @@ public class Projectile : GameObject, IMoveable
     public override void Update()
     {
         Move();
-        var collided = CollisionManager.Current.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
         if (collided is not null)
         {
             if (collided == Owner)
@@ -66,14 +66,14 @@ public class Projectile : GameObject, IMoveable
                     return;
             
             }
-            CollisionManager.Current.RemoveGameObject(this);
+            CollisionManager.RemoveGameObject(this);
         }
-        if (CollisionManager.Current.ScreenColision(this))
-            CollisionManager.Current.RemoveGameObject(this);
+        if (CollisionManager.ScreenColision(this))
+            CollisionManager.RemoveGameObject(this);
     }
 
     protected float ToRadians(float angleD) => MathF.PI / 180 * angleD;
-
+    protected float ToDegree(float angleR) => 180 / MathF.PI * angleR;
     public virtual void GoTo(float angle)
     {
         var radians = ToRadians(angle);

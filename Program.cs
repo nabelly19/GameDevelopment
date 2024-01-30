@@ -1,6 +1,7 @@
 using System;
 using System.CodeDom;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
 
@@ -27,7 +28,7 @@ form.Load += (o, e) =>
 {
     bmp = new Bitmap(pb.Width, pb.Height);
     g = Graphics.FromImage(bmp);
-    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+    g.InterpolationMode = InterpolationMode.NearestNeighbor;
     g.Clear(Color.Black);
     pb.Image = bmp;
     timer.Start();
@@ -43,7 +44,7 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    MapManager.Current.RenderMapOrFade(g, pb);
+    MapManager.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
@@ -61,7 +62,8 @@ form.KeyDown += (o, e) =>
 
         case Keys.I:
             // GameEngine.Current.Player.Info();
-            GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
+            MessageBox.Show(CollisionManager.gameObjects.Count.ToString());
+            // GameEngine.Current.Player.Weapon.WindBlade = !GameEngine.Current.Player.Weapon.WindBlade;
             
             break;
 
@@ -82,24 +84,32 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.MoveRight();
             break;
 
+        case Keys.F:
+            break;
+
         case Keys.Space:
             GameEngine.Current.Player.Attack();
             break;
+        
+        // case Keys.LButton:
+        //     GameEngine.Current.Player.Attack();
+        //     break;
+
         case Keys.L:
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(engine.player);
             break;
         
         case Keys.Y:
-            MapManager.Current.PrevMap();
+            MapManager.PrevMap();
             break;
         case Keys.T:
-            MapManager.Current.nextMap();
+            MapManager.NextMap();
             // CollisionManager.New();
             // CollisionManager.Current.AddGameObject(GameEngine.Current.Player);
             break;
         case Keys.K:
-            GameEngine.Current.AddObject(new SpiralProjectile("Bullet", 200, 200, 50, 50, 90, GameEngine.Current.Player));
+            GameEngine.Current.AddObject(new TrackingProjectile("Bullet", 200, 200, 50, 50, GameEngine.Current.Player, 90, GameEngine.Current.Player));
             break;
     }
 };

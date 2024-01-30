@@ -12,7 +12,7 @@ public class Coin : GameObject, IMoveable, IInteractable
     public int slowFrameRate { get; set; } = 0;
 
     public Coin(string name, int x, int y)
-        : base(name, x, y, Resources.Current.Coins[0])
+        : base(name, x, y, Resources.Coins[0])
     {
         DisableHitbox();
         this.Height = 110;
@@ -65,7 +65,7 @@ public class Coin : GameObject, IMoveable, IInteractable
             steps = start;
         }
 
-        this.Sprite = Resources.Current.Coins[steps];
+        this.Sprite = Resources.Coins[steps];
     }
 
 

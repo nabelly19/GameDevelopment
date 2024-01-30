@@ -4,10 +4,9 @@ using System.Windows.Forms;
 
 public class Wave : Projectile
 {
+    public override float BaseAcceleration { get; set;} = 3;
     public Wave(string name, int x, int y, string sprite, float direction, IAttackable owner)
-        : base(name, x, y, sprite, direction, owner)
-    {
-    }
+        : base(name, x, y, sprite, direction, owner) { }
 
     public Wave(
         string name,
@@ -18,7 +17,5 @@ public class Wave : Projectile
         float direction,
         IAttackable owner
     )
-        : base(name, x, y, width, height, direction, owner)
-    {
-    }
+        : base(name, x, y, width, height, direction, owner) { }
 }

@@ -5,8 +5,9 @@ OBJ FOLDER IS FINALLY GONE HOLY CRAP, WHY IS THAT SO DAMN HARD BRO
 ### Development Update
 
 Addded:
-   - More Boss States<br />
-   - Player Vulnerabilty<br />
-   - Player Animation when no volocity (Still Working on Player Animation when still)<br />
+   - Platform Boss State<br />
+   - Tracking Projectile Boss State<br />
+   - Coin animation<br />
+   - Sprites<br />
 
 [Todo](TODO.md)

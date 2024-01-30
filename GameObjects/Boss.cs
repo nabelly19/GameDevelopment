@@ -10,6 +10,7 @@ public class Boss : GameObject, IAttackable
     public int Hp { get; set; } = 3;
     public StateManager Manager { get; private set; }
     public bool isVulnerable { get; set; }
+    public bool isAlive { get; set; }
 
     public Boss(string name, int x, int y, string sprite)
         : base(name, x, y, sprite) 
@@ -21,7 +22,7 @@ public class Boss : GameObject, IAttackable
     {
         this.Manager.Act();
 
-        var collided = CollisionManager.Current.GetCollisions(this);
+        var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
             if (other is IAttackable player)

@@ -6,25 +6,24 @@ using System.Linq;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
 
-public class Resources
+public static class Resources
 {
-    private static Resources crr;
-    public static Resources Current => crr;
-
-    private Resources()
-    {
-
-        this.PlayerSprites = Directory
+    public static List<Bitmap> PlayerSprites = new();
+    public static List<Bitmap> Maps = new();
+    public static List<Bitmap> Coins = new();
+    public static void New()
+    { 
+        PlayerSprites = Directory
             // .GetFiles("./assets/Sprites/Player/NewSprite/", "*.png")
             .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        this.Maps = Directory
+        Maps = Directory
             // .GetFiles("./assets/Maps/", "*.png")
             .GetFiles("../../../assets/Maps/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        this.Coins = Directory
+        Coins = Directory
             // .GetFiles("./assets/Sprites/Coin/", "*.png")
             .GetFiles("../../../assets/Sprites/Coin/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
