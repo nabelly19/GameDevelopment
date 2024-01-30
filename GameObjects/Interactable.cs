@@ -10,7 +10,7 @@ public abstract class Interactable : GameObject
         float x,
         float y,
         string sprite
-    ) : base(name, x, y, sprite) { }
+    ) : base(name, x, y, sprite) { DisableHitbox(); }
 
     protected Interactable
     (
@@ -19,7 +19,7 @@ public abstract class Interactable : GameObject
         float y, 
         float width, 
         float height
-    ) : base(name, x, y, width, height) { }
+    ) : base(name, x, y, width, height) { DisableHitbox(); }
 
     public abstract void Interact();
 

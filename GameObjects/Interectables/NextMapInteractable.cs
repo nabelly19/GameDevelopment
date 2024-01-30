@@ -5,7 +5,6 @@ public class NextMapInteractable : Interactable
 {
     public NextMapInteractable(string name, float x, float y, float width, float height) : base(name, x, y, width, height)
     {
-        DisableHitbox();
     }
 
     public override void Render(Graphics g, PictureBox pb)
