@@ -24,15 +24,15 @@ public class Dungeon_02 : Map
         float x = Screen.PrimaryScreen.Bounds.Width / 2;
         float y = Screen.PrimaryScreen.Bounds.Height / 2;
 
-        var w1 = new Wall("Direita",x + 7.45f * 100, y, 50,height); 
-        var w2 = new Wall("Esquerda",x - 7.45f * 100, y, 50,height); 
-        var w3 = new Wall("CimaEsquerda",x - 9 * 100, y - 325, width, 50); 
-        var w4 = new Wall("CimaDireita", x + 9 * 100, y - 325, width, 50);
+        var w1 = new Wall("Direita",x + 0.965f * width / 2, y, 50, height); 
+        var w2 = new Wall("Esquerda",x - 0.965f * width / 2, y, 50,height); 
+        var w3 = new Wall("CimaEsquerda",x - 0.568f * width, y - 0.45f * height/2, width, 50); 
+        var w4 = new Wall("CimaDireita", x + 0.568f * width, y - 0.45f * height/2, width, 50);
         var w5 = new Wall("Portao", x, y - 447.5f, width, 50);
-        var w6 = new Wall("ParedeEsquedaPortao", x - 131.5f, y - 395, 50, 190);
-        var w7 = new Wall("ParedeDireitaPortao", x + 131.5f, y - 395, 50, 190);
-        var w8 = new Wall("LavaEsquerda", x - 6.85f * 100, y - 270, 110, 90);
-        var w9 = new Wall("LavaDireita", x + 6.79f * 100, y - 270, 110, 90);
+        var w6 = new Wall("ParedeEsquedaPortao", 0.865f * x, y - 0.55f * height/2, 50, 190);
+        var w7 = new Wall("ParedeDireitaPortao", 1.135f * x, y - 0.55f * height/2, 50, 190);
+        var w8 = new Wall("LavaEsquerda", x - 0.87f * width / 2, y - 0.375f * height/2, 110, 90);
+        var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height/2, 110, 90);
 
 
         this.Walls.Add(w1);

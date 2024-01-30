@@ -43,7 +43,7 @@ timer.Tick += (o, e) =>
     fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
-
+    
     MapManager.RenderMapOrFade(g, pb);
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);

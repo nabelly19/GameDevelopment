@@ -26,8 +26,8 @@ public class GameEngine
         CollisionManager.New();
         MapManager.New();
 
-        MapManager.AddMap(new Dungeon_01(pb));
         MapManager.AddMap(new Dungeon_02(pb));
+        MapManager.AddMap(new Dungeon_01(pb));
         MapManager.AddMap(new Dungeon_01(pb));
         MapManager.AddMap(new Dungeon_02(pb));
         MapManager.AddMap(new Dungeon_01(pb));

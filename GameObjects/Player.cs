@@ -19,12 +19,13 @@ public class Player : GameObject, IMoveable, IAttackable
     public Weapon Weapon { get; set; }
 
     public int Hp { get; set; } = 3;
+    public bool isVulnerable { get; set; }
+    public bool isAlive { get; set; }
     public float BaseAcceleration { get; set; } = 1_300;
     public float Ax { get; set; }
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
-    public bool isVulnerable { get; set; }
     public DateTime lastDamage { get; set; }
 
     public Player(string name, int x, int y)
@@ -288,12 +289,18 @@ public class Player : GameObject, IMoveable, IAttackable
         if (isVulnerable)
         {
             this.Hp--;
+            verifyLifeStatus();
             lastDamage = DateTime.Now;
         }
 
         isVulnerable = false;
     }
 
+    private void verifyLifeStatus()
+    {
+        if (this.Hp < 0)
+            this.Hp = 0;
+    }
 
     public void VerifyVulnerability(){
         var now = DateTime.Now;
