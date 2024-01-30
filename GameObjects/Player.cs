@@ -57,7 +57,7 @@ public class Player : GameObject, IMoveable, IAttackable
             )
         );
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
-        CreateHitbox(this.X, this.Y + 10, this.Width * 0.75f, this.Height - 20);
+        CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
