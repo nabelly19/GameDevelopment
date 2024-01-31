@@ -40,16 +40,13 @@ public class Projectile : GameObject, IMoveable
     )
         : base(name, x, y, width, height)
     {
-        DisableHitbox();
         this.Owner = owner;
         this.Direction = direction;
+        DisableHitbox();
     }
 
     public override void Render(Graphics g, PictureBox pb)
-    {
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        g.DrawRectangle(Pens.White, this.Hitbox);
-    }
+    => g.DrawRectangle(Pens.White, this.Hitbox);
 
     public virtual void Move()
     {
@@ -59,6 +56,7 @@ public class Projectile : GameObject, IMoveable
 
     public override void Update()
     {
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         Move();
         var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
         if (collided is not null)

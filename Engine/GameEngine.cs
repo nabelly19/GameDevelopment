@@ -25,7 +25,7 @@ public class GameEngine
 
     public void Update()
     {
-        foreach (var gameObject in CollisionManager.gameObjects.ToList())
+        foreach (var gameObject in CollisionManager.GameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
@@ -36,7 +36,7 @@ public class GameEngine
     public void Render(Graphics g, PictureBox pb)
     {
         MapManager.RenderMapOrFade(g, pb);
-        foreach (var gameObject in CollisionManager.gameObjects.ToList())
+        foreach (var gameObject in CollisionManager.GameObjects.ToList())
         {
             if (gameObject is null)
                 continue;

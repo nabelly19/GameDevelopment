@@ -11,8 +11,8 @@ public class Player : GameObject, IMoveable, IAttackable
     private float vy = 0f;
     private DateTime last = DateTime.Now;
     private DateTime lastAttack = DateTime.Now;
-    public int steps { get; set; } = 0;
-    public int slowFrameRate { get; set; } = 0;
+    public int Steps { get; set; } = 0;
+    public int SlowFrameRate { get; set; } = 0;
 
     public Weapon Weapon { get; set; }
 
@@ -24,8 +24,8 @@ public class Player : GameObject, IMoveable, IAttackable
     public float Ay { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
-    public DateTime lastDamage { get; set; }
-    public int coinWallet { get; set; } = 0;
+    public DateTime LastDamage { get; set; }
+    public int CoinWallet { get; set; } = 0;
     public bool isInteractable { get; set; }
 
     public Player(string name, int x, int y)
@@ -57,9 +57,9 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         g.DrawRectangle(Pens.White, this.Hitbox);
-        g.DrawString($"Player Wallet: {this.coinWallet}",  SystemFonts.DefaultFont, Brushes.White, 10, 40);
+        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
+        g.DrawString($"Player Wallet: {this.CoinWallet}", SystemFonts.DefaultFont, Brushes.White, 10, 40);
     }
 
     public void Move()
@@ -133,24 +133,20 @@ public class Player : GameObject, IMoveable, IAttackable
     }
 
     public void MoveUp()
-    {
-        this.Ay = -1;
-    }
+    => this.Ay = -1;
+
 
     public void MoveDown()
-    {
-        this.Ay = 1;
-    }
+    => this.Ay = 1;
+
 
     public void MoveRight()
-    {
-        this.Ax = 1;
-    }
+    => this.Ax = 1;
+
 
     public void MoveLeft()
-    {
-        this.Ax = -1;
-    }
+    => this.Ax = -1;
+
 
     public void StopY_axis() => this.Ay = 0;
 
@@ -166,18 +162,18 @@ public class Player : GameObject, IMoveable, IAttackable
 
     private void AnimatePLayer(int start, int end)
     {
-        slowFrameRate += 1;
+        SlowFrameRate += 1;
 
-        if (slowFrameRate > 3)
+        if (SlowFrameRate > 3)
         {
-            steps++;
-            slowFrameRate = 0;
+            Steps++;
+            SlowFrameRate = 0;
         }
 
-        if (steps > end || steps < start)
-            steps = start;
+        if (Steps > end || Steps < start)
+            Steps = start;
 
-        this.Sprite = Resources.PlayerSprites[steps];
+        this.Sprite = Resources.PlayerSprites[Steps];
     }
 
     public void Info() { }
@@ -278,7 +274,7 @@ public class Player : GameObject, IMoveable, IAttackable
         {
             this.Hp--;
             verifyLifeStatus();
-            lastDamage = DateTime.Now;
+            LastDamage = DateTime.Now;
         }
 
         isVulnerable = false;
@@ -293,7 +289,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public void VerifyVulnerability()
     {
         var now = DateTime.Now;
-        var diff = now - lastDamage;
+        var diff = now - LastDamage;
         var seconds = diff.TotalSeconds;
         if (seconds > 3)
             isVulnerable = true;
@@ -302,12 +298,12 @@ public class Player : GameObject, IMoveable, IAttackable
         CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
     public void Interact()
     {
-        foreach (var item in CollisionManager.gameObjects)
+        foreach (var item in CollisionManager.GameObjects)
         {
             if (item is Interactable iter)
             {
-                if (iter.VerifyCollisions());
-                    iter.Interact();
+                if (iter.VerifyCollisions()) ;
+                iter.Interact();
                 return;
             }
         }
@@ -317,10 +313,6 @@ public class Player : GameObject, IMoveable, IAttackable
     public void ColectItem()
     {
         if (isInteractable)
-        {
-            this.coinWallet++;
-        }
-
-        
+            this.CoinWallet++;
     }
 }

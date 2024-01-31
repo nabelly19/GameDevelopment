@@ -41,7 +41,6 @@ timer.Tick += (o, e) =>
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
 
-    
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
@@ -59,7 +58,7 @@ form.KeyDown += (o, e) =>
 
         case Keys.I:
             // GameEngine.Current.Player.Info();
-            MessageBox.Show(CollisionManager.gameObjects.Count.ToString());
+            MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
             break;
 
         case Keys.W:
@@ -67,7 +66,6 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.A:
-
             GameEngine.Current.Player.MoveLeft();
             break;
 

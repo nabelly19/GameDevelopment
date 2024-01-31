@@ -2,14 +2,12 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-public class Coin : GameObject, IMoveable 
+public class Coin : GameObject, IMoveable
 {
     public float BaseAcceleration { get; set; }
     public float Ax { get; set; }
     public float Ay { get; set; }
     public int StateManager { get; set; }
-    public int steps { get; set; } = 0;
-    public int slowFrameRate { get; set; } = 0;
     public int Steps { get; set; } = 0;
     public int SlowFrameRate { get; set; } = 0;
 
@@ -32,7 +30,7 @@ public class Coin : GameObject, IMoveable
     public override void Update()
     {
         Move();
-        
+
         var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
@@ -45,10 +43,7 @@ public class Coin : GameObject, IMoveable
     }
 
     public void Move()
-    {
-
-        AnimateItem(1, 5);
-    }
+    => AnimateItem(1, 5);
 
     private void AnimateItem(int start, int end)
     {
@@ -61,9 +56,8 @@ public class Coin : GameObject, IMoveable
         }
 
         if (Steps > end || Steps < start)
-        {
             Steps = start;
-        }
+
 
         this.Sprite = Resources.Coins[Steps];
     }

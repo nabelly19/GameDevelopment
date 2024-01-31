@@ -25,7 +25,7 @@ public abstract class GameObject
         this.Height = this.Sprite.Height;
     }
 
-    public GameObject(string name, int x, int y, Image image)
+    public GameObject(string name, float x, float y, Image image)
     {
         this.Name = name;
         this.X = x;
@@ -49,15 +49,10 @@ public abstract class GameObject
     public virtual void Render(Graphics g, PictureBox pb) { }
 
     public void setImage(string path)
-    {
-        this.Sprite = Bitmap.FromFile(path);
-    }
+        => this.Sprite = Bitmap.FromFile(path);
 
     public virtual void CreateHitbox(float x, float y, float width, float height)
-    {
-        this.Hitbox = new RectangleF(x - (width / 2), y - (height / 2), width, height);
-    }
-
+        => this.Hitbox = new RectangleF(x - (width / 2), y - (height / 2), width, height);
     public virtual void EnableHitbox() => this.isHittable = true;
 
     public virtual void DisableHitbox() => this.isHittable = false;

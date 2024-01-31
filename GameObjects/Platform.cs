@@ -15,6 +15,7 @@ public class Platform : GameObject
 
     public override void Update()
     {
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         var player = GameEngine.Current.Player;
         var bottomR = new PointF(
             player.X + player.Hitbox.Width / 2,
@@ -40,8 +41,5 @@ public class Platform : GameObject
     }
 
     public override void Render(Graphics g, PictureBox pb)
-    {
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        g.DrawRectangle(Pens.White, this.Hitbox);
-    }
+    => g.DrawRectangle(Pens.White, this.Hitbox);
 }

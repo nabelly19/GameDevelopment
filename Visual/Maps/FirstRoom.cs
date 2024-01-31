@@ -38,7 +38,7 @@ public class FirstRoom : Map
 
         // var market = new Market("Maercadin kkk", 700, 700);
 
-        
+
         this.GameObjects.Add(i1);
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
@@ -63,7 +63,6 @@ public class FirstRoom : Map
         {
             if (item is Interactable pog)
                 g.DrawRectangle(Pens.Gold, item.Hitbox);
-
+        }
     }
-}
 }

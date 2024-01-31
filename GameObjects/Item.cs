@@ -27,6 +27,6 @@ public class Item : GameObject, IItemMarket
     public void BuyIt()
     {
 
-       this.player.coinWallet -= itemValue;
+       this.player.CoinWallet -= itemValue;
     }
 }
