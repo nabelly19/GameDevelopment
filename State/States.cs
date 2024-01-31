@@ -216,9 +216,9 @@ public class PlatformState : State
 
     public PlatformState(float lifetime)
     {
-        var random = Random.Shared.Next(0, 3);
+        var random = Random.Shared.Next(0, 2);
         platform = new("Platform", spawns[random].X, spawns[random].Y, 290, 260);
-        if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width)
+        if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width/2)
             platform = new("Platform", spawns[random + 2].X, spawns[random + 2].Y, 290, 260);
         this.durationTime = lifetime + platform.damageInitiationDelay;
     }
@@ -239,7 +239,7 @@ public class PlatformState : State
         {
             isActivated = false;
             CollisionManager.RemoveGameObject(platform);
-            var random = Random.Shared.Next(0, 3);
+            var random = Random.Shared.Next(0, 2);
             platform = new("Platform", spawns[random].X, spawns[random].Y, 290, 260);
             if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width / 2)
                 
