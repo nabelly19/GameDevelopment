@@ -2,26 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Dynamic;
+using System.Linq;
 using System.Windows.Forms;
 
 public static class CollisionManager
 {
-    public static List<GameObject> gameObjects { get; set; }
+    public static List<GameObject> GameObjects { get; set; }
 
-    public static void AddGameObject(GameObject gameObject) => gameObjects.Add(gameObject);
+    public static void AddGameObject(GameObject gameObject) => GameObjects.Add(gameObject);
 
-    public static void RemoveGameObject(GameObject gameObject) => gameObjects.Remove(gameObject);
+    public static void RemoveGameObject(GameObject gameObject) => GameObjects.Remove(gameObject);
 
     public static bool CheckCollisions(GameObject obj)
     {
-        for (int j = 0; j < gameObjects.Count; j++)
+        for (int j = 0; j < GameObjects.Count; j++)
         {
-            GameObject other = gameObjects[j];
+            GameObject other = GameObjects[j];
 
             if (other == obj)
                 continue;
 
-            if (CollisionDetected(obj, other) && other.isHittable)
+            if (collisionDetected(obj, other) && other.isHittable)
                 return true;
         }
         return false;
@@ -29,23 +30,20 @@ public static class CollisionManager
 
     public static IEnumerable<GameObject> GetCollisions(GameObject obj)
     {
-        for (int j = 0; j < gameObjects.Count; j++)
+        for (int j = 0; j < GameObjects.Count; j++)
         {
-            GameObject other = gameObjects[j];
+            GameObject other = GameObjects[j];
             if (other == obj)
                 continue;
-            if (CollisionDetected(obj, other) && other.isHittable)
+            if (collisionDetected(obj, other) && other.isHittable)
                 yield return other;
         }
     }
 
-    private static bool CollisionDetected(GameObject obj1, GameObject obj2) =>
+    private static bool collisionDetected(GameObject obj1, GameObject obj2) =>
         obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
-    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p)
-    {
-        return hitbox.Contains(p);
-    }
+    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p) => hitbox.Contains(p);
 
     public static bool ScreenColision(GameObject obj)
     {
@@ -62,10 +60,11 @@ public static class CollisionManager
         return false;
     }
 
-    public static void SetGameobjects(List<GameObject> list){
+    public static void SetGameobjects(List<GameObject> list)
+    {
         GameEngine.Current.AddPlayer(list);
-        gameObjects = list;
+        GameObjects = list.ToList();
     }
 
-    public static void New() => gameObjects = new List<GameObject>();
+    public static void ResetList() => GameObjects = new List<GameObject>();
 }

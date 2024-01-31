@@ -1,15 +1,15 @@
-using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
-public class Coin : GameObject, IMoveable 
+public class Coin : GameObject, IMoveable
 {
+    public float BaseAcceleration { get; set; }
+    public float Ax { get; set; }
+    public float Ay { get; set; }
     public int StateManager { get; set; }
-    public int steps { get; set; } = 0;
-    public int slowFrameRate { get; set; } = 0;
+    public int Steps { get; set; } = 0;
+    public int SlowFrameRate { get; set; } = 0;
 
     public Coin(string name, int x, int y)
         : base(name, x, y, Resources.Coins[0])
@@ -25,13 +25,12 @@ public class Coin : GameObject, IMoveable
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawImage(this.Sprite, this.X, this.Y, this.Width, this.Height);
-        
     }
 
     public override void Update()
     {
         Move();
-        
+
         var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
@@ -44,33 +43,22 @@ public class Coin : GameObject, IMoveable
     }
 
     public void Move()
+    => AnimateItem(1, 5);
+
+    private void AnimateItem(int start, int end)
     {
+        SlowFrameRate += 1;
 
-        AnimateItem(1,5);
-
-    }
-
-     private void AnimateItem(int start, int end)
-    {
-        slowFrameRate += 1;
-
-        if (slowFrameRate > 5)
+        if (SlowFrameRate > 5)
         {
-            steps++;
-            slowFrameRate = 0;
+            Steps++;
+            SlowFrameRate = 0;
         }
 
-        if (steps > end || steps < start)
-        {
-            steps = start;
-        }
+        if (Steps > end || Steps < start)
+            Steps = start;
 
-        this.Sprite = Resources.Coins[steps];
+
+        this.Sprite = Resources.Coins[Steps];
     }
-
-
-    public float BaseAcceleration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Ax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public float Ay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-   
 }

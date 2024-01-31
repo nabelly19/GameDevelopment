@@ -7,9 +7,9 @@ public static class MapManager
 {
     public static List<Map> Maps { get; private set; }
     private static int index = 0;
-    private static Map prevMap;
-    public static Map Map { get; set; }
-    private static Map newMap;
+    private static Map previous;
+    public static Map Current { get; set; }
+    private static Map next;
     private static int timer;
     private static bool transitioning = false;
     private static int transitionClock;
@@ -18,7 +18,7 @@ public static class MapManager
     {
         foreach (var item in Maps)
         {
-            if (item == Map)
+            if (item == Current)
                 CollisionManager.SetGameobjects(item.GameObjects);
         }
     }
@@ -28,23 +28,23 @@ public static class MapManager
     public static void NextMap()
     {
         index++;
-        prevMap = Map;
-        newMap = Maps[index];
+        previous = Current;
+        next = Maps[index];
         transitioning = true;
     }
 
-    public static void PrevMap()
+    public static void PreviousMap()
     {
         index--;
-        prevMap = Map;
-        newMap = Maps[index];
+        previous = Current;
+        next = Maps[index];
         transitioning = true;
     }
 
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
     {
         if (!transitioning)
-            Map.RenderBackground(g, pb);
+            Current.RenderBackground(g, pb);
         else
             DrawFadeMap(g, pb);
     }
@@ -53,8 +53,8 @@ public static class MapManager
     {
         transitionClock = 5;
 
-        Map.RenderBackground(g, pb);
-        if (Map == prevMap)
+        Current.RenderBackground(g, pb);
+        if (Current == previous)
             timer += transitionClock;
         else
             timer -= transitionClock;
@@ -67,12 +67,17 @@ public static class MapManager
 
         if (timer == 255)
         {
-            Map = newMap;
+            Current = next;
             AddMapObjects();
-            GameEngine.Current.Player.X = Map.PlayerSpawn.X;
-            GameEngine.Current.Player.Y = Map.PlayerSpawn.Y;
-            newMap = null;
+            setPlayerSpawn();
+            next = null;
         }
+    }
+
+    private static void setPlayerSpawn()
+    {
+        GameEngine.Current.Player.X = Current.PlayerSpawn.X;
+        GameEngine.Current.Player.Y = Current.PlayerSpawn.Y;
     }
 
     public static void DrawFadeRectangle(Graphics g)
@@ -86,5 +91,19 @@ public static class MapManager
         );
     }
 
-    public static void New() => Maps = new List<Map>();
+    public static void InitializeMapList() => Maps = new List<Map>();
+
+    public static void Start(PictureBox pb)
+    {
+        InitializeMapList();
+
+        AddMap(new FirstRoom(pb));
+        AddMap(new FelixRoom(pb));
+
+        Current = Maps[0];
+
+        GameEngine.Current.Player.X = Current.PlayerSpawn.X;
+        GameEngine.Current.Player.Y = Current.PlayerSpawn.Y;
+        AddMapObjects();
+    }
 }

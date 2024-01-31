@@ -1,10 +1,6 @@
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-// namespace Entity;
-/* The Boss class is a subclass of the Enemy class and represents a boss enemy with a spawn point and
-methods for attacking and handling collisions. */
 public class Boss : GameObject, IAttackable
 {
     public int Hp { get; set; } = 3;
@@ -13,10 +9,10 @@ public class Boss : GameObject, IAttackable
     public bool isAlive { get; set; }
 
     public Boss(string name, int x, int y, string sprite)
-        : base(name, x, y, sprite) 
-        {
-            this.Manager = new(this);
-        }
+        : base(name, x, y, sprite)
+    {
+        this.Manager = new(this);
+    }
 
     public override void Update()
     {
@@ -38,8 +34,5 @@ public class Boss : GameObject, IAttackable
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 
-    public void ReceiveDamage()
-    {
-        this.Hp--;
-    }
+    public void ReceiveDamage() => this.Hp--;
 }
