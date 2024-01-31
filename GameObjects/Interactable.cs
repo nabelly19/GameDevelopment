@@ -1,4 +1,6 @@
+using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 
 public abstract class Interactable : GameObject
 {
@@ -20,6 +22,11 @@ public abstract class Interactable : GameObject
         float width, 
         float height
     ) : base(name, x, y, width, height) { DisableHitbox(); }
+
+    public override void Render(Graphics g, PictureBox pb)
+    {
+        g.FillRectangle(Brushes.Gold, this.Hitbox);
+    }
 
     public abstract void Interact();
 

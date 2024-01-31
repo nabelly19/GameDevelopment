@@ -101,6 +101,7 @@ public static class MapManager
         AddMap(new FelixRoom(pb));
 
         Current = Maps[0];
+        setPlayerSpawn();
 
         GameEngine.Current.Player.X = Current.PlayerSpawn.X;
         GameEngine.Current.Player.Y = Current.PlayerSpawn.Y;

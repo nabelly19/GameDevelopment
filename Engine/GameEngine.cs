@@ -36,12 +36,16 @@ public class GameEngine
     public void Render(Graphics g, PictureBox pb)
     {
         MapManager.RenderMapOrFade(g, pb);
+
         foreach (var gameObject in CollisionManager.GameObjects.ToList())
         {
             if (gameObject is null)
                 continue;
             gameObject.Render(g, pb);
         }
+        
+        HUD.Render(g, pb);
+
         MapManager.DrawFadeRectangle(g);
     }
 
