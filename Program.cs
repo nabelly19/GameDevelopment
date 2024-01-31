@@ -58,7 +58,9 @@ form.KeyDown += (o, e) =>
 
         case Keys.I:
             // GameEngine.Current.Player.Info();
-            MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
+            // MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
+            // MessageBox.Show(Cursor.Position.X.ToString());
+            // MessageBox.Show(Cursor.Position.Y.ToString());
             break;
 
         case Keys.W:
@@ -117,6 +119,12 @@ form.KeyUp += (o, e) =>
         case Keys.Space:
             break;
     }
+};
+
+pb.MouseDown += (o, e) =>
+{
+    MessageBox.Show(Cursor.Position.X.ToString());
+    MessageBox.Show(Cursor.Position.Y.ToString());
 };
 
 Application.Run(form);
