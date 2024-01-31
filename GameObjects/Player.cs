@@ -302,7 +302,7 @@ public class Player : GameObject, IMoveable, IAttackable
         {
             if (item is Interactable iter)
             {
-                if (iter.VerifyCollisions()) ;
+                if (iter.VerifyCollisions())
                 iter.Interact();
                 return;
             }

@@ -27,11 +27,11 @@ public class FelixTheToad : Boss
         // c3.SetNextState(w2);
 
         // this.Manager.AddList(w1);
-        this.Manager.AddList(s1);
-        this.Manager.AddList(s2);
+        // this.Manager.AddList(s1);
+        // this.Manager.AddList(s2);
         // this.Manager.AddList(s3);
-        this.Manager.AddList(s4);
-        this.Manager.AddList(s5);
+        // this.Manager.AddList(s4);
+        // this.Manager.AddList(s5);
         this.Manager.AddList(s6);
 
     }
