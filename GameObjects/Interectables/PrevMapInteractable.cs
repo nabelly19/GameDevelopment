@@ -10,14 +10,14 @@ public class PrevMapInteractable : Interactable
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(
-            MapManager.Map.PlayerSpawn.X,
-            MapManager.Map.PlayerSpawn.Y,
+            MapManager.Current.PlayerSpawn.X,
+            MapManager.Current.PlayerSpawn.Y,
             75, 75
         );
         g.DrawRectangle(Pens.Gold, this.Hitbox);
     }
 
     public override void Interact()
-        => MapManager.PrevMap();
+        => MapManager.PreviousMap();
     
 }

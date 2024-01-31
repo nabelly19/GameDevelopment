@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 public class TrackingProjectile : Projectile
 {
     private GameObject player;
@@ -52,6 +54,7 @@ public class TrackingProjectile : Projectile
 
     public override void Update()
     {
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         VerifyLifespan();
         Move();
         var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
@@ -88,6 +91,11 @@ public class TrackingProjectile : Projectile
     public override void Move()
     {
         Track();
+    }
+
+    public override void Render(Graphics g, PictureBox pb)
+    {
+        base.Render(g, pb);
     }
 
     public void Track()

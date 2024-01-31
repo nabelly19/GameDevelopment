@@ -10,8 +10,8 @@ public class NextMapInteractable : Interactable
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(
-            MapManager.Map.PlayerSpawn.X,
-            MapManager.Map.PlayerSpawn.Y,
+            MapManager.Current.PlayerSpawn.Y,
+            MapManager.Current.PlayerSpawn.X,
             75, 75
         );
         g.DrawRectangle(Pens.Gold, this.Hitbox);
