@@ -8,9 +8,6 @@ using System.Windows.Forms;
 
 public static class Resources
 {
-    public static List<Bitmap> PlayerSprites = new();
-    public static List<Bitmap> Maps = new();
-    public static List<Bitmap> Coins = new();
     public static void New()
     { 
         PlayerSprites = Directory
@@ -28,7 +25,15 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Coin/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        // this.Maps.Add(Bitmap.FromFile("../../../assets/Maps/PRIMEIROCENARIO.png"));
+        Market = Directory 
+            .GetFiles("../../../assets/Sprites/Market/", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
 
     }
+
+    public static List<Bitmap> PlayerSprites = new();
+    public static List<Bitmap> Maps = new();
+    public static List<Bitmap> Coins = new();
+    public static List<Bitmap> Market = new();
 }

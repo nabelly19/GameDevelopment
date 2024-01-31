@@ -5,8 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
-// namespace Entity;
-
 public class Player : GameObject, IMoveable, IAttackable
 {
     private float vx = 0f;
@@ -27,6 +25,8 @@ public class Player : GameObject, IMoveable, IAttackable
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime lastDamage { get; set; }
+    public int coinWallet { get; set; } = 0;
+    public bool isInteractable { get; set; }
 
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
@@ -59,6 +59,7 @@ public class Player : GameObject, IMoveable, IAttackable
         );
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawString($"Player Wallet: {this.coinWallet}",  SystemFonts.DefaultFont, Brushes.White, 10, 40);
     }
 
     public void Move()
@@ -297,7 +298,29 @@ public class Player : GameObject, IMoveable, IAttackable
         if (seconds > 3)
             isVulnerable = true;
     }
-
     private void updateHitbox() =>
         CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
+    public void Interact()
+    {
+        foreach (var item in CollisionManager.gameObjects)
+        {
+            if (item is Interactable iter)
+            {
+                if (iter.VerifyCollisions());
+                    iter.Interact();
+                return;
+            }
+        }
+
+    }
+
+    public void ColectItem()
+    {
+        if (isInteractable)
+        {
+            this.coinWallet++;
+        }
+
+        
+    }
 }

@@ -80,6 +80,7 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.F:
+            GameEngine.Current.Player.Interact();
             break;
 
         case Keys.Space:
