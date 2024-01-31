@@ -16,7 +16,6 @@ public class FirstRoom : Map
         InitializeMapObjects(pb);
     }
 
-
     public override void InitializeMapObjects(PictureBox pb)
     {
         float width = this.image.Width;
@@ -34,12 +33,18 @@ public class FirstRoom : Map
         var v2 = new Wall("BarriSS V1", x + 0.51f * width / 2, y - 0.45f * height / 2, 90, 90); // barriSS V1 ( de pra baixo tlgd )
         var v3 = new Wall("BarriSS V2", x + 0.75f * width / 2, y - 0.45f * height / 2, 70, 90); // barriSS
 
-        var i1 = new PrevMapInteractable("Indo Ali", 50, 50, 50, 50);
+        var i1 = new NextMapInteractable("Indo Ali", 
+        PlayerSpawn.X, PlayerSpawn.Y,
+            75, 75);
+
+        var i2 = new Market("Coé", 
+        PlayerSpawn.X + 100, PlayerSpawn.Y,
+            100, 100);
 
         // var market = new Market("Maercadin kkk", 700, 700);
 
-
-        this.GameObjects.Add(i1);
+        // this.GameObjects.Add(i1);
+        this.GameObjects.Add(i2);
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
         this.GameObjects.Add(w3);
@@ -61,8 +66,8 @@ public class FirstRoom : Map
 
         foreach (var item in this.GameObjects)
         {
-            if (item is Interactable pog)
-                g.DrawRectangle(Pens.Gold, item.Hitbox);
+            // if (item is Interactable pog)
+                // g.DrawRectangle(Pens.Gold, item.Hitbox);
         }
     }
 }

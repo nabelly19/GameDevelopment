@@ -9,33 +9,30 @@ using Microsoft.VisualBasic;
 public class Market : Interactable
 {
     public List<Item> AllMarketItems = new();
-    public bool isInteractable { get; set; }
-    
+    private RectangleF MarketBackground { get; set; }
+    public bool isVisible = false;
+
     public Market(string name, float x, float y, float width, float height) : base(name, x, y, width, height)
     {
         this.isInteractable = true;
-        CreateHitbox(x, Y, width, height);
+        CreateHitbox(x, y, width, height);
     }
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.DrawRectangle(Pens.PaleGoldenrod, Hitbox);
+        g.FillRectangle(Brushes.Gold, this.Hitbox);
+        if (this.isVisible)
+            showCurrentMarket();
     }
-    public override void Update()
-    {
-        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
-            if (collided is Player)
-            {
-                CollisionManager.RemoveGameObject(this);
-            }
-    }
+
 
     public void showCurrentMarket()
     {
-        
+        HUD.SetObject(new MarketMenu("MENU", 100, 100, 100, 100));
     }
 
     public override void Interact()
     {
-        throw new NotImplementedException();
+        this.isVisible = !isVisible;
+        HUD.SetObject(null);
     }
 }
