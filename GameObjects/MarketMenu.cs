@@ -4,7 +4,9 @@ using System.Windows.Forms;
 public class MarketMenu : GameObject
 {
     private RectangleF MarketBackground { get; set; }
-    public MarketMenu(string name, float x, float y, float width, float height) : base(name, x, y, width, height)
+
+    public MarketMenu(string name, float x, float y, float width, float height)
+        : base(name, x, y, width, height)
     {
         DisableHitbox();
         CreateHitbox(X, Y, width, height);
@@ -14,8 +16,6 @@ public class MarketMenu : GameObject
 
         this.MarketBackground = new RectangleF(wid - wid / 2, hei - hei / 2, wid, hei);
     }
-
-
 
     public override void Render(Graphics g, PictureBox pb)
     {

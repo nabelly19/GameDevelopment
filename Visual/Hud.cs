@@ -4,17 +4,17 @@ using System.Windows.Forms;
 
 public static class HUD
 {
-    public static GameObject Obj { get; private set; }
+    public static List<GameObject> Objs { get; private set; } = new();
 
-    public static void SetObject(GameObject obj)
-        => Obj = obj;
-    public static void Reset()
-        => Obj = null;
+    public static void AddObject(GameObject obj) => Objs.Add(obj);
+
+    public static void Reset() => Objs = new();
+
     public static void Render(Graphics g, PictureBox pb)
     {
-        if (Obj is null)
+        if (Objs.Count == 0)
             return;
-        Obj.Render(g, pb);
+        foreach (var obj in Objs)
+            obj.Render(g, pb);
     }
-
 }

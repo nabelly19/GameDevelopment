@@ -27,12 +27,12 @@ public class Market : Interactable
 
     public void showCurrentMarket()
     {
-        HUD.SetObject(new MarketMenu("MENU", 100, 100, 100, 100));
+        HUD.AddObject(new MarketMenu("MENU", 100, 100, 100, 100));
     }
 
     public override void Interact()
     {
         this.isVisible = !isVisible;
-        HUD.SetObject(null);
+        HUD.Reset();
     }
 }
