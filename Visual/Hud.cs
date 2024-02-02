@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 public static class HUD
@@ -16,5 +17,13 @@ public static class HUD
             return;
         foreach (var obj in Objs)
             obj.Render(g, pb);
+    }
+
+    public static void Update()
+    {
+        if (Objs.Count == 0)
+            return;
+        foreach (var obj in Objs.ToList())
+            obj.Update();
     }
 }

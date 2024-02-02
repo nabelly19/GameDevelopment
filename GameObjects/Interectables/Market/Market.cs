@@ -27,6 +27,11 @@ public class Market : Interactable
 
     public void showCurrentMarket()
     {
+        foreach (var item in HUD.Objs.ToList())
+        {
+            if(item is MarketMenu)
+                return;
+        }
         HUD.AddObject(new MarketMenu("MENU", 100, 100, 100, 100));
     }
 

@@ -27,8 +27,8 @@ public class Platform : GameObject
         );
         if (
             !(
-                CollisionManager.CheckCollisionbyPoint(this.Hitbox, bottomR)
-                || CollisionManager.CheckCollisionbyPoint(this.Hitbox, bottomL)
+                CollisionManager.CheckCollisionByPoint(this.Hitbox, bottomR)
+                || CollisionManager.CheckCollisionByPoint(this.Hitbox, bottomL)
             )
         )
         {
