@@ -70,4 +70,8 @@ public class FirstRoom : Map
                 // g.DrawRectangle(Pens.Gold, item.Hitbox);
         }
     }
+
+    public override void Update()
+    {
+    }
 }

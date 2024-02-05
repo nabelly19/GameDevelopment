@@ -66,6 +66,10 @@ public class FelixRoom : Map
         AddRandomCoin();
     }
 
+    public override void Update()
+    {
+        AddRandomCoin();
+    }
     private void AddRandomCoin()
     {
         var query = from obj in CollisionManager.GameObjects where obj is Coin select obj;
@@ -90,4 +94,5 @@ public class FelixRoom : Map
                 )
             );
     }
+
 }

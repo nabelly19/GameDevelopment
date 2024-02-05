@@ -26,6 +26,8 @@ public class GameEngine
 
     public void Update()
     {
+        MapManager.UpdateMap();
+
         foreach (var gameObject in CollisionManager.GameObjects.ToList())
         {
             if (gameObject is null)

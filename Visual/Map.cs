@@ -10,5 +10,6 @@ public abstract class Map
     public abstract List<GameObject> GameObjects { get; set; }
     protected Image image = null;
     public abstract void InitializeMapObjects(PictureBox pb);
+    public abstract void Update();
     public abstract void RenderBackground(Graphics g, PictureBox pb);
 }

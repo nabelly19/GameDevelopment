@@ -41,6 +41,11 @@ public static class MapManager
         transitioning = true;
     }
 
+    public static void UpdateMap()
+    {
+        Current.Update();
+    }
+
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
     {
         if (!transitioning)
