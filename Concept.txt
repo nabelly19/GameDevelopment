@@ -26,7 +26,8 @@
 		11. Wind Blade (faltou ventinho) - OK
 		12. Chance de Bloqueio
 		
-
+->
+BP = Player - Boss
 
 ==============
 Como o jogo ira funcionar
