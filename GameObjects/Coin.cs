@@ -38,7 +38,7 @@ public class Coin : GameObject, IMoveable
         {
             if (other is Player player)
             {
-                player.ColectItem();
+                player.ColectCoin();
                 CollisionManager.RemoveGameObject(this);
             }
         }

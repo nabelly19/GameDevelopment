@@ -6,14 +6,18 @@ using System.Windows.Forms;
 
 public static class ItemManager
 {
-    public static List<Item> AllItens = new();
+    public static List<Item> AllItens;
+    public static List<Item> Bought = new();
     private static Random random = new Random();
 
     public static void Startup()
     {
-        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
-        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
-        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
+        AllItens = new()
+        {
+            new ItemWindBlade("Item Wind", 0, 0, 100, 100),
+            new ItemWindBlade("Item Wind", 0, 0, 100, 100),
+            new ItemWindBlade("Item Wind", 0, 0, 100, 100)
+        };
     }
 
     public static void getRandomItems(Item[] items)

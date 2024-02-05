@@ -4,7 +4,12 @@ using System.Windows.Forms;
 
 public class MarketMenu : GameObject
 {
-    private PointF[] itemsPosition = { new(100, 100), new(1000, 1000), new(1000, 100) };
+    private PointF[] itemsPosition =
+    {
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.75f, Screen.PrimaryScreen.Bounds.Height / 2),
+        new(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2),
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 1.25f, Screen.PrimaryScreen.Bounds.Height / 2)
+    };
     private RectangleF marketBackground { get; set; }
 
     public Item[] Items = new Item[3]; // tem 3 cartas neh
@@ -37,11 +42,8 @@ public class MarketMenu : GameObject
     {
         replaceItems();
         g.FillRectangle(Brushes.Gray, this.marketBackground);
-        g.FillRectangle(Brushes.Orange, this.Hitbox);
         foreach (var item in Items)
-        {
             item.Render(g, pb);
-        }
     }
 
     public override void Update()
