@@ -123,8 +123,9 @@ form.KeyUp += (o, e) =>
 
 pb.MouseDown += (o, e) =>
 {
-    MessageBox.Show(Cursor.Position.X.ToString());
-    MessageBox.Show(Cursor.Position.Y.ToString());
+    HUD.Update();
+    // MessageBox.Show(Cursor.Position.X.ToString());
+    // MessageBox.Show(Cursor.Position.Y.ToString());
 };
 
 Application.Run(form);

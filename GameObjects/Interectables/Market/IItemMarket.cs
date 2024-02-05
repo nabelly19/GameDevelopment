@@ -4,7 +4,8 @@ using System.Windows.Forms;
 public interface IItemMarket
 {
     public void BuyIt();
-    int itemValue { get; set; }
-    int itemOccurrence { get; set; }
+    int Value { get; set; }
+    int Occurrence { get; set; }
+    public bool Temporary { get; set; }
     
 }

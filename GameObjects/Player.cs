@@ -7,8 +7,8 @@ using Microsoft.VisualBasic;
 
 public class Player : GameObject, IMoveable, IAttackable
 {
-    private float vx = 0f;
-    private float vy = 0f;
+    public float Vx { get; set; } = 0f;
+    public float Vy { get; set; } = 0f;
     private DateTime last = DateTime.Now;
     private DateTime lastAttack = DateTime.Now;
     public int Steps { get; set; } = 0;
@@ -22,11 +22,15 @@ public class Player : GameObject, IMoveable, IAttackable
     public float BaseAcceleration { get; set; } = 1_300;
     public float Ax { get; set; }
     public float Ay { get; set; }
+    public float Angle { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime LastDamage { get; set; }
     public int CoinWallet { get; set; } = 0;
     public bool isInteractable { get; set; }
+
+    private float Fx = 0f;
+    private float Fy = 0;
 
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
@@ -46,6 +50,12 @@ public class Player : GameObject, IMoveable, IAttackable
         Move();
     }
 
+    public void ApplyForce(float fx, float fy)
+    {
+        this.Fx += fx;
+        this.Fy += fy;
+    }
+
     public override void Render(Graphics g, PictureBox pb)
     {
         g.DrawImage(
@@ -59,14 +69,20 @@ public class Player : GameObject, IMoveable, IAttackable
         );
         g.DrawRectangle(Pens.White, this.Hitbox);
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
-        g.DrawString($"Player Wallet: {this.CoinWallet}", SystemFonts.DefaultFont, Brushes.White, 10, 40);
+        g.DrawString(
+            $"Player Wallet: {this.CoinWallet}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            40
+        );
+        g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
+        g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
+        g.DrawString($"Player VY: {Vy}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
     }
 
     public void Move()
     {
-        var OldX = X;
-        var OldY = Y;
-
         var now = DateTime.Now;
         var time = now - last;
         var secs = (float)time.TotalSeconds;
@@ -74,79 +90,84 @@ public class Player : GameObject, IMoveable, IAttackable
 
         this.Weapon.Move();
 
-        if (vx > 8)
+        if (Vx > 8)
             StopRight();
-        else if (vx < -8)
+        else if (Vx < -8)
             StopLeft();
-        else if (vy < -8)
+        else if (Vy < -8)
             StopUp();
-        // else if (vy > 8)
-        //     StopDown();
 
-        if (vx > 20)
+        if (Vx > 20)
             AnimatePLayer(9, 12);
-        else if (vx < -20)
+        else if (Vx < -20)
             AnimatePLayer(5, 8);
-        else if (vy < -20)
+        else if (Vy < -20)
             AnimatePLayer(13, 16);
-        else if (vy > 20)
+        else if (Vy > 20)
             AnimatePLayer(1, 4);
-        else if ((int)vy == 0)
+        else if ((int)Vy == 0)
             AnimatePLayer(17, 21);
 
-        double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
+        var OldX = X;
+        var OldY = Y;
 
+        double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
         if (magnitude != 0)
         {
-            vx += (float)(Ax / magnitude) * BaseAcceleration * secs;
-            vy += (float)(Ay / magnitude) * BaseAcceleration * secs;
+            Vx += (float)(Ax / magnitude) * BaseAcceleration * secs;
+            Vy += (float)(Ay / magnitude) * BaseAcceleration * secs;
         }
 
-        X += vx * secs;
-        Y += vy * secs;
+        Vx += Fx * secs;
+        Vy += Fy * secs;
 
-        updateHitbox();
+        Fx /= 4;
+        Fy /= 4;
 
-        vx *= MathF.Pow(0.001f, secs);
-        vy *= MathF.Pow(0.001f, secs);
+        X += Vx * secs;
+        Y += Vy * secs;
+
+        Vx *= MathF.Pow(0.001f, secs);
+        Vy *= MathF.Pow(0.001f, secs);
 
         const int max = 600;
-        if (vx > max)
-            vx = max;
-        else if (vx < -max)
-            vx = -max;
+        if (Vx > max)
+            Vx = max;
+        else if (Vx < -max)
+            Vx = -max;
 
-        if (vy > max)
-            vy = max;
-        else if (vy < -max)
-            vy = -max;
+        if (Vy > max)
+            Vy = max;
+        else if (Vy < -max)
+            Vy = -max;
 
-        if (!(CollisionManager.CheckCollisions(this) || CollisionManager.ScreenColision(this)))
+        updateHitbox();
+        var collInfo = CollisionManager.CheckCollisionsData(this);
+        if (collInfo == CollisionType.None && !CollisionManager.ScreenColision(this))
             return;
 
-        const float energyLoss = 0.2f;
-        vx = -vx * energyLoss;
-        vy = -vy * energyLoss;
+        if ((collInfo & CollisionType.Bottom) > 0)
+            Vy = -0.8f * Vy;
+        else
+            Vy = Vy * -1;
+
+        if ((collInfo & CollisionType.Left) > 0)
+            Vx = -0.8f * Vx;
+        else
+            Vx = Vx * -1;
 
         X = OldX;
         Y = OldY;
+        updateHitbox();
     }
 
-    public void MoveUp()
-    => this.Ay = -1;
+    public void MoveUp() => this.Ay = -1;
 
+    public void MoveDown() => this.Ay = 1;
 
-    public void MoveDown()
-    => this.Ay = 1;
+    public void MoveRight() => this.Ax = 1;
 
-
-    public void MoveRight()
-    => this.Ax = 1;
-
-
-    public void MoveLeft()
-    => this.Ax = -1;
-
+    public void MoveLeft() => this.Ax = -1;
 
     public void StopY_axis() => this.Ay = 0;
 
@@ -294,8 +315,10 @@ public class Player : GameObject, IMoveable, IAttackable
         if (seconds > 3)
             isVulnerable = true;
     }
+
     private void updateHitbox() =>
         CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
+
     public void Interact()
     {
         foreach (var item in CollisionManager.GameObjects)
@@ -307,7 +330,6 @@ public class Player : GameObject, IMoveable, IAttackable
                 return;
             }
         }
-
     }
 
     public void ColectItem()

@@ -13,6 +13,8 @@ public class Projectile : GameObject, IMoveable
     public float Ax { get; set; }
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
+    public float Vx { get; set; }
+    public float Vy { get; set; }
 
     public Projectile(
         string name,
