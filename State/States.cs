@@ -218,13 +218,15 @@ public class PlatformState : State
     {
         var random = Random.Shared.Next(0, 2);
         platform = new("Platform", spawns[random].X, spawns[random].Y, 290, 260);
-        if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width/2)
+        if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width / 2)
             platform = new("Platform", spawns[random + 2].X, spawns[random + 2].Y, 290, 260);
         this.durationTime = lifetime + platform.damageInitiationDelay;
     }
 
     public override void Act(Boss boss)
     {
+        int contador = 2;
+
         if (!isActivated)
         {
             creationTime = DateTime.Now;
@@ -242,7 +244,23 @@ public class PlatformState : State
             var random = Random.Shared.Next(0, 2);
             platform = new("Platform", spawns[random].X, spawns[random].Y, 290, 260);
             if (GameEngine.Current.Player.X > Screen.PrimaryScreen.Bounds.Width / 2)
-                
+                platform = new("Platform", spawns[random + 2].X, spawns[random + 2].Y, 290, 260);
+
+            if (random == 0)
+                MapManager.Current.SetBackground(Resources.Maps[2]);
+
+
+            if (random == 1 + contador)
+                MapManager.Current.SetBackground(Resources.Maps[3]);
+
+            if (random == 0 + contador)
+                MapManager.Current.SetBackground(Resources.Maps[4]);
+
+
+            if (random == 1)
+                MapManager.Current.SetBackground(Resources.Maps[5]);
+
+
             GoToNext();
             return;
         }

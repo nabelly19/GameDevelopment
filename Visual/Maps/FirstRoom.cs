@@ -27,10 +27,10 @@ public class FirstRoom : Map
         var w2 = new Wall("Baixo", x, y + 0.8f * height / 2, width, 100); // parede de baixo
         var w3 = new Wall("Esquerda", x - 0.86f * width / 2, y, 100, height); // parede da esquerda
         var w4 = new Wall("Cima", x, y - 0.65f * height / 2, width, 100); // parede de cima
-        var w5 = new Wall("Barril", x - 0.66f * width / 4, y - 0.49f * height / 2, 129, 90); // barril
-        var v1 = new Wall("BarrilV", x - 0.66f * width / 4, y - 0.45f * height / 2, 90, 90); // barril V ( de pra cima tlgd )
+        var w5 = new Wall("Barril", x - 0.66f * width / 4, y - 0.52f * height / 2, 129, 40); // barril
+        var v1 = new Wall("BarrilV", x + 0.20f * width / 2, y - 0.42f * height / 2, 129, 90); // barril V ( de pra cima tlgd )
         var w6 = new Wall("BarriSS", x + 0.623f * width / 2, y - 0.47f * height / 2, 220, 90); // barriSS
-        var v2 = new Wall("BarriSS V1", x + 0.51f * width / 2, y - 0.45f * height / 2, 90, 90); // barriSS V1 ( de pra baixo tlgd )
+        var v2 = new Wall("BarriSS V1", x + 0.05f * width / 2, y - 0.36f * height / 2, 100, 50); // barriSS V1 ( de pra baixo tlgd )
         var v3 = new Wall("BarriSS V2", x + 0.75f * width / 2, y - 0.45f * height / 2, 70, 90); // barriSS
 
         var i1 = new NextMapInteractable("Indo Ali", 
@@ -38,8 +38,7 @@ public class FirstRoom : Map
             75, 75);
 
         var i2 = new Market("Coé", 
-        PlayerSpawn.X + 100, PlayerSpawn.Y,
-            100, 100);
+        x + 0.32f * width / 2, y - 0.20f * height / 2, 200, 90);
 
         // var market = new Market("Maercadin kkk", 700, 700);
 
@@ -69,5 +68,11 @@ public class FirstRoom : Map
             // if (item is Interactable pog)
                 // g.DrawRectangle(Pens.Gold, item.Hitbox);
         }
+
+        // foreach (var wall in GameObjects)
+        // {
+        //     g.DrawRectangle(Pens.White, wall.Hitbox);
+
+        // }
     }
 }

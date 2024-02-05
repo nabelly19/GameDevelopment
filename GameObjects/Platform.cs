@@ -38,6 +38,7 @@ public class Platform : GameObject
             if (millis > damageInitiationDelay)
                 player.ReceiveDamage();
         }
+
     }
 
     public override void Render(Graphics g, PictureBox pb)

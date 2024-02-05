@@ -41,6 +41,14 @@ public static class MapManager
         transitioning = true;
     }
 
+    // public static void SetStateCrrMap()
+    // {
+    //     if ()
+    //     {
+            
+    //     }
+    // }
+
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
     {
         if (!transitioning)
@@ -97,8 +105,9 @@ public static class MapManager
     {
         InitializeMapList();
 
-        // AddMap(new FirstRoom(pb));
+        AddMap(new FirstRoom(pb));
         AddMap(new FelixRoom(pb));
+        AddMap(new LitchRoom(pb));
 
         Current = Maps[0];
         setPlayerSpawn();

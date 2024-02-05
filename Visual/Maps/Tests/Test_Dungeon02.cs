@@ -15,7 +15,7 @@ public class Test_Dungeon_02 : Map
 
     public Test_Dungeon_02(PictureBox pb)
     {
-        this.image = Resources.Maps[1];
+        this.image = Resources.Maps[2];
         this.PlayerSpawn = new PointF(
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height

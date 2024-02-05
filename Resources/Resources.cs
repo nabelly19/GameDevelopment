@@ -29,11 +29,16 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Market/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        Cards = Directory  
+            .GetFiles("../../../assets/Sprites/Card/", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
 
     }
 
     public static List<Bitmap> PlayerSprites = new();
     public static List<Bitmap> Maps = new();
+    public static List<Bitmap> Cards = new();
     public static List<Bitmap> Coins = new();
     public static List<Bitmap> Market = new();
 }

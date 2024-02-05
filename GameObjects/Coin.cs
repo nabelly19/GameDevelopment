@@ -30,7 +30,12 @@ public class Coin : GameObject, IMoveable
     public override void Update()
     {
         Move();
+        VerifyCollisions();
+      
+    }
 
+    public bool VerifyCollisions()
+    {
         var collided = CollisionManager.GetCollisions(this);
         foreach (var other in collided)
         {
@@ -38,8 +43,10 @@ public class Coin : GameObject, IMoveable
             {
                 player.ColectItem();
                 CollisionManager.RemoveGameObject(this);
+                return true;
             }
         }
+        return false;
     }
 
     public void Move()

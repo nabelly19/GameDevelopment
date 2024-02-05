@@ -312,7 +312,15 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void ColectItem()
     {
-        if (isInteractable)
-            this.CoinWallet++;
+        var collided = CollisionManager.GetCollisions(this);
+        foreach (var other in collided)
+        {
+            if (other is Coin coin)
+            {   
+                if(coin.VerifyCollisions())
+                    this.CoinWallet++;
+                return;
+            }
+    }
     }
 }

@@ -19,7 +19,7 @@ public class Market : Interactable
     }
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.FillRectangle(Brushes.Gold, this.Hitbox);
+        g.FillRectangle(Brushes.Transparent, this.Hitbox);
         if (this.isVisible)
             showCurrentMarket();
     }
