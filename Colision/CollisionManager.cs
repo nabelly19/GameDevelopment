@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Dynamic;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 
 public static class CollisionManager
@@ -28,6 +29,40 @@ public static class CollisionManager
         return false;
     }
 
+    public static CollisionType CheckCollisionsData(GameObject obj)
+    {
+        for (int j = 0; j < GameObjects.Count; j++)
+        {
+            GameObject other = GameObjects[j];
+
+            if (other == obj)
+                continue;
+            
+            if (!other.isHittable)
+                continue;
+
+            if (!collisionDetected(obj, other))
+                continue;
+
+            var rect = obj.Hitbox;
+            rect.Intersect(other.Hitbox);
+
+            if (rect.Width > rect.Height)
+            {
+                if (rect.Y + rect.Height / 2 < obj.Hitbox.Y + obj.Hitbox.Height / 2)
+                    return CollisionType.Bottom;
+                else return CollisionType.Top;
+            }
+            else
+            {
+                if (rect.X + rect.Width / 2 < obj.Hitbox.X + obj.Hitbox.Width / 2)
+                    return CollisionType.Left;
+                else return CollisionType.Right; 
+            }
+        }
+        return CollisionType.None;
+    }
+
     public static IEnumerable<GameObject> GetCollisions(GameObject obj)
     {
         for (int j = 0; j < GameObjects.Count; j++)
@@ -40,10 +75,11 @@ public static class CollisionManager
         }
     }
 
-    private static bool collisionDetected(GameObject obj1, GameObject obj2) =>
-        obj2.Hitbox.IntersectsWith(obj1.Hitbox);
+    private static bool collisionDetected(GameObject obj1, GameObject obj2) 
+        => obj2.Hitbox.IntersectsWith(obj1.Hitbox);
 
-    public static bool CheckCollisionbyPoint(RectangleF hitbox, PointF p) => hitbox.Contains(p);
+    public static bool CheckCollisionByPoint(RectangleF hitbox, PointF p) 
+        => hitbox.Contains(p);
 
     public static bool ScreenColision(GameObject obj)
     {
@@ -65,6 +101,5 @@ public static class CollisionManager
         GameEngine.Current.AddPlayer(list);
         GameObjects = list.ToList();
     }
-
     public static void ResetList() => GameObjects = new List<GameObject>();
 }

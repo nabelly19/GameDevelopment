@@ -20,6 +20,7 @@ public class GameEngine
         Resources.New();
         CollisionManager.ResetList();
         MapManager.Start(pb);
+        ItemManager.Startup();
         StartSound();
     }
 
@@ -31,6 +32,7 @@ public class GameEngine
                 continue;
             gameObject.Update();
         }
+
     }
 
     public void Render(Graphics g, PictureBox pb)

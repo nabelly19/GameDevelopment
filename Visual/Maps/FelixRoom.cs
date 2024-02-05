@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -33,6 +34,11 @@ public class FelixRoom : Map
         var w7 = new Wall("ParedeDireitaPortao", 1.135f * x, y - 0.55f * height / 2, 50, 190);
         var w8 = new Wall("LavaEsquerda", x - 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
         var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
+        var b = new WallMoveable("Bullet",
+                    Boss.X - 14,
+                    Boss.Y - 50,
+                    Random.Shared.Next(90, 179),
+                    Boss);
 
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
@@ -44,6 +50,7 @@ public class FelixRoom : Map
         this.GameObjects.Add(w8);
         this.GameObjects.Add(w9);
         this.GameObjects.Add(Boss);
+        this.GameObjects.Add(b);
         this.GameObjects.Add(new Coin("Moeda", 900, 700));
     }
 

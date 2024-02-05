@@ -97,7 +97,7 @@ public static class MapManager
     {
         InitializeMapList();
 
-        // AddMap(new FirstRoom(pb));
+        AddMap(new FirstRoom(pb));
         AddMap(new FelixRoom(pb));
 
         Current = Maps[0];

@@ -4,63 +4,75 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-public class ItemManager
+public static class ItemManager
 {
-    private Item item = null;
-    public List<Item> AllItens = new();
-    public List<Item> ItemsPerMarketList = new();
-    public List<Item> IsTemporary = new();
-    public bool temporary { get; set; } = false;
-    private Random random = new Random();
+    public static List<Item> AllItens = new();
+    private static Random random = new Random();
 
-    public ItemManager (Item item)
+    public static void Startup()
     {
-        this.item = item;
+        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
+        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
+        AllItens.Add(new ItemWindBlade("Item Wind", 0, 0, 100, 100));
     }
 
-    public void AddToMarket()
+    public static void getRandomItems(Item[] items)
     {
-        int totalOccurrence = AllItens.Sum(item => item.itemOccurrence);
-        int randomOcNumber = random.Next(totalOccurrence);
-        int sumOcNumber = 0;
+        var rndItems = 
+            from it in AllItens
+            orderby Random.Shared.Next()
+            select it;
+        var selectedItens = rndItems
+            .Take(items.Length)
+            .ToArray();
 
-        if(temporary)
-            addToChoice(item);
-        else{
-        foreach(Item item in ItemsPerMarketList)
-        {
-            sumOcNumber += item.itemOccurrence;
-            if (randomOcNumber < sumOcNumber)
-                this.ItemsPerMarketList.Add(item);
-        }
+        for (int i = 0; i < items.Length; i++)
+            items[i] = selectedItens[i];
     }
-    }
-    public void addToChoice(Item temporaryItem)
-    {
-        this.IsTemporary.Add(temporaryItem);
-    }
-
-    public void showChoice(Item item1, Item item2, Graphics g, PictureBox pb)
-    {
-        int totalOccurrence = IsTemporary.Sum(item => item.itemOccurrence);
-        int randomOcNumber = random.Next(totalOccurrence);
-        int sumOcNumber = 0;
-        
-        foreach(Item item in IsTemporary)
-        {
-            sumOcNumber += item.itemOccurrence;
-            if(randomOcNumber < sumOcNumber)
-                item1 = item;
-        }
-
-        foreach(Item item in IsTemporary)
-        {
-            sumOcNumber += item.itemOccurrence;
-            if(randomOcNumber < sumOcNumber)
-                item2 = item;
-        }
-
-        
-    }
-
 }
+
+// public void AddToMarket()
+// {
+//     int totalOccurrence = AllItens.Sum(item => item.itemOccurrence);
+//     int randomOcNumber = random.Next(totalOccurrence);
+//     int sumOcNumber = 0;
+
+//     if(temporary)
+//         addToChoice(item);
+//     else{
+//     foreach(Item item in ItemsPerMarketList)
+//     {
+//         sumOcNumber += item.itemOccurrence;
+//         if (randomOcNumber < sumOcNumber)
+//             this.ItemsPerMarketList.Add(item);
+//     }
+// }
+// }
+
+// public void addToChoice(Item temporaryItem)
+// {
+//     this.IsTemporary.Add(temporaryItem);
+// }
+
+// public void showChoice(Item item1, Item item2, Graphics g, PictureBox pb)
+// {
+//     int totalOccurrence = IsTemporary.Sum(item => item.itemOccurrence);
+//     int randomOcNumber = random.Next(totalOccurrence);
+//     int sumOcNumber = 0;
+
+//     foreach(Item item in IsTemporary)
+//     {
+//         sumOcNumber += item.itemOccurrence;
+//         if(randomOcNumber < sumOcNumber)
+//             item1 = item;
+//     }
+
+//     foreach(Item item in IsTemporary)
+//     {
+//         sumOcNumber += item.itemOccurrence;
+//         if(randomOcNumber < sumOcNumber)
+//             item2 = item;
+//     }
+
+
+// }
