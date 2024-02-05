@@ -18,22 +18,16 @@ public static class ItemManager
 
     public static void getRandomItems(Item[] items)
     {
+        var rndItems = 
+            from it in AllItens
+            orderby Random.Shared.Next()
+            select it;
+        var selectedItens = rndItems
+            .Take(items.Length)
+            .ToArray();
+
         for (int i = 0; i < items.Length; i++)
-        {
-            var rdmItem = VerifyRandomCard(items);
-            items[i] = rdmItem;
-        }
-    }
-
-    private static Item VerifyRandomCard(Item[] items)
-    {
-        Item rdmItems;
-        // do
-        // {
-            rdmItems = AllItens[Random.Shared.Next(AllItens.Count)];
-        // } while (items.Contains(rdmItems));
-
-        return rdmItems;
+            items[i] = selectedItens[i];
     }
 }
 

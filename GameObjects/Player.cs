@@ -29,6 +29,9 @@ public class Player : GameObject, IMoveable, IAttackable
     public int CoinWallet { get; set; } = 0;
     public bool isInteractable { get; set; }
 
+    private float Fx = 0f;
+    private float Fy = 0;
+
     public Player(string name, int x, int y)
         // : base(name, x, y, "./assets/Sprites/Player/NewSprite/k_0.png")
         : base(name, x, y, "../../../assets/Sprites/Player/NewSprite/k_0.png")
@@ -45,6 +48,12 @@ public class Player : GameObject, IMoveable, IAttackable
         updateHitbox();
         this.Weapon.Update();
         Move();
+    }
+
+    public void ApplyForce(float fx, float fy)
+    {
+        this.Fx += fx;
+        this.Fy += fy;
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -68,7 +77,11 @@ public class Player : GameObject, IMoveable, IAttackable
             40
         );
         g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
+        g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
+        g.DrawString($"Player VY: {Vy}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
     }
+
+    CollisionType lastInfo = CollisionType.None;
 
     public void Move()
     {
@@ -85,8 +98,6 @@ public class Player : GameObject, IMoveable, IAttackable
             StopLeft();
         else if (Vy < -8)
             StopUp();
-        // else if (vy > 8)
-        //     StopDown();
 
         if (Vx > 20)
             AnimatePLayer(9, 12);
@@ -99,18 +110,24 @@ public class Player : GameObject, IMoveable, IAttackable
         else if ((int)Vy == 0)
             AnimatePLayer(17, 21);
 
-        double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
+        var OldX = X;
+        var OldY = Y;
 
+        double magnitude = Math.Sqrt(Ax * Ax + Ay * Ay);
         if (magnitude != 0)
         {
             Vx += (float)(Ax / magnitude) * BaseAcceleration * secs;
             Vy += (float)(Ay / magnitude) * BaseAcceleration * secs;
         }
 
+        Vx += Fx * secs;
+        Vy += Fy * secs;
+
+        Fx /= 4;
+        Fy /= 4;
+
         X += Vx * secs;
         Y += Vy * secs;
-
-        updateHitbox();
 
         Vx *= MathF.Pow(0.001f, secs);
         Vy *= MathF.Pow(0.001f, secs);
@@ -126,25 +143,30 @@ public class Player : GameObject, IMoveable, IAttackable
         else if (Vy < -max)
             Vy = -max;
 
-        var OldX = X;
-        var OldY = Y;
-
-        if (!(CollisionManager.CheckCollisions(this) || CollisionManager.ScreenColision(this)))
+        updateHitbox();
+        var collInfo = CollisionManager.CheckCollisionsData(this);
+        if (collInfo == CollisionType.None && !CollisionManager.ScreenColision(this))
             return;
 
-        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
-        var collision_angle = CollisionManager.GetCollisionAngle(collided, this);
-        Angle = 180 / MathF.PI * collision_angle;
-        CollisionManager.ChangeVelocity(this, collision_angle);
-        const float energyLoss = 2.0f;
-        Vx = Vx * energyLoss;
-        Vy = Vy * energyLoss;
+        if ((collInfo & CollisionType.Bottom) > 0)
+        {
+            Vy = -0.8f * Vy;
+        }
+        else{
+            Vy = Vy*-1;
+        }
+
+        if ((collInfo & CollisionType.Left) > 0)
+        {
+            Vx = -0.8f * Vx;
+        }
+        else{
+            Vx = Vx*-1;
+        }
 
         X = OldX;
         Y = OldY;
-
-        X += Vx * secs;
-        Y += Vy * secs;
+        updateHitbox();
     }
 
     public void MoveUp() => this.Ay = -1;
