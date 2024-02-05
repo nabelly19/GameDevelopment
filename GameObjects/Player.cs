@@ -81,8 +81,6 @@ public class Player : GameObject, IMoveable, IAttackable
         g.DrawString($"Player VY: {Vy}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
     }
 
-    CollisionType lastInfo = CollisionType.None;
-
     public void Move()
     {
         var now = DateTime.Now;
@@ -149,20 +147,14 @@ public class Player : GameObject, IMoveable, IAttackable
             return;
 
         if ((collInfo & CollisionType.Bottom) > 0)
-        {
             Vy = -0.8f * Vy;
-        }
-        else{
-            Vy = Vy*-1;
-        }
+        else
+            Vy = Vy * -1;
 
         if ((collInfo & CollisionType.Left) > 0)
-        {
             Vx = -0.8f * Vx;
-        }
-        else{
-            Vx = Vx*-1;
-        }
+        else
+            Vx = Vx * -1;
 
         X = OldX;
         Y = OldY;

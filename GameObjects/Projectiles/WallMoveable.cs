@@ -25,6 +25,7 @@ public class WallMoveable : RotateProjectile
         this.center = new(x, y);
         this.radius = 300;
         RotatePoints();
+         EnableHitbox();
     }
 
     public override void Render(Graphics g, PictureBox pb) =>
@@ -39,9 +40,8 @@ public class WallMoveable : RotateProjectile
         if (player is null)
             return;
         
-        EnableHitbox();
+       
         var data = CollisionManager.CheckCollisionsData(player);
-        DisableHitbox();
 
         var rA = Random.Shared.Next(10_000);
         var rB = Random.Shared.Next(10_000) - 5_000;
@@ -79,6 +79,6 @@ public class WallMoveable : RotateProjectile
         this.X = this.center.X + this.radius * cos;
         this.Y = this.center.Y + this.radius * sin;
         GoTo(Direction);
-        this.Angle += 1f;
+        this.Angle += 0.2f;
     }
 }

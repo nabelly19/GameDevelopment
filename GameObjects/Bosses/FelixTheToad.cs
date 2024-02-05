@@ -6,7 +6,7 @@ public class FelixTheToad : Boss
     {
         var s1 = new SpiralProjectileState();
         var s2 = new WaitState();
-        // var s3 = new CircularlWaveState();
+        var s3 = new CircularlWaveState();
         var s4 = new SpiralWaveState();
         var s5 = new TrackingProjectileState(GameEngine.Current.Player);
         var s6 = new PlatformState(3_500);
@@ -26,13 +26,13 @@ public class FelixTheToad : Boss
         w1.SetNextState(s5);
         // c3.SetNextState(w2);
 
-        // this.Manager.AddList(w1);
+        this.Manager.AddList(w1);
         // this.Manager.AddList(s1);
         // this.Manager.AddList(s2);
-        // this.Manager.AddList(s3);
+        this.Manager.AddList(s3);
         // this.Manager.AddList(s4);
         // this.Manager.AddList(s5);
-        this.Manager.AddList(s6);
+        // this.Manager.AddList(s6);
 
     }
 
