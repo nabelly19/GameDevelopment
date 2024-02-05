@@ -12,5 +12,6 @@ public abstract class Map
     public virtual void SetBackground(Bitmap img) {this.image = img;}
     protected Image image = null;
     public abstract void InitializeMapObjects(PictureBox pb);
+    public abstract void Update();
     public abstract void RenderBackground(Graphics g, PictureBox pb);
 }

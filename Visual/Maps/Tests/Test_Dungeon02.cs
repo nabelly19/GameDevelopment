@@ -65,4 +65,9 @@ public class Test_Dungeon_02 : Map
 
         // }
     }
+
+    public override void Update()
+    {
+        throw new System.NotImplementedException();
+    }
 }

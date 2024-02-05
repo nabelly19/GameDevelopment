@@ -26,8 +26,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime LastDamage { get; set; }
-    public int CoinWallet { get; set; } = 0;
-    public bool isInteractable { get; set; }
+    public int CoinWallet { get; set; } = 9999;
 
     private float Fx = 0f;
     private float Fy = 0;
@@ -217,8 +216,9 @@ public class Player : GameObject, IMoveable, IAttackable
 
             if (obj is IAttackable other)
             {
+                if (other.isVulnerable)
+                    other.ReceiveDamage();
                 this.lastAttack = now;
-                other.ReceiveDamage();
                 return;
             }
         }
@@ -332,17 +332,5 @@ public class Player : GameObject, IMoveable, IAttackable
         }
     }
 
-    public void ColectItem()
-    {
-        var collided = CollisionManager.GetCollisions(this);
-        foreach (var other in collided)
-        {
-            if (other is Coin coin)
-            {   
-                if(coin.VerifyCollisions())
-                    this.CoinWallet++;
-                return;
-            }
-    }
-    }
+    public void ColectCoin() => this.CoinWallet++;
 }

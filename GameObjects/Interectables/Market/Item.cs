@@ -29,10 +29,13 @@ public abstract class Item : GameObject, IItemMarket
         // MessageBox.Show(b.ToString());
     }
 
-    public virtual void BuyIt()
+    public virtual bool BuyIt()
     {
-        if (!this.isbought)
-            GameEngine.Current.Player.CoinWallet -= Value;
-        this.isbought = true;
+        var player = GameEngine.Current.Player;
+        if (this.isbought || player.CoinWallet < Value)
+            return false;
+        player.CoinWallet -= Value;
+        ItemManager.Bought.Add(this);
+        return true;
     }
 }

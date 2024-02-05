@@ -1,0 +1,45 @@
+- Mecanicas ( Boss fights, colisões, save, new game, resetar o progresso do jogador ao morrer :( )
+- Mapas
+- 1 Jogador
+- Buff Tier :)
+- Sistema de Evento de Moedas (Direito a 1 habilidade não permanente)
+	Durante a boss fight aparecera uma moeda random por ai( pq eh random neh) 
+	e se o jogador pegar a moeda, ele ficara com ela por periodo de uma vida.
+	Com a moeda, você possui o direito de comprar habilidades na sala de espera
+	de algum boss. Caso você morra com moedas, todas as moedas que foram pegas naquela vida
+	e nao foram gastas serão perdidas.
+
+- Sistema de Upgrade (Habilidades)
+	Vantagens não podem ser absurdas.
+	Vantagens Propostas:
+		1. Dash
+		2. Tp???
+        
+		3. HP+
+		4. Chance baixa de dar mais dano (Dano Crítico)
+		5. Se curar (Tempo de recarga alto, fica parado, Precisa + balanceamento)
+		6. Perry
+		7. Slow Down Time  :(	
+		8. +Vel
+		9. Atq mais Rapido (Para alguns boss da pra dar double damage)
+		10. +Range
+		11. Wind Blade (faltou ventinho) - OK
+		12. Chance de Bloqueio
+		
+->
+BP = Player - Boss
+
+==============
+Como o jogo ira funcionar
+Tela preta -> Studios KKKKKKK -> Menu (Novo jogo, Carregar Jogo, Créditos)
+
+?? Cutscene ??
+
+Mapa: Sala de Espera -> Mapa: Sala Boss 1
+
+Arregaça o boss na porrada
+
+
+
+Boss Morto -> Seleçao de 1 Carta (3 cartas, boas ou ruins)
+  

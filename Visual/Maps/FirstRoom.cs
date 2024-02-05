@@ -75,4 +75,8 @@ public class FirstRoom : Map
 
         // }
     }
+
+    public override void Update()
+    {
+    }
 }
