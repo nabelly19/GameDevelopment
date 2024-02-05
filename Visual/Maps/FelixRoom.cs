@@ -63,6 +63,11 @@ public class FelixRoom : Map
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2.65f
         );
+        AddRandomCoin();
+    }
+
+    private void AddRandomCoin()
+    {
         var query = from obj in CollisionManager.GameObjects where obj is Coin select obj;
         if (query.FirstOrDefault() is null)
             CollisionManager.AddGameObject(
