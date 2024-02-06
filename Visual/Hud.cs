@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 public static class HUD
 {
-    coisas fixas
     public static List<GameObject> Objs { get; private set; } = new();
 
     public static void AddObject(GameObject obj) => Objs.Add(obj);

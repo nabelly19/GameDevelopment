@@ -13,7 +13,7 @@ public class FelixRoom : Map
 
     public FelixRoom(PictureBox pb)
     {
-        this.image = Resources.Maps[2];
+        this.image = Resources.Maps[1];
         this.PlayerSpawn = new PointF(
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
