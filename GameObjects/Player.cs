@@ -44,6 +44,13 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
+        var diff = DateTime.Now - lastAttack;
+        var millis = diff.TotalMilliseconds;
+        if (millis > 10000)
+        {
+            this.lastAttack = DateTime.Now;
+            CollisionManager.RemoveGameObject(Weapon);
+        }
         VerifyVulnerability();
         updateHitbox();
         this.Weapon.Update();
@@ -205,6 +212,8 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Attack()
     {
+        GameEngine.Current.AddObjectToCollisionList(Weapon);
+
         var now = DateTime.Now;
         var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;

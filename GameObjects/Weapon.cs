@@ -19,6 +19,7 @@ public class Weapon : GameObject, IMoveable
         : base(name, x, y, height, width)
     {
         this.player = player;
+        setImage("../../../assets/Sprites/Spear/lanca.png");
         DisableHitbox();
     }
 
@@ -32,7 +33,7 @@ public class Weapon : GameObject, IMoveable
     public override void Update() => CreateHitbox(this.X, this.Y, this.Width, this.Height);
 
     public override void Render(Graphics g, PictureBox pb) =>
-        g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawImage(this.Sprite, new PointF(this.X, this.Y));
 
     public void Move()
     {

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 public class LitchRoom : Map {
     //  public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
     public override List<GameObject> GameObjects { get; set; } = new();
-    public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
@@ -65,7 +64,7 @@ public class LitchRoom : Map {
         this.GameObjects.Add(w17);
  
         this.GameObjects.Add(new Coin("Moeda", 900, 700));
-        this.GameObjects.Add(Boss);
+       
     }
 
     public override void RenderBackground(Graphics g, PictureBox pb)
