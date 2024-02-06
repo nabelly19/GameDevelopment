@@ -19,7 +19,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public int baseHp = 3;
     public int Hp { get; set; } = 3;
     public bool isVulnerable { get; set; }
-    public bool isAlive { get; set; }
+    public bool isAlive { get; set; } = true;
     public float BaseAcceleration { get; set; } = 1_300;
     public float Ax { get; set; }
     public float Ay { get; set; }
@@ -81,6 +81,7 @@ public class Player : GameObject, IMoveable, IAttackable
         g.DrawString($"Player Speed: {BaseAcceleration}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
         g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 105);
         g.DrawString($"Player Block: {BlockChance}", SystemFonts.DefaultFont, Brushes.White, 10, 120);
+        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 135);
 
     }
 
@@ -312,7 +313,10 @@ public class Player : GameObject, IMoveable, IAttackable
     private void verifyLifeStatus()
     {
         if (this.Hp < 0)
+        {
             this.Hp = 0;
+            this.isAlive = false;
+        }
     }
 
     public void VerifyVulnerability()

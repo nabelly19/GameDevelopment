@@ -43,7 +43,7 @@ public static class MapManager
 
     public static void UpdateMap()
     {
-        Current.Update();
+        Current.UpdateBackground();
     }
 
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
@@ -73,8 +73,9 @@ public static class MapManager
         if (timer == 255)
         {
             Current = next;
-            AddMapObjects();
             setPlayerSpawn();
+            AddMapObjects();
+            GameEngine.Current.Sound.ChangeSoundLocation(Current.song);
             next = null;
         }
     }

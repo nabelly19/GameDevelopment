@@ -36,10 +36,10 @@ public class ItemCritChance : Item
     public override void ApplyBuff()
     {
         var player = GameEngine.Current.Player;
-        var futureBlockChance = player.BlockChance + this.percentageIncrease;
-        if (futureBlockChance >= 0.70)
+        var futureCritChance = player.CritChance + this.percentageIncrease;
+        if (futureCritChance >= 0.70)
             return;
 
-        player.BlockChance = futureBlockChance;
+        player.CritChance = futureCritChance;
     }
 }

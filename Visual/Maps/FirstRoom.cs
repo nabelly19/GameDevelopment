@@ -5,6 +5,9 @@ using System.Windows.Forms;
 public class FirstRoom : Map
 {
     public override List<GameObject> GameObjects { get; set; }
+    public override CoinSystem CoinSystem { get; set; }
+    public override System.Media.SoundPlayer song { get; set; }
+
     public FirstRoom(PictureBox pb)
     {
         GameObjects = new();
@@ -13,6 +16,7 @@ public class FirstRoom : Map
             (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
             Screen.PrimaryScreen.Bounds.Height / 2
             );
+        this.song = new ("../../../assets/songs/Haunt.wav");
         InitializeMapObjects(pb);
     }
 
@@ -76,7 +80,7 @@ public class FirstRoom : Map
         // }
     }
 
-    public override void Update()
+    public override void UpdateBackground()
     {
     }
 }

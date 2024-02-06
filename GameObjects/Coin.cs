@@ -45,6 +45,7 @@ public class Coin : GameObject, IMoveable
             {
                 player.ColectCoin();
                 CollisionManager.RemoveGameObject(this);
+                MapManager.Current.CoinSystem.Count++;
                 return true;
             }
         }

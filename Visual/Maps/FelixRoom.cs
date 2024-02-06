@@ -8,14 +8,17 @@ public class FelixRoom : Map
 {
     public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
     public override List<GameObject> GameObjects { get; set; } = new();
+    public override CoinSystem CoinSystem { get; set; }
+    public override System.Media.SoundPlayer song { get; set; }
 
     public FelixRoom(PictureBox pb)
     {
-        this.image = Resources.Maps[2];
+        this.image = Resources.Maps[1];
         this.PlayerSpawn = new PointF(
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
+        this.song = new ("../../../assets/songs/FelixTheme.wav");
         InitializeMapObjects(pb);
     }
 
@@ -25,6 +28,14 @@ public class FelixRoom : Map
         float height = this.image.Height;
         float x = Screen.PrimaryScreen.Bounds.Width / 2;
         float y = Screen.PrimaryScreen.Bounds.Height / 2;
+
+        this.CoinSystem = new CoinSystem
+        (
+            2 * x, 
+            2 * y,
+            5, 2
+        );
+
 
         var w1 = new Wall("Direita", x + 0.965f * width / 2, y, 50, height);
         var w2 = new Wall("Esquerda", x - 0.965f * width / 2, y, 50, height);
@@ -58,19 +69,21 @@ public class FelixRoom : Map
 
     public override void RenderBackground(Graphics g, PictureBox pb)
     {
+        g.DrawString($"Map Coins: {CoinSystem.Count}", SystemFonts.DefaultFont, Brushes.White, 10, 150);
+
         g.DrawImage(
             this.image,
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2.65f
         );
-        AddRandomCoin();
+        // AddRandomCoin();
     }
 
-    public override void Update()
+    public override void UpdateBackground()
     {
-        AddRandomCoin();
+        this.CoinSystem.Act();
     }
-    private void AddRandomCoin()
+    protected override void AddRandomCoin()
     {
         var query = from obj in CollisionManager.GameObjects where obj is Coin select obj;
         if (query.FirstOrDefault() is null)
