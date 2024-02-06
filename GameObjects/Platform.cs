@@ -5,6 +5,7 @@ using System.Windows.Forms;
 public class Platform : GameObject
 {
     public DateTime creationTime = DateTime.Now;
+    public bool isAttaking { get; private set; } = false;
     public float damageInitiationDelay = 3_750;
 
     public Platform(string name, float x, float y, float width, float height)
@@ -32,15 +33,18 @@ public class Platform : GameObject
             )
         )
         {
-            var diff = DateTime.Now - creationTime;
-            var millis = (float)diff.TotalMilliseconds;
-
-            if (millis > damageInitiationDelay)
+            if (isAttaking)
                 player.ReceiveDamage();
         }
+        var diff = DateTime.Now - creationTime;
+        var millis = (float)diff.TotalMilliseconds;
 
+        if (millis > damageInitiationDelay)
+            isAttaking = true;
+        else
+            isAttaking = false;
     }
 
-    public override void Render(Graphics g, PictureBox pb)
-    => g.DrawRectangle(Pens.White, this.Hitbox);
+    public override void Render(Graphics g, PictureBox pb) =>
+        g.DrawRectangle(Pens.White, this.Hitbox);
 }
