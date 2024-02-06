@@ -81,6 +81,7 @@ public class Player : GameObject, IMoveable, IAttackable
         g.DrawString($"Player Speed: {BaseAcceleration}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
         g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 105);
         g.DrawString($"Player Block: {BlockChance}", SystemFonts.DefaultFont, Brushes.White, 10, 120);
+        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 135);
 
     }
 

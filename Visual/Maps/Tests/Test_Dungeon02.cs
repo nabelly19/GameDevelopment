@@ -12,6 +12,7 @@ public class Test_Dungeon_02 : Map
         960, 540
     );
     public override List<GameObject> GameObjects { get; set; } = new();
+    public override CoinSystem CoinSystem { get; set; }
 
     public Test_Dungeon_02(PictureBox pb)
     {
@@ -66,7 +67,7 @@ public class Test_Dungeon_02 : Map
         // }
     }
 
-    public override void Update()
+    public override void UpdateBackground()
     {
         throw new System.NotImplementedException();
     }

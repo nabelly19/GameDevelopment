@@ -5,6 +5,8 @@ using System.Windows.Forms;
 public class FirstRoom : Map
 {
     public override List<GameObject> GameObjects { get; set; }
+    public override CoinSystem CoinSystem { get; set; }
+
     public FirstRoom(PictureBox pb)
     {
         GameObjects = new();
@@ -76,7 +78,7 @@ public class FirstRoom : Map
         // }
     }
 
-    public override void Update()
+    public override void UpdateBackground()
     {
     }
 }

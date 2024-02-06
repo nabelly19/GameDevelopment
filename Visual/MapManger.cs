@@ -43,7 +43,7 @@ public static class MapManager
 
     public static void UpdateMap()
     {
-        Current.Update();
+        Current.UpdateBackground();
     }
 
     public static void RenderMapOrFade(Graphics g, PictureBox pb)
