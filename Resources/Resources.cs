@@ -33,6 +33,10 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Card/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        Felix = Directory
+            .GetFiles("../../../assets/Sprites/Bosses/Felix", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
 
     }
 
@@ -40,5 +44,6 @@ public static class Resources
     public static List<Bitmap> Maps = new();
     public static List<Bitmap> Cards = new();
     public static List<Bitmap> Coins = new();
+    public static List <Bitmap> Felix = new();
     public static List<Bitmap> Market = new();
 }

@@ -102,8 +102,8 @@ public static class MapManager
     {
         InitializeMapList();
 
-        AddMap(new FirstRoom(pb));
-        AddMap(new FelixRoom(pb));
+        // AddMap(new FirstRoom(pb));
+        // AddMap(new FelixRoom(pb));
         AddMap(new LitchRoom(pb));
 
         Current = Maps[0];

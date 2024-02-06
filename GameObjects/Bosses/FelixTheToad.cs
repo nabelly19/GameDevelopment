@@ -1,8 +1,10 @@
 public class FelixTheToad : Boss
 {
+    public int Steps { get; set; } = 0;
+    public int SlowFrameRate { get; set; } = 0;
     public FelixTheToad(int x, int y)
-        // : base("Felix, the Toad", x, y, "./assets/Sprites/Bosses/Felix/felix.png")
-        : base("Felix, the Toad", x, y, "../../../assets/Sprites/Bosses/Felix/felix.png")
+        // : base("Felix, the Toad", x, y, "./assets/Sprites/Bosses/Felix/F_0.pn")
+        : base("Felix, the Toad", x, y, "../../../assets/Sprites/Bosses/Felix/F_0.png")
     {
         var s1 = new SpiralProjectileState();
         var s2 = new WaitState();
@@ -39,9 +41,29 @@ public class FelixTheToad : Boss
     public override void Update()
     {
         base.Update();
-        if (Manager.Current is WaitState || Manager.Current is VulnerabilityState || Manager.Current is PlatformState)
-            setImage("../../../assets/Sprites/Bosses/Felix/felix.png");
+        if (Manager.Current is WaitState)
+            AnimateBoss(0,3);
+        else if (Manager.Current is VulnerabilityState)
+            AnimateBoss(5,7);
+        else if (Manager.Current is PlatformState)
+            AnimateBoss(10,13);
         else
-            setImage("../../../assets/Sprites/Bosses/Felix/felix2.png");
+            AnimateBoss(0,3);
+    }
+
+    public void AnimateBoss(int start, int end)
+    {
+         SlowFrameRate += 1;
+
+        if (SlowFrameRate > 6)
+        {
+            Steps++;
+            SlowFrameRate = 0;
+        }
+
+        if (Steps > end || Steps < start)
+            Steps = start;
+
+        this.Sprite = Resources.Felix[Steps];
     }
 }
