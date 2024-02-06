@@ -75,6 +75,7 @@ public static class MapManager
             Current = next;
             AddMapObjects();
             setPlayerSpawn();
+            GameEngine.Current.Sound.ChangeSoundLocation(Current.song);
             next = null;
         }
     }

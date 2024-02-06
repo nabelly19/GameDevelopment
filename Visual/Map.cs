@@ -9,6 +9,7 @@ public abstract class Map
     public PointF PlayerSpawn { get; set; }
     public virtual Boss Boss { get; set; } = null;
     public abstract List<GameObject> GameObjects { get; set; }
+    public abstract System.Media.SoundPlayer song { get; set; }
     public abstract CoinSystem CoinSystem { get; set; }
     public virtual void SetBackground(Image img) { this.image = img; }
     public virtual void SetBackground(Bitmap img) { this.image = img; }

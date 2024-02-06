@@ -13,6 +13,7 @@ public class Test_Dungeon_02 : Map
     );
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
+    public override System.Media.SoundPlayer song { get; set; }
 
     public Test_Dungeon_02(PictureBox pb)
     {

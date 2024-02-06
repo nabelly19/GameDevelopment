@@ -9,6 +9,7 @@ public class FelixRoom : Map
     public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
+    public override System.Media.SoundPlayer song { get; set; }
 
     public FelixRoom(PictureBox pb)
     {
@@ -17,6 +18,7 @@ public class FelixRoom : Map
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
+        this.song = new ("../../../assets/songs/OMORI OST - 106 GOLDENVENGEANCE.wav");
         InitializeMapObjects(pb);
     }
 
