@@ -18,7 +18,7 @@ public class FelixRoom : Map
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
-        this.song = new ("../../../assets/songs/OMORI OST - 106 GOLDENVENGEANCE.wav");
+        this.song = new ("../../../assets/songs/FelixTheme.wav");
         InitializeMapObjects(pb);
     }
 

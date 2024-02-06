@@ -73,8 +73,8 @@ public static class MapManager
         if (timer == 255)
         {
             Current = next;
-            AddMapObjects();
             setPlayerSpawn();
+            AddMapObjects();
             GameEngine.Current.Sound.ChangeSoundLocation(Current.song);
             next = null;
         }
