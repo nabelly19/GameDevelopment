@@ -11,7 +11,7 @@ public class FelixRoom : Map
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
-    public FelixRoom(PictureBox pb)
+    public FelixRoom()
     {
         this.image = Resources.Maps[1];
         this.PlayerSpawn = new PointF(
@@ -19,10 +19,10 @@ public class FelixRoom : Map
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
         this.song = new ("../../../assets/songs/FelixTheme.wav");
-        InitializeMapObjects(pb);
+        InitializeMapObjects();
     }
 
-    public override void InitializeMapObjects(PictureBox pb)
+    public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;

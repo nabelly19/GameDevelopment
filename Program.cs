@@ -10,7 +10,7 @@ Graphics g = null;
 var pb = new PictureBox { Dock = DockStyle.Fill, };
 
 GameEngine.New();
-GameEngine.Current.StartUp(pb);
+GameEngine.Current.StartUp();
 
 var timer = new Timer { Interval = 1000 / 60, };
 

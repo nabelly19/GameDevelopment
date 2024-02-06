@@ -8,7 +8,7 @@ public class FirstRoom : Map
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
-    public FirstRoom(PictureBox pb)
+    public FirstRoom()
     {
         GameObjects = new();
         this.image = Resources.Maps[0];
@@ -17,10 +17,10 @@ public class FirstRoom : Map
             Screen.PrimaryScreen.Bounds.Height / 2
             );
         this.song = new ("../../../assets/songs/Haunt.wav");
-        InitializeMapObjects(pb);
+        InitializeMapObjects();
     }
 
-    public override void InitializeMapObjects(PictureBox pb)
+    public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;
