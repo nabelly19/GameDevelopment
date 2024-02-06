@@ -99,19 +99,33 @@ public static class MapManager
 
     public static void InitializeMapList() => Maps = new List<Map>();
 
-    public static void Start(PictureBox pb)
+    public static void Start()
     {
         InitializeMapList();
 
-        AddMap(new FirstRoom(pb));
-        AddMap(new FelixRoom(pb));
-        AddMap(new LitchRoom(pb));
+        AddMap(new FirstRoom());
+        AddMap(new FelixRoom());
+        AddMap(new LitchRoom());
 
         Current = Maps[0];
         setPlayerSpawn();
 
         GameEngine.Current.Player.X = Current.PlayerSpawn.X;
         GameEngine.Current.Player.Y = Current.PlayerSpawn.Y;
+        AddMapObjects();
+    }
+
+    public static void Restart()
+    {
+        InitializeMapList();
+
+        AddMap(new FirstRoom());
+        AddMap(new FelixRoom());
+        AddMap(new LitchRoom());
+
+        index = -1;
+        NextMap();
+
         AddMapObjects();
     }
 }

@@ -14,7 +14,7 @@ public abstract class Map
     public virtual void SetBackground(Image img) { this.image = img; }
     public virtual void SetBackground(Bitmap img) { this.image = img; }
     protected Image image = null;
-    public abstract void InitializeMapObjects(PictureBox pb);
+    public abstract void InitializeMapObjects();
     public abstract void UpdateBackground();
     public abstract void RenderBackground(Graphics g, PictureBox pb);
     protected virtual void AddRandomCoin()

@@ -8,17 +8,18 @@ public class LitchRoom : Map {
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
-    public LitchRoom(PictureBox pb)
+    public LitchRoom()
     {
         this.image = Resources.Maps[6];
         this.PlayerSpawn = new PointF(
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
-        InitializeMapObjects(pb);
+        this.song = new ("../../../assets/songs/Haunt.wav");
+        InitializeMapObjects();
     }
 
-     public override void InitializeMapObjects(PictureBox pb)
+     public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;

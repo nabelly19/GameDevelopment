@@ -321,7 +321,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     private void verifyLifeStatus()
     {
-        if (this.Hp < 0)
+        if (this.Hp <= 0)
         {
             this.Hp = 0;
             this.isAlive = false;

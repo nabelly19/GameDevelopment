@@ -11,18 +11,18 @@ public class Test_Dungeon01 : Map
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
-    public Test_Dungeon01(PictureBox pb)
+    public Test_Dungeon01()
     {
         this.image = Resources.Maps[0];
         this.PlayerSpawn = new PointF(
           (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
           Screen.PrimaryScreen.Bounds.Height / 2
           );
-        InitializeMapObjects(pb);
+        InitializeMapObjects();
     }
 
 
-    public override void InitializeMapObjects(PictureBox pb)
+    public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;

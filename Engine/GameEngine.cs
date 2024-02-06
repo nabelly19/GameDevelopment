@@ -15,17 +15,19 @@ public class GameEngine
 
     public void StartSound() => Sound.Play();
 
-    public void StartUp(PictureBox pb)
+    public void StartUp()
     {
         Resources.New();
         CollisionManager.ResetList();
-        MapManager.Start(pb);
+        MapManager.Start();
         ItemManager.Startup();
         StartSound();
     }
 
     public void Update()
     {
+        if (!this.Player.isAlive)
+            RestartGame();
         MapManager.UpdateMap();
 
         foreach (var gameObject in CollisionManager.GameObjects.ToList())
@@ -66,9 +68,12 @@ public class GameEngine
 
     public void AddMap(Map map) => MapManager.Maps.Add(map);
 
-    public void Run() { }
+    public void RestartGame() 
+    { 
+        MapManager.Restart();
 
-    public void Stop() { }
+        this.Player.isAlive = true;
+    }
 
     public static void New() => current = new GameEngine();
 }

@@ -15,16 +15,16 @@ public class Test_Dungeon_02 : Map
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
 
-    public Test_Dungeon_02(PictureBox pb)
+    public Test_Dungeon_02()
     {
         this.image = Resources.Maps[2];
         this.PlayerSpawn = new PointF(
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
             );
-        InitializeMapObjects(pb);
+        InitializeMapObjects();
     }
-    public override void InitializeMapObjects(PictureBox pb)
+    public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;
