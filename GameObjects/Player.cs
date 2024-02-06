@@ -16,6 +16,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public Weapon Weapon { get; set; }
 
+    public int baseHp = 3;
     public int Hp { get; set; } = 3;
     public bool isVulnerable { get; set; }
     public bool isAlive { get; set; }
@@ -75,9 +76,12 @@ public class Player : GameObject, IMoveable, IAttackable
             10,
             40
         );
-        g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
-        g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        g.DrawString($"Player VY: {Vy}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
+        g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
+        g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
+        g.DrawString($"Player Speed: {BaseAcceleration}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
+        g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 105);
+        g.DrawString($"Player Block: {BlockChance}", SystemFonts.DefaultFont, Brushes.White, 10, 120);
+
     }
 
     public void Move()
@@ -129,7 +133,7 @@ public class Player : GameObject, IMoveable, IAttackable
         Vx *= MathF.Pow(0.001f, secs);
         Vy *= MathF.Pow(0.001f, secs);
 
-        const int max = 600;
+        float max = BaseAcceleration * 0.4615f;
         if (Vx > max)
             Vx = max;
         else if (Vx < -max)
@@ -217,7 +221,11 @@ public class Player : GameObject, IMoveable, IAttackable
             if (obj is IAttackable other)
             {
                 if (other.isVulnerable)
+                {
+                    if (CritDamage())
+                        other.ReceiveDamage();
                     other.ReceiveDamage();
+                }
                 this.lastAttack = now;
                 return;
             }
@@ -333,4 +341,13 @@ public class Player : GameObject, IMoveable, IAttackable
     }
 
     public void ColectCoin() => this.CoinWallet++;
+
+    private bool CritDamage()
+    {
+        float chance = (float)Random.Shared.NextDouble();
+        if (chance < this.CritChance)
+            return true;
+        return false;
+
+    }
 }

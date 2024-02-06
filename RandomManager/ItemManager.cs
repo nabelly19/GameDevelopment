@@ -16,13 +16,25 @@ public static class ItemManager
         {
             new ItemWindBlade("Item Wind", 0, 0, 100, 100),
             new ItemWindBlade("Item Wind", 0, 0, 100, 100),
-            new ItemWindBlade("Item Wind", 0, 0, 100, 100)
+            new ItemWindBlade("Item Wind", 0, 0, 100, 100),
+            new ItemSpeed("Speed 5%", 0, 0, 100, 100, 0.5f),
+            new ItemSpeed("Speed 2%", 0, 0, 100, 100, 0.2f),
+            new ItemSpeed("Speed 1%", 0, 0, 100, 100, 0.01f),
+            new ItemHp("+1 Heart", 0, 0, 100, 100, 1),
+            new ItemHp("+2 Heart", 0, 0, 100, 100, 2),
+            new ItemBlockChance("Block 7%", 0, 0, 100, 100, 0.07f),
+            new ItemBlockChance("Block 5%", 0, 0, 100, 100, 0.05f),
+            new ItemBlockChance("Block 2%", 0, 0, 100, 100, 0.02f),
+            new ItemCritChance("Crit 5%", 0, 0, 100, 100, 0.05f),
+            new ItemCritChance("Crit 3%", 0, 0, 100, 100, 0.03f),
+            new ItemCritChance("Crit 1%", 0, 0, 100, 100, 0.01f),
+
         };
     }
 
     public static void getRandomItems(Item[] items)
     {
-        var rndItems = 
+        var rndItems =
             from it in AllItens
             orderby Random.Shared.Next()
             select it;
@@ -34,49 +46,3 @@ public static class ItemManager
             items[i] = selectedItens[i];
     }
 }
-
-// public void AddToMarket()
-// {
-//     int totalOccurrence = AllItens.Sum(item => item.itemOccurrence);
-//     int randomOcNumber = random.Next(totalOccurrence);
-//     int sumOcNumber = 0;
-
-//     if(temporary)
-//         addToChoice(item);
-//     else{
-//     foreach(Item item in ItemsPerMarketList)
-//     {
-//         sumOcNumber += item.itemOccurrence;
-//         if (randomOcNumber < sumOcNumber)
-//             this.ItemsPerMarketList.Add(item);
-//     }
-// }
-// }
-
-// public void addToChoice(Item temporaryItem)
-// {
-//     this.IsTemporary.Add(temporaryItem);
-// }
-
-// public void showChoice(Item item1, Item item2, Graphics g, PictureBox pb)
-// {
-//     int totalOccurrence = IsTemporary.Sum(item => item.itemOccurrence);
-//     int randomOcNumber = random.Next(totalOccurrence);
-//     int sumOcNumber = 0;
-
-//     foreach(Item item in IsTemporary)
-//     {
-//         sumOcNumber += item.itemOccurrence;
-//         if(randomOcNumber < sumOcNumber)
-//             item1 = item;
-//     }
-
-//     foreach(Item item in IsTemporary)
-//     {
-//         sumOcNumber += item.itemOccurrence;
-//         if(randomOcNumber < sumOcNumber)
-//             item2 = item;
-//     }
-
-
-// }

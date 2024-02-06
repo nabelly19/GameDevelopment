@@ -68,7 +68,15 @@ public class Projectile : GameObject, IMoveable
             if (collided is IAttackable other)
             {
                 if (other.isVulnerable)
+                {
+                    var chance = Random.Shared.NextDouble();
+                    if (chance < other.BlockChance)
+                    {
+                        CollisionManager.RemoveGameObject(this);
+                        return;
+                    }
                     other.ReceiveDamage();
+                }
                 else
                     return;
             }

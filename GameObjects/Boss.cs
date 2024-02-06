@@ -7,6 +7,7 @@ public class Boss : GameObject, IAttackable
     public StateManager Manager { get; private set; }
     public bool isVulnerable { get; set; }
     public bool isAlive { get; set; }
+    public float BlockChance { get; set; } = 0f;
 
     public Boss(string name, int x, int y, string sprite)
         : base(name, x, y, sprite)

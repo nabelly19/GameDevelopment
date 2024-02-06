@@ -66,8 +66,16 @@ public class TrackingProjectile : Projectile
             if (collided is IAttackable other)
             {
                 if (other.isVulnerable)
+                {
+                    var chance = Random.Shared.NextDouble();
+                    // MessageBox.Show(chance.ToString());
+                    if (chance < other.BlockChance)
+                    {
+                        CollisionManager.RemoveGameObject(this);
+                        return;
+                    }
                     other.ReceiveDamage();
-
+                }
             }
 
             CollisionManager.RemoveGameObject(this);
