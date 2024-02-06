@@ -18,6 +18,13 @@ public abstract class Item : GameObject, IItemMarket
     public override void Render(Graphics g, PictureBox pb)
     {
         g.DrawRectangle(Pens.Orange, this.Hitbox);
+        g.DrawString
+        (
+            this.Name, 
+            new Font("Arial", 26, FontStyle.Bold), 
+            Brushes.Gold, 
+            new PointF(this.Hitbox.X, this.Hitbox.Y)
+        );
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
@@ -29,13 +36,18 @@ public abstract class Item : GameObject, IItemMarket
         // MessageBox.Show(b.ToString());
     }
 
-    public virtual bool BuyIt()
+    public virtual void BuyIt()
     {
         var player = GameEngine.Current.Player;
-        if (this.isbought || player.CoinWallet < Value)
-            return false;
+
+        if (ItemManager.Bought.Contains(this))
+            return;
+        if (player.CoinWallet < Value)
+            return;
         player.CoinWallet -= Value;
         ItemManager.Bought.Add(this);
-        return true;
+        ApplyBuff();
     }
+
+    public virtual void ApplyBuff() {}
 }

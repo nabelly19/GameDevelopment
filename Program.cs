@@ -79,6 +79,10 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.MoveRight();
             break;
 
+        case Keys.R:
+            GameEngine.Current.Player.Hp = GameEngine.Current.Player.baseHp;
+            break;
+
         case Keys.F:
             GameEngine.Current.Player.Interact();
             break;
