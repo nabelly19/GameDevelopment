@@ -2,6 +2,7 @@ public abstract class State
 {
     private StateManager manager;
     public State nextState { get; private set; }
+    public bool isChain { get; set; } = false;
 
     public void SetContext(StateManager manager) => this.manager = manager;
 

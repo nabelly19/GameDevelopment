@@ -15,6 +15,7 @@ public class Projectile : GameObject, IMoveable
     public IAttackable Owner { get; set; } = null;
     public float Vx { get; set; }
     public float Vy { get; set; }
+    public bool isMoving { get; set; }
 
     public Projectile(
         string name,

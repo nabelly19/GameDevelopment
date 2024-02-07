@@ -23,11 +23,12 @@ public class Player : GameObject, IMoveable, IAttackable
     public float BaseAcceleration { get; set; } = 1_300;
     public float Ax { get; set; }
     public float Ay { get; set; }
+    public bool isMoving { get; set; } = true;
     public float Angle { get; set; }
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime LastDamage { get; set; }
-    public int CoinWallet { get; set; } = 9999;
+    public int CoinWallet { get; set; } = 0;
 
     private float Fx = 0f;
     private float Fy = 0;
@@ -118,6 +119,9 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(1, 4);
         else if ((int)Vy == 0)
             AnimatePLayer(17, 21);
+
+        if (!isMoving)
+            return;
 
         var OldX = X;
         var OldY = Y;
@@ -325,6 +329,7 @@ public class Player : GameObject, IMoveable, IAttackable
         {
             this.Hp = 0;
             this.isAlive = false;
+            this.isMoving = false;
         }
     }
 

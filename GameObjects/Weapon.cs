@@ -14,6 +14,7 @@ public class Weapon : GameObject, IMoveable
     public float Ay { get; set; }
     public float Vx { get; set; }
     public float Vy { get; set; }
+    public bool isMoving { get; set; }
 
     public Weapon(string name, int x, int y, float width, float height, Player player)
         : base(name, x, y, height, width)

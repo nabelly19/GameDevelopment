@@ -12,6 +12,7 @@ public class Coin : GameObject, IMoveable
     public int SlowFrameRate { get; set; } = 0;
     public float Vx { get; set; }
     public float Vy { get; set; }
+    public bool isMoving { get; set; }
 
     public Coin(string name, int x, int y)
         : base(name, x, y, Resources.Coins[0])

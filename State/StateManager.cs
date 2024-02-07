@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class StateManager
 {
     public State Current { get; set; } = null;
-    private List<State> initialStateList = new();
+    public List<State> initialStateList = new();
     private Boss boss = null;
 
     public StateManager(Boss boss)
@@ -16,6 +16,12 @@ public class StateManager
     {
         this.initialStateList.Add(state);
         state.SetContext(this);
+    }
+
+    public void AddContext(params State[] states)
+    {   
+        foreach (var state in states)
+            state.SetContext(this);
     }
 
     public void Act()

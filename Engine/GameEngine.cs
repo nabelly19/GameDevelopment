@@ -28,6 +28,7 @@ public class GameEngine
     {
         if (!this.Player.isAlive)
             RestartGame();
+        
         MapManager.UpdateMap();
 
         foreach (var gameObject in CollisionManager.GameObjects.ToList())
@@ -72,7 +73,6 @@ public class GameEngine
     { 
         MapManager.Restart();
 
-        this.Player.isAlive = true;
     }
 
     public static void New() => current = new GameEngine();
