@@ -44,5 +44,10 @@ public abstract class Map
                 )
             );
     }
+    protected virtual void AddObjects(params GameObject[] objs)
+    {
+        foreach (var obj in objs)
+            this.GameObjects.Add(obj);
+    }
     public virtual void ResetInteractables() {}
 }
