@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,10 +7,11 @@ public class MarketMenu : GameObject
 {
     private PointF[] itemsPosition =
     {
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.75f, Screen.PrimaryScreen.Bounds.Height / 2),
-        new(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2),
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 1.25f, Screen.PrimaryScreen.Bounds.Height / 2)
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 1.15f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f)
     };
+
     private RectangleF marketBackground { get; set; }
 
     public Item[] Items = new Item[3]; // tem 3 cartas neh

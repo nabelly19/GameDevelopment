@@ -21,6 +21,17 @@ public class ItemHp : Item
     ) : base(name, x, y, width, height) 
         => this.hpIncrease = hp;
 
+    public ItemHp
+    (
+        string name,
+        float x, 
+        float y,
+        int hp
+    ) : base(name, x, y, "../../../assets/Sprites/Card/c0.png")
+        => this.hpIncrease = hp;
+
+    
+
     public override void ApplyBuff()
     {
         var player = GameEngine.Current.Player;

@@ -15,15 +15,32 @@ public abstract class Item : GameObject, IItemMarket
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
+    protected Item(string name, float x, float y) 
+        : base(name, x, y, Resources.Cards[0])
+        
+    {
+        DisableHitbox();
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    }
+
+    protected Item(string name, float x, float y, string sprite) 
+        : base(name, x, y, sprite)
+        
+    {
+        DisableHitbox();
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    }
+
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.DrawRectangle(Pens.Orange, this.Hitbox);
+        g.DrawImage(this.Sprite, this.X, this.Y, 210, 300);
+        // g.DrawRectangle(Pens.Orange, this.Hitbox);
         g.DrawString
         (
             this.Name, 
-            new Font("Arial", 26, FontStyle.Bold), 
-            Brushes.Gold, 
-            new PointF(this.Hitbox.X, this.Hitbox.Y)
+            new Font("Pixelify Sans", 26, FontStyle.Bold), 
+            Brushes.White, 
+            new PointF(this.Hitbox.X + 20, this.Hitbox.Y + 2.10f * 120)
         );
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }

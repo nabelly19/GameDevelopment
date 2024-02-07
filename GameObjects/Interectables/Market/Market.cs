@@ -24,7 +24,6 @@ public class Market : Interactable
             showCurrentMarket();
     }
 
-
     public void showCurrentMarket()
     {
         foreach (var item in HUD.Objs.ToList())

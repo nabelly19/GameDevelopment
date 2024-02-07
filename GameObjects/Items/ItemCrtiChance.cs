@@ -21,6 +21,15 @@ public class ItemCritChance : Item
     ) : base(name, x, y, width, height) 
         => this.percentageIncrease = percentage;
 
+    public ItemCritChance
+    (
+        string name,
+        float x, 
+        float y,
+        float percentage
+    ) : base(name, x, y, "../../../assets/Sprites/Card/c11.png")
+        => this.percentageIncrease = percentage;
+
     public override void BuyIt()
     {
         var player = GameEngine.Current.Player;

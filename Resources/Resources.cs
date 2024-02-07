@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
@@ -41,6 +42,10 @@ public static class Resources
             .GetFiles("../../../assets/Wallpaper", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        IconHud = Directory
+            .GetFiles("../../../assets/Sprites/Life", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -50,4 +55,5 @@ public static class Resources
     public static List<Bitmap> Felix = new();
     public static List<Bitmap> Market = new();
     public static List<Bitmap> Wallpaper = new();
+    public static List<Bitmap> IconHud = new();
 }
