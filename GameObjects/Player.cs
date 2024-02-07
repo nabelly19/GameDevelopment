@@ -372,10 +372,11 @@ public class Player : GameObject, IMoveable, IAttackable
         foreach (var item in CollisionManager.GameObjects)
         {
             if (item is Interactable iter)
-            {
+            {   
+                if(!iter.isInteractable)
+                    return;
                 if (iter.VerifyCollisions())
                     iter.Interact();
-                return;
             }
         }
     }

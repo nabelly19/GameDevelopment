@@ -72,6 +72,7 @@ public static class MapManager
 
         if (timer == 255)
         {
+            Current.ResetInteractables();
             Current = next;
             setPlayerSpawn();
             AddMapObjects();

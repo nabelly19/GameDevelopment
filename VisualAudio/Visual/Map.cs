@@ -44,4 +44,5 @@ public abstract class Map
                 )
             );
     }
+    public virtual void ResetInteractables() {}
 }

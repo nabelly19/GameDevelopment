@@ -54,8 +54,6 @@ public class FelixTheToad : Boss
         // this.Manager.AddList(s5);
         // this.Manager.AddList(s6);
 
-        this.isVulnerable = true;
-        this.Hp = 1;
     }
 
     public override void Update()
@@ -67,6 +65,8 @@ public class FelixTheToad : Boss
             AnimateBoss(5,7);
         else if (Manager.Current is PlatformState)
             AnimateBoss(10,13);
+        else if (Manager.Current is DeadState)
+            this.Sprite = Resources.Felix[9];
         else
             AnimateBoss(0,3);
     }

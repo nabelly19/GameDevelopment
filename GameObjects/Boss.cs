@@ -17,9 +17,8 @@ public class Boss : GameObject, IAttackable
 
     public override void Update()
     {
-        if (verifyDeath())
-            return;
-            
+        verifyDeath();
+
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         Attack();
 
@@ -33,8 +32,7 @@ public class Boss : GameObject, IAttackable
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        if (verifyDeath())
-            return;
+
         g.DrawString($"HP Boss: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 20);
         g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
         g.DrawRectangle(Pens.White, this.Hitbox);
@@ -58,7 +56,7 @@ public class Boss : GameObject, IAttackable
     {
         if (!this.isAlive)
         {
-            CollisionManager.RemoveGameObject(this);
+            this.Manager.Current = new DeadState();
             return true;
         }
         return false;
