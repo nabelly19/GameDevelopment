@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-public class LitchRoom : Map {
-    //  public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
+public class LitchRoom : Map
+{
+    public override Boss Boss { get; set; } = new LichTheHottes(960, 540);
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
@@ -15,20 +16,29 @@ public class LitchRoom : Map {
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
-        this.song = new ("../../../assets/songs/LichTheme.wav");
+        this.song = new("../../../assets/songs/LichTheme.wav");
         InitializeMapObjects();
     }
 
-     public override void InitializeMapObjects()
+    public override void InitializeMapObjects()
     {
         float width = this.image.Width;
         float height = this.image.Height;
         float x = Screen.PrimaryScreen.Bounds.Width / 2;
         float y = Screen.PrimaryScreen.Bounds.Height / 2;
 
+        this.CoinSystem = new CoinSystem
+        (
+            2 * x * 0.13f,
+            2 * x - 2 * x * 0.13f,
+            2 * y * 0.297f,
+            2 * y - 2 * y * 0.297f,
+            5, 2
+        );
+
         var w1 = new Wall("Direita", x + 0.960f * width / 2, y, 50, height);
         var w2 = new Wall("Esquerda", x - 0.960f * width / 2, y, 50, height);
-        var w3 = new Wall("Cimaw", x - 0.568f * width, y - 0.55f * height / 2, width * width/2, 50);
+        var w3 = new Wall("Cimaw", x - 0.568f * width, y - 0.55f * height / 2, width * width / 2, 50);
         var w4 = new Wall("Arvore Esquerda", x - 0.712f * width / 2, y + 0.407f * height / 2, 75, 90);
         var w5 = new Wall("Arvore Esquerda", x - 0.822f * width / 2, y + 0.450f * height / 2, 439, 90);
         var w6 = new Wall("Arvore Esquerda", x - 0.777f * width / 2, y + 0.480f * height / 2, 580, 90);
@@ -43,29 +53,161 @@ public class LitchRoom : Map {
         var w14 = new Wall("Arvore Direita", x + 0.87f * width / 2, y + 0.428f * height / 2, 439, 90);
         var w15 = new Wall("Arvore Direita", x + 0.712f * width / 2, y + 0.407f * height / 2, 75, 90);
         var w16 = new Wall("Arvore Direita", x + 0.777f * width / 2, y + 0.525f * height / 2, 605, 90);
-        var w17  = new Wall("Arvore Direita", x + 0.7400f * width / 2, y + 0.550f * height / 2, 605, 90);
+        var w17 = new Wall("Arvore Direita", x + 0.7400f * width / 2, y + 0.550f * height / 2, 605, 90);
 
-        this.GameObjects.Add(w1);
-        this.GameObjects.Add(w2);
-        this.GameObjects.Add(w3);
-        this.GameObjects.Add(w4);
-        this.GameObjects.Add(w5);
-        this.GameObjects.Add(w6);
-        this.GameObjects.Add(w7);
-        this.GameObjects.Add(w8);
-        this.GameObjects.Add(w9);
-        this.GameObjects.Add(w10);
+        var b1_0 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            0,
+            Boss
+        );
 
-        this.GameObjects.Add(w11);
-        this.GameObjects.Add(w12);
-        this.GameObjects.Add(w13);
-        this.GameObjects.Add(w14);
-        this.GameObjects.Add(w15);
-        this.GameObjects.Add(w16);
-        this.GameObjects.Add(w17);
- 
-        this.GameObjects.Add(new Coin("Moeda", 900, 700));
-       
+        var b1_1 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            355,
+            Boss
+        );
+        var b1_2 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            5,
+            Boss
+        );
+        var b1_3 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            350,
+            Boss
+        );
+        var b1_4 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            10,
+            Boss
+        );
+        var b1_5 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            345,
+            Boss
+        );
+
+
+        var b2_0 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            120,
+            Boss
+        );
+        var b2_1 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            115,
+            Boss
+        );var b2_2 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            125,
+            Boss
+        );var b2_3 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            110,
+            Boss
+        );var b2_4 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            130,
+            Boss
+        );var b2_5 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            105,
+            Boss
+        );
+
+        var b3_0 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            240,
+            Boss
+        );
+        var b3_1 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            235,
+            Boss
+        );
+        var b3_2 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            245,
+            Boss
+        );var b3_3 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            230,
+            Boss
+        );var b3_4 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            250,
+            Boss
+        );var b3_5 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            25, 25,
+            225,
+            Boss
+        );
+
+        AddObjects(
+            w1, w2, w3, w4, w5, w6, w7, w8, w9, w10,
+            w11, w12, w13, w14, w15, w16, w17,
+
+            b1_0, b1_1, b1_2, b1_3, b1_4, b1_5,
+            b2_0, b2_1, b2_2, b2_3, b2_4, b2_5,
+            b3_0, b3_1, b3_2, b3_3, b3_4, b3_5
+        );
+        this.Boss = new LichTheHottes(960, 540);
+        this.GameObjects.Add(this.Boss);
+
     }
 
     public override void RenderBackground(Graphics g, PictureBox pb)
@@ -83,7 +225,8 @@ public class LitchRoom : Map {
         }
     }
 
-       public override void UpdateBackground()
+    public override void UpdateBackground()
     {
+        this.CoinSystem.Act();
     }
 }

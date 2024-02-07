@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +14,7 @@ public class Projectile : GameObject, IMoveable
     public float Ax { get; set; }
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
+    public List<GameObject> Owners { get; set;} = new();
     public float Vx { get; set; }
     public float Vy { get; set; }
     public bool isMoving { get; set; }
@@ -66,6 +68,8 @@ public class Projectile : GameObject, IMoveable
         {
             if (collided == Owner)
                 return;
+            if (this.Owners.Contains(collided))
+                return;
             if (collided is IAttackable other)
             {
                 if (other.isVulnerable)
@@ -96,5 +100,10 @@ public class Projectile : GameObject, IMoveable
         var radians = ToRadians(angle);
         this.X += BaseAcceleration * MathF.Cos(radians);
         this.Y += BaseAcceleration * MathF.Sin(radians);
+    }
+    public virtual void AddOwners(params GameObject[] objs)
+    {
+        foreach (var item in objs)
+            this.Owners.Add(item);
     }
 }

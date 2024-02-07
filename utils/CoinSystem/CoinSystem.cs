@@ -5,7 +5,9 @@ using System.Windows.Forms;
 public class CoinSystem
 {
     private DateTime last = DateTime.Now;
+    private float minWidth;
     private float maxWidth;
+    private float minHeight;
     private float maxHeight;
     public float Cooldown { get; set; }
     public int Count { get; set; }
@@ -14,7 +16,9 @@ public class CoinSystem
 
     public CoinSystem
     (
+        float minWid,
         float maxWid,
+        float minHei,
         float maxHei,
         float cd,
         int maxCollectedCoins
@@ -68,17 +72,15 @@ public class CoinSystem
             new Coin(
                 "Moeda",
                 Random.Shared.Next(
-                    (int)(this.maxWidth * 0.13f),
+                    (int)(this.minWidth),
                     (int)(
                         this.maxWidth
-                        - this.maxWidth * 0.13f
                     )
                 ),
                 Random.Shared.Next(
-                    (int)(this.maxHeight * 0.297f),
+                    (int)(this.minHeight),
                     (int)(
                         this.maxHeight
-                        - this.maxHeight * 0.297f
                     )
                 )
             )

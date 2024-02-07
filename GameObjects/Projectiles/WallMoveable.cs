@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 public class WallMoveable : RotateProjectile
 {
+    public float AngularSpeed { get; set; } = 0.5f;
     public WallMoveable(
         string name,
         float x,
@@ -22,10 +23,26 @@ public class WallMoveable : RotateProjectile
         IAttackable owner
     ) : base(name, x, y, 200, 200, direction, owner)
     {
+        this.Angle = direction;
         this.center = new(x, y);
         this.radius = 300;
-        RotatePoints();
-         EnableHitbox();
+        EnableHitbox();
+    }
+
+    public WallMoveable(
+        string name,
+        float x,
+        float y,
+        float width,
+        float height,
+        float direction,
+        IAttackable owner
+    ) : base(name, x, y, width, height, direction, owner)
+    {
+        this.Angle = direction;
+        this.center = new(x, y);
+        this.radius = 300;
+        EnableHitbox();
     }
 
     public override void Render(Graphics g, PictureBox pb) =>
@@ -78,7 +95,7 @@ public class WallMoveable : RotateProjectile
 
         this.X = this.center.X + this.radius * cos;
         this.Y = this.center.Y + this.radius * sin;
-        GoTo(Direction);
-        this.Angle += 0.2f;
+        // GoTo(Direction);
+        this.Angle += this.AngularSpeed;
     }
 }
