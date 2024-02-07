@@ -34,7 +34,6 @@ public class TrackingProjectile : Projectile
     {
         this.player = player;
         this.BaseAcceleration = 3;
-
     }
 
     public TrackingProjectile
@@ -52,6 +51,40 @@ public class TrackingProjectile : Projectile
         this.player = player;
     }
 
+    public TrackingProjectile
+    (
+        string name,
+        int x,
+        int y,
+        string sprite,
+        GameObject player,
+        List<GameObject> owners,
+        float direction,
+        IAttackable owner
+    ) : base(name, x, y, sprite, direction, owner)
+    {
+        this.BaseAcceleration = 3;
+        this.player = player;
+        this.Owners = owners;
+    }
+
+     public TrackingProjectile(
+        string name,
+        float x,
+        float y,
+        float width,
+        float height,
+        List<GameObject> owners,
+        GameObject player,
+        float direction,
+        IAttackable owner
+    ) : base(name, x, y, width, height, direction, owner)
+    {
+        this.player = player;
+        this.BaseAcceleration = 3;
+        this.Owners = owners;
+    }
+
     public override void Update()
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
@@ -61,6 +94,8 @@ public class TrackingProjectile : Projectile
         if (collided is not null)
         {
             if (collided == Owner)
+                return;
+            if (this.Owners.Contains(collided))
                 return;
 
             if (collided is IAttackable other)
@@ -82,6 +117,7 @@ public class TrackingProjectile : Projectile
         }
         if (CollisionManager.ScreenColision(this))
             CollisionManager.RemoveGameObject(this);
+
     }
 
     private void VerifyLifespan()
