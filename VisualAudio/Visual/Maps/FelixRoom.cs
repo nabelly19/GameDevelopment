@@ -31,8 +31,10 @@ public class FelixRoom : Map
 
         this.CoinSystem = new CoinSystem
         (
-            2 * x, 
-            2 * y,
+            2 * x * 0.13f,
+            2 * x - 2 * x * 0.13f, 
+            2 * y * 0.297f,
+            2* y - 2 * y * 0.297f,
             5, 2
         );
 
@@ -50,7 +52,21 @@ public class FelixRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            Random.Shared.Next(90, 179),
+            0,
+            Boss
+        );
+        var b2 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            90,
+            Boss
+        );
+        var b3 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            180,
             Boss
         );
 
@@ -65,6 +81,8 @@ public class FelixRoom : Map
         this.GameObjects.Add(w9);
         this.GameObjects.Add(Boss);
         this.GameObjects.Add(b);
+        this.GameObjects.Add(b2);
+        this.GameObjects.Add(b3);
     }
 
     public override void RenderBackground(Graphics g, PictureBox pb)
@@ -76,36 +94,11 @@ public class FelixRoom : Map
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2.65f
         );
-        // AddRandomCoin();
     }
 
     public override void UpdateBackground()
     {
         this.CoinSystem.Act();
-    }
-    protected override void AddRandomCoin()
-    {
-        var query = from obj in CollisionManager.GameObjects where obj is Coin select obj;
-        if (query.FirstOrDefault() is null)
-            CollisionManager.AddGameObject(
-                new Coin(
-                    "Moeda",
-                    Random.Shared.Next(
-                        (int)(Screen.PrimaryScreen.Bounds.Width * 0.13f),
-                        (int)(
-                            Screen.PrimaryScreen.Bounds.Width
-                            - Screen.PrimaryScreen.Bounds.Width * 0.13f
-                        )
-                    ),
-                    Random.Shared.Next(
-                        (int)(Screen.PrimaryScreen.Bounds.Height * 0.297f),
-                        (int)(
-                            Screen.PrimaryScreen.Bounds.Height
-                            - Screen.PrimaryScreen.Bounds.Height * 0.297f
-                        )
-                    )
-                )
-            );
     }
 
 }

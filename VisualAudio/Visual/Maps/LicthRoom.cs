@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 public class LitchRoom : Map {
-    //  public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
+    public override Boss Boss { get; set; } = new LichTheHottes(960, 540);
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
@@ -26,6 +26,15 @@ public class LitchRoom : Map {
         float x = Screen.PrimaryScreen.Bounds.Width / 2;
         float y = Screen.PrimaryScreen.Bounds.Height / 2;
 
+        this.CoinSystem = new CoinSystem
+        (
+            2 * x * 0.13f,
+            2 * x - 2 * x * 0.13f, 
+            2 * y * 0.297f,
+            2* y - 2 * y * 0.297f,
+            5, 2
+        );
+
         var w1 = new Wall("Direita", x + 0.960f * width / 2, y, 50, height);
         var w2 = new Wall("Esquerda", x - 0.960f * width / 2, y, 50, height);
         var w3 = new Wall("Cimaw", x - 0.568f * width, y - 0.55f * height / 2, width * width/2, 50);
@@ -45,6 +54,28 @@ public class LitchRoom : Map {
         var w16 = new Wall("Arvore Direita", x + 0.777f * width / 2, y + 0.525f * height / 2, 605, 90);
         var w17  = new Wall("Arvore Direita", x + 0.7400f * width / 2, y + 0.550f * height / 2, 605, 90);
 
+         var b = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            0,
+            Boss
+        );
+        var b2 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            120,
+            Boss
+        );
+        var b3 = new WallMoveable(
+            "Bullet",
+            Boss.X - 14,
+            Boss.Y - 50,
+            240,
+            Boss
+        );
+
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
         this.GameObjects.Add(w3);
@@ -63,8 +94,11 @@ public class LitchRoom : Map {
         this.GameObjects.Add(w15);
         this.GameObjects.Add(w16);
         this.GameObjects.Add(w17);
- 
-        this.GameObjects.Add(new Coin("Moeda", 900, 700));
+        this.GameObjects.Add(b);
+        this.GameObjects.Add(b2);
+        this.GameObjects.Add(b3);
+
+        this.GameObjects.Add(Boss);
        
     }
 
@@ -83,7 +117,8 @@ public class LitchRoom : Map {
         }
     }
 
-       public override void UpdateBackground()
+    public override void UpdateBackground()
     {
+        this.CoinSystem.Act();
     }
 }

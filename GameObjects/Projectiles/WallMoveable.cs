@@ -22,10 +22,10 @@ public class WallMoveable : RotateProjectile
         IAttackable owner
     ) : base(name, x, y, 200, 200, direction, owner)
     {
+        this.Angle = direction;
         this.center = new(x, y);
         this.radius = 300;
-        RotatePoints();
-         EnableHitbox();
+        EnableHitbox();
     }
 
     public override void Render(Graphics g, PictureBox pb) =>
@@ -78,7 +78,7 @@ public class WallMoveable : RotateProjectile
 
         this.X = this.center.X + this.radius * cos;
         this.Y = this.center.Y + this.radius * sin;
-        GoTo(Direction);
+        // GoTo(Direction);
         this.Angle += 0.2f;
     }
 }
