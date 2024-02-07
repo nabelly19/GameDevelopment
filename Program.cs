@@ -54,7 +54,6 @@ timer.Tick += (o, e) =>
 
 form.KeyDown += (o, e) =>
 {
-    StartScreen.SetgoStart();
     switch (e.KeyCode)
     {
         case Keys.Escape:
@@ -108,6 +107,7 @@ form.KeyDown += (o, e) =>
             MapManager.NextMap();
             break;
     }
+    StartScreen.SetgoStart();
 };
 
 form.KeyUp += (o, e) =>
