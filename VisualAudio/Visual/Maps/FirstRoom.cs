@@ -38,15 +38,14 @@ public class FirstRoom : Map
         var v3 = new Wall("BarriSS V2", x + 0.75f * width / 2, y - 0.45f * height / 2, 70, 90); // barriSS
 
         var i1 = new NextMapInteractable("Indo Ali", 
-        PlayerSpawn.X, PlayerSpawn.Y,
-            75, 75);
+        x + 0.45f * width, y,
+            100, 0.45f * height);
+            i1.Auto = true;
 
         var i2 = new Market("Coé", 
         x + 0.32f * width / 2, y - 0.20f * height / 2, 200, 90);
 
-        // var market = new Market("Maercadin kkk", 700, 700);
-
-        // this.GameObjects.Add(i1);
+        this.GameObjects.Add(i1);
         this.GameObjects.Add(i2);
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
@@ -69,8 +68,8 @@ public class FirstRoom : Map
 
         foreach (var item in this.GameObjects)
         {
-            // if (item is Interactable pog)
-                // g.DrawRectangle(Pens.Gold, item.Hitbox);
+            if (item is Interactable pog)
+                g.DrawRectangle(Pens.Gold, item.Hitbox);
         }
 
         // foreach (var wall in GameObjects)
@@ -82,5 +81,14 @@ public class FirstRoom : Map
 
     public override void UpdateBackground()
     {
+    }
+
+    public override void ResetInteractables()
+    {
+       foreach (var item in this.GameObjects)
+        {
+            if (item is Interactable pog)
+                pog.Interacted = false;
+        } 
     }
 }

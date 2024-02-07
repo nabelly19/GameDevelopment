@@ -54,8 +54,6 @@ public class FelixTheToad : Boss
         // this.Manager.AddList(s5);
         // this.Manager.AddList(s6);
 
-        this.isVulnerable = true;
-        this.Hp = 1;
     }
 
     public override void Update()

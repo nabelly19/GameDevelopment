@@ -5,6 +5,7 @@ using System.Windows.Forms;
 public abstract class Interactable : GameObject
 {
     public bool isInteractable { get; set; }
+    public bool Interacted = false;
 
     protected Interactable
     (
@@ -32,12 +33,16 @@ public abstract class Interactable : GameObject
 
     public bool VerifyCollisions()
     {
-        var collided = CollisionManager.GetCollisions(this).FirstOrDefault();
+        var collided = CollisionManager.GetCollisions(this);
         if (collided is not null)
         {
-            if (collided is Player p)
+            foreach (var col in collided)
             {
-                return true;
+                if (col is Player p)
+                {
+                    return true;
+                }
+                
             }
         }
         return false;
