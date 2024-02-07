@@ -75,10 +75,9 @@ public static class MapManager
             Current = next;
             setPlayerSpawn();
             AddMapObjects();
-            var player = GameEngine.Current.Player;
-            player.isAlive = true;
-            player.isMoving = true;
-            player.Hp = player.baseHp;
+            if(!GameEngine.Current.Player.isAlive)
+                GameEngine.Current.Player.Revive();
+            
             GameEngine.Current.Sound.ChangeSoundLocation(Current.song);
             next = null;
         }
@@ -129,7 +128,6 @@ public static class MapManager
 
         index = -1;
         NextMap();
-
         AddMapObjects();
     }
 }

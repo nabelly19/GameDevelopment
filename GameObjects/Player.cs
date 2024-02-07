@@ -1,9 +1,6 @@
 using System;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 public class Player : GameObject, IMoveable, IAttackable
 {
@@ -45,6 +42,9 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
+        if (!isMoving)
+            return;
+        
         var diff = DateTime.Now - lastAttack;
         var millis = diff.TotalMilliseconds;
         if (millis > 10000)
@@ -62,6 +62,13 @@ public class Player : GameObject, IMoveable, IAttackable
     {
         this.Fx += fx;
         this.Fy += fy;
+    }
+
+    public void Revive()
+    {
+        this.isAlive = true;
+        this.isMoving = true;
+        this.Hp = this.baseHp;
     }
 
     public override void Render(Graphics g, PictureBox pb)
@@ -86,15 +93,33 @@ public class Player : GameObject, IMoveable, IAttackable
         );
         g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
         g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        g.DrawString($"Player Speed: {BaseAcceleration}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
-        g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 105);
-        g.DrawString($"Player Block: {BlockChance}", SystemFonts.DefaultFont, Brushes.White, 10, 120);
+        g.DrawString(
+            $"Player Speed: {BaseAcceleration}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            90
+        );
+        g.DrawString(
+            $"Player Angle: {this.Angle}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            105
+        );
+        g.DrawString(
+            $"Player Block: {BlockChance}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            120
+        );
         g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 135);
-
     }
 
     public void Move()
     {
+
         var now = DateTime.Now;
         var time = now - last;
         var secs = (float)time.TotalSeconds;
@@ -119,9 +144,6 @@ public class Player : GameObject, IMoveable, IAttackable
             AnimatePLayer(1, 4);
         else if ((int)Vy == 0)
             AnimatePLayer(17, 21);
-
-        if (!isMoving)
-            return;
 
         var OldX = X;
         var OldY = Y;
@@ -366,6 +388,5 @@ public class Player : GameObject, IMoveable, IAttackable
         if (chance < this.CritChance)
             return true;
         return false;
-
     }
 }

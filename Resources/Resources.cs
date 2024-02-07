@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 public static class Resources
 {
     public static void New()
-    { 
+    {
         PlayerSprites = Directory
             // .GetFiles("./assets/Sprites/Player/NewSprite/", "*.png")
             .GetFiles("../../../assets/Sprites/Player/NewSprite/", "*.png")
@@ -25,11 +25,11 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Coin/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        Market = Directory 
+        Market = Directory
             .GetFiles("../../../assets/Sprites/Market/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-        Cards = Directory  
+        Cards = Directory
             .GetFiles("../../../assets/Sprites/Card/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
@@ -37,13 +37,17 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Bosses/Felix", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
-
+        Wallpaper = Directory
+            .GetFiles("../../../assets/Wallpaper", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
     }
 
     public static List<Bitmap> PlayerSprites = new();
     public static List<Bitmap> Maps = new();
     public static List<Bitmap> Cards = new();
     public static List<Bitmap> Coins = new();
-    public static List <Bitmap> Felix = new();
+    public static List<Bitmap> Felix = new();
     public static List<Bitmap> Market = new();
+    public static List<Bitmap> Wallpaper = new();
 }

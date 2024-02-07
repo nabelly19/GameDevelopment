@@ -21,14 +21,13 @@ public class GameEngine
         CollisionManager.ResetList();
         MapManager.Start();
         ItemManager.Startup();
-        StartSound();
     }
 
     public void Update()
     {
         if (!this.Player.isAlive)
             RestartGame();
-        
+
         MapManager.UpdateMap();
 
         foreach (var gameObject in CollisionManager.GameObjects.ToList())
@@ -37,7 +36,6 @@ public class GameEngine
                 continue;
             gameObject.Update();
         }
-
     }
 
     public void Render(Graphics g, PictureBox pb)
@@ -50,7 +48,7 @@ public class GameEngine
                 continue;
             gameObject.Render(g, pb);
         }
-        
+
         HUD.Render(g, pb);
 
         MapManager.DrawFadeRectangle(g);
@@ -69,10 +67,9 @@ public class GameEngine
 
     public void AddMap(Map map) => MapManager.Maps.Add(map);
 
-    public void RestartGame() 
-    { 
+    public void RestartGame()
+    {
         MapManager.Restart();
-
     }
 
     public static void New() => current = new GameEngine();

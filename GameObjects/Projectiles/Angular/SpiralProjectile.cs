@@ -41,7 +41,6 @@ public class SpiralProjectile : RotateProjectile
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
-        g.DrawRectangle(Pens.Red, new RectangleF(this.center.X,this.center.Y, 10, 10));
     }
 
     public override void RotatePoints()

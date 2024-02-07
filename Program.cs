@@ -40,9 +40,13 @@ timer.Tick += (o, e) =>
     fps = (int)(1 / (float)(DateTime.Now - lastchecked).TotalSeconds);
     lastchecked = DateTime.Now;
     g.Clear(Color.Black);
-
-    GameEngine.Current.Update();
-    GameEngine.Current.Render(g, pb);
+    if (StartScreen.goStart)
+    {
+        GameEngine.Current.Update();
+        GameEngine.Current.Render(g, pb);
+    }
+    else
+        StartScreen.Render(g, pb);
     g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
 
     pb.Refresh();
@@ -50,6 +54,7 @@ timer.Tick += (o, e) =>
 
 form.KeyDown += (o, e) =>
 {
+    StartScreen.SetgoStart();
     switch (e.KeyCode)
     {
         case Keys.Escape:
@@ -133,8 +138,6 @@ form.KeyUp += (o, e) =>
 pb.MouseDown += (o, e) =>
 {
     HUD.Update();
-    // MessageBox.Show(Cursor.Position.X.ToString());
-    // MessageBox.Show(Cursor.Position.Y.ToString());
 };
 
 Application.Run(form);
