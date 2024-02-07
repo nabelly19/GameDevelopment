@@ -15,7 +15,7 @@ public class LitchRoom : Map {
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
-        this.song = new ("../../../assets/songs/Haunt.wav");
+        this.song = new ("../../../assets/songs/LichTheme.wav");
         InitializeMapObjects();
     }
 
