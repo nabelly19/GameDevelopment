@@ -20,10 +20,10 @@ public class WallMoveable : RotateProjectile
         float y,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, 200, 200, direction, owner)
+    ) : base(name, x, y, 200* ClientScreenSize.WidthFactor, 200* ClientScreenSize.WidthFactor, direction, owner)
     {
         this.center = new(x, y);
-        this.radius = 300;
+        this.radius = 300* ClientScreenSize.WidthFactor;
         RotatePoints();
          EnableHitbox();
     }

@@ -17,7 +17,7 @@ public class Coin : GameObject, IMoveable
         : base(name, x, y, Resources.Coins[0])
     {
         DisableHitbox();
-        this.Height = 110;
+        this.Height = 110 * ClientScreenSize.WidthFactor;
         this.Width = 1.25555f * this.Height;
         this.Width /= 4f;
         this.Height /= 4f;
@@ -33,7 +33,6 @@ public class Coin : GameObject, IMoveable
     {
         Move();
         VerifyCollisions();
-      
     }
 
     public bool VerifyCollisions()

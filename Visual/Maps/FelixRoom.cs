@@ -6,7 +6,8 @@ using System.Windows.Forms;
 
 public class FelixRoom : Map
 {
-    public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
+    public override Boss Boss { get; set; } =
+        new FelixTheToad(960 * ClientScreenSize.WidthFactor, 540 * ClientScreenSize.HeightFactor);
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
@@ -18,38 +19,80 @@ public class FelixRoom : Map
             Screen.PrimaryScreen.Bounds.Width / 2,
             0.9f * Screen.PrimaryScreen.Bounds.Height
         );
-        this.song = new ("../../../assets/songs/FelixTheme.wav");
+        this.song = new("../../../assets/songs/FelixTheme.wav");
         InitializeMapObjects();
     }
 
     public override void InitializeMapObjects()
     {
-        float width = this.image.Width;
-        float height = this.image.Height;
+        float width = this.image.Width * ClientScreenSize.WidthFactor;
+        float height = this.image.Height * ClientScreenSize.HeightFactor;
         float x = Screen.PrimaryScreen.Bounds.Width / 2;
         float y = Screen.PrimaryScreen.Bounds.Height / 2;
 
-        this.CoinSystem = new CoinSystem
-        (
-            2 * x, 
-            2 * y,
-            5, 2
+        this.CoinSystem = new CoinSystem(2 * x, 2 * y, 5, 2);
+
+        var w1 = new Wall(
+            "Direita",
+            x + 0.965f * width / 2,
+            y,
+            50 * ClientScreenSize.WidthFactor,
+            height
         );
-
-
-        var w1 = new Wall("Direita", x + 0.965f * width / 2, y, 50, height);
-        var w2 = new Wall("Esquerda", x - 0.965f * width / 2, y, 50, height);
-        var w3 = new Wall("CimaEsquerda", x - 0.568f * width, y - 0.45f * height / 2, width, 50);
-        var w4 = new Wall("CimaDireita", x + 0.568f * width, y - 0.45f * height / 2, width, 50);
-        var w5 = new Wall("Portao", x, y - 447.5f, width, 50);
-        var w6 = new Wall("ParedeEsquedaPortao", 0.865f * x, y - 0.55f * height / 2, 50, 190);
-        var w7 = new Wall("ParedeDireitaPortao", 1.135f * x, y - 0.55f * height / 2, 50, 190);
-        var w8 = new Wall("LavaEsquerda", x - 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
-        var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
+        var w2 = new Wall(
+            "Esquerda",
+            x - 0.965f * width / 2,
+            y,
+            50 * ClientScreenSize.WidthFactor,
+            height
+        );
+        var w3 = new Wall(
+            "CimaEsquerda",
+            x - 0.568f * width,
+            y - 0.45f * height / 2,
+            width,
+            50 * ClientScreenSize.WidthFactor
+        );
+        var w4 = new Wall(
+            "CimaDireita",
+            x + 0.568f * width,
+            y - 0.45f * height / 2,
+            width,
+            50 * ClientScreenSize.WidthFactor
+        );
+        var w5 = new Wall("Portao", x, y - 447.5f, width, 50 * ClientScreenSize.WidthFactor);
+        var w6 = new Wall(
+            "ParedeEsquedaPortao",
+            0.865f * x,
+            y - 0.55f * height / 2,
+            50 * ClientScreenSize.WidthFactor,
+            190 * ClientScreenSize.WidthFactor
+        );
+        var w7 = new Wall(
+            "ParedeDireitaPortao",
+            1.135f * x,
+            y - 0.55f * height / 2,
+            50 * ClientScreenSize.WidthFactor,
+            190 * ClientScreenSize.WidthFactor
+        );
+        var w8 = new Wall(
+            "LavaEsquerda",
+            x - 0.87f * width / 2,
+            y - 0.375f * height / 2,
+            110 * ClientScreenSize.WidthFactor,
+            90 * ClientScreenSize.WidthFactor
+        );
+        var w9 = new Wall(
+            "LavaDireita",
+            x + 0.87f * width / 2,
+            y - 0.375f * height / 2,
+            110 * ClientScreenSize.WidthFactor,
+            90 * ClientScreenSize.WidthFactor
+        );
         var b = new WallMoveable(
             "Bullet",
-            Boss.X - 14,
-            Boss.Y - 50,
+            Boss.X - 14 * ClientScreenSize.WidthFactor,
+            Boss.Y - 50 * ClientScreenSize.WidthFactor,
             Random.Shared.Next(90, 179),
             Boss
         );
@@ -69,13 +112,26 @@ public class FelixRoom : Map
 
     public override void RenderBackground(Graphics g, PictureBox pb)
     {
-        g.DrawString($"Map Coins: {CoinSystem.Count}", SystemFonts.DefaultFont, Brushes.White, 10, 150);
+        g.DrawString(
+            $"Map Coins: {CoinSystem.Count}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            150
+        );
 
         g.DrawImage(
             this.image,
-            (pb.Width / 2) - this.image.Width / 2,
-            (pb.Height / 2) - this.image.Height / 2.65f
+            (pb.Width / 2) - this.image.Width * ClientScreenSize.WidthFactor / 2,
+            (pb.Height / 2) - this.image.Height * ClientScreenSize.WidthFactor / 2.65f,
+            this.image.Width * ClientScreenSize.WidthFactor,
+            this.image.Height * ClientScreenSize.WidthFactor
         );
+
+        foreach (var wall in GameObjects)
+        {
+            g.DrawRectangle(Pens.White, wall.Hitbox);
+        }
         // AddRandomCoin();
     }
 
@@ -83,6 +139,7 @@ public class FelixRoom : Map
     {
         this.CoinSystem.Act();
     }
+
     protected override void AddRandomCoin()
     {
         var query = from obj in CollisionManager.GameObjects where obj is Coin select obj;
@@ -107,5 +164,4 @@ public class FelixRoom : Map
                 )
             );
     }
-
 }

@@ -38,6 +38,8 @@ public class Player : GameObject, IMoveable, IAttackable
     {
         this.Height = 340;
         this.Width = 0.894118f * this.Height;
+        this.Height *= ClientScreenSize.WidthFactor;
+        this.Width *= ClientScreenSize.WidthFactor;
         this.Width /= 2.8f;
         this.Height /= 2.8f;
     }
@@ -85,11 +87,35 @@ public class Player : GameObject, IMoveable, IAttackable
         );
         g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
         g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        g.DrawString($"Player Speed: {BaseAcceleration}", SystemFonts.DefaultFont, Brushes.White, 10, 90);
-        g.DrawString($"Player Angle: {this.Angle}", SystemFonts.DefaultFont, Brushes.White, 10, 105);
-        g.DrawString($"Player Block: {BlockChance}", SystemFonts.DefaultFont, Brushes.White, 10, 120);
+        g.DrawString(
+            $"Screen Width: {ClientScreenSize.Width}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            195
+        );
+        g.DrawString(
+            $"Player Speed: {BaseAcceleration}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            90
+        );
+        g.DrawString(
+            $"Player Angle: {this.Angle}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            105
+        );
+        g.DrawString(
+            $"Player Block: {BlockChance}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            120
+        );
         g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 135);
-
     }
 
     public void Move()
@@ -208,7 +234,10 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Sprite = Resources.PlayerSprites[Steps];
     }
 
-    public void Info() { }
+    public void Info()
+    {
+        MessageBox.Show($"{this.Height} {this.Width}");
+    }
 
     public void Attack()
     {
@@ -253,8 +282,8 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X - this.Width / 2 - 25,
                             this.Y,
-                            50,
-                            50,
+                            50 * ClientScreenSize.WidthFactor,
+                            50 * ClientScreenSize.WidthFactor,
                             180,
                             this
                         )
@@ -266,8 +295,8 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X + this.Width / 2 + 25,
                             this.Y,
-                            50,
-                            50,
+                            50 * ClientScreenSize.WidthFactor,
+                            50 * ClientScreenSize.WidthFactor,
                             0,
                             this
                         )
@@ -282,8 +311,8 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y - this.Height / 2 - 25,
-                            50,
-                            50,
+                            50 * ClientScreenSize.WidthFactor,
+                            50 * ClientScreenSize.WidthFactor,
                             270,
                             this
                         )
@@ -295,8 +324,8 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y + this.Height / 2 + 25,
-                            50,
-                            50,
+                            50 * ClientScreenSize.WidthFactor,
+                            50 * ClientScreenSize.WidthFactor,
                             90,
                             this
                         )
@@ -338,7 +367,12 @@ public class Player : GameObject, IMoveable, IAttackable
     }
 
     private void updateHitbox() =>
-        CreateHitbox(this.X + 5, this.Y + 13, this.Width * 0.5f, this.Height - 35);
+        CreateHitbox(
+            this.X + 5 * ClientScreenSize.WidthFactor,
+            this.Y + 13 * ClientScreenSize.WidthFactor,
+            this.Width * 0.5f,
+            this.Height - 35 * ClientScreenSize.WidthFactor
+        );
 
     public void Interact()
     {
@@ -361,6 +395,5 @@ public class Player : GameObject, IMoveable, IAttackable
         if (chance < this.CritChance)
             return true;
         return false;
-
     }
 }

@@ -9,7 +9,8 @@ public class Boss : GameObject, IAttackable
     public bool isVulnerable { get; set; }
     public bool isAlive { get; set; }
     public float BlockChance { get; set; } = 0f;
-    public Boss(string name, int x, int y, string sprite)
+
+    public Boss(string name, float x, float y, string sprite)
         : base(name, x, y, sprite)
     {
         this.Manager = new(this);
@@ -30,8 +31,19 @@ public class Boss : GameObject, IAttackable
     public override void Render(Graphics g, PictureBox pb)
     {
         g.DrawString($"HP Boss: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 20);
-        g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        g.DrawImage(
+            this.Sprite,
+            this.X - this.Width * ClientScreenSize.WidthFactor / 2,
+            this.Y - this.Height * ClientScreenSize.WidthFactor / 2,
+            this.Width * ClientScreenSize.WidthFactor,
+            this.Height * ClientScreenSize.WidthFactor
+        );
+        CreateHitbox(
+            this.X,
+            this.Y,
+            this.Width * ClientScreenSize.WidthFactor,
+            this.Height * ClientScreenSize.WidthFactor
+        );
         g.DrawRectangle(Pens.White, this.Hitbox);
     }
 

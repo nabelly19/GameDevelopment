@@ -43,7 +43,7 @@ timer.Tick += (o, e) =>
 
     GameEngine.Current.Update();
     GameEngine.Current.Render(g, pb);
-    g.DrawString($"FPS: {fps.ToString()}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
+    g.DrawString($"FPS: {fps}", SystemFonts.DefaultFont, Brushes.White, 10, 10);
 
     pb.Refresh();
 };
@@ -57,7 +57,7 @@ form.KeyDown += (o, e) =>
             break;
 
         case Keys.I:
-            // GameEngine.Current.Player.Info();
+            GameEngine.Current.Player.Info();
             // MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
             // MessageBox.Show(Cursor.Position.X.ToString());
             // MessageBox.Show(Cursor.Position.Y.ToString());
