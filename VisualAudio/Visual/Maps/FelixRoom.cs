@@ -10,7 +10,8 @@ public class FelixRoom : Map
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
-
+    private Wall removable;
+    private Interactable addable;
     public FelixRoom()
     {
         this.image = Resources.Maps[1];
@@ -49,6 +50,15 @@ public class FelixRoom : Map
         var w8 = new Wall("LavaEsquerda", x - 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
         var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
 
+        var wV = new Wall("Removivel", x, y - 0.45f * height / 2, width, 50);
+        this.removable = wV;
+
+        var i1 = new NextMapInteractable("Indo Ali",
+                x, y - 0.45f * height / 2,
+                100, 100);
+        i1.Auto = true;
+        this.addable = i1;
+
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
         this.GameObjects.Add(w3);
@@ -58,6 +68,7 @@ public class FelixRoom : Map
         this.GameObjects.Add(w7);
         this.GameObjects.Add(w8);
         this.GameObjects.Add(w9);
+        this.GameObjects.Add(wV);
         this.GameObjects.Add(Boss);
     }
 
@@ -70,11 +81,22 @@ public class FelixRoom : Map
             (pb.Width / 2) - this.image.Width / 2,
             (pb.Height / 2) - this.image.Height / 2.65f
         );
+
+        foreach (var item in this.GameObjects)
+        {
+            item.Render(g, pb);
+        }
     }
 
     public override void UpdateBackground()
     {
         this.CoinSystem.Act();
+        if (!this.Boss.isAlive)
+        {
+           CollisionManager.RemoveGameObject(this.removable);
+            CollisionManager.AddGameObject(this.addable);
+        }
+            
     }
 
 }

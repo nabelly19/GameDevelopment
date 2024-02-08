@@ -27,16 +27,10 @@ public class FelixTheToad : Boss
         this.Manager.AddContext
         (
             s1, s4, s6, v1,
-            w3, 
-            c2, 
+            w3,
+            c2,
             c1_0, c1_1, c1_2, c1_3, c1_4
         );
-
-        // w3.SetContext(Manager);
-
-        // s1.SetContext(Manager);
-        // s4.SetContext(Manager);
-        // s6.SetContext(Manager);
 
         s1.SetNextState(w3);
         s4.SetNextState(w3);
@@ -51,33 +45,33 @@ public class FelixTheToad : Boss
         this.Manager.AddList(s1);
         this.Manager.AddList(v1);
         this.Manager.AddList(c1_0);
-        // this.Manager.AddList(s1);
-        // this.Manager.AddList(s2);
-        // this.Manager.AddList(s3);
-        // this.Manager.AddList(s4);
-        // this.Manager.AddList(s5);
-        // this.Manager.AddList(s6);
 
+        this.Hp = 1;
+        this.isVulnerable = true;
     }
 
     public override void Update()
     {
         base.Update();
         if (Manager.Current is WaitState)
-            AnimateBoss(0,3);
+            AnimateBoss(0, 3);
         else if (Manager.Current is VulnerabilityState)
-            AnimateBoss(5,7);
+            AnimateBoss(5, 7);
         else if (Manager.Current is PlatformState)
-            AnimateBoss(10,13);
+            AnimateBoss(10, 13);
         else if (Manager.Current is DeadState)
+        {
             this.Sprite = Resources.Felix[9];
+            this.isAlive = false;
+            MapManager.Current.SetBackground(Resources.Maps[7]);
+        }
         else
-            AnimateBoss(0,3);
+            AnimateBoss(0, 3);
     }
 
     public void AnimateBoss(int start, int end)
     {
-         SlowFrameRate += 1;
+        SlowFrameRate += 1;
 
         if (SlowFrameRate > 6)
         {
