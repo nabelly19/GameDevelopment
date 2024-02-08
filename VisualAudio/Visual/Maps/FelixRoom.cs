@@ -74,13 +74,13 @@ public class FelixRoom : Map
 
     public override void RenderBackground(Graphics g, PictureBox pb)
     {
-        g.DrawString(
-            $"Map Coins: {CoinSystem.Count}",
-            SystemFonts.DefaultFont,
-            Brushes.White,
-            10,
-            150
-        );
+        // g.DrawString(
+        //     $"Map Coins: {CoinSystem.Count}",
+        //     SystemFonts.DefaultFont,
+        //     Brushes.White,
+        //     10,
+        //     150
+        // );
 
         g.DrawImage(
             this.image,
@@ -89,10 +89,10 @@ public class FelixRoom : Map
             ClientScreen.ResponsiveX(this.image.Width),
             ClientScreen.ResponsiveY(this.image.Height)
         );
-        foreach (var wall in GameObjects)
-        {
-            g.DrawRectangle(Pens.White, wall.Hitbox);
-        }
+        // foreach (var wall in GameObjects)
+        // {
+        //     g.DrawRectangle(Pens.White, wall.Hitbox);
+        // }
     }
 
     public override void UpdateBackground()

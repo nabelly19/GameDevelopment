@@ -41,8 +41,8 @@ public class Boss : GameObject, IAttackable
         g.DrawString($"HP Boss: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 20);
         g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
         // g.DrawRectangle(Pens.White, this.Hitbox);
-        RenderState(g, pb);
-        g.DrawString($"Boss Vulnerability: {isVulnerable}", SystemFonts.DefaultFont, Brushes.White, 10, 170);
+        // RenderState(g, pb);
+        // g.DrawString($"Boss Vulnerability: {isVulnerable}", SystemFonts.DefaultFont, Brushes.White, 10, 170);
     }
 
     public virtual void ReceiveDamage()

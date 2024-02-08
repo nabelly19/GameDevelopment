@@ -2,6 +2,7 @@ public class FelixTheToad : Boss
 {
     public int Steps { get; set; } = 0;
     public int SlowFrameRate { get; set; } = 0;
+
     public FelixTheToad(float x, float y)
         // : base("Felix, the Toad", x, y, "./assets/Sprites/Bosses/Felix/F_0.pn")
         : base("Felix, the Toad", x, y, "../../../assets/Sprites/Bosses/Felix/F_0.png")
@@ -15,22 +16,13 @@ public class FelixTheToad : Boss
         var w3 = new WaitState(4); // 5 segundos
 
         var c2 = new SpiralWaveState();
-        var c1_0 = new SpiralProjectileState
-        {
-            isChain = true
-        };
+        var c1_0 = new SpiralProjectileState { isChain = true };
         var c1_1 = new SpiralWaveState();
         var c1_2 = new SpiralWaveState();
         var c1_3 = new VulnerabilityState(3);
         var c1_4 = new WaitState(2);
 
-        this.Manager.AddContext
-        (
-            s1, s4, s6, v1,
-            w3,
-            c2,
-            c1_0, c1_1, c1_2, c1_3, c1_4
-        );
+        this.Manager.AddContext(s1, s4, s6, v1, w3, c2, c1_0, c1_1, c1_2, c1_3, c1_4);
 
         s1.SetNextState(w3);
         s4.SetNextState(w3);
@@ -46,8 +38,8 @@ public class FelixTheToad : Boss
         this.Manager.AddList(v1);
         this.Manager.AddList(c1_0);
 
-        this.Hp = 1;
-        this.isVulnerable = true;
+        // this.Hp = 1;
+        // this.isVulnerable = true;
     }
 
     public override void Update()
@@ -61,6 +53,12 @@ public class FelixTheToad : Boss
             AnimateBoss(10, 13);
         else if (Manager.Current is DeadState)
         {
+            foreach (var gameObject in CollisionManager.GameObjects)
+            {
+                if (gameObject is Platform)
+                    CollisionManager.RemoveGameObject(gameObject);
+            }
+
             this.Sprite = Resources.Felix[9];
             this.isAlive = false;
             MapManager.Current.SetBackground(Resources.Maps[7]);

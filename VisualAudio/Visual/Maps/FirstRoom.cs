@@ -68,11 +68,11 @@ public class FirstRoom : Map
             ClientScreen.ResponsiveY(this.image.Height)
         );
 
-        foreach (var wall in GameObjects)
-        {
-            g.DrawRectangle(Pens.White, wall.Hitbox);
+        // foreach (var wall in GameObjects)
+        // {
+        //     g.DrawRectangle(Pens.White, wall.Hitbox);
 
-        }
+        // }
         foreach (var item in this.GameObjects)
         {
             if (item is Interactable pog)

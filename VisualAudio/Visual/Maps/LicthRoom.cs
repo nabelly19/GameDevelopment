@@ -220,11 +220,11 @@ public class LitchRoom : Map
             ClientScreen.ResponsiveY(this.image.Height)
         );
 
-        foreach (var wall in GameObjects)
-        {
-            g.DrawRectangle(Pens.White, wall.Hitbox);
+        // foreach (var wall in GameObjects)
+        // {
+        //     g.DrawRectangle(Pens.White, wall.Hitbox);
 
-        }
+        // }
     }
 
     public override void UpdateBackground()

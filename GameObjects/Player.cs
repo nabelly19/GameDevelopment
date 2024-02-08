@@ -26,7 +26,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime LastDamage { get; set; }
-    public int CoinWallet { get; set; } = 10;
+    public int CoinWallet { get; set; } = 0;
 
     private float Fx = 0f;
     private float Fy = 0;
@@ -98,30 +98,30 @@ public class Player : GameObject, IMoveable, IAttackable
             10,
             40
         );
-        g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
-        g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        g.DrawString(
-            $"Player Speed: {BaseAcceleration}",
-            SystemFonts.DefaultFont,
-            Brushes.White,
-            10,
-            90
-        );
-        g.DrawString(
-            $"Player Angle: {this.Angle}",
-            SystemFonts.DefaultFont,
-            Brushes.White,
-            10,
-            105
-        );
+        // g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
+        // g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
+        // g.DrawString(
+        //     $"Player Speed: {BaseAcceleration}",
+        //     SystemFonts.DefaultFont,
+        //     Brushes.White,
+        //     10,
+        //     90
+        // );
+        // g.DrawString(
+        //     $"Player Angle: {this.Angle}",
+        //     SystemFonts.DefaultFont,
+        //     Brushes.White,
+        //     10,
+        //     105
+        // );
         g.DrawString(
             $"Player Block: {BlockChance}",
             SystemFonts.DefaultFont,
             Brushes.White,
             10,
-            120
+            60
         );
-        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 135);
+        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 70);
     }
 
     public void Move()
