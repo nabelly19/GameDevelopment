@@ -38,8 +38,6 @@ public class LichTheHottes : Boss
         this.Manager.AddList(s3);
     }
 
-    public override void Update() { }
-
     public void AnimateBoss(int start, int end)
     {
         SlowFrameRate += 1;
