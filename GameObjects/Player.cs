@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 public class Player : GameObject, IMoveable, IAttackable
 {
@@ -40,17 +41,23 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Height /= 2.8f;
     }
 
+    int fpsCount = 0;
+
     public override void Update()
     {
         if (!isMoving)
             return;
-        
-        var diff = DateTime.Now - lastAttack;
-        var millis = diff.TotalMilliseconds;
-        if (millis > 10000)
+
+        if (Weapon.isAttaking)
         {
-            this.lastAttack = DateTime.Now;
-            CollisionManager.RemoveGameObject(Weapon);
+            fpsCount++;
+            if (fpsCount > 10)
+            {
+                fpsCount = 0;
+                Weapon.isAttaking = false;
+                this.lastAttack = DateTime.Now;
+                CollisionManager.RemoveGameObject(Weapon);
+            }
         }
         VerifyVulnerability();
         updateHitbox();
@@ -82,7 +89,6 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        g.DrawRectangle(Pens.White, this.Hitbox);
         g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         g.DrawString(
             $"Player Wallet: {this.CoinWallet}",
@@ -119,7 +125,6 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Move()
     {
-
         var now = DateTime.Now;
         var time = now - last;
         var secs = (float)time.TotalSeconds;
@@ -238,8 +243,6 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Attack()
     {
-        CollisionManager.RemoveGameObject(Weapon);
-        GameEngine.Current.AddObjectToCollisionList(Weapon);
 
         var now = DateTime.Now;
         var dt = now - this.lastAttack;
@@ -247,6 +250,10 @@ public class Player : GameObject, IMoveable, IAttackable
 
         if (secs < this.Weapon.AtkSpeed)
             return;
+
+        CollisionManager.RemoveGameObject(Weapon);
+        GameEngine.Current.AddObjectToCollisionList(Weapon);
+        this.Weapon.isAttaking = true;
 
         var collisions = CollisionManager.GetCollisions(this.Weapon);
 
@@ -330,7 +337,6 @@ public class Player : GameObject, IMoveable, IAttackable
                     );
                     break;
             }
-            this.lastAttack = now;
         }
     }
 
@@ -373,8 +379,8 @@ public class Player : GameObject, IMoveable, IAttackable
         foreach (var item in CollisionManager.GameObjects)
         {
             if (item is Interactable iter)
-            {   
-                if(!iter.isInteractable)
+            {
+                if (!iter.isInteractable)
                     return;
                 if (iter.VerifyCollisions())
                     iter.Interact();

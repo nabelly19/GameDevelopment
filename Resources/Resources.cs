@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 public static class Resources
 {
@@ -50,6 +46,10 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Bosses/Feiticeira", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        Weapon = Directory
+            .GetFiles("../../../assets/Sprites/Sword", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -61,4 +61,5 @@ public static class Resources
     public static List<Bitmap> Market = new();
     public static List<Bitmap> Wallpaper = new();
     public static List<Bitmap> IconHud = new();
+    public static List<Bitmap> Weapon = new();
 }
