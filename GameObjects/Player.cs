@@ -238,6 +238,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Attack()
     {
+        CollisionManager.RemoveGameObject(Weapon);
         GameEngine.Current.AddObjectToCollisionList(Weapon);
 
         var now = DateTime.Now;

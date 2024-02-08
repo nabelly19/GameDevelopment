@@ -46,6 +46,10 @@ public static class Resources
             .GetFiles("../../../assets/Sprites/Life", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        Litch = Directory
+            .GetFiles("../../../assets/Sprites/Bosses/Felix", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -53,6 +57,7 @@ public static class Resources
     public static List<Bitmap> Cards = new();
     public static List<Bitmap> Coins = new();
     public static List<Bitmap> Felix = new();
+    public static List<Bitmap> Litch = new();
     public static List<Bitmap> Market = new();
     public static List<Bitmap> Wallpaper = new();
     public static List<Bitmap> IconHud = new();
