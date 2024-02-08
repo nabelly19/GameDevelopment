@@ -48,10 +48,10 @@ public class XProjectileState : State
             y += 30;
 
         GameEngine.Current.AddObjectToCollisionList(
-            new XProjectile("Bullet", x1, y, 30, 30, 30, boss)
+            new XProjectile("Bullet", x1, y, ClientScreen.ResponsiveX(30), ClientScreen.ResponsiveY(30), 30, boss)
         );
         GameEngine.Current.AddObjectToCollisionList(
-            new XProjectile("Bullet", x2, y, 30, 30, 30, boss)
+            new XProjectile("Bullet", x2, y, ClientScreen.ResponsiveX(30), ClientScreen.ResponsiveY(30), 30, boss)
         );
     }
 

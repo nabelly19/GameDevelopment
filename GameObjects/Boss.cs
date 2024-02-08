@@ -9,12 +9,12 @@ public class Boss : GameObject, IAttackable
     public bool isVulnerable { get; set; }
     public bool isAlive { get; set; } = true;
     public float BlockChance { get; set; } = 0f;
-    public Boss(string name, int x, int y, string sprite)
+    public Boss(string name, float x, float y, string sprite)
         : base(name, x, y, sprite)
     {
         this.Manager = new(this);
     }
-    public Boss(string name, int x, int y, Image sprite)
+    public Boss(string name, float x, float y, Image sprite)
         : base(name, x, y, sprite)
     {
         this.Manager = new(this);

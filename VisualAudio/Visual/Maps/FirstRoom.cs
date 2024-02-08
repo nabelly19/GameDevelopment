@@ -13,8 +13,8 @@ public class FirstRoom : Map
         GameObjects = new();
         this.image = Resources.Maps[0];
         this.PlayerSpawn = new PointF(
-            (Screen.PrimaryScreen.Bounds.Width / 2) - 0.60f * this.image.Width / 2,
-            Screen.PrimaryScreen.Bounds.Height / 2
+            (ClientScreen.Width / 2) - 0.60f * ClientScreen.ResponsiveX(this.image.Width) / 2,
+            ClientScreen.Height / 2
             );
         this.song = new ("../../../assets/songs/Haunt.wav");
         InitializeMapObjects();
@@ -22,10 +22,10 @@ public class FirstRoom : Map
 
     public override void InitializeMapObjects()
     {
-        float width = this.image.Width;
-        float height = this.image.Height;
-        float x = Screen.PrimaryScreen.Bounds.Width / 2;
-        float y = Screen.PrimaryScreen.Bounds.Height / 2;
+        float width = ClientScreen.ResponsiveY(this.image.Width);
+        float height = ClientScreen.ResponsiveY(this.image.Height);
+        float x = ClientScreen.Width / 2;
+        float y = ClientScreen.Height / 2;
 
         var w1 = new Wall("Direita", x + width / 2, y, 100, height); // parede da direita
         var w2 = new Wall("Baixo", x, y + 0.8f * height / 2, width, 100); // parede de baixo
@@ -62,21 +62,23 @@ public class FirstRoom : Map
     {
         g.DrawImage(
             this.image,
-            (pb.Width / 2) - this.image.Width / 2,
-            (pb.Height / 2) - this.image.Height / 2
+            (ClientScreen.Width / 2) - ClientScreen.ResponsiveY(this.image.Width) / 2,
+            (ClientScreen.Height / 2) - ClientScreen.ResponsiveY(this.image.Height) / 2,
+            ClientScreen.ResponsiveY(this.image.Width),
+            ClientScreen.ResponsiveY(this.image.Height)
         );
 
+        foreach (var wall in GameObjects)
+        {
+            g.DrawRectangle(Pens.White, wall.Hitbox);
+
+        }
         foreach (var item in this.GameObjects)
         {
             if (item is Interactable pog)
                 g.DrawRectangle(Pens.Gold, item.Hitbox);
         }
 
-        // foreach (var wall in GameObjects)
-        // {
-        //     g.DrawRectangle(Pens.White, wall.Hitbox);
-
-        // }
     }
 
     public override void UpdateBackground()

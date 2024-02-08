@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public class LitchRoom : Map
 {
-    public override Boss Boss { get; set; } = new LichTheHottes(960, 540);
+    public override Boss Boss { get; set; } = new LichTheHottes(ClientScreen.ResponsiveX(960), ClientScreen.ResponsiveY(540));
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
@@ -22,10 +22,10 @@ public class LitchRoom : Map
 
     public override void InitializeMapObjects()
     {
-        float width = this.image.Width;
-        float height = this.image.Height;
-        float x = Screen.PrimaryScreen.Bounds.Width / 2;
-        float y = Screen.PrimaryScreen.Bounds.Height / 2;
+        float width = ClientScreen.ResponsiveX(this.image.Width);
+        float height = ClientScreen.ResponsiveY(this.image.Height);
+        float x = ClientScreen.Width / 2;
+        float y = ClientScreen.Height / 2;
 
         this.CoinSystem = new CoinSystem
         (
@@ -205,7 +205,7 @@ public class LitchRoom : Map
             b2_0, b2_1, b2_2, b2_3, b2_4, b2_5,
             b3_0, b3_1, b3_2, b3_3, b3_4, b3_5
         );
-        this.Boss = new LichTheHottes(960, 540, b1_0, b2_0, b3_0);
+        this.Boss = new LichTheHottes(ClientScreen.ResponsiveX(960), ClientScreen.ResponsiveY(540), b1_0, b2_0, b3_0);
         this.GameObjects.Add(this.Boss);
 
     }
@@ -214,8 +214,10 @@ public class LitchRoom : Map
     {
         g.DrawImage(
             this.image,
-            (pb.Width / 2) - this.image.Width / 2,
-            (pb.Height / 2) - this.image.Height / 2.65f
+            (ClientScreen.Width / 2) - ClientScreen.ResponsiveX(this.image.Width) / 2,
+            (ClientScreen.Height / 2) - ClientScreen.ResponsiveY(this.image.Height) / 2.65f,
+            ClientScreen.ResponsiveX(this.image.Width),
+            ClientScreen.ResponsiveY(this.image.Height)
         );
 
         foreach (var wall in GameObjects)

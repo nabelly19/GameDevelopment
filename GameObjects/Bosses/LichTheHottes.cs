@@ -3,7 +3,7 @@ public class LichTheHottes : Boss
     public int Steps { get; set; } = 0;
     public int SlowFrameRate { get; set; } = 0;
 
-    public LichTheHottes(int x, int y)
+    public LichTheHottes(float x, float y)
         : base("Lich, The Hottes", x, y, Resources.Litch[0])
     {
         var w3 = new WaitState(4); // 5 segundos
@@ -19,7 +19,7 @@ public class LichTheHottes : Boss
         this.Manager.AddList(s3);
     }
 
-    public LichTheHottes(int x, int y, params WallMoveable[] movableWalls)
+    public LichTheHottes(float x, float y, params WallMoveable[] movableWalls)
         : base("Lich, The Hottes", x, y, Resources.Litch[0])
     {
         var w3 = new WaitState(4); // 5 segundos

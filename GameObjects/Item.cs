@@ -15,17 +15,15 @@ public abstract class Item : GameObject, IItemMarket
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
-    protected Item(string name, float x, float y) 
+    protected Item(string name, float x, float y)
         : base(name, x, y, Resources.Cards[0])
-        
     {
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
-    protected Item(string name, float x, float y, string sprite) 
+    protected Item(string name, float x, float y, string sprite)
         : base(name, x, y, sprite)
-        
     {
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
@@ -33,15 +31,25 @@ public abstract class Item : GameObject, IItemMarket
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        CreateHitbox(this.X + 105, this.Y + 150, 210, 300);
-        g.DrawImage(this.Sprite, this.X, this.Y, 210, 300);
+        CreateHitbox(
+            this.X + ClientScreen.ResponsiveX(105),
+            this.Y + ClientScreen.ResponsiveX(150),
+            ClientScreen.ResponsiveX(210),
+            ClientScreen.ResponsiveX(300)
+        );
+        g.DrawImage(
+            this.Sprite,
+            this.X,
+            this.Y,
+            ClientScreen.ResponsiveX(210),
+            ClientScreen.ResponsiveX(300)
+        );
         g.DrawRectangle(Pens.Orange, this.Hitbox);
-        g.DrawString
-        (
-            this.Name, 
-            new Font("Pixelify Sans", 26, FontStyle.Bold), 
-            Brushes.White, 
-            new PointF(this.Hitbox.X + 20, this.Hitbox.Y + 1.95f * 120)
+        g.DrawString(
+            this.Name,
+            new Font("Pixelify Sans", ClientScreen.ResponsiveX(26), FontStyle.Bold),
+            Brushes.White,
+            new PointF(this.Hitbox.X +  ClientScreen.ResponsiveX(20), this.Hitbox.Y + 1.95f *  ClientScreen.ResponsiveX(120))
         );
     }
 
@@ -66,5 +74,5 @@ public abstract class Item : GameObject, IItemMarket
         ApplyBuff();
     }
 
-    public virtual void ApplyBuff() {}
+    public virtual void ApplyBuff() { }
 }

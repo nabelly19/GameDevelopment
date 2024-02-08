@@ -7,15 +7,15 @@ public class MarketMenu : GameObject
 {
     private PointF[] itemsPosition =
     {
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 1.15f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f)
+        new(ClientScreen.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
+        new(ClientScreen.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
+        new(ClientScreen.Width / 2 * 1.15f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f)
     };
 
       private PointF[] iconsPosition =
     {
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2),
-        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2)
+        new(ClientScreen.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2),
+        new(ClientScreen.Width / 2 * 0.90f, ClientScreen.Height / 2)
     };
 
     private RectangleF marketBackground { get; set; }
@@ -29,8 +29,8 @@ public class MarketMenu : GameObject
         CreateHitbox(0, 0, width, height);
         ItemManager.getRandomItems(this.Items);
         replaceItems();
-        float wid = Screen.PrimaryScreen.Bounds.Width / 2;
-        float hei = Screen.PrimaryScreen.Bounds.Height / 2;
+        float wid = ClientScreen.Width / 2;
+        float hei = ClientScreen.Height / 2;
 
         this.marketBackground = new RectangleF(wid - wid / 2, hei - hei / 2, wid, hei);
     }

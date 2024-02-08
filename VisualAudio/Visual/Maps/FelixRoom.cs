@@ -6,7 +6,8 @@ using System.Windows.Forms;
 
 public class FelixRoom : Map
 {
-    public override Boss Boss { get; set; } = new FelixTheToad(960, 540);
+    public override Boss Boss { get; set; } =
+        new FelixTheToad(ClientScreen.ResponsiveX(960), ClientScreen.ResponsiveY(540));
     public override List<GameObject> GameObjects { get; set; } = new();
     public override CoinSystem CoinSystem { get; set; }
     public override System.Media.SoundPlayer song { get; set; }
@@ -15,29 +16,28 @@ public class FelixRoom : Map
     {
         this.image = Resources.Maps[1];
         this.PlayerSpawn = new PointF(
-            Screen.PrimaryScreen.Bounds.Width / 2,
-            0.9f * Screen.PrimaryScreen.Bounds.Height
+            ClientScreen.Width / 2,
+            0.9f * ClientScreen.Height
         );
-        this.song = new ("../../../assets/songs/FelixTheme.wav");
+        this.song = new("../../../assets/songs/FelixTheme.wav");
         InitializeMapObjects();
     }
 
     public override void InitializeMapObjects()
     {
-        float width = this.image.Width;
-        float height = this.image.Height;
-        float x = Screen.PrimaryScreen.Bounds.Width / 2;
-        float y = Screen.PrimaryScreen.Bounds.Height / 2;
+        float width = ClientScreen.ResponsiveX(this.image.Width);
+        float height = ClientScreen.ResponsiveY(this.image.Height);
+        float x = ClientScreen.Width / 2;
+        float y = ClientScreen.Height / 2;
 
-        this.CoinSystem = new CoinSystem
-        (
+        this.CoinSystem = new CoinSystem(
             x - 0.87f * width / 2,
-            x + 0.87f * width / 2, 
+            x + 0.87f * width / 2,
             y - 0.375f * height / 2,
             2 * y,
-            5, 2
+            5,
+            2
         );
-
 
         var w1 = new Wall("Direita", x + 0.965f * width / 2, y, 50, height);
         var w2 = new Wall("Esquerda", x - 0.965f * width / 2, y, 50, height);
@@ -63,18 +63,29 @@ public class FelixRoom : Map
 
     public override void RenderBackground(Graphics g, PictureBox pb)
     {
-        g.DrawString($"Map Coins: {CoinSystem.Count}", SystemFonts.DefaultFont, Brushes.White, 10, 150);
+        g.DrawString(
+            $"Map Coins: {CoinSystem.Count}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            150
+        );
 
         g.DrawImage(
             this.image,
-            (pb.Width / 2) - this.image.Width / 2,
-            (pb.Height / 2) - this.image.Height / 2.65f
+            (ClientScreen.Width / 2) - ClientScreen.ResponsiveX(this.image.Width) / 2,
+            (ClientScreen.Height / 2) - ClientScreen.ResponsiveY(this.image.Height) / 2.65f,
+            ClientScreen.ResponsiveX(this.image.Width),
+            ClientScreen.ResponsiveY(this.image.Height)
         );
+        foreach (var wall in GameObjects)
+        {
+            g.DrawRectangle(Pens.White, wall.Hitbox);
+        }
     }
 
     public override void UpdateBackground()
     {
         this.CoinSystem.Act();
     }
-
 }
