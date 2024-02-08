@@ -21,7 +21,13 @@ public class Market : Interactable
     {
         g.FillRectangle(Brushes.Transparent, this.Hitbox);
         if (this.isVisible)
+        {
             showCurrentMarket();
+            var collided = CollisionManager.GetCollisions(this);
+            if (!collided.Contains(GameEngine.Current.Player))
+                Interact();
+
+        }
     }
 
     public void showCurrentMarket()
