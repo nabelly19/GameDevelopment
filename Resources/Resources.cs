@@ -47,7 +47,7 @@ public static class Resources
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
         Litch = Directory
-            .GetFiles("../../../assets/Sprites/Bosses/Felix", "*.png")
+            .GetFiles("../../../assets/Sprites/Bosses/Feiticeira", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
     }
