@@ -13,8 +13,8 @@ Project Description
 
 arrumar lugares da moeda - no meu computador funciona
 arrumar mercado
-	- compras no card inteiro
-	- andar com ele aberto
+	- compras no card inteiro - ok
+	- andar com ele aberto - ok
 	- arrumar sprite do mercado
 
 arrumar felix

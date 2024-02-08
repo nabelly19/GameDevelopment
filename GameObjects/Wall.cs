@@ -10,6 +10,6 @@ public class Wall : GameObject
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
-        // g.DrawRectangle(Pens.White, this.Hitbox);
+        g.DrawRectangle(Pens.White, this.Hitbox);
     }
 }

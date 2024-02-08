@@ -60,7 +60,9 @@ public class Boss : GameObject, IAttackable
     private bool verifyDeath()
     {
         if (!this.isAlive)
-        {
+        {   
+            if (this.Manager.Current is PlatformState)
+                this.Manager.Current.GoToNext();
             this.Manager.Current = new DeadState();
             return true;
         }
