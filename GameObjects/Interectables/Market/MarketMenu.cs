@@ -12,9 +12,16 @@ public class MarketMenu : GameObject
         new(Screen.PrimaryScreen.Bounds.Width / 2 * 1.15f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f)
     };
 
+      private PointF[] iconsPosition =
+    {
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2),
+        new(Screen.PrimaryScreen.Bounds.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2)
+    };
+
     private RectangleF marketBackground { get; set; }
 
     public Item[] Items = new Item[3]; // tem 3 cartas neh
+    public Icon[] Icons = new Icon[2]; // tem 2 icons neh
 
     public MarketMenu(string name, float x, float y, float width, float height)
         : base(name, x, y, width, height)
