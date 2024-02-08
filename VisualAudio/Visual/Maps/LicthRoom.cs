@@ -205,7 +205,7 @@ public class LitchRoom : Map
             b2_0, b2_1, b2_2, b2_3, b2_4, b2_5,
             b3_0, b3_1, b3_2, b3_3, b3_4, b3_5
         );
-        this.Boss = new LichTheHottes(960, 540);
+        this.Boss = new LichTheHottes(960, 540, b1_0, b2_0, b3_0);
         this.GameObjects.Add(this.Boss);
 
     }

@@ -10,11 +10,15 @@ public class FelixTheToad : Boss
         var s1 = new SpiralProjectileState();
         var s4 = new SpiralWaveState();
         var s6 = new PlatformState(3_500);
+        // var s5 = new CircularlWaveState();
         var v1 = new VulnerabilityState();
         var w3 = new WaitState(4); // 5 segundos
 
         var c2 = new SpiralWaveState();
-        var c1_0 = new SpiralProjectileState();
+        var c1_0 = new SpiralProjectileState
+        {
+            isChain = true
+        };
         var c1_1 = new SpiralWaveState();
         var c1_2 = new SpiralWaveState();
         var c1_3 = new VulnerabilityState(3);

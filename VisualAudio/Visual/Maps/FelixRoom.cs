@@ -31,10 +31,10 @@ public class FelixRoom : Map
 
         this.CoinSystem = new CoinSystem
         (
-            2 * x * 0.13f,
-            2 * x - 2 * x * 0.13f, 
-            2 * y * 0.297f,
-            2* y - 2 * y * 0.297f,
+            x - 0.87f * width / 2,
+            x + 0.87f * width / 2, 
+            y - 0.375f * height / 2,
+            2 * y,
             5, 2
         );
 
@@ -48,27 +48,6 @@ public class FelixRoom : Map
         var w7 = new Wall("ParedeDireitaPortao", 1.135f * x, y - 0.55f * height / 2, 50, 190);
         var w8 = new Wall("LavaEsquerda", x - 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
         var w9 = new Wall("LavaDireita", x + 0.87f * width / 2, y - 0.375f * height / 2, 110, 90);
-        var b = new WallMoveable(
-            "Bullet",
-            Boss.X - 14,
-            Boss.Y - 50,
-            0,
-            Boss
-        );
-        var b2 = new WallMoveable(
-            "Bullet",
-            Boss.X - 14,
-            Boss.Y - 50,
-            90,
-            Boss
-        );
-        var b3 = new WallMoveable(
-            "Bullet",
-            Boss.X - 14,
-            Boss.Y - 50,
-            180,
-            Boss
-        );
 
         this.GameObjects.Add(w1);
         this.GameObjects.Add(w2);
@@ -80,9 +59,6 @@ public class FelixRoom : Map
         this.GameObjects.Add(w8);
         this.GameObjects.Add(w9);
         this.GameObjects.Add(Boss);
-        this.GameObjects.Add(b);
-        this.GameObjects.Add(b2);
-        this.GameObjects.Add(b3);
     }
 
     public override void RenderBackground(Graphics g, PictureBox pb)

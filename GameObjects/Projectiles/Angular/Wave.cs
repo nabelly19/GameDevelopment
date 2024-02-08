@@ -25,5 +25,8 @@ public class Wave : Projectile
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         if (this.Sprite is not null)
             g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
+        else
+            g.DrawRectangle(Pens.White, this.Hitbox);
+
     }
 }

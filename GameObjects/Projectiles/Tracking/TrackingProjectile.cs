@@ -129,7 +129,6 @@ public class TrackingProjectile : Projectile
             CollisionManager.RemoveGameObject(this);
             dt = null;
         }
-
     }
 
     public override void Move()

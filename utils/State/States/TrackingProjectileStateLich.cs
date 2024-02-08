@@ -7,12 +7,21 @@ public class TrackingProjectileStateLich : State
     int count = 0;
     Player player;
     List<GameObject> Owners = new();
+    List<WallMoveable> Spawns = new();
     bool gotOwners = false;
 
     public TrackingProjectileStateLich(Player player)
     {
         this.player = player;
+    }
 
+    public TrackingProjectileStateLich(Player player, params WallMoveable[] spawnpoints)
+    {
+        this.player = player;
+        foreach (var wall in spawnpoints)
+        {
+            this.Spawns.Add(wall);
+        }
     }
 
     public override void Act(Boss boss)
@@ -25,7 +34,7 @@ public class TrackingProjectileStateLich : State
                     this.Owners.Add(item);
             }
         }
-        if (count == 1)
+        if (count == 3)
         {
             dt = null;
             count = 0;
@@ -41,8 +50,13 @@ public class TrackingProjectileStateLich : State
         count++;
         dt = null;
 
-        GameEngine.Current.AddObjectToCollisionList(
-            new TrackingProjectile("Bullet", boss.X, boss.Y, 25, 25, this.Owners, this.player, 30, boss)
-        );
+
+        foreach (var spawn in Spawns)
+        {
+            GameEngine.Current.AddObjectToCollisionList(
+                new TrackingProjectile("Bullet", spawn.X, spawn.Y, 25, 25, this.Owners, this.player, 30, boss)
+            );
+            
+        }
     }
 }
