@@ -14,6 +14,11 @@ public class Boss : GameObject, IAttackable
     {
         this.Manager = new(this);
     }
+    public Boss(string name, int x, int y, Image sprite)
+        : base(name, x, y, sprite)
+    {
+        this.Manager = new(this);
+    }
 
     public override void Update()
     {

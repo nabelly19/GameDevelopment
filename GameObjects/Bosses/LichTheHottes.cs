@@ -2,19 +2,16 @@ public class LichTheHottes : Boss
 {
     public int Steps { get; set; } = 0;
     public int SlowFrameRate { get; set; } = 0;
-    public LichTheHottes(int x, int y) 
-    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/L_0")
+
+    public LichTheHottes(int x, int y)
+        : base("Lich, The Hottes", x, y, Resources.Litch[0])
     {
         var w3 = new WaitState(4); // 5 segundos
-
+        
         var s1 = new TrackingProjectileStateLich(GameEngine.Current.Player);
         var s2 = new CircularlWaveState();
         var s3 = new XProjectileState(GameEngine.Current.Player);
-        this.Manager.AddContext(
-            w3,
-            s1, s2, s3
-            
-        );
+        this.Manager.AddContext(w3, s1, s2, s3);
 
         // this.Manager.AddList(w3);
         this.Manager.AddList(s1);
@@ -22,19 +19,15 @@ public class LichTheHottes : Boss
         this.Manager.AddList(s3);
     }
 
-     public LichTheHottes(int x, int y, params WallMoveable[] movableWalls) 
-    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/L_0)")
+    public LichTheHottes(int x, int y, params WallMoveable[] movableWalls)
+        : base("Lich, The Hottes", x, y, Resources.Litch[0])
     {
         var w3 = new WaitState(4); // 5 segundos
 
         var s1 = new TrackingProjectileStateLich(GameEngine.Current.Player, movableWalls);
         var s2 = new CircularlWaveState();
         var s3 = new XProjectileState(GameEngine.Current.Player);
-        this.Manager.AddContext(
-            w3,
-            s1, s2, s3
-            
-        );
+        this.Manager.AddContext(w3, s1, s2, s3);
 
         s1.SetNextState(w3);
         s2.SetNextState(w3);
@@ -45,14 +38,11 @@ public class LichTheHottes : Boss
         this.Manager.AddList(s3);
     }
 
-    public override void Update()
-    {
-        
-    }
+    public override void Update() { }
 
-     public void AnimateBoss(int start, int end)
+    public void AnimateBoss(int start, int end)
     {
-         SlowFrameRate += 1;
+        SlowFrameRate += 1;
 
         if (SlowFrameRate > 6)
         {
@@ -66,7 +56,7 @@ public class LichTheHottes : Boss
         this.Sprite = Resources.Felix[Steps];
     }
 
-     public override void ReceiveDamage()
+    public override void ReceiveDamage()
     {
         this.Hp--;
         if (this.Hp == 2)
