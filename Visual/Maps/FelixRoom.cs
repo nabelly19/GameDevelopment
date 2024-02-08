@@ -122,12 +122,15 @@ public class FelixRoom : Map
 
         g.DrawImage(
             this.image,
-            (pb.Width / 2) - this.image.Width * ClientScreenSize.WidthFactor / 2,
-            (pb.Height / 2) - this.image.Height * ClientScreenSize.WidthFactor / 2.65f,
-            this.image.Width * ClientScreenSize.WidthFactor,
-            this.image.Height * ClientScreenSize.WidthFactor
+            (pb.Width / 2) - this.image.Width * ClientScreenSize.HeightFactor / 2,
+            (pb.Height / 2) - this.image.Height * ClientScreenSize.HeightFactor / 2.65f,
+            this.image.Width * ClientScreenSize.HeightFactor,
+            this.image.Height * ClientScreenSize.HeightFactor
         );
 
+        g.DrawString($"PbW: {pb.Width}", SystemFonts.DefaultFont, Brushes.White, 10, 500);
+        g.DrawString($"PbH: {pb.Height}", SystemFonts.DefaultFont, Brushes.White, 10, 550);
+        
         foreach (var wall in GameObjects)
         {
             g.DrawRectangle(Pens.White, wall.Hitbox);
