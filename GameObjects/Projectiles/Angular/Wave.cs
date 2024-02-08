@@ -20,6 +20,9 @@ public class Wave : Projectile
     )
         : base(name, x, y, width, height, direction, owner) { }
 
+    public Wave(string name, float x, float y, Image image, IAttackable owner) 
+    : base(name, x, y, image, owner){ }
+
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);

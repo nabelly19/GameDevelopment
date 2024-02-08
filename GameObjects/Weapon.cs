@@ -15,12 +15,13 @@ public class Weapon : GameObject, IMoveable
     public float Vx { get; set; }
     public float Vy { get; set; }
     public bool isMoving { get; set; }
+    public bool isAttaking { get; set; }
 
     public Weapon(string name, int x, int y, float width, float height, Player player)
         : base(name, x, y, height, width)
     {
         this.player = player;
-        setImage("../../../assets/Sprites/Spear/lanca.png");
+        this.Sprite = Resources.Weapon[0];
         DisableHitbox();
     }
 
@@ -34,7 +35,13 @@ public class Weapon : GameObject, IMoveable
     public override void Update() => CreateHitbox(this.X, this.Y, this.Width, this.Height);
 
     public override void Render(Graphics g, PictureBox pb) =>
-        g.DrawImage(this.Sprite, new PointF(this.X, this.Y));
+        g.DrawImage(
+            this.Sprite,
+            this.X - this.Hitbox.Width / 2 ,
+            this.Y - this.Hitbox.Height / 2,
+            this.Hitbox.Width,
+            this.Hitbox.Height
+        );
 
     public void Move()
     {
@@ -48,6 +55,16 @@ public class Weapon : GameObject, IMoveable
             this.Ax = 0;
             this.Ay = player.Ay;
         }
+
+        if (Ax > 0)
+            this.Sprite = Resources.Weapon[0];
+        else if (Ax < 0)
+            this.Sprite = Resources.Weapon[3];
+
+        if (Ay > 0)
+            this.Sprite = Resources.Weapon[2];
+        else if (Ay < 0)
+            this.Sprite = Resources.Weapon[1];
 
         this.X =
             player.Hitbox.X

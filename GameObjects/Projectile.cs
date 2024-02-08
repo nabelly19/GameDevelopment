@@ -50,6 +50,14 @@ public class Projectile : GameObject, IMoveable
         DisableHitbox();
     }
 
+    public Projectile(string name, float x, float y, Image image,  IAttackable owner) 
+    : base(name, x, y, image)
+    {
+        this.Owner = owner;
+        this.Direction = 30;
+        DisableHitbox();
+    }
+
     public override void Render(Graphics g, PictureBox pb)
     => g.DrawRectangle(Pens.White, this.Hitbox);
 

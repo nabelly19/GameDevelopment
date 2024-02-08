@@ -21,7 +21,6 @@ public class MarketMenu : GameObject
     private RectangleF marketBackground { get; set; }
 
     public Item[] Items = new Item[3]; // tem 3 cartas neh
-    public Icon[] Icons = new Icon[2]; // tem 2 icons neh
 
     public MarketMenu(string name, float x, float y, float width, float height)
         : base(name, x, y, width, height)

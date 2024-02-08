@@ -33,16 +33,16 @@ public abstract class Item : GameObject, IItemMarket
 
     public override void Render(Graphics g, PictureBox pb)
     {
+        CreateHitbox(this.X + 105, this.Y + 150, 210, 300);
         g.DrawImage(this.Sprite, this.X, this.Y, 210, 300);
-        // g.DrawRectangle(Pens.Orange, this.Hitbox);
+        g.DrawRectangle(Pens.Orange, this.Hitbox);
         g.DrawString
         (
             this.Name, 
             new Font("Pixelify Sans", 26, FontStyle.Bold), 
             Brushes.White, 
-            new PointF(this.Hitbox.X + 20, this.Hitbox.Y + 2.10f * 120)
+            new PointF(this.Hitbox.X + 20, this.Hitbox.Y + 1.95f * 120)
         );
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
     public override void Update()

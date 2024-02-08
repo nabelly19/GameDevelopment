@@ -10,10 +10,17 @@ using System.Windows.Forms;
 
 public class Icons : GameObject
 {
-    public Icons(string name, float x, float y, string sprite) 
+    // public Icons(string name, float x, float y) 
+    // : base(name, x, y, Resources.IconHud[0])
+    // {
+    //     DisableHitbox();
+    //     CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    // }
+
+    public Icons(string name, float x, float y) 
     : base(name, x, y, Resources.IconHud[0])
     {
-        DisableHitbox();
+         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
@@ -26,8 +33,8 @@ public class Icons : GameObject
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.DrawImage(this.Sprite, this.X, this.Y, this.Width, this.Height);
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        g.DrawImage(this.Sprite, this.X, this.Y, this.Width, this.Height);
     }
 
 }
