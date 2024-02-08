@@ -1,7 +1,7 @@
 public class LichTheHottes : Boss
 {
     public LichTheHottes(int x, int y) 
-    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/litch.png")
+    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/L_0.png")
     {
         var w3 = new WaitState(4); // 5 segundos
 
@@ -21,7 +21,7 @@ public class LichTheHottes : Boss
     }
 
     public LichTheHottes(int x, int y, params WallMoveable[] movableWalls) 
-    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/litch.png")
+    : base("Lich, The Hottes", x, y, "../../../assets/Sprites/Bosses/Feiticeira/L_0.png")
     {
         var w3 = new WaitState(4); // 5 segundos
 

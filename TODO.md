@@ -27,6 +27,11 @@ arrumar Litch
 	- e fazer win
 	- chain do boss
 
+arrumar weapon
+
+resources implementar em todos os lugares
+
+
 ### In Progress
 
 - [ ] Maps + Hitboxes (Colision)  
