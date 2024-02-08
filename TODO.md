@@ -11,6 +11,22 @@ Project Description
 - [ ] Menu  
 - [ ] Cutscenes  
 
+arrumar lugares da moeda
+arrumar mercado
+	- compras no card inteiro
+	- andar com ele aberto
+	- arrumar sprite do mercado
+
+arrumar felix
+	- quando morrer trocar mapa e adicionar paredes ou algo do tipo
+	- ajeitar o sprite de plataforma dele
+	- chain do boss
+
+arrumar Litch 
+	- fazer os sprites dos ataques
+	- e fazer win
+	- chain do boss
+
 ### In Progress
 
 - [ ] Maps + Hitboxes (Colision)  
