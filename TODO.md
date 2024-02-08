@@ -11,7 +11,7 @@ Project Description
 - [ ] Menu  
 - [ ] Cutscenes  
 
-arrumar lugares da moeda
+arrumar lugares da moeda - no meu computador funciona
 arrumar mercado
 	- compras no card inteiro
 	- andar com ele aberto

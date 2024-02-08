@@ -17,8 +17,8 @@ public class LichTheHottes : Boss
         );
 
         // this.Manager.AddList(w3);
-        // this.Manager.AddList(s1);
-        // this.Manager.AddList(s2);
+        this.Manager.AddList(s1);
+        this.Manager.AddList(s2);
         this.Manager.AddList(s3);
     }
 
@@ -40,8 +40,8 @@ public class LichTheHottes : Boss
         s2.SetNextState(w3);
 
         // this.Manager.AddList(w3);
-        // this.Manager.AddList(s1);
-        // this.Manager.AddList(s2);
+        this.Manager.AddList(s1);
+        this.Manager.AddList(s2);
         this.Manager.AddList(s3);
     }
 

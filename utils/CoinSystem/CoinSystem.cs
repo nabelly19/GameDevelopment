@@ -24,7 +24,9 @@ public class CoinSystem
         int maxCollectedCoins
     )
     {
+        this.minWidth = minWid;
         this.maxWidth = maxWid;
+        this.minHeight = minHei;
         this.maxHeight = maxHei;
 
         this.Cooldown = cd;

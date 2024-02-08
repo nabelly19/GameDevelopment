@@ -33,8 +33,9 @@ public abstract class Item : GameObject, IItemMarket
 
     public override void Render(Graphics g, PictureBox pb)
     {
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
         g.DrawImage(this.Sprite, this.X, this.Y, 210, 300);
-        // g.DrawRectangle(Pens.Orange, this.Hitbox);
+        g.DrawRectangle(Pens.Orange, this.Hitbox);
         g.DrawString
         (
             this.Name, 
@@ -42,7 +43,6 @@ public abstract class Item : GameObject, IItemMarket
             Brushes.White, 
             new PointF(this.Hitbox.X + 20, this.Hitbox.Y + 2.10f * 120)
         );
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
     public override void Update()

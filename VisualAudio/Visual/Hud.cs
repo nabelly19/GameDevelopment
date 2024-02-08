@@ -15,6 +15,10 @@ public static class HUD
 
     public static void Render(Graphics g, PictureBox pb)
     {
+        if (StaticObjs.Count == 0)
+            return;
+        foreach (var obj in StaticObjs)
+            obj.Render(g, pb);
         if (Objs.Count == 0)
             return;
         foreach (var obj in Objs)

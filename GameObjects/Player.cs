@@ -26,7 +26,7 @@ public class Player : GameObject, IMoveable, IAttackable
     public float CritChance { get; set; }
     public float BlockChance { get; set; }
     public DateTime LastDamage { get; set; }
-    public int CoinWallet { get; set; } = 0;
+    public int CoinWallet { get; set; } = 10;
 
     private float Fx = 0f;
     private float Fy = 0;
