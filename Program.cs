@@ -108,9 +108,9 @@ form.KeyDown += (o, e) =>
         // case Keys.Y:
         //     MapManager.PreviousMap();
         //     break;
-        case Keys.T:
-            MapManager.NextMap();
-            break;
+        // case Keys.T:
+        //     MapManager.NextMap();
+        //     break;
     }
 };
 
