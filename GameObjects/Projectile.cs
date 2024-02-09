@@ -14,7 +14,7 @@ public class Projectile : GameObject, IMoveable
     public float Ax { get; set; }
     public float Ay { get; set; }
     public IAttackable Owner { get; set; } = null;
-    public List<GameObject> Owners { get; set;} = new();
+    public List<GameObject> Owners { get; set; } = new();
     public float Vx { get; set; }
     public float Vy { get; set; }
     public bool isMoving { get; set; }
@@ -24,6 +24,21 @@ public class Projectile : GameObject, IMoveable
         float x,
         float y,
         string sprite,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite)
+    {
+        this.Direction = direction;
+        this.Owner = owner;
+        DisableHitbox();
+    }
+
+    public Projectile(
+        string name,
+        float x,
+        float y,
+        Image sprite,
         float direction,
         IAttackable owner
     )
@@ -50,8 +65,8 @@ public class Projectile : GameObject, IMoveable
         DisableHitbox();
     }
 
-    public override void Render(Graphics g, PictureBox pb)
-    => g.DrawRectangle(Pens.White, this.Hitbox);
+    public override void Render(Graphics g, PictureBox pb) =>
+        g.DrawRectangle(Pens.White, this.Hitbox);
 
     public virtual void Move()
     {
@@ -101,6 +116,7 @@ public class Projectile : GameObject, IMoveable
         this.X += BaseAcceleration * MathF.Cos(radians);
         this.Y += BaseAcceleration * MathF.Sin(radians);
     }
+
     public virtual void AddOwners(params GameObject[] objs)
     {
         foreach (var item in objs)

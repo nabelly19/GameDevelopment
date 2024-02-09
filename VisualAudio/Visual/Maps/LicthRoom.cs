@@ -59,7 +59,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             0,
             Boss
         );
@@ -68,7 +68,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             355,
             Boss
         );
@@ -76,7 +76,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             5,
             Boss
         );
@@ -84,7 +84,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             350,
             Boss
         );
@@ -92,7 +92,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             10,
             Boss
         );
@@ -100,7 +100,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             345,
             Boss
         );
@@ -110,7 +110,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             120,
             Boss
         );
@@ -118,35 +118,35 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             115,
             Boss
         );var b2_2 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             125,
             Boss
         );var b2_3 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             110,
             Boss
         );var b2_4 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             130,
             Boss
         );var b2_5 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             105,
             Boss
         );
@@ -155,7 +155,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             240,
             Boss
         );
@@ -163,7 +163,7 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             235,
             Boss
         );
@@ -171,28 +171,28 @@ public class LitchRoom : Map
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             245,
             Boss
         );var b3_3 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             230,
             Boss
         );var b3_4 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             250,
             Boss
         );var b3_5 = new WallMoveable(
             "Bullet",
             Boss.X - 14,
             Boss.Y - 50,
-            25, 25,
+            Resources.RotateWall,
             225,
             Boss
         );

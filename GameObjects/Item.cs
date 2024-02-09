@@ -28,6 +28,12 @@ public abstract class Item : GameObject, IItemMarket
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
+    protected Item(string name, float x, float y, Image sprite)
+        : base(name, x, y, sprite)
+    {
+        DisableHitbox();
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    }
 
     public override void Render(Graphics g, PictureBox pb)
     {
@@ -44,12 +50,17 @@ public abstract class Item : GameObject, IItemMarket
             ClientScreen.ResponsiveX(210),
             ClientScreen.ResponsiveX(300)
         );
-        g.DrawRectangle(Pens.Orange, this.Hitbox);
         g.DrawString(
             this.Name,
             new Font("Pixelify Sans", ClientScreen.ResponsiveX(26), FontStyle.Bold),
             Brushes.White,
             new PointF(this.Hitbox.X +  ClientScreen.ResponsiveX(20), this.Hitbox.Y + 1.95f *  ClientScreen.ResponsiveX(120))
+        );
+        g.DrawString(
+            $"Price: {this.Value.ToString()}",
+            new Font("Pixelify Sans", ClientScreen.ResponsiveX(26), FontStyle.Bold),
+            Brushes.White,
+            new PointF(this.Hitbox.X +  ClientScreen.ResponsiveX(20), this.Hitbox.Y + 1.95f *  ClientScreen.ResponsiveX(160))
         );
     }
 
@@ -58,7 +69,6 @@ public abstract class Item : GameObject, IItemMarket
         var b = CollisionManager.CheckCollisionByPoint(this.Hitbox, Cursor.Position);
         if (b)
             BuyIt();
-        // MessageBox.Show(b.ToString());
     }
 
     public virtual void BuyIt()

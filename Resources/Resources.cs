@@ -39,7 +39,7 @@ public static class Resources
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
         IconHud = Directory
-            .GetFiles("assets/Sprites/Life", "*.png")
+            .GetFiles("assets/Sprites/Life/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
         Litch = Directory
@@ -50,6 +50,34 @@ public static class Resources
             .GetFiles("assets/Sprites/Sword", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        Spiral = Directory
+            .GetFiles("assets/Sprites/Projectiles/Spiral", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList()[0];
+        Beam = Directory
+            .GetFiles("assets/Sprites/Projectiles/Beam", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList()[0];
+        Tracking = Directory
+            .GetFiles("assets/Sprites/Projectiles/Tracking", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
+        RotateWall = Directory
+            .GetFiles("assets/Sprites/Projectiles/RotateWall", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList()[0];
+        X = Directory
+            .GetFiles("assets/Sprites/projectiles/X", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
+        LitchSpiral = Directory
+            .GetFiles("assets/Sprites/Projectiles/LitchSpiral", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList()[0];
+        Death = Directory
+        .GetFiles("assets/Sprites/Player/Death", "*.png")
+        .Select(file => Bitmap.FromFile(file) as Bitmap)
+        .ToList();    
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -62,4 +90,11 @@ public static class Resources
     public static List<Bitmap> Wallpaper = new();
     public static List<Bitmap> IconHud = new();
     public static List<Bitmap> Weapon = new();
+    public static List<Bitmap> Tracking = new();
+    public static List<Bitmap> X = new();
+    public static List <Bitmap> Death = new();
+     public static Bitmap Spiral;
+    public static Bitmap LitchSpiral;
+    public static Bitmap Beam;
+    public static Bitmap RotateWall;
 }

@@ -45,6 +45,12 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
+        if(!this.isAlive)
+        {
+
+            AnimateThisDeathPlayer(0,2);
+        }
+
         if (!isMoving)
             return;
 
@@ -73,12 +79,13 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Revive()
     {
-        this.Fx = this.Fy = 0;
+        this.Vx = this.Vy = this.Fx = this.Fy = 0;
         this.isAlive = true;
         this.isMoving = true;
         this.Hp = this.baseHp;
     }
 
+        Font font = new Font("Arial", ClientScreen.HeightFactor * 35);
     public override void Render(Graphics g, PictureBox pb)
     {
         g.DrawImage(
@@ -90,38 +97,34 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
         g.DrawString(
-            $"Player Wallet: {this.CoinWallet}",
-            SystemFonts.DefaultFont,
+            $"{this.Hp}",
+            font,
             Brushes.White,
-            10,
-            40
+            ClientScreen.ResponsiveX(80),
+            ClientScreen.ResponsiveY(35)
         );
-        // g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
-        // g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        // g.DrawString(
-        //     $"Player Speed: {BaseAcceleration}",
-        //     SystemFonts.DefaultFont,
-        //     Brushes.White,
-        //     10,
-        //     90
-        // );
-        // g.DrawString(
-        //     $"Player Angle: {this.Angle}",
-        //     SystemFonts.DefaultFont,
-        //     Brushes.White,
-        //     10,
-        //     105
-        // );
+        g.DrawString(
+            $"{this.CoinWallet}x",
+            font,
+            Brushes.White,
+            ClientScreen.ResponsiveX(80),
+            ClientScreen.ResponsiveY(85)
+        );
         g.DrawString(
             $"Player Block: {BlockChance}",
             SystemFonts.DefaultFont,
             Brushes.White,
             10,
-            60
+            ClientScreen.ResponsiveY(185)
         );
-        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 70);
+        g.DrawString(
+            $"Player CC: {CritChance}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            ClientScreen.ResponsiveY(200)
+        );
     }
 
     public void Move()
@@ -240,11 +243,28 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Sprite = Resources.PlayerSprites[Steps];
     }
 
+      public void AnimateThisDeathPlayer(int start, int end)
+    {
+        SlowFrameRate += 1;
+        for (int i = 0; i < 2; i ++)
+        {
+            if (SlowFrameRate > 3)
+            {
+                Steps++;
+                SlowFrameRate = 0;
+            }
+            if(Steps > 2)
+                return;
+            this.Sprite = Resources.Death[Steps];
+            
+        }  
+    }
+
+
     public void Info() { }
 
     public void Attack()
     {
-
         var now = DateTime.Now;
         var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;
@@ -253,7 +273,8 @@ public class Player : GameObject, IMoveable, IAttackable
             return;
 
         CollisionManager.RemoveGameObject(Weapon);
-        GameEngine.Current.AddObjectToCollisionList(Weapon);
+        if (!Weapon.WindBlade)
+            GameEngine.Current.AddObjectToCollisionList(Weapon);
         this.Weapon.isAttaking = true;
 
         var collisions = CollisionManager.GetCollisions(this.Weapon);
@@ -288,8 +309,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X - this.Width / 2 - 25,
                             this.Y,
-                            50,
-                            50,
+                            Resources.Weapon[3],
                             180,
                             this
                         )
@@ -301,8 +321,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X + this.Width / 2 + 25,
                             this.Y,
-                            50,
-                            50,
+                            Resources.Weapon[0],
                             0,
                             this
                         )
@@ -317,8 +336,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y - this.Height / 2 - 25,
-                            50,
-                            50,
+                            Resources.Weapon[1],
                             270,
                             this
                         )
@@ -330,8 +348,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y + this.Height / 2 + 25,
-                            50,
-                            50,
+                            Resources.Weapon[2],
                             90,
                             this
                         )
@@ -359,8 +376,10 @@ public class Player : GameObject, IMoveable, IAttackable
         {
             this.Hp = 0;
             this.Fx = this.Fy = 0;
+            this.Steps = 0;
             this.isAlive = false;
             this.isMoving = false;
+           
         }
     }
 

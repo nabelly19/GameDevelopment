@@ -26,7 +26,7 @@ public abstract class Interactable : GameObject
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.FillRectangle(Brushes.Gold, this.Hitbox);
+        // g.FillRectangle(Brushes.Gold, this.Hitbox);
     }
 
     public abstract void Interact();

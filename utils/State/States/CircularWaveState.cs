@@ -25,7 +25,7 @@ public class CircularlWaveState : State
         for (int i = 0; i < 180; i++)
         {
             GameEngine.Current.AddObjectToCollisionList(
-                new Wave("Bullet", boss.X, boss.Y, 25, 25, angle, boss)
+                new Wave("Bullet", boss.X, boss.Y, Resources.LitchSpiral, angle, boss)
             );
             var a = CollisionManager.GameObjects;
             angle += 2;
