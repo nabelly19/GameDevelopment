@@ -90,13 +90,13 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        g.DrawString($"Player HP: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 30);
+        g.DrawString($"{this.Hp}", SystemFonts.DefaultFont, Brushes.White, 60, 35);
         g.DrawString(
-            $"Player Wallet: {this.CoinWallet}",
+            $"{this.CoinWallet}x",
             SystemFonts.DefaultFont,
             Brushes.White,
-            10,
-            40
+            0.94f * Screen.PrimaryScreen.Bounds.Width,
+            33
         );
         // g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
         // g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);

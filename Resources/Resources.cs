@@ -39,7 +39,7 @@ public static class Resources
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
         IconHud = Directory
-            .GetFiles("assets/Sprites/Life", "*.png")
+            .GetFiles("assets/Sprites/Life/", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
         Litch = Directory

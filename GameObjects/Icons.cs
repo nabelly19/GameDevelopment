@@ -24,12 +24,21 @@ public class Icons : GameObject
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
+    public Icons(string name, float x, float y, Image image) 
+    : base(name, x, y, image)
+    {
+        DisableHitbox();
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    }
+
     public Icons(string name, float x, float y, float width, float height)
         : base(name, x, y, width, height)
     {
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
+
+    
 
     public override void Render(Graphics g, PictureBox pb)
     {
