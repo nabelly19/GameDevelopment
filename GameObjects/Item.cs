@@ -50,12 +50,17 @@ public abstract class Item : GameObject, IItemMarket
             ClientScreen.ResponsiveX(210),
             ClientScreen.ResponsiveX(300)
         );
-        g.DrawRectangle(Pens.Orange, this.Hitbox);
         g.DrawString(
             this.Name,
             new Font("Pixelify Sans", ClientScreen.ResponsiveX(26), FontStyle.Bold),
             Brushes.White,
             new PointF(this.Hitbox.X +  ClientScreen.ResponsiveX(20), this.Hitbox.Y + 1.95f *  ClientScreen.ResponsiveX(120))
+        );
+        g.DrawString(
+            $"Price: {this.Value.ToString()}",
+            new Font("Pixelify Sans", ClientScreen.ResponsiveX(26), FontStyle.Bold),
+            Brushes.White,
+            new PointF(this.Hitbox.X +  ClientScreen.ResponsiveX(20), this.Hitbox.Y + 1.95f *  ClientScreen.ResponsiveX(160))
         );
     }
 
