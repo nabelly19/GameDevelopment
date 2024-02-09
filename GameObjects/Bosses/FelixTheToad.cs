@@ -86,6 +86,8 @@ public class FelixTheToad : Boss
     public override void ReceiveDamage()
     {
         this.Hp--;
+        if(this.Manager.Current is VulnerabilityState)
+            this.Manager.Current.GoToNext();
         if (this.Hp == 2)
         {
             var w2 = new WaitState(2);
