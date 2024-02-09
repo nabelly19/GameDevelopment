@@ -70,6 +70,10 @@ public static class Resources
             .GetFiles("assets/Sprites/projectiles/X", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList();
+        LitchSpiral = Directory
+            .GetFiles("assets/Sprites/Projectiles/LitchSpiral", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList()[0];
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -85,6 +89,7 @@ public static class Resources
     public static List<Bitmap> Tracking = new();
     public static List<Bitmap> X = new();
      public static Bitmap Spiral;
+    public static Bitmap LitchSpiral;
     public static Bitmap Beam;
     public static Bitmap RotateWall;
 }
