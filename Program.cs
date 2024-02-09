@@ -92,10 +92,10 @@ form.KeyDown += (o, e) =>
         //     GameEngine.Current.Player.Hp = GameEngine.Current.Player.baseHp;
         //     break;
 
-        // case Keys.Q:
-        //     GameEngine.Current.Player.Hp = 1;
-        //     GameEngine.Current.Player.ReceiveDamage();
-        //     break;
+        case Keys.Q:
+            GameEngine.Current.Player.Hp = 1;
+            GameEngine.Current.Player.ReceiveDamage();
+            break;
 
         case Keys.F:
             GameEngine.Current.Player.Interact();
