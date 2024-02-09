@@ -20,7 +20,7 @@ public class FelixRoom : Map
             ClientScreen.Width / 2,
             0.9f * ClientScreen.Height
         );
-        this.song = new("../../../assets/songs/FelixTheme.wav");
+        this.song = new("assets/songs/FelixTheme.wav");
         InitializeMapObjects();
     }
 

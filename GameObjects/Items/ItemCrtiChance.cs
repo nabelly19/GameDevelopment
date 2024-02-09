@@ -27,7 +27,7 @@ public class ItemCritChance : Item
         float x, 
         float y,
         float percentage
-    ) : base(name, x, y, "../../../assets/Sprites/Card/c11.png")
+    ) : base(name, x, y, "assets/Sprites/Card/c11.png")
         => this.percentageIncrease = percentage;
 
     public override void BuyIt()

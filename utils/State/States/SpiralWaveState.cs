@@ -3,7 +3,7 @@ using System.Drawing;
 
 public class SpiralWaveState : State
 {
-    // private Image image = Bitmap.FromFile("../../../assets/Beam/beam.png") as Bitmap;
+    // private Image image = Bitmap.FromFile("...assets/Beam/beam.png") as Bitmap;
     private float angle = 0;
     DateTime? dt = null;
 
@@ -12,7 +12,7 @@ public class SpiralWaveState : State
         if (angle >= 180)
         {
             GameEngine.Current.AddObjectToCollisionList(
-                new Wave("Bullet", boss.X - 14, boss.Y - 50, "../../../assets/Sprites/Projectiles/Beam/beam.png", angle, boss)
+                new Wave("Bullet", boss.X - 14, boss.Y - 50, "assets/Sprites/Projectiles/Beam/beam.png", angle, boss)
             );
             angle = 0;
             GoToNext();
@@ -25,7 +25,7 @@ public class SpiralWaveState : State
             return;
 
         GameEngine.Current.AddObjectToCollisionList(
-            new Wave("Bullet", boss.X - 14, boss.Y - 50, "../../../assets/Sprites/Projectiles/Beam/beam.png", angle, boss)
+            new Wave("Bullet", boss.X - 14, boss.Y - 50, "assets/Sprites/Projectiles/Beam/beam.png", angle, boss)
         );
 
         // 4 = 360 mais espacado

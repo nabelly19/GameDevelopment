@@ -27,7 +27,7 @@ public class ItemSpeed : Item
         float x, 
         float y,
         float percentage
-    ) : base(name, x, y, "../../../assets/Sprites/Card/c1.png")
+    ) : base(name, x, y, "assets/Sprites/Card/c1.png")
         => this.percentageIncrease = percentage;
 
     public override void ApplyBuff()

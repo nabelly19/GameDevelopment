@@ -7,7 +7,7 @@ public class SoundPlayer
     public SoundPlayer()
     {
         this.song = new System.Media.SoundPlayer();
-        this.song.SoundLocation = "../../../assets/songs/Haunt.wav"; // DEBUG MODE
+        this.song.SoundLocation = "assets/songs/Haunt.wav"; // DEBUG MODE
     }
 
 
@@ -16,7 +16,7 @@ public class SoundPlayer
         this.song.Stop();
         this.song.Dispose();
         this.song = sender;
-        // this.song.SoundLocation = "../../../assets/songs/OMORI OST - 106 GOLDENVENGEANCE.wav";
+        // this.song.SoundLocation = "...assets/songs/OMORI OST - 106 GOLDENVENGEANCE.wav";
         this.song.Load();
         this.song.PlayLooping();
     }

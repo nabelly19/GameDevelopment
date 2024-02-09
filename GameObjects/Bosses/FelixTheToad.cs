@@ -4,8 +4,8 @@ public class FelixTheToad : Boss
     public int SlowFrameRate { get; set; } = 0;
 
     public FelixTheToad(float x, float y)
-        // : base("Felix, the Toad", x, y, "./assets/Sprites/Bosses/Felix/F_0.pn")
-        : base("Felix, the Toad", x, y, "../../../assets/Sprites/Bosses/Felix/F_0.png")
+        : base("Felix, the Toad", x, y, "assets/Sprites/Bosses/Felix/F_0.png")
+        // : base("Felix, the Toad", x, y, "../../../assets/Sprites/Bosses/Felix/F_0.png")
     {
         // var s5 = new TrackingProjectileState(GameEngine.Current.Player);
         var s1 = new SpiralProjectileState();

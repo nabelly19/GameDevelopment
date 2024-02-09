@@ -27,7 +27,7 @@ public class ItemBlockChance : Item
         float x, 
         float y,
         float percentage
-    ) : base(name, x, y, "../../../assets/Sprites/Card/c12.png")
+    ) : base(name, x, y, "assets/Sprites/Card/c12.png")
         => this.percentageIncrease = percentage;
 
 
