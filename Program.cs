@@ -65,12 +65,12 @@ form.KeyDown += (o, e) =>
             Application.Exit();
             break;
 
-        case Keys.I:
-            // GameEngine.Current.Player.Info();
-            // MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
-            // MessageBox.Show(Cursor.Position.X.ToString());
-            // MessageBox.Show(Cursor.Position.Y.ToString());
-            break;
+        // case Keys.I:
+        //     // GameEngine.Current.Player.Info();
+        //     // MessageBox.Show(CollisionManager.GameObjects.Count.ToString());
+        //     // MessageBox.Show(Cursor.Position.X.ToString());
+        //     // MessageBox.Show(Cursor.Position.Y.ToString());
+        //     break;
 
         case Keys.W:
             GameEngine.Current.Player.MoveUp();
@@ -88,14 +88,14 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.MoveRight();
             break;
 
-        case Keys.R:
-            GameEngine.Current.Player.Hp = GameEngine.Current.Player.baseHp;
-            break;
+        // case Keys.R:
+        //     GameEngine.Current.Player.Hp = GameEngine.Current.Player.baseHp;
+        //     break;
 
-        case Keys.Q:
-            GameEngine.Current.Player.Hp = 1;
-            GameEngine.Current.Player.ReceiveDamage();
-            break;
+        // case Keys.Q:
+        //     GameEngine.Current.Player.Hp = 1;
+        //     GameEngine.Current.Player.ReceiveDamage();
+        //     break;
 
         case Keys.F:
             GameEngine.Current.Player.Interact();
@@ -105,12 +105,12 @@ form.KeyDown += (o, e) =>
             GameEngine.Current.Player.Attack();
             break;
 
-        case Keys.Y:
-            MapManager.PreviousMap();
-            break;
-        case Keys.T:
-            MapManager.NextMap();
-            break;
+        // case Keys.Y:
+        //     MapManager.PreviousMap();
+        //     break;
+        // case Keys.T:
+        //     MapManager.NextMap();
+        //     break;
     }
 };
 
