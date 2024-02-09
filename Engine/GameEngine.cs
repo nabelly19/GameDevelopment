@@ -21,7 +21,7 @@ public class GameEngine
         CollisionManager.ResetList();
         MapManager.Start();
         ItemManager.Startup();
-        // HUD.AddStaticObject(new Icons("Icone", 700, 10 ));
+        HUD.Start();
     }
 
     public void Update()
