@@ -54,7 +54,7 @@ public class TrackingProjectileStateLich : State
         foreach (var spawn in Spawns)
         {
             GameEngine.Current.AddObjectToCollisionList(
-                new TrackingProjectile("Bullet", spawn.X, spawn.Y, 25, 25, this.Owners, this.player, 30, boss)
+                new TrackingProjectile("Bullet", spawn.X, spawn.Y, Resources.Tracking, this.Owners, this.player, 30, boss)
             );
             
         }

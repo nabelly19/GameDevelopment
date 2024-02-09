@@ -3,24 +3,40 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
 public class TrackingProjectile : Projectile
 {
     private GameObject player;
     private float angle;
     private bool track = true;
     private DateTime? dt = null;
-    public TrackingProjectile
-    (
+
+    public TrackingProjectile(
         string name,
         int x,
         int y,
         string sprite,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, sprite, direction, owner)
+    )
+        : base(name, x, y, sprite, direction, owner)
     {
         this.BaseAcceleration = 3;
     }
+
+    public TrackingProjectile(
+        string name,
+        int x,
+        int y,
+        Image sprite,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner)
+    {
+        this.BaseAcceleration = 3;
+    }
+
     public TrackingProjectile(
         string name,
         float x,
@@ -30,14 +46,14 @@ public class TrackingProjectile : Projectile
         GameObject player,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, width, height, direction, owner)
+    )
+        : base(name, x, y, width, height, direction, owner)
     {
         this.player = player;
         this.BaseAcceleration = 3;
     }
 
-    public TrackingProjectile
-    (
+    public TrackingProjectile(
         string name,
         int x,
         int y,
@@ -45,14 +61,29 @@ public class TrackingProjectile : Projectile
         GameObject player,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, sprite, direction, owner)
+    )
+        : base(name, x, y, sprite, direction, owner)
     {
         this.BaseAcceleration = 3;
         this.player = player;
     }
 
-    public TrackingProjectile
-    (
+    public TrackingProjectile(
+        string name,
+        int x,
+        int y,
+        Image sprite,
+        GameObject player,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner)
+    {
+        this.BaseAcceleration = 3;
+        this.player = player;
+    }
+
+    public TrackingProjectile(
         string name,
         int x,
         int y,
@@ -61,14 +92,32 @@ public class TrackingProjectile : Projectile
         List<GameObject> owners,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, sprite, direction, owner)
+    )
+        : base(name, x, y, sprite, direction, owner)
     {
         this.BaseAcceleration = 3;
         this.player = player;
         this.Owners = owners;
     }
 
-     public TrackingProjectile(
+    public TrackingProjectile(
+        string name,
+        int x,
+        int y,
+        Image sprite,
+        GameObject player,
+        List<GameObject> owners,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner)
+    {
+        this.BaseAcceleration = 3;
+        this.player = player;
+        this.Owners = owners;
+    }
+
+    public TrackingProjectile(
         string name,
         float x,
         float y,
@@ -78,7 +127,25 @@ public class TrackingProjectile : Projectile
         GameObject player,
         float direction,
         IAttackable owner
-    ) : base(name, x, y, width, height, direction, owner)
+    )
+        : base(name, x, y, width, height, direction, owner)
+    {
+        this.player = player;
+        this.BaseAcceleration = 3;
+        this.Owners = owners;
+    }
+
+    public TrackingProjectile(
+        string name,
+        float x,
+        float y,
+        Image sprite,
+        List<GameObject> owners,
+        GameObject player,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner)
     {
         this.player = player;
         this.BaseAcceleration = 3;
@@ -117,7 +184,6 @@ public class TrackingProjectile : Projectile
         }
         if (CollisionManager.ScreenColision(this))
             CollisionManager.RemoveGameObject(this);
-
     }
 
     private void VerifyLifespan()
@@ -138,7 +204,7 @@ public class TrackingProjectile : Projectile
 
     public override void Render(Graphics g, PictureBox pb)
     {
-        base.Render(g, pb);
+        g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
     }
 
     public void Track()
@@ -154,7 +220,7 @@ public class TrackingProjectile : Projectile
     }
 
     private void GetPlayerAngle()
-    {   
+    {
         if (!track)
             return;
 
@@ -173,6 +239,5 @@ public class TrackingProjectile : Projectile
         var dist = MathF.Sqrt(dx * dx + dy * dy);
 
         return dist;
-
     }
 }

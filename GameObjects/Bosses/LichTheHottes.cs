@@ -3,7 +3,7 @@ using System;
 public class LichTheHottes : Boss
 {
     public int Steps { get; set; } = 0;
-    public int SlowFrameRate { get; set; } = 10;
+    public int SlowFrameRate { get; set; } = 0;
 
     public LichTheHottes(float x, float y)
         : base("Lich, The Hottes", x, y, Resources.Litch[0])
@@ -64,7 +64,7 @@ public class LichTheHottes : Boss
         SlowFrameRate += 1;
         for (int i = 0; i < 5; i ++)
         {
-            if (SlowFrameRate > 8)
+            if (SlowFrameRate > 10)
             {
                 Steps++;
                 SlowFrameRate = 0;
@@ -80,7 +80,7 @@ public class LichTheHottes : Boss
     {
         SlowFrameRate += 1;
 
-        if (SlowFrameRate > 8)
+        if (SlowFrameRate > 10)
         {
             Steps++;
             SlowFrameRate = 0;
