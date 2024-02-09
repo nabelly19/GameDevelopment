@@ -8,14 +8,10 @@ public static class ItemManager
 {
     public static List<Item> AllItens;
     public static List<Item> Bought = new();
-    private static Random random = new Random();
-
     public static void Startup()
     {
         AllItens = new()
         {
-            // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
-            // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
             new ItemWindBlade("Wind Blade", 0, 0),
             new ItemSpeed("Speed 5%", 0, 0, 0.05f),
             new ItemSpeed("Speed 2%", 0, 0, 0.02f),
@@ -28,19 +24,13 @@ public static class ItemManager
             new ItemCritChance("Crit 5%", 0, 0, 0.05f),
             new ItemCritChance("Crit 3%", 0, 0, 0.03f),
             new ItemCritChance("Crit 1%", 0, 0, 0.01f),
-
         };
     }
 
     public static void getRandomItems(Item[] items)
     {
-        var rndItems =
-            from it in AllItens
-            orderby Random.Shared.Next()
-            select it;
-        var selectedItens = rndItems
-            .Take(items.Length)
-            .ToArray();
+        var rndItems = from it in AllItens orderby Random.Shared.Next() select it;
+        var selectedItens = rndItems.Take(items.Length).ToArray();
 
         for (int i = 0; i < items.Length; i++)
             items[i] = selectedItens[i];
