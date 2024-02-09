@@ -12,6 +12,15 @@ public abstract class RotateProjectile : Projectile
         IAttackable owner
     )
         : base(name, x, y, sprite, direction, owner) { }
+    protected RotateProjectile(
+        string name,
+        float x,
+        float y,
+        Image sprite,
+        float direction,
+        IAttackable owner
+    )
+        : base(name, x, y, sprite, direction, owner) { }
 
     protected RotateProjectile(
         string name,
