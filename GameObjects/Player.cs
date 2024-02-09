@@ -79,6 +79,7 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Hp = this.baseHp;
     }
 
+        Font font = new Font("Arial", ClientScreen.HeightFactor * 35);
     public override void Render(Graphics g, PictureBox pb)
     {
         g.DrawImage(
@@ -90,8 +91,13 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        Font font = new Font("Arial",ClientScreen.HeightFactor * 35);
-        g.DrawString($"{this.Hp}", font, Brushes.White, ClientScreen.ResponsiveX(80), ClientScreen.ResponsiveY(35));
+        g.DrawString(
+            $"{this.Hp}",
+            font,
+            Brushes.White,
+            ClientScreen.ResponsiveX(80),
+            ClientScreen.ResponsiveY(35)
+        );
         g.DrawString(
             $"{this.CoinWallet}x",
             font,
@@ -99,30 +105,20 @@ public class Player : GameObject, IMoveable, IAttackable
             ClientScreen.ResponsiveX(80),
             ClientScreen.ResponsiveY(85)
         );
-        // g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
-        // g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);
-        // g.DrawString(
-        //     $"Player Speed: {BaseAcceleration}",
-        //     SystemFonts.DefaultFont,
-        //     Brushes.White,
-        //     10,
-        //     90
-        // );
-        // g.DrawString(
-        //     $"Player Angle: {this.Angle}",
-        //     SystemFonts.DefaultFont,
-        //     Brushes.White,
-        //     10,
-        //     105
-        // );
         g.DrawString(
             $"Player Block: {BlockChance}",
             SystemFonts.DefaultFont,
             Brushes.White,
             10,
-            60
+            ClientScreen.ResponsiveY(185)
         );
-        g.DrawString($"Player CC: {CritChance}", SystemFonts.DefaultFont, Brushes.White, 10, 70);
+        g.DrawString(
+            $"Player CC: {CritChance}",
+            SystemFonts.DefaultFont,
+            Brushes.White,
+            10,
+            ClientScreen.ResponsiveY(200)
+        );
     }
 
     public void Move()

@@ -26,7 +26,7 @@ public class Boss : GameObject, IAttackable
     {
         verifyDeath();
 
-        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+        CreateHitbox(this.X, this.Y, ClientScreen.ResponsiveX(this.Width), ClientScreen.ResponsiveY(this.Height));
         Attack();
 
         var collided = CollisionManager.GetCollisions(this);
@@ -37,13 +37,26 @@ public class Boss : GameObject, IAttackable
         }
     }
 
+        Font font = new Font("Arial", ClientScreen.HeightFactor * 35);
     public override void Render(Graphics g, PictureBox pb)
     {
-        g.DrawString($"HP Boss: {this.Hp}", SystemFonts.DefaultFont, Brushes.White, 10, 20);
+        g.DrawString($"{this.Hp}", font, Brushes.White, ClientScreen.ResponsiveX(80), ClientScreen.ResponsiveY(138));
         if (this.Manager.Current is PlatformState)
-            g.DrawImage(this.Sprite, this.X - this.Width / 2 * 1.45f, this.Y - this.Height / 2);
+            g.DrawImage(
+                this.Sprite,
+                ClientScreen.ResponsiveX(this.X - this.Width / 2 * 1.45f),
+                ClientScreen.ResponsiveY(this.Y - this.Height / 2),
+                ClientScreen.ResponsiveX(this.Sprite.Width),
+                ClientScreen.ResponsiveY(this.Sprite.Height)
+            );
         else
-            g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
+            g.DrawImage(
+                this.Sprite,
+                this.X - ClientScreen.ResponsiveX(this.Width / 2),
+                this.Y - ClientScreen.ResponsiveX(this.Height / 2),
+                ClientScreen.ResponsiveX(this.Sprite.Width),
+                ClientScreen.ResponsiveY(this.Sprite.Height)
+            );
         // g.DrawRectangle(Pens.White, this.Hitbox);
         // RenderState(g, pb);
         // g.DrawString($"Boss Vulnerability: {isVulnerable}", SystemFonts.DefaultFont, Brushes.White, 10, 170);
