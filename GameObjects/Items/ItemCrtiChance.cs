@@ -1,34 +1,13 @@
 public class ItemCritChance : Item
 {
     private float percentageIncrease;
-    public ItemCritChance
-    (
-        string name, 
-        float x, 
-        float y, 
-        float width, 
-        float height
-    ) : base(name, x, y, width, height) { }
 
-    public ItemCritChance
-    (
-        string name, 
-        float x, 
-        float y, 
-        float width, 
-        float height,
-        float percentage
-    ) : base(name, x, y, width, height) 
-        => this.percentageIncrease = percentage;
-
-    public ItemCritChance
-    (
-        string name,
-        float x, 
-        float y,
-        float percentage
-    ) : base(name, x, y, Resources.Cards[3])
-        => this.percentageIncrease = percentage;
+    public ItemCritChance(string name, float x, float y, float percentage)
+        : base(name, x, y, Resources.Cards[3])
+    {
+        this.percentageIncrease = percentage;
+        Value = (int)(100f * percentage);
+    }
 
     public override void BuyIt()
     {

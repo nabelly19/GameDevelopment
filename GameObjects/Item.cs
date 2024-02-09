@@ -58,7 +58,6 @@ public abstract class Item : GameObject, IItemMarket
         var b = CollisionManager.CheckCollisionByPoint(this.Hitbox, Cursor.Position);
         if (b)
             BuyIt();
-        // MessageBox.Show(b.ToString());
     }
 
     public virtual void BuyIt()

@@ -17,8 +17,8 @@ public static class ItemManager
             // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
             // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
             new ItemWindBlade("Wind Blade", 0, 0),
-            new ItemSpeed("Speed 5%", 0, 0, 0.5f),
-            new ItemSpeed("Speed 2%", 0, 0, 0.2f),
+            new ItemSpeed("Speed 5%", 0, 0, 0.05f),
+            new ItemSpeed("Speed 2%", 0, 0, 0.02f),
             new ItemSpeed("Speed 1%", 0, 0, 0.01f),
             new ItemHp("+1 Heart", 0, 0, 1),
             new ItemHp("+2 Heart", 0, 0, 2),
@@ -26,7 +26,7 @@ public static class ItemManager
             new ItemBlockChance("Block 5%", 0, 0, 0.05f),
             new ItemBlockChance("Block 2%", 0, 0, 0.02f),
             new ItemCritChance("Crit 5%", 0, 0, 0.05f),
-            new ItemCritChance("Crit 3%", 0, 0, 10.03f),
+            new ItemCritChance("Crit 3%", 0, 0, 0.03f),
             new ItemCritChance("Crit 1%", 0, 0, 0.01f),
 
         };
