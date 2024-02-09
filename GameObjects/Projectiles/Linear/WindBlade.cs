@@ -4,7 +4,14 @@ using System.Windows.Forms;
 
 public class WindBlade : Projectile
 {
-    public WindBlade(string name, int x, int y, Image sprite, float direction, IAttackable owner)
+    public WindBlade(
+        string name,
+        float x,
+        float y,
+        Image sprite,
+        float direction,
+        IAttackable owner
+    )
         : base(name, x, y, sprite, direction, owner) { }
 
     public WindBlade(
@@ -17,6 +24,11 @@ public class WindBlade : Projectile
         IAttackable owner
     )
         : base(name, x, y, width, height, direction, owner) { }
+
+    public override void Render(Graphics g, PictureBox pb)
+    {
+        g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
+    }
 
     public override void Update()
     {

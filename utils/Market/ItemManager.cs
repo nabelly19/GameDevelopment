@@ -16,7 +16,7 @@ public static class ItemManager
         {
             // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
             // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
-            // new ItemWindBlade("Item Wind", 0, 0, 100, 100),
+            new ItemWindBlade("Wind Blade", 0, 0),
             new ItemSpeed("Speed 5%", 0, 0, 0.5f),
             new ItemSpeed("Speed 2%", 0, 0, 0.2f),
             new ItemSpeed("Speed 1%", 0, 0, 0.01f),

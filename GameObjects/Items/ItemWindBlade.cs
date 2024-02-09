@@ -1,7 +1,7 @@
 public class ItemWindBlade : Item
 {
-    public ItemWindBlade(string name, float x, float y, float width, float height)
-        : base(name, x, y, width, height) { }
+    public ItemWindBlade(string name, float x, float y)
+        : base(name, x, y, Resources.Cards[3]) { }
 
     public override void ApplyBuff()
     {
