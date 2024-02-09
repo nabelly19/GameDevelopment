@@ -244,7 +244,6 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Attack()
     {
-
         var now = DateTime.Now;
         var dt = now - this.lastAttack;
         var secs = (float)dt.TotalMilliseconds;
@@ -253,7 +252,8 @@ public class Player : GameObject, IMoveable, IAttackable
             return;
 
         CollisionManager.RemoveGameObject(Weapon);
-        GameEngine.Current.AddObjectToCollisionList(Weapon);
+        if (!Weapon.WindBlade)
+            GameEngine.Current.AddObjectToCollisionList(Weapon);
         this.Weapon.isAttaking = true;
 
         var collisions = CollisionManager.GetCollisions(this.Weapon);
@@ -288,8 +288,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X - this.Width / 2 - 25,
                             this.Y,
-                            50,
-                            50,
+                            Resources.Weapon[3],
                             180,
                             this
                         )
@@ -301,8 +300,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X + this.Width / 2 + 25,
                             this.Y,
-                            50,
-                            50,
+                            Resources.Weapon[0],
                             0,
                             this
                         )
@@ -317,8 +315,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y - this.Height / 2 - 25,
-                            50,
-                            50,
+                            Resources.Weapon[1],
                             270,
                             this
                         )
@@ -330,8 +327,7 @@ public class Player : GameObject, IMoveable, IAttackable
                             "Bullet",
                             this.X,
                             this.Y + this.Height / 2 + 25,
-                            50,
-                            50,
+                            Resources.Weapon[2],
                             90,
                             this
                         )

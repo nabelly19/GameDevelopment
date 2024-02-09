@@ -1,34 +1,14 @@
+using System;
+
 public class ItemBlockChance : Item
 {
     private float percentageIncrease;
-    public ItemBlockChance
-    (
-        string name, 
-        float x, 
-        float y, 
-        float width, 
-        float height
-    ) : base(name, x, y, width, height) { }
-
-    public ItemBlockChance
-    (
-        string name, 
-        float x, 
-        float y, 
-        float width, 
-        float height,
-        float percentage
-    ) : base(name, x, y, width, height) 
-        => this.percentageIncrease = percentage;
-
-    public ItemBlockChance
-    (
-        string name,
-        float x, 
-        float y,
-        float percentage
-    ) : base(name, x, y, "assets/Sprites/Card/c12.png")
-        => this.percentageIncrease = percentage;
+     public ItemBlockChance(string name, float x, float y, float percentage)
+        : base(name, x, y, Resources.Cards[4])
+    {
+        this.percentageIncrease = percentage;
+        Value = (int)Math.Round(100f * percentage / 2f);
+    }
 
 
     public override void BuyIt()

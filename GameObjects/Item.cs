@@ -28,6 +28,12 @@ public abstract class Item : GameObject, IItemMarket
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
+    protected Item(string name, float x, float y, Image sprite)
+        : base(name, x, y, sprite)
+    {
+        DisableHitbox();
+        CreateHitbox(this.X, this.Y, this.Width, this.Height);
+    }
 
     public override void Render(Graphics g, PictureBox pb)
     {
@@ -58,7 +64,6 @@ public abstract class Item : GameObject, IItemMarket
         var b = CollisionManager.CheckCollisionByPoint(this.Hitbox, Cursor.Position);
         if (b)
             BuyIt();
-        // MessageBox.Show(b.ToString());
     }
 
     public virtual void BuyIt()
