@@ -15,28 +15,48 @@ public class FelixTheToad : Boss
         var v1 = new VulnerabilityState();
         var w3 = new WaitState(4); // 5 segundos
 
-        var c2 = new SpiralWaveState();
         var c1_0 = new SpiralProjectileState { isChain = true };
         var c1_1 = new SpiralWaveState();
         var c1_2 = new SpiralWaveState();
         var c1_3 = new VulnerabilityState(3);
         var c1_4 = new WaitState(2);
+        
+        var c2_0 = new SpiralProjectileState { isChain = true };
+        var c2_1 = new SpiralProjectileState();
+        var c2_2 = new WaitState(2);
+        var c2_3 = new SpiralProjectileState();
+        var c2_4 = new SpiralProjectileState();
+        var c2_5 = new VulnerabilityState(3);
 
-        this.Manager.AddContext(s1, s4, s6, v1, w3, c2, c1_0, c1_1, c1_2, c1_3, c1_4);
+        this.Manager.AddContext(
+            s1, s4, s6,
+            v1,
+            w3,
+            c1_0, c1_1, c1_2, c1_3, c1_4,
+            c2_0, c2_1, c2_2, c2_3, c2_4, c2_5
+            );
 
         s1.SetNextState(w3);
         s4.SetNextState(w3);
         s6.SetNextState(w3);
+
         c1_0.SetNextState(c1_1);
         c1_1.SetNextState(c1_2);
         c1_2.SetNextState(c1_3);
         c1_3.SetNextState(c1_4);
+        
+        c2_0.SetNextState(c2_1);
+        c2_1.SetNextState(c2_2);
+        c2_2.SetNextState(c2_3);
+        c2_3.SetNextState(c2_4);
+        c2_4.SetNextState(c2_5);
 
         this.Manager.AddList(s6);
         this.Manager.AddList(s4);
         this.Manager.AddList(s1);
         this.Manager.AddList(v1);
         this.Manager.AddList(c1_0);
+        this.Manager.AddList(c2_0);
 
         // this.Hp = 1;
         // this.isVulnerable = true;
