@@ -90,13 +90,14 @@ public class Player : GameObject, IMoveable, IAttackable
                 this.Height
             )
         );
-        g.DrawString($"{this.Hp}", SystemFonts.DefaultFont, Brushes.White, 60, 35);
+        Font font = new Font("Arial",ClientScreen.HeightFactor * 35);
+        g.DrawString($"{this.Hp}", font, Brushes.White, ClientScreen.ResponsiveX(80), ClientScreen.ResponsiveY(35));
         g.DrawString(
             $"{this.CoinWallet}x",
-            SystemFonts.DefaultFont,
+            font,
             Brushes.White,
-            0.94f * Screen.PrimaryScreen.Bounds.Width,
-            33
+            ClientScreen.ResponsiveX(80),
+            ClientScreen.ResponsiveY(85)
         );
         // g.DrawString($"Player Y: {Y}", SystemFonts.DefaultFont, Brushes.White, 10, 60);
         // g.DrawString($"Player X: {X}", SystemFonts.DefaultFont, Brushes.White, 10, 75);

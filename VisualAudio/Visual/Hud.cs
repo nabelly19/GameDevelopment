@@ -36,8 +36,8 @@ public static class HUD
     }
     public static void Start()
     {
-        AddStaticObject(new Icons("HP", 10, 25, Resources.IconHud[0] ));
-        AddStaticObject(new Icons("Moedas", 0.95f * Screen.PrimaryScreen.Bounds.Width, 20, Resources.IconHud[1] ));
+        AddStaticObject(new Icons("HP", ClientScreen.ResponsiveX(25), ClientScreen.ResponsiveY(41), Resources.IconHud[0] ));
+        AddStaticObject(new Icons("Moedas", 25, 91, Resources.IconHud[1] ));
 
     }
 }
