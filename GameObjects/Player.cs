@@ -45,6 +45,12 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public override void Update()
     {
+        if(!this.isAlive)
+        {
+
+            AnimateThisDeathPlayer(0,2);
+        }
+
         if (!isMoving)
             return;
 
@@ -237,6 +243,24 @@ public class Player : GameObject, IMoveable, IAttackable
         this.Sprite = Resources.PlayerSprites[Steps];
     }
 
+      public void AnimateThisDeathPlayer(int start, int end)
+    {
+        SlowFrameRate += 1;
+        for (int i = 0; i < 2; i ++)
+        {
+            if (SlowFrameRate > 3)
+            {
+                Steps++;
+                SlowFrameRate = 0;
+            }
+            if(Steps > 2)
+                return;
+            this.Sprite = Resources.Death[Steps];
+            
+        }  
+    }
+
+
     public void Info() { }
 
     public void Attack()
@@ -352,8 +376,10 @@ public class Player : GameObject, IMoveable, IAttackable
         {
             this.Hp = 0;
             this.Fx = this.Fy = 0;
+            this.Steps = 0;
             this.isAlive = false;
             this.isMoving = false;
+           
         }
     }
 
