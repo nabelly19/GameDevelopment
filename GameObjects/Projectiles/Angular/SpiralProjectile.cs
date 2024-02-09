@@ -11,7 +11,7 @@ public class SpiralProjectile : RotateProjectile
         float direction,
         IAttackable owner
     )
-        : base(name, x, y, "../../../assets/Sprites/Projectiles/Spiral/spiral.png", direction, owner)
+        : base(name, x, y, Resources.Spiral, direction, owner)
     {
         this.center = new(x, y);
         this.radius = 35;

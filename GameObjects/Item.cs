@@ -15,8 +15,8 @@ public abstract class Item : GameObject, IItemMarket
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
     }
 
-    protected Item(string name, float x, float y)
-        : base(name, x, y, Resources.Cards[0])
+    protected Item(string name, float x, float y, Image sprite)
+        : base(name, x, y, sprite)
     {
         DisableHitbox();
         CreateHitbox(this.X, this.Y, this.Width, this.Height);

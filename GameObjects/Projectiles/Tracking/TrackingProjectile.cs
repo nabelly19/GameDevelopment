@@ -14,7 +14,7 @@ public class TrackingProjectile : Projectile
         string name,
         int x,
         int y,
-        string sprite,
+        Image sprite,
         float direction,
         IAttackable owner
     ) : base(name, x, y, sprite, direction, owner)
@@ -41,7 +41,7 @@ public class TrackingProjectile : Projectile
         string name,
         int x,
         int y,
-        string sprite,
+        Image sprite,
         GameObject player,
         float direction,
         IAttackable owner
@@ -56,7 +56,7 @@ public class TrackingProjectile : Projectile
         string name,
         int x,
         int y,
-        string sprite,
+        Image sprite,
         GameObject player,
         List<GameObject> owners,
         float direction,

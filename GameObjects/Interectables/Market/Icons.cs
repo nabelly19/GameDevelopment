@@ -10,13 +10,6 @@ using System.Windows.Forms;
 
 public class Icons : GameObject
 {
-    // public Icons(string name, float x, float y) 
-    // : base(name, x, y, Resources.IconHud[0])
-    // {
-    //     DisableHitbox();
-    //     CreateHitbox(this.X, this.Y, this.Width, this.Height);
-    // }
-
     public Icons(string name, float x, float y) 
     : base(name, x, y, Resources.IconHud[0])
     {

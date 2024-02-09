@@ -27,7 +27,7 @@ public class ItemHp : Item
         float x, 
         float y,
         int hp
-    ) : base(name, x, y, "../../../assets/Sprites/Card/c0.png")
+    ) : base(name, x, y, Resources.Cards[0])
         => this.hpIncrease = hp;
 
     

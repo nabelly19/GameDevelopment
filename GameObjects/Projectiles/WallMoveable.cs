@@ -10,7 +10,7 @@ public class WallMoveable : RotateProjectile
         string name,
         float x,
         float y,
-        string sprite,
+        Image sprite,
         float direction,
         IAttackable owner
     ) : base(name, x, y, sprite, direction, owner) { }

@@ -7,7 +7,7 @@ public abstract class RotateProjectile : Projectile
         string name,
         float x,
         float y,
-        string sprite,
+        Image sprite,
         float direction,
         IAttackable owner
     )

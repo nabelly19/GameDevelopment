@@ -23,7 +23,7 @@ public class Projectile : GameObject, IMoveable
         string name,
         float x,
         float y,
-        string sprite,
+        Image sprite,
         float direction,
         IAttackable owner
     )

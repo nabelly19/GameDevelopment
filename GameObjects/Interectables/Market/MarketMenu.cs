@@ -7,14 +7,14 @@ public class MarketMenu : GameObject
 {
     private PointF[] itemsPosition =
     {
-        new(ClientScreen.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
-        new(ClientScreen.Width / 2 * 0.90f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f),
-        new(ClientScreen.Width / 2 * 1.15f, Screen.PrimaryScreen.Bounds.Height / 2 * 0.75f)
+        new(ClientScreen.Width / 2 * 0.65f, ClientScreen.Height / 2 * 0.75f),
+        new(ClientScreen.Width / 2 * 0.90f, ClientScreen.Height / 2 * 0.75f),
+        new(ClientScreen.Width / 2 * 1.15f, ClientScreen.Height / 2 * 0.75f)
     };
 
       private PointF[] iconsPosition =
     {
-        new(ClientScreen.Width / 2 * 0.65f, Screen.PrimaryScreen.Bounds.Height / 2),
+        new(ClientScreen.Width / 2 * 0.65f, ClientScreen.Height / 2),
         new(ClientScreen.Width / 2 * 0.90f, ClientScreen.Height / 2)
     };
 

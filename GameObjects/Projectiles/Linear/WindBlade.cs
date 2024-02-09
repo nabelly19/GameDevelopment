@@ -1,9 +1,10 @@
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
 public class WindBlade : Projectile
 {
-    public WindBlade(string name, int x, int y, string sprite, float direction, IAttackable owner)
+    public WindBlade(string name, int x, int y, Image sprite, float direction, IAttackable owner)
         : base(name, x, y, sprite, direction, owner) { }
 
     public WindBlade(

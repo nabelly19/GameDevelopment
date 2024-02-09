@@ -6,7 +6,7 @@ public class Wave : Projectile
 {
     public override float BaseAcceleration { get; set; } = 3;
 
-    public Wave(string name, float x, float y, string sprite, float direction, IAttackable owner)
+    public Wave(string name, float x, float y, Image sprite, float direction, IAttackable owner)
         : base(name, x, y, sprite, direction, owner) { }
 
     public Wave(

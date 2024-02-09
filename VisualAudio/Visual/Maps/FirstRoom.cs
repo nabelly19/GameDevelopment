@@ -16,7 +16,7 @@ public class FirstRoom : Map
             (ClientScreen.Width / 2) - 0.60f * ClientScreen.ResponsiveX(this.image.Width) / 2,
             ClientScreen.Height / 2
             );
-        this.song = new ("../../../assets/songs/Haunt.wav");
+        this.song = new ("assets/songs/Haunt.wav");
         InitializeMapObjects();
     }
 
