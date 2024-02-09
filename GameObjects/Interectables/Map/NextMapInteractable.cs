@@ -16,7 +16,7 @@ public class NextMapInteractable : Interactable
     public override void Render(Graphics g, PictureBox pb)
     {
         VerifyPlayer();
-        g.DrawRectangle(Pens.Gold, this.Hitbox);
+        // g.DrawRectangle(Pens.Gold, this.Hitbox);
     }
 
     public override void Interact()
