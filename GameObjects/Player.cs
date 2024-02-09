@@ -73,7 +73,7 @@ public class Player : GameObject, IMoveable, IAttackable
 
     public void Revive()
     {
-        this.Fx = this.Fy = 0;
+        this.Vx = this.Vy = this.Fx = this.Fy = 0;
         this.isAlive = true;
         this.isMoving = true;
         this.Hp = this.baseHp;
