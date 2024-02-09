@@ -21,26 +21,25 @@ public class LichTheHottes : Boss
         var s2 = new CircularlWaveState();
         var s3 = new XProjectileState(GameEngine.Current.Player);
 
-        var c1_0 = new CircularlWaveState();
+        var c1_0 = new CircularlWaveState() { isChain = true};
        
-        // var c1_1 = new XProjectileState(GameEngine.Current.Player);
-        // var c1_2 = new WaitState(2);
-        // var c1_3 = new VulnerabilityState(3);
+        var c1_1 = new XProjectileState(GameEngine.Current.Player);
+        var c1_2 = new VulnerabilityState(3);
 
-        this.Manager.AddContext(w3, s1, s2, s3);
+        this.Manager.AddContext(w3, s1, s2, s3, c1_0, c1_1, c1_2);
 
         s1.SetNextState(s2);
         s2.SetNextState(w3);
         s3.SetNextState(w3);
-        // c1_0.SetNextState(c1_1);
-        // c1_1.SetNextState(c1_2);
-        // c1_2.SetNextState(c1_3);
+        c1_0.SetNextState(c1_1);
+        c1_1.SetNextState(c1_2);
 
         this.Manager.AddList(s1);
         this.Manager.AddList(s2);
         this.Manager.AddList(s3);
         this.Manager.AddList(v1);
         this.Manager.AddList(c1_0);
+  
    
     }
 
@@ -48,15 +47,15 @@ public class LichTheHottes : Boss
     {
         base.Update();
         if (Manager.Current is WaitState)
-            AnimateBoss(0,6);
+            AnimateBoss(0,5);
         else if (Manager.Current is VulnerabilityState)
-            AnimateBoss(9,10);
+            AnimateBoss(8,9);
         else if (Manager.Current is CircularlWaveState)
-            AnimateBoss(7,8);
+            AnimateBoss(6,7);
         else if (Manager.Current is DeadState)
-            AnimateThisDeathBoss(11, 15);
+            AnimateThisDeathBoss(10, 13);
         else
-            AnimateBoss(0,6);
+            AnimateBoss(0,5);
     }
 
     public void AnimateThisDeathBoss(int start, int end)
@@ -69,7 +68,7 @@ public class LichTheHottes : Boss
                 Steps++;
                 SlowFrameRate = 0;
             }
-            if(Steps > 18)
+            if(Steps > 17)
                 return;
             this.Sprite = Resources.Litch[Steps];
             

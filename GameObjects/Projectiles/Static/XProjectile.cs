@@ -28,6 +28,17 @@ public class XProjectile : Projectile
     {
     }
 
+    public XProjectile
+    (
+        string name, 
+        float x, float y, 
+        Image sprite, 
+        float direction, 
+        IAttackable owner) 
+        : base(name, x, y, sprite, direction, owner)
+    {
+    }
+
     public override void Update()
     {
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
@@ -60,9 +71,9 @@ public class XProjectile : Projectile
     public override void Render(Graphics g, PictureBox pb)
     {
         CreateHitbox(this.X, this.Y, 30, 30);
-        if (this.Sprite is not null)
+       
             g.DrawImage(this.Sprite, this.X - this.Width / 2, this.Y - this.Height / 2);
-        else
+      
             g.DrawRectangle(Pens.White, this.Hitbox);
     }
 

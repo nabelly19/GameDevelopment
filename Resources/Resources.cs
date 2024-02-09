@@ -61,11 +61,15 @@ public static class Resources
         Tracking = Directory
             .GetFiles("assets/Sprites/Projectiles/Tracking", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
-            .ToList()[0];
+            .ToList();
         RotateWall = Directory
             .GetFiles("assets/Sprites/Projectiles/RotateWall", "*.png")
             .Select(file => Bitmap.FromFile(file) as Bitmap)
             .ToList()[0];
+        X = Directory
+            .GetFiles("assets/Sprites/projectiles/X", "*.png")
+            .Select(file => Bitmap.FromFile(file) as Bitmap)
+            .ToList();
     }
 
     public static List<Bitmap> PlayerSprites = new();
@@ -78,8 +82,9 @@ public static class Resources
     public static List<Bitmap> Wallpaper = new();
     public static List<Bitmap> IconHud = new();
     public static List<Bitmap> Weapon = new();
+    public static List<Bitmap> Tracking = new();
+    public static List<Bitmap> X = new();
      public static Bitmap Spiral;
     public static Bitmap Beam;
-    public static Bitmap Tracking;
     public static Bitmap RotateWall;
 }

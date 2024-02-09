@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 public class TrackingProjectile : Projectile
 {
+    private int Steps { get; set; } = 0;
+    private int SlowFrameRate { get; set; } = 0;
     private GameObject player;
     private float angle;
     private bool track = true;
@@ -154,6 +156,7 @@ public class TrackingProjectile : Projectile
 
     public override void Update()
     {
+        AnimateProjectile(0,1);
         CreateHitbox(this.X, this.Y, this.Width, this.Height);
         VerifyLifespan();
         Move();
@@ -240,4 +243,21 @@ public class TrackingProjectile : Projectile
 
         return dist;
     }
+
+     private void AnimateProjectile(int start, int end)
+    {
+        SlowFrameRate += 1;
+
+        if (SlowFrameRate > 3)
+        {
+            Steps++;
+            SlowFrameRate = 0;
+        }
+
+        if (Steps > end || Steps < start)
+            Steps = start;
+
+        this.Sprite = Resources.Tracking[Steps];
+    }
+
 }
