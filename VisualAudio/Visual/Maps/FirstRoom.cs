@@ -72,12 +72,12 @@ public class FirstRoom : Map
         // {
         //     g.DrawRectangle(Pens.White, wall.Hitbox);
 
+        // // }
+        // foreach (var item in this.GameObjects)
+        // {
+        //     if (item is Interactable pog)
+        //         g.DrawRectangle(Pens.Gold, item.Hitbox);
         // }
-        foreach (var item in this.GameObjects)
-        {
-            if (item is Interactable pog)
-                g.DrawRectangle(Pens.Gold, item.Hitbox);
-        }
 
     }
 
