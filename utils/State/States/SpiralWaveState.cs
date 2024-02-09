@@ -4,12 +4,12 @@ using System.Drawing;
 public class SpiralWaveState : State
 {
     // private Image image = Bitmap.FromFile("...assets/Beam/beam.png") as Bitmap;
-    private float angle = 0;
+    private float angle = -45;
     DateTime? dt = null;
 
     public override void Act(Boss boss)
     {
-        if (angle >= 180)
+        if (angle >= 225)
         {
             GameEngine.Current.AddObjectToCollisionList(
                 new Wave("Bullet", boss.X - 14, boss.Y - 50, Resources.Beam, angle, boss)

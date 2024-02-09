@@ -46,6 +46,7 @@ public class Projectile : GameObject, IMoveable
     {
         this.Direction = direction;
         this.Owner = owner;
+        DisableHitbox();
     }
 
     public Projectile(
